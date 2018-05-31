@@ -14,39 +14,40 @@
         card_view:cardCornerRadius="10dp">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/img_show"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/rolling_to_you" />
+            android:src="@drawable/infinity_war" />
     </android.support.v7.widget.CardView>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:padding="5dp">
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_show_movie_name"
+            android:id="@+id/tv_show_movie_title"
             android:layout_width="150dp"
             android:layout_height="30dp"
             android:paddingLeft="10dp"
-            android:text="Lăn Đến Bên Em"
+            android:text="Infinity War"
             android:textSize="18dp" />
 
         <TextView
             android:id="@+id/tv_show_time"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_below="@+id/tv_show_movie_title"
             android:paddingLeft="10dp"
             android:text="107 phút - IMDb 5.8" />
 
         <TextView
             android:id="@+id/tv_show_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
+            android:background="@drawable/text_view_border"
             android:layout_marginLeft="10dp"
+            android:textAlignment="center"
             android:text="9.3" />
     </RelativeLayout>
 
@@ -55,11 +56,12 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_show_dat_ve"
+            android:id="@+id/tv_show_order_ticket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#ff5722"
+            android:background="@drawable/text_view_order_border"
             android:text="Đặt vé"
+            android:padding="5dp"
             android:layout_centerInParent="true"
             android:textColor="#ffffff"
             android:textSize="16dp" />

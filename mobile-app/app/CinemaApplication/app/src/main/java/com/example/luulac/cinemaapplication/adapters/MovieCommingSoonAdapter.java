@@ -40,7 +40,7 @@ public class MovieCommingSoonAdapter extends RecyclerView.Adapter<MovieCommingSo
         Glide.with(context).load(movies.get(position).getImage())
                 .thumbnail(0.5f)
                 .into(holder.imgCommingSoon);
-        holder.tvDate.setText(movies.get(position).getPrice());
+        holder.tvDate.setText("01/06");
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

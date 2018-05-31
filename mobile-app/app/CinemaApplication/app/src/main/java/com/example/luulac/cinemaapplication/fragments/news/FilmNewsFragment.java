@@ -19,7 +19,7 @@ public class FilmNewsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_film_news, null);
+        View view = inflater.inflate(R.layout.fragment_promotion, null);
 
         return view;
     }

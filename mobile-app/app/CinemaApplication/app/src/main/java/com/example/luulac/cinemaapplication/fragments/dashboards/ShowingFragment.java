@@ -38,10 +38,10 @@ public class ShowingFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_movie_showing);
 
         movies = new ArrayList<>();
-        movies.add(new Movie("Dead Pool 2", "http://api.androidhive.info/images/glide/medium/deadpool.jpg", "123"));
-        movies.add(new Movie("Dead Pool 2", "http://api.androidhive.info/images/glide/medium/deadpool.jpg", "123"));
-        movies.add(new Movie("Dead Pool 2", "http://api.androidhive.info/images/glide/medium/deadpool.jpg", "123"));
-        movies.add(new Movie("Dead Pool 2", "http://api.androidhive.info/images/glide/medium/deadpool.jpg", "123"));
+        movies.add(new Movie("1", "http://api.androidhive.info/images/glide/medium/deadpool.jpg", "8.8"));
+        movies.add(new Movie("1", "http://api.androidhive.info/images/glide/medium/deadpool.jpg", "8.8"));
+        movies.add(new Movie("1", "http://api.androidhive.info/images/glide/medium/deadpool.jpg", "8.8"));
+        movies.add(new Movie("1", "http://api.androidhive.info/images/glide/medium/deadpool.jpg", "8.8"));
 
         adapter = new MovieShowingAdapter(movies);
 

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view2"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        android:layout_marginLeft="10dp"
+        card_view:cardCornerRadius="10dp">
+
+        <ImageView
+            android:id="@+id/img_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/infinity_war" />
+    </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_show_movie_title"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:paddingLeft="10dp"
+            android:text="Infinity War"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_show_time"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_show_movie_title"
+            android:paddingLeft="10dp"
+            android:text="107 phút - IMDb 5.8" />
+
+        <TextView
+            android:id="@+id/tv_show_rating"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/text_view_border"
+            android:layout_marginLeft="10dp"
+            android:textAlignment="center"
+            android:text="9.3" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_show_order_ticket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_view_order_border"
+            android:text="Đặt vé"
+            android:padding="5dp"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+    </RelativeLayout>
+</LinearLayout>

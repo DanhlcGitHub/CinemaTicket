@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CinemaBookingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AdminAccount">
+    <Key>
+      <PropertyRef Name="adminId" />
+    </Key>
+    <Property Name="adminId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="adminPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BankAccount">
+    <Key>
+      <PropertyRef Name="cardNumber" />
+    </Key>
+    <Property Name="cardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ownerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="expDate" Type="DateTime" Precision="0" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="BankId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="BankList">
+    <Key>
+      <PropertyRef Name="bankId" />
+    </Key>
+    <Property Name="bankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bankName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="imgLogo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BookingDetail">
+    <Key>
+      <PropertyRef Name="bookingDetailId" />
+    </Key>
+    <Property Name="bookingDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bookingId" Type="Int32" />
+    <Property Name="ticketId" Type="Int32" />
+    <NavigationProperty Name="BookingTicket" Relationship="Self.FKBookingDetailBookingTicket001" FromRole="BookingDetail" ToRole="BookingTicket" />
+    <NavigationProperty Name="Ticket" Relationship="Self.FKBookingDetailTicket001" FromRole="BookingDetail" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="BookingTicket">
+    <Key>
+      <PropertyRef Name="bookingId" />
+    </Key>
+    <Property Name="bookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerId" Type="Int32" />
+    <Property Name="paymentMethodId" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="bookingDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="BookingDetails" Relationship="Self.FKBookingDetailBookingTicket001" FromRole="BookingTicket" ToRole="BookingDetail" />
+    <NavigationProperty Name="Customer" Relationship="Self.FKBookingTicketCustomer001" FromRole="BookingTicket" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Cinema">
+    <Key>
+      <PropertyRef Name="cinemaId" />
+    </Key>
+    <Property Name="cinemaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="groupId" Type="Int32" />
+    <Property Name="profilePicture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cinemaAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="openTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="introduction" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GroupCinema" Relationship="Self.FKCinemaGroupCinema001" FromRole="Cinema" ToRole="GroupCinema" />
+    <NavigationProperty Name="CinemaManagers" Relationship="Self.FKCinemaManagerCinema001" FromRole="Cinema" ToRole="CinemaManager" />
+    <NavigationProperty Name="Promotions" Relationship="Self.FKPromotionCinema001" FromRole="Cinema" ToRole="Promotion" />
+    <NavigationProperty Name="Rooms" Relationship="Self.FKRoomCinema001" FromRole="Cinema" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="CinemaManager">
+    <Key>
+      <PropertyRef Name="managerId" />
+    </Key>
+    <Property Name="managerId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="managerPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="cinemaId" Type="Int32" />
+    <NavigationProperty Name="Cinema" Relationship="Self.FKCinemaManagerCinema001" FromRole="CinemaManager" ToRole="Cinema" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerId" />
+    </Key>
+    <Property Name="customerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BookingTickets" Relationship="Self.FKBookingTicketCustomer001" FromRole="Customer" ToRole="BookingTicket" />
+  </EntityType>
+  <EntityType Name="DigitalType">
+    <Key>
+      <PropertyRef Name="digTypeId" />
+    </Key>
+    <Property Name="digTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Rooms" Relationship="Self.FKRoomDigitalType001" FromRole="DigitalType" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="Film">
+    <Key>
+      <PropertyRef Name="filmId" />
+    </Key>
+    <Property Name="filmId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateRelease" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="restricted" Type="Int32" />
+    <Property Name="filmLength" Type="Int32" />
+    <Property Name="imdb" Type="Double" />
+    <Property Name="digTypeId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="author" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="movieGenre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="filmContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="actorList" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="countries" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="trailerLink" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="posterPicture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="additionPicture" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleFilm001" FromRole="Film" ToRole="MovieSchedule" />
+    <NavigationProperty Name="News" Relationship="Self.FKNewsFilm001" FromRole="Film" ToRole="News" />
+  </EntityType>
+  <EntityType Name="GroupCinema">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cinemaId" Type="Int32" />
+    <Property Name="logoImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cinemas" Relationship="Self.FKCinemaGroupCinema001" FromRole="GroupCinema" ToRole="Cinema" />
+    <NavigationProperty Name="PartnerAccounts" Relationship="Self.FKPartnerAccountGroupCinema001" FromRole="GroupCinema" ToRole="PartnerAccount" />
+    <NavigationProperty Name="TypeOfSeats" Relationship="Self.FKTypeOfSeatGroupCinema001" FromRole="GroupCinema" ToRole="TypeOfSeat" />
+  </EntityType>
+  <EntityType Name="MovieSchedule">
+    <Key>
+      <PropertyRef Name="scheduleId" />
+    </Key>
+    <Property Name="scheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="filmId" Type="Int32" />
+    <Property Name="timeId" Type="Int32" />
+    <Property Name="roomId" Type="Int32" />
+    <NavigationProperty Name="Film" Relationship="Self.FKMovieScheduleFilm001" FromRole="MovieSchedule" ToRole="Film" />
+    <NavigationProperty Name="Room" Relationship="Self.FKMovieScheduleRoom001" FromRole="MovieSchedule" ToRole="Room" />
+    <NavigationProperty Name="ShowTime" Relationship="Self.FKMovieScheduleShowTime001" FromRole="MovieSchedule" ToRole="ShowTime" />
+    <NavigationProperty Name="Tickets" Relationship="Self.FKTicketMovieSchedule001" FromRole="MovieSchedule" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="newsId" />
+    </Key>
+    <Property Name="newsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="filmId" Type="Int32" />
+    <Property Name="urlDocument" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Film" Relationship="Self.FKNewsFilm001" FromRole="News" ToRole="Film" />
+  </EntityType>
+  <EntityType Name="PartnerAccount">
+    <Key>
+      <PropertyRef Name="partnerId" />
+    </Key>
+    <Property Name="partnerId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="partnerPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="groupOfCinemaId" Type="Int32" />
+    <NavigationProperty Name="GroupCinema" Relationship="Self.FKPartnerAccountGroupCinema001" FromRole="PartnerAccount" ToRole="GroupCinema" />
+  </EntityType>
+  <EntityType Name="Promotion">
+    <Key>
+      <PropertyRef Name="promotionId" />
+    </Key>
+    <Property Name="promotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cinemaId" Type="Int32" />
+    <Property Name="urlDocument" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cinema" Relationship="Self.FKPromotionCinema001" FromRole="Promotion" ToRole="Cinema" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="roomId" />
+    </Key>
+    <Property Name="roomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cinemaId" Type="Int32" />
+    <Property Name="capacity" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="digTypeId" Type="Int32" />
+    <NavigationProperty Name="Cinema" Relationship="Self.FKRoomCinema001" FromRole="Room" ToRole="Cinema" />
+    <NavigationProperty Name="DigitalType" Relationship="Self.FKRoomDigitalType001" FromRole="Room" ToRole="DigitalType" />
+    <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleRoom001" FromRole="Room" ToRole="MovieSchedule" />
+    <NavigationProperty Name="Seats" Relationship="Self.FKSeatRoom001" FromRole="Room" ToRole="Seat" />
+  </EntityType>
+  <EntityType Name="Seat">
+    <Key>
+      <PropertyRef Name="seatId" />
+    </Key>
+    <Property Name="seatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="typeSeatId" Type="Int32" />
+    <Property Name="roomId" Type="Int32" />
+    <Property Name="px" Type="Int32" />
+    <Property Name="py" Type="Int32" />
+    <NavigationProperty Name="Room" Relationship="Self.FKSeatRoom001" FromRole="Seat" ToRole="Room" />
+    <NavigationProperty Name="TypeOfSeat" Relationship="Self.FKSeatTypeOfSeat001" FromRole="Seat" ToRole="TypeOfSeat" />
+    <NavigationProperty Name="Tickets" Relationship="Self.FKTicketSeat001" FromRole="Seat" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="ShowTime">
+    <Key>
+      <PropertyRef Name="timeId" />
+    </Key>
+    <Property Name="timeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="startTime" Type="DateTime" Precision="3" />
+    <Property Name="endTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleShowTime001" FromRole="ShowTime" ToRole="MovieSchedule" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="ticketId" />
+    </Key>
+    <Property Name="ticketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="scheduleId" Type="Int32" />
+    <Property Name="seatId" Type="Int32" />
+    <Property Name="paymentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="qrCode" Type="Int32" />
+    <Property Name="ticketStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Double" />
+    <NavigationProperty Name="BookingDetails" Relationship="Self.FKBookingDetailTicket001" FromRole="Ticket" ToRole="BookingDetail" />
+    <NavigationProperty Name="MovieSchedule" Relationship="Self.FKTicketMovieSchedule001" FromRole="Ticket" ToRole="MovieSchedule" />
+    <NavigationProperty Name="Seat" Relationship="Self.FKTicketSeat001" FromRole="Ticket" ToRole="Seat" />
+  </EntityType>
+  <EntityType Name="TypeOfSeat">
+    <Key>
+      <PropertyRef Name="typeSeatId" />
+    </Key>
+    <Property Name="typeSeatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="typeName" Type="Int32" />
+    <Property Name="capacity" Type="Int32" />
+    <Property Name="groupId" Type="Int32" />
+    <Property Name="price" Type="Double" />
+    <NavigationProperty Name="GroupCinema" Relationship="Self.FKTypeOfSeatGroupCinema001" FromRole="TypeOfSeat" ToRole="GroupCinema" />
+    <NavigationProperty Name="Seats" Relationship="Self.FKSeatTypeOfSeat001" FromRole="TypeOfSeat" ToRole="Seat" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FKBookingDetailBookingTicket001">
+    <End Role="BookingTicket" Type="Self.BookingTicket" Multiplicity="0..1" />
+    <End Role="BookingDetail" Type="Self.BookingDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookingTicket">
+        <PropertyRef Name="bookingId" />
+      </Principal>
+      <Dependent Role="BookingDetail">
+        <PropertyRef Name="bookingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKBookingDetailTicket001">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+    <End Role="BookingDetail" Type="Self.BookingDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="ticketId" />
+      </Principal>
+      <Dependent Role="BookingDetail">
+        <PropertyRef Name="ticketId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKBookingTicketCustomer001">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="BookingTicket" Type="Self.BookingTicket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerId" />
+      </Principal>
+      <Dependent Role="BookingTicket">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKCinemaGroupCinema001">
+    <End Role="GroupCinema" Type="Self.GroupCinema" Multiplicity="0..1" />
+    <End Role="Cinema" Type="Self.Cinema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupCinema">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Cinema">
+        <PropertyRef Name="groupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKCinemaManagerCinema001">
+    <End Role="Cinema" Type="Self.Cinema" Multiplicity="0..1" />
+    <End Role="CinemaManager" Type="Self.CinemaManager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinema">
+        <PropertyRef Name="cinemaId" />
+      </Principal>
+      <Dependent Role="CinemaManager">
+        <PropertyRef Name="cinemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPromotionCinema001">
+    <End Role="Cinema" Type="Self.Cinema" Multiplicity="0..1" />
+    <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinema">
+        <PropertyRef Name="cinemaId" />
+      </Principal>
+      <Dependent Role="Promotion">
+        <PropertyRef Name="cinemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKRoomCinema001">
+    <End Role="Cinema" Type="Self.Cinema" Multiplicity="0..1" />
+    <End Role="Room" Type="Self.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinema">
+        <PropertyRef Name="cinemaId" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="cinemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKRoomDigitalType001">
+    <End Role="DigitalType" Type="Self.DigitalType" Multiplicity="0..1" />
+    <End Role="Room" Type="Self.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DigitalType">
+        <PropertyRef Name="digTypeId" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="digTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMovieScheduleFilm001">
+    <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+    <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="filmId" />
+      </Principal>
+      <Dependent Role="MovieSchedule">
+        <PropertyRef Name="filmId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKNewsFilm001">
+    <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="filmId" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="filmId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPartnerAccountGroupCinema001">
+    <End Role="GroupCinema" Type="Self.GroupCinema" Multiplicity="0..1" />
+    <End Role="PartnerAccount" Type="Self.PartnerAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupCinema">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="PartnerAccount">
+        <PropertyRef Name="groupOfCinemaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTypeOfSeatGroupCinema001">
+    <End Role="GroupCinema" Type="Self.GroupCinema" Multiplicity="0..1" />
+    <End Role="TypeOfSeat" Type="Self.TypeOfSeat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupCinema">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="TypeOfSeat">
+        <PropertyRef Name="groupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMovieScheduleRoom001">
+    <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+    <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="roomId" />
+      </Principal>
+      <Dependent Role="MovieSchedule">
+        <PropertyRef Name="roomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMovieScheduleShowTime001">
+    <End Role="ShowTime" Type="Self.ShowTime" Multiplicity="0..1" />
+    <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShowTime">
+        <PropertyRef Name="timeId" />
+      </Principal>
+      <Dependent Role="MovieSchedule">
+        <PropertyRef Name="timeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTicketMovieSchedule001">
+    <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MovieSchedule">
+        <PropertyRef Name="scheduleId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="scheduleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKSeatRoom001">
+    <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+    <End Role="Seat" Type="Self.Seat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="roomId" />
+      </Principal>
+      <Dependent Role="Seat">
+        <PropertyRef Name="roomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKSeatTypeOfSeat001">
+    <End Role="TypeOfSeat" Type="Self.TypeOfSeat" Multiplicity="0..1" />
+    <End Role="Seat" Type="Self.Seat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfSeat">
+        <PropertyRef Name="typeSeatId" />
+      </Principal>
+      <Dependent Role="Seat">
+        <PropertyRef Name="typeSeatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKTicketSeat001">
+    <End Role="Seat" Type="Self.Seat" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seat">
+        <PropertyRef Name="seatId" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="seatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CinemaBookingDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdminAccounts" EntityType="Self.AdminAccount" />
+    <EntitySet Name="BankAccounts" EntityType="Self.BankAccount" />
+    <EntitySet Name="BankLists" EntityType="Self.BankList" />
+    <EntitySet Name="BookingDetails" EntityType="Self.BookingDetail" />
+    <EntitySet Name="BookingTickets" EntityType="Self.BookingTicket" />
+    <EntitySet Name="Cinemas" EntityType="Self.Cinema" />
+    <EntitySet Name="CinemaManagers" EntityType="Self.CinemaManager" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="DigitalTypes" EntityType="Self.DigitalType" />
+    <EntitySet Name="Films" EntityType="Self.Film" />
+    <EntitySet Name="GroupCinemas" EntityType="Self.GroupCinema" />
+    <EntitySet Name="MovieSchedules" EntityType="Self.MovieSchedule" />
+    <EntitySet Name="News" EntityType="Self.News" />
+    <EntitySet Name="PartnerAccounts" EntityType="Self.PartnerAccount" />
+    <EntitySet Name="Promotions" EntityType="Self.Promotion" />
+    <EntitySet Name="Rooms" EntityType="Self.Room" />
+    <EntitySet Name="Seats" EntityType="Self.Seat" />
+    <EntitySet Name="ShowTimes" EntityType="Self.ShowTime" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+    <EntitySet Name="TypeOfSeats" EntityType="Self.TypeOfSeat" />
+    <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
+    <AssociationSet Name="FKBookingDetailBookingTicket001" Association="Self.FKBookingDetailBookingTicket001">
+      <End Role="BookingTicket" EntitySet="BookingTickets" />
+      <End Role="BookingDetail" EntitySet="BookingDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FKBookingDetailTicket001" Association="Self.FKBookingDetailTicket001">
+      <End Role="Ticket" EntitySet="Tickets" />
+      <End Role="BookingDetail" EntitySet="BookingDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FKBookingTicketCustomer001" Association="Self.FKBookingTicketCustomer001">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="BookingTicket" EntitySet="BookingTickets" />
+    </AssociationSet>
+    <AssociationSet Name="FKCinemaGroupCinema001" Association="Self.FKCinemaGroupCinema001">
+      <End Role="GroupCinema" EntitySet="GroupCinemas" />
+      <End Role="Cinema" EntitySet="Cinemas" />
+    </AssociationSet>
+    <AssociationSet Name="FKCinemaManagerCinema001" Association="Self.FKCinemaManagerCinema001">
+      <End Role="Cinema" EntitySet="Cinemas" />
+      <End Role="CinemaManager" EntitySet="CinemaManagers" />
+    </AssociationSet>
+    <AssociationSet Name="FKPromotionCinema001" Association="Self.FKPromotionCinema001">
+      <End Role="Cinema" EntitySet="Cinemas" />
+      <End Role="Promotion" EntitySet="Promotions" />
+    </AssociationSet>
+    <AssociationSet Name="FKRoomCinema001" Association="Self.FKRoomCinema001">
+      <End Role="Cinema" EntitySet="Cinemas" />
+      <End Role="Room" EntitySet="Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FKRoomDigitalType001" Association="Self.FKRoomDigitalType001">
+      <End Role="DigitalType" EntitySet="DigitalTypes" />
+      <End Role="Room" EntitySet="Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FKMovieScheduleFilm001" Association="Self.FKMovieScheduleFilm001">
+      <End Role="Film" EntitySet="Films" />
+      <End Role="MovieSchedule" EntitySet="MovieSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FKNewsFilm001" Association="Self.FKNewsFilm001">
+      <End Role="Film" EntitySet="Films" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FKPartnerAccountGroupCinema001" Association="Self.FKPartnerAccountGroupCinema001">
+      <End Role="GroupCinema" EntitySet="GroupCinemas" />
+      <End Role="PartnerAccount" EntitySet="PartnerAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FKTypeOfSeatGroupCinema001" Association="Self.FKTypeOfSeatGroupCinema001">
+      <End Role="GroupCinema" EntitySet="GroupCinemas" />
+      <End Role="TypeOfSeat" EntitySet="TypeOfSeats" />
+    </AssociationSet>
+    <AssociationSet Name="FKMovieScheduleRoom001" Association="Self.FKMovieScheduleRoom001">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="MovieSchedule" EntitySet="MovieSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FKMovieScheduleShowTime001" Association="Self.FKMovieScheduleShowTime001">
+      <End Role="ShowTime" EntitySet="ShowTimes" />
+      <End Role="MovieSchedule" EntitySet="MovieSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FKTicketMovieSchedule001" Association="Self.FKTicketMovieSchedule001">
+      <End Role="MovieSchedule" EntitySet="MovieSchedules" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FKSeatRoom001" Association="Self.FKSeatRoom001">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="Seat" EntitySet="Seats" />
+    </AssociationSet>
+    <AssociationSet Name="FKSeatTypeOfSeat001" Association="Self.FKSeatTypeOfSeat001">
+      <End Role="TypeOfSeat" EntitySet="TypeOfSeats" />
+      <End Role="Seat" EntitySet="Seats" />
+    </AssociationSet>
+    <AssociationSet Name="FKTicketSeat001" Association="Self.FKTicketSeat001">
+      <End Role="Seat" EntitySet="Seats" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

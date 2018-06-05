@@ -1,0 +1,77 @@
+﻿.carousel-indicators li {
+            display: inline-block;
+            width: 13px;
+            height: 15px;
+            margin: 5px;
+            text-indent: -999px;
+            cursor: pointer;
+            background-color: #e8ddd0;
+            border-radius: 10px;
+        }
+
+        .carousel-indicators .active {
+            background-color: orangered;
+        }
+
+        .carousel {
+            margin-top: 50px;
+        }
+
+        .card m-2 {
+            max-width: 18rem;
+        }
+
+        .cinemas_icon {
+            margin: 10px 0px 10px 0px;
+            float: left;
+        }
+
+        .top-right {
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            background: #808080;
+            color: #ffffff;
+            border-radius: 5px;
+            padding: 3px;
+        }
+
+        .profile-image {
+            float: left;
+        }
+
+        .img-theater {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+        }
+
+        .nav-list {
+            max-height: 500px;
+            max-width: 300px;
+            margin-bottom: 10px;
+            overflow-y: auto;
+            overflow: hidden;
+        }
+
+        .img-2d {
+            width: 30px;
+            height: 26px;
+            margin: 10px;
+
+        }
+
+        .icon-common {
+            width: 25px;
+            height: 20px;
+        }
+
+        .img-movie {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .icon_star_rating {
+            width: 8px;
+            height: 8px;
+        }

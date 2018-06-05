@@ -256,7 +256,36 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\css\bootstrap.min.css" />
-    <Content Include="Content\js\jquery-2.2.4.min.js" />
+    <Content Include="Content\css\index.css" />
+    <Content Include="Content\img\2D.png" />
+    <Content Include="Content\img\account.png" />
+    <Content Include="Content\img\account_black.png" />
+    <Content Include="Content\img\account_white.png" />
+    <Content Include="Content\img\avatar.png" />
+    <Content Include="Content\img\black_panther.jpg" />
+    <Content Include="Content\img\cinestar.png" />
+    <Content Include="Content\img\cinestar_hai_ba_trung.jpg" />
+    <Content Include="Content\img\comment.png" />
+    <Content Include="Content\img\deadpool2_banner.jpg" />
+    <Content Include="Content\img\doraemonvadaogiauvang.jpg" />
+    <Content Include="Content\img\doraemon_banner.jpg" />
+    <Content Include="Content\img\ic_location.png" />
+    <Content Include="Content\img\ic_location_small.png" />
+    <Content Include="Content\img\like.png" />
+    <Content Include="Content\img\news_avatar_2.jpg" />
+    <Content Include="Content\img\nham_mat_thay_mua_he.jpg" />
+    <Content Include="Content\img\nham_mat_thay_mua_he1.jpg" />
+    <Content Include="Content\img\nobitavadaogiauvang.jpg" />
+    <Content Include="Content\img\ongnhiphieuluuky.jpg" />
+    <Content Include="Content\img\phim_ngan_bao.jpg" />
+    <Content Include="Content\img\simon_banner.jpg" />
+    <Content Include="Content\img\solo_a_star_wars.jpg" />
+    <Content Include="Content\img\starwar_banner.jpg" />
+    <Content Include="Content\img\star_1_2.png" />
+    <Content Include="Content\img\star_full.png" />
+    <Content Include="Content\img\thegioikhunglong.jpg" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery-3.3.1.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -271,12 +300,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\" />
     <Folder Include="DAO\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="CinemaModel.edmx">
@@ -298,9 +332,6 @@
       <DependentUpon>CinemaModel.edmx</DependentUpon>
       <LastGenOutput>CinemaModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

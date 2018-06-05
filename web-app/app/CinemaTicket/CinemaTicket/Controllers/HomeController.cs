@@ -12,18 +12,16 @@ namespace CinemaTicket.Controllers
         //
         // GET: /Home/
 
-        public string Index()
+        public ActionResult Index()
         {
-            String s = "";
-            DigitalTypeService ser = new DigitalTypeService();
-            List<DigitalType> list = ser.GetAll();
-            foreach (var item in list)
+            FilmService filmService = new FilmService();
+            List<Film> hightLight = filmService.FindByTop(4);
+            ViewBag.hightLight = hightLight;
+            /*foreach (var item in hightLight)
             {
-                string sub = "id: " + item.digTypeId + "name: " + item.name + "\n";
-                s += sub;
-            }
-            return s;
+                item.posterPicture = System.Web.HttpContext.Current.Server.MapPath(item.posterPicture);
+            }*/
+            return View();
         }
-
     }
 }

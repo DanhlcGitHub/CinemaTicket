@@ -108,13 +108,13 @@
           <Property Name="trailerLink" Type="nvarchar" MaxLength="500" />
           <Property Name="posterPicture" Type="nvarchar" MaxLength="255" />
           <Property Name="additionPicture" Type="nvarchar" MaxLength="1000" />
+          <Property Name="filmStatus" Type="int" />
         </EntityType>
         <EntityType Name="GroupCinema">
           <Key>
             <PropertyRef Name="GroupId" />
           </Key>
           <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cinemaId" Type="int" />
           <Property Name="logoImg" Type="nvarchar" MaxLength="50" />
           <Property Name="name" Type="nvarchar" MaxLength="255" />
         </EntityType>
@@ -653,6 +653,7 @@
           <Property Name="trailerLink" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="posterPicture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="additionPicture" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="filmStatus" Type="Int32" />
           <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleFilm001" FromRole="Film" ToRole="MovieSchedule" />
           <NavigationProperty Name="News" Relationship="Self.FKNewsFilm001" FromRole="Film" ToRole="News" />
         </EntityType>
@@ -661,7 +662,6 @@
             <PropertyRef Name="GroupId" />
           </Key>
           <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cinemaId" Type="Int32" />
           <Property Name="logoImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cinemas" Relationship="Self.FKCinemaGroupCinema001" FromRole="GroupCinema" ToRole="Cinema" />
@@ -1221,6 +1221,7 @@
                 <ScalarProperty Name="trailerLink" ColumnName="trailerLink" />
                 <ScalarProperty Name="posterPicture" ColumnName="posterPicture" />
                 <ScalarProperty Name="additionPicture" ColumnName="additionPicture" />
+                <ScalarProperty Name="filmStatus" ColumnName="filmStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1228,7 +1229,6 @@
             <EntityTypeMapping TypeName="CinemaBookingDBModel.GroupCinema">
               <MappingFragment StoreEntitySet="GroupCinema">
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="cinemaId" ColumnName="cinemaId" />
                 <ScalarProperty Name="logoImg" ColumnName="logoImg" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>

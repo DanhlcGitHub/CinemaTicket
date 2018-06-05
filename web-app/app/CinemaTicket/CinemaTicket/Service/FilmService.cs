@@ -10,6 +10,8 @@ namespace CinemaTicket.Service
     interface IFilmService
     {
         List<Film> FindByName(string key);
+
+        List<Film> FindByTop(int index);
     }
     public class FilmService : IFilmService
     {
@@ -43,6 +45,11 @@ namespace CinemaTicket.Service
         public List<Film> FindByName(string key)
         {
             return filmRepository.FindBy(c => c.name.Contains(key));
+        }
+
+        public List<Film> FindByTop(int index)
+        {
+            return filmRepository.FindByTop(index);
         }
     }
 }

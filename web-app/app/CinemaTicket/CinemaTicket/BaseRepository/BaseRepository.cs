@@ -57,9 +57,12 @@ namespace CinemaTicket.BaseRepository
                 return db.Set<T>().Where(predicate).ToList();
             }
         }
-        public void Save()
+        public List<T> FindByTop(int index)
         {
-
+            using (var db = new CinemaBookingDBEntities())
+            {
+                return db.Set<T>().Take<T>(index).ToList();
+            }
         }
     }
 }

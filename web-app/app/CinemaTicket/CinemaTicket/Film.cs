@@ -35,6 +35,7 @@ namespace CinemaTicket
         public string trailerLink { get; set; }
         public string posterPicture { get; set; }
         public string additionPicture { get; set; }
+        public Nullable<int> filmStatus { get; set; }
     
         public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
         public virtual ICollection<News> News { get; set; }

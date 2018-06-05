@@ -112,6 +112,7 @@
           <ScalarProperty Name="trailerLink" ColumnName="trailerLink" />
           <ScalarProperty Name="posterPicture" ColumnName="posterPicture" />
           <ScalarProperty Name="additionPicture" ColumnName="additionPicture" />
+          <ScalarProperty Name="filmStatus" ColumnName="filmStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -119,7 +120,6 @@
       <EntityTypeMapping TypeName="CinemaBookingDBModel.GroupCinema">
         <MappingFragment StoreEntitySet="GroupCinema">
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-          <ScalarProperty Name="cinemaId" ColumnName="cinemaId" />
           <ScalarProperty Name="logoImg" ColumnName="logoImg" />
           <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>

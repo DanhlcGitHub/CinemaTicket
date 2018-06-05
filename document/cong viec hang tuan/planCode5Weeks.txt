@@ -1,0 +1,31 @@
+Tuần 1:
+Hoàn thành các chức năng cơ bản cho client( web-app; mobile)
+   + login, log out
+   + đổ thông tin lên các front-end đã làm
+   + dat ve
+   + thanh toán ( difficult)
+--------------------------
+tuan 2:
+Hoàn thành những chức năng cơ bản cho manager
+   - cho admin
+		+ thêm phim
+		+ thêm partner ( thêm loại ghế cho cụm rạp)
+		+ xem list partner
+   - cho partner 
+        + thêm Cinema manager
+		+ quản lý các rạp
+		  xem thông tin các rạp; xuất report
+   - cho Cinema manager
+		+ thêm suất chiếu
+		+ xem report của rạp mình
+---------------------------
+tuan 3: 
+Hoàn thành những chức năng khó cho client
+      + bán lại vé, trả vé, đặt vé chọn ghế
+-------------------------------
+tuan 4:
+Hoàn thành những chức năng phát sinh nếu không làm được trong 3 tuần trên
+
+---------------------------------
+Tuần 5:
+	

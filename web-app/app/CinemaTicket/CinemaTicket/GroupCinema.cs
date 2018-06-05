@@ -22,7 +22,6 @@ namespace CinemaTicket
         }
     
         public int GroupId { get; set; }
-        public Nullable<int> cinemaId { get; set; }
         public string logoImg { get; set; }
         public string name { get; set; }
     

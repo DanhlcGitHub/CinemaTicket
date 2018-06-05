@@ -1,4 +1,3 @@
-F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\EntityFramework.xml
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\CinemaTicket.dll.config
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\CinemaTicket.dll
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\CinemaTicket.pdb
@@ -18,6 +17,7 @@ F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Deployment.dll
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.dll
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Razor.dll
+F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\EntityFramework.xml
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\EntityFramework.SqlServer.xml
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\Newtonsoft.Json.xml
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.xml
@@ -33,3 +33,4 @@ F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Razor.xml
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.dll
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.pdb
+F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csprojResolveAssemblyReference.cache

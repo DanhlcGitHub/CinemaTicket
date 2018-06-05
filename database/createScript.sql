@@ -3,6 +3,7 @@ CREATE DATABASE CinemaBookingDB;
 
 use [CinemaBookingDB];
 
+
 CREATE TABLE Film (
     filmId int IDENTITY(1,1) PRIMARY KEY,
     name nvarchar(255),
@@ -18,7 +19,8 @@ CREATE TABLE Film (
 	countries nvarchar(255),
 	trailerLink nvarchar(500),
 	posterPicture nvarchar(255),
-	additionPicture nvarchar(1000)
+	additionPicture nvarchar(1000),
+	filmStatus int
 );
 
 CREATE TABLE DigitalType (
@@ -28,9 +30,16 @@ CREATE TABLE DigitalType (
 
 CREATE TABLE GroupCinema (
     GroupId int IDENTITY(1,1) PRIMARY KEY,
-	cinemaId int,
 	logoImg nvarchar(50),
     name nvarchar(255),
+);
+
+CREATE TABLE PartnerAccount (
+    partnerId nvarchar(255) PRIMARY KEY,
+	partnerPassword nvarchar(255),
+	phone nvarchar(255),
+	email nvarchar(255),
+	groupOfCinemaId int,
 );
 
 CREATE TABLE Cinema (
@@ -42,6 +51,14 @@ CREATE TABLE Cinema (
 	email nvarchar(200),
 	openTime nvarchar(200),
 	introduction nvarchar(1000)
+);
+
+CREATE TABLE CinemaManager (
+    managerId nvarchar(255) PRIMARY KEY,
+	managerPassword nvarchar(255),
+	phone nvarchar(255),
+	email nvarchar(255),
+	cinemaId int,
 );
 
 CREATE TABLE ShowTime (
@@ -56,14 +73,19 @@ CREATE TABLE Room (
     capacity int,
     name nvarchar(15),
 	digTypeId int,
+	matrixSizeX int,
+	matrixSizeY int,
 );
+
 
 CREATE TABLE Seat (
     seatId int IDENTITY(1,1) PRIMARY KEY,
 	typeSeatId int,
     roomId int,
     px int,
-	py int
+	py int,
+	locationX int,
+	locationY nvarchar(2),
 );
 
 CREATE TABLE TypeOfSeat (
@@ -117,22 +139,6 @@ CREATE TABLE UserAccount (
 	userPassword nvarchar(255),
 	phone nvarchar(255),
 	email nvarchar(255),
-);
-
-CREATE TABLE PartnerAccount (
-    partnerId nvarchar(255) PRIMARY KEY,
-	partnerPassword nvarchar(255),
-	phone nvarchar(255),
-	email nvarchar(255),
-	groupOfCinemaId int,
-);
-
-CREATE TABLE CinemaManager (
-    managerId nvarchar(255) PRIMARY KEY,
-	managerPassword nvarchar(255),
-	phone nvarchar(255),
-	email nvarchar(255),
-	cinemaId int,
 );
 
 CREATE TABLE AdminAccount (
@@ -192,8 +198,11 @@ ALTER TABLE Promotion ADD CONSTRAINT FKPromotionCinema001 FOREIGN KEY (cinemaId)
 ALTER TABLE PartnerAccount ADD CONSTRAINT FKPartnerAccountGroupCinema001 FOREIGN KEY (groupOfCinemaId) REFERENCES GroupCinema (groupId);
 ALTER TABLE CinemaManager ADD CONSTRAINT FKCinemaManagerCinema001 FOREIGN KEY (cinemaId) REFERENCES Cinema (cinemaId);
 
-ALTER TABLE PartnerAccount
-ADD groupOfCinemaId int;
+ALTER TABLE Film
+ADD filmStatus int;
+
+ALTER TABLE Film
+DROP COLUMN isAvailable;
 
 
 

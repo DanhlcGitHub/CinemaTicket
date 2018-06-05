@@ -14,6 +14,7 @@ namespace CinemaTicket.BaseRepository
         void Update(T entity);
         void Delete<E>(E id);
         List<T> FindBy(Expression<Func<T, bool>> predicate);
-        void Save();
+
+        List<T> FindByTop(int rank);
     }
 }

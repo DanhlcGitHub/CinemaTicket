@@ -25,6 +25,8 @@ namespace CinemaTicket
         public Nullable<int> capacity { get; set; }
         public string name { get; set; }
         public Nullable<int> digTypeId { get; set; }
+        public Nullable<int> matrixSizeX { get; set; }
+        public Nullable<int> matrixSizeY { get; set; }
     
         public virtual Cinema Cinema { get; set; }
         public virtual DigitalType DigitalType { get; set; }

@@ -55,6 +55,7 @@
             <PropertyRef Name="cinemaId" />
           </Key>
           <Property Name="cinemaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cinemaName" Type="nvarchar" MaxLength="255" />
           <Property Name="groupId" Type="int" />
           <Property Name="profilePicture" Type="nvarchar" MaxLength="255" />
           <Property Name="cinemaAddress" Type="nvarchar" MaxLength="255" />
@@ -126,6 +127,7 @@
           <Property Name="filmId" Type="int" />
           <Property Name="timeId" Type="int" />
           <Property Name="roomId" Type="int" />
+          <Property Name="scheduleDate" Type="date" />
         </EntityType>
         <EntityType Name="News">
           <Key>
@@ -162,6 +164,8 @@
           <Property Name="capacity" Type="int" />
           <Property Name="name" Type="nvarchar" MaxLength="15" />
           <Property Name="digTypeId" Type="int" />
+          <Property Name="matrixSizeX" Type="int" />
+          <Property Name="matrixSizeY" Type="int" />
         </EntityType>
         <EntityType Name="Seat">
           <Key>
@@ -172,6 +176,8 @@
           <Property Name="roomId" Type="int" />
           <Property Name="px" Type="int" />
           <Property Name="py" Type="int" />
+          <Property Name="locationX" Type="int" />
+          <Property Name="locationY" Type="int" />
         </EntityType>
         <EntityType Name="ShowTime">
           <Key>
@@ -180,16 +186,6 @@
           <Property Name="timeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="startTime" Type="datetime" />
           <Property Name="endTime" Type="datetime" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -208,7 +204,7 @@
             <PropertyRef Name="typeSeatId" />
           </Key>
           <Property Name="typeSeatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="typeName" Type="int" />
+          <Property Name="typeName" Type="nvarchar" MaxLength="20" />
           <Property Name="capacity" Type="int" />
           <Property Name="groupId" Type="int" />
           <Property Name="price" Type="float" />
@@ -457,7 +453,6 @@
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Seat" EntityType="Self.Seat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShowTime" EntityType="Self.ShowTime" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOfSeat" EntityType="Self.TypeOfSeat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
@@ -593,6 +588,7 @@
             <PropertyRef Name="cinemaId" />
           </Key>
           <Property Name="cinemaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cinemaName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="groupId" Type="Int32" />
           <Property Name="profilePicture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="cinemaAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -676,6 +672,7 @@
           <Property Name="filmId" Type="Int32" />
           <Property Name="timeId" Type="Int32" />
           <Property Name="roomId" Type="Int32" />
+          <Property Name="scheduleDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Film" Relationship="Self.FKMovieScheduleFilm001" FromRole="MovieSchedule" ToRole="Film" />
           <NavigationProperty Name="Room" Relationship="Self.FKMovieScheduleRoom001" FromRole="MovieSchedule" ToRole="Room" />
           <NavigationProperty Name="ShowTime" Relationship="Self.FKMovieScheduleShowTime001" FromRole="MovieSchedule" ToRole="ShowTime" />
@@ -719,6 +716,8 @@
           <Property Name="capacity" Type="Int32" />
           <Property Name="name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="digTypeId" Type="Int32" />
+          <Property Name="matrixSizeX" Type="Int32" />
+          <Property Name="matrixSizeY" Type="Int32" />
           <NavigationProperty Name="Cinema" Relationship="Self.FKRoomCinema001" FromRole="Room" ToRole="Cinema" />
           <NavigationProperty Name="DigitalType" Relationship="Self.FKRoomDigitalType001" FromRole="Room" ToRole="DigitalType" />
           <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleRoom001" FromRole="Room" ToRole="MovieSchedule" />
@@ -733,6 +732,8 @@
           <Property Name="roomId" Type="Int32" />
           <Property Name="px" Type="Int32" />
           <Property Name="py" Type="Int32" />
+          <Property Name="locationX" Type="Int32" />
+          <Property Name="locationY" Type="Int32" />
           <NavigationProperty Name="Room" Relationship="Self.FKSeatRoom001" FromRole="Seat" ToRole="Room" />
           <NavigationProperty Name="TypeOfSeat" Relationship="Self.FKSeatTypeOfSeat001" FromRole="Seat" ToRole="TypeOfSeat" />
           <NavigationProperty Name="Tickets" Relationship="Self.FKTicketSeat001" FromRole="Seat" ToRole="Ticket" />
@@ -745,16 +746,6 @@
           <Property Name="startTime" Type="DateTime" Precision="3" />
           <Property Name="endTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleShowTime001" FromRole="ShowTime" ToRole="MovieSchedule" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -776,7 +767,7 @@
             <PropertyRef Name="typeSeatId" />
           </Key>
           <Property Name="typeSeatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="typeName" Type="Int32" />
+          <Property Name="typeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="capacity" Type="Int32" />
           <Property Name="groupId" Type="Int32" />
           <Property Name="price" Type="Double" />
@@ -1027,7 +1018,6 @@
           <EntitySet Name="Rooms" EntityType="Self.Room" />
           <EntitySet Name="Seats" EntityType="Self.Seat" />
           <EntitySet Name="ShowTimes" EntityType="Self.ShowTime" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tickets" EntityType="Self.Ticket" />
           <EntitySet Name="TypeOfSeats" EntityType="Self.TypeOfSeat" />
           <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
@@ -1164,6 +1154,7 @@
             <EntityTypeMapping TypeName="CinemaBookingDBModel.Cinema">
               <MappingFragment StoreEntitySet="Cinema">
                 <ScalarProperty Name="cinemaId" ColumnName="cinemaId" />
+                <ScalarProperty Name="cinemaName" ColumnName="cinemaName" />
                 <ScalarProperty Name="groupId" ColumnName="groupId" />
                 <ScalarProperty Name="profilePicture" ColumnName="profilePicture" />
                 <ScalarProperty Name="cinemaAddress" ColumnName="cinemaAddress" />
@@ -1241,6 +1232,7 @@
                 <ScalarProperty Name="filmId" ColumnName="filmId" />
                 <ScalarProperty Name="timeId" ColumnName="timeId" />
                 <ScalarProperty Name="roomId" ColumnName="roomId" />
+                <ScalarProperty Name="scheduleDate" ColumnName="scheduleDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1281,6 +1273,8 @@
                 <ScalarProperty Name="capacity" ColumnName="capacity" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="digTypeId" ColumnName="digTypeId" />
+                <ScalarProperty Name="matrixSizeX" ColumnName="matrixSizeX" />
+                <ScalarProperty Name="matrixSizeY" ColumnName="matrixSizeY" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1292,6 +1286,8 @@
                 <ScalarProperty Name="roomId" ColumnName="roomId" />
                 <ScalarProperty Name="px" ColumnName="px" />
                 <ScalarProperty Name="py" ColumnName="py" />
+                <ScalarProperty Name="locationX" ColumnName="locationX" />
+                <ScalarProperty Name="locationY" ColumnName="locationY" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1301,17 +1297,6 @@
                 <ScalarProperty Name="timeId" ColumnName="timeId" />
                 <ScalarProperty Name="startTime" ColumnName="startTime" />
                 <ScalarProperty Name="endTime" ColumnName="endTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CinemaBookingDBModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -20,7 +20,7 @@ namespace CinemaTicket
         }
     
         public int typeSeatId { get; set; }
-        public Nullable<int> typeName { get; set; }
+        public string typeName { get; set; }
         public Nullable<int> capacity { get; set; }
         public Nullable<int> groupId { get; set; }
         public Nullable<double> price { get; set; }

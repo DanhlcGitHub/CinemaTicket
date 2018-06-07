@@ -5,92 +5,14 @@
 
 <!DOCTYPE html>
 
-<html>
+<html ng-app="homeModule">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Home Page</title>
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
-    <style>
-        .carousel-indicators li {
-            display: inline-block;
-            width: 13px;
-            height: 15px;
-            margin: 5px;
-            text-indent: -999px;
-            cursor: pointer;
-            background-color: #e8ddd0;
-            border-radius: 10px;
-        }
-
-        .carousel-indicators .active {
-            background-color: orangered;
-        }
-
-        .carousel {
-            margin-top: 50px;
-        }
-
-        .card m-2 {
-            max-width: 18rem;
-        }
-
-        .cinemas_icon {
-            margin: 10px 0px 10px 0px;
-            float: left;
-        }
-
-        .top-right {
-            position: absolute;
-            top: 15px;
-            right: 30px;
-            background: #808080;
-            color: #ffffff;
-            border-radius: 5px;
-            padding: 3px;
-        }
-
-        .profile-image {
-            float: left;
-        }
-
-        .img-theater {
-            width: 50px;
-            height: 50px;
-            margin: 10px;
-        }
-
-        .nav-list {
-            max-height: 500px;
-            max-width: 300px;
-            margin-bottom: 10px;
-            overflow-y: auto;
-            overflow: hidden;
-        }
-
-        .img-2d {
-            width: 30px;
-            height: 26px;
-            margin: 10px;
-        }
-
-        .icon-common {
-            width: 25px;
-            height: 20px;
-        }
-
-        .img-movie {
-            width: 100%;
-            border-radius: 5px;
-        }
-
-        .icon_star_rating {
-            width: 8px;
-            height: 8px;
-        }
-    </style>
-
+    <link rel="stylesheet" href="~/Content/css/index.css">
 </head>
-<body>
+<body ng-controller="filmController">
     <nav class="navbar fixed-top navbar-light navbar-expand-md bg-light">
         <a href="/" class="navbar-brand mr-0">Icon</a>
         <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
@@ -113,13 +35,13 @@
             </ul>
             <ul class="navbar-nav text-left">
                 <li class="nav-item">
-                    <img src="~/Content/img/account_white.png" style="margin:10px 5px 10px 5px; width:25px; height:25px;" />
+                    <img src="~/Content/img/film/account_white.png" style="margin:10px 5px 10px 5px; width:25px; height:25px;" />
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Đăng nhập</a>
                 </li>
                 <li class="nav-item">
-                    <img src="~/Content/img/ic_location_small.png" style="margin:10px 5px 10px 5px;" />
+                    <img src="~/Content/img/film/ic_location_small.png" style="margin:10px 5px 10px 5px;" />
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -176,147 +98,28 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-12 d-inline-flex mb-3">
-                    <div class="col-3">
-                        <img class="img-movie rounded" src="~/Content/img/nham_mat_thay_mua_he.jpg">
-                        <div class="top-right">
-                            <div class="text-center">
-                                8.1
+                <div class="col-1" style="margin-top: 30%">
+                    <img onclick="FilmManager.previous()" src="Content/img/repository/pre.png" />
+                </div>
+                <div class="col-10" style="float:left">
+                    <div class="row" id="filmContainer">
+                        <div ng-repeat="aFilm in FilmData" class="col-3">
+                            <img height="300" class="img-movie rounded" ng-src="{{aFilm.img}}">
+                            <div class="top-right">
+                                <div class="text-center">
+                                    {{aFilm.imdb}}
+                                </div>
+                                <div class="d-inline-flex" style="float:left;">
+                                    <img ng-repeat="i in getNumber({{aFilm.imdb}})" src="Content/img/film/star_full.png" class="icon_star_rating" />
+                                </div>
                             </div>
-                            <div class="d-inline-flex" style="float:left;">
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_1_2.png" class="icon_star_rating" />
-                            </div>
+                            <h5 class="mt-2">{{aFilm.name}}</h5>
+                            <small class="text-muted">{{aFilm.length}}</small>
                         </div>
-                        <h5 class="mt-2">Nhắm Mắt Thấy Mùa Hè</h5>
-                        <small class="text-muted">100 phút</small>
-                    </div>
-                    <div class="col-3">
-                        <img class="img-movie rounded" src="~/Content/img/nham_mat_thay_mua_he.jpg">
-                        <div class="top-right">
-                            <div class="text-center">
-                                8.1
-                            </div>
-                            <div class="d-inline-flex" style="float:left;">
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_1_2.png" class="icon_star_rating" />
-                            </div>
-                        </div>
-                        <h5 class="mt-2">Nhắm Mắt Thấy Mùa Hè</h5>
-                        <small class="text-muted">100 phút</small>
-                    </div>
-                    <div class="col-3">
-                        <img class="img-movie rounded" src="~/Content/img/nham_mat_thay_mua_he.jpg">
-                        <div class="top-right">
-                            <div class="text-center">
-                                8.1
-                            </div>
-                            <div class="d-inline-flex" style="float:left;">
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_1_2.png" class="icon_star_rating" />
-                            </div>
-                        </div>
-                        <h5 class="mt-2">Nhắm Mắt Thấy Mùa Hè</h5>
-                        <small class="text-muted">100 phút</small>
-                    </div>
-                    <div class="col-3">
-                        <img class="img-movie rounded" src="~/Content/img/nham_mat_thay_mua_he.jpg">
-                        <div class="top-right">
-                            <div class="text-center">
-                                8.1
-                            </div>
-                            <div class="d-inline-flex" style="float:left;">
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_1_2.png" class="icon_star_rating" />
-                            </div>
-                        </div>
-                        <h5 class="mt-2">Nhắm Mắt Thấy Mùa Hè</h5>
-                        <small class="text-muted">100 phút</small>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12 d-inline-flex mb-3">
-                    <div class="col-3">
-                        <img class="img-movie rounded" src="~/Content/img/nham_mat_thay_mua_he.jpg">
-                        <div class="top-right">
-                            <div class="text-center">
-                                8.1
-                            </div>
-                            <div class="d-inline-flex" style="float:left;">
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_1_2.png" class="icon_star_rating" />
-                            </div>
-                        </div>
-                        <h5 class="mt-2">Nhắm Mắt Thấy Mùa Hè</h5>
-                        <small class="text-muted">100 phút</small>
-                    </div>
-                    <div class="col-3">
-                        <img class="img-movie rounded" src="~/Content/img/nham_mat_thay_mua_he.jpg">
-                        <div class="top-right">
-                            <div class="text-center">
-                                8.1
-                            </div>
-                            <div class="d-inline-flex" style="float:left;">
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_1_2.png" class="icon_star_rating" />
-                            </div>
-                        </div>
-                        <h5 class="mt-2">Nhắm Mắt Thấy Mùa Hè</h5>
-                        <small class="text-muted">100 phút</small>
-                    </div>
-                    <div class="col-3">
-                        <img class="img-movie rounded" src="~/Content/img/nham_mat_thay_mua_he.jpg">
-                        <div class="top-right">
-                            <div class="text-center">
-                                8.1
-                            </div>
-                            <div class="d-inline-flex" style="float:left;">
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_1_2.png" class="icon_star_rating" />
-                            </div>
-                        </div>
-                        <h5 class="mt-2">Nhắm Mắt Thấy Mùa Hè</h5>
-                        <small class="text-muted">100 phút</small>
-                    </div>
-                    <div class="col-3">
-                        <img class="img-movie rounded" src="~/Content/img/nham_mat_thay_mua_he.jpg">
-                        <div class="top-right">
-                            <div class="text-center">
-                                8.1
-                            </div>
-                            <div class="d-inline-flex" style="float:left;">
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_full.png" class="icon_star_rating" />
-                                <img src="~/Content/img/star_1_2.png" class="icon_star_rating" />
-                            </div>
-                        </div>
-                        <h5 class="mt-2">Nhắm Mắt Thấy Mùa Hè</h5>
-                        <small class="text-muted">100 phút</small>
-                    </div>
+                <div class="col-1" style="margin-top: 30%">
+                    <img onclick="FilmManager.next()" src="Content/img/repository/next.png" />
                 </div>
             </div>
         </div>
@@ -327,288 +130,55 @@
         <div class="container">
             <div class="row border">
                 <div class="col-1 border-right">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link p-2 pt-3" data-toggle="tab" href="#cinemas">
-                                <img src="~/Content/img/cinestar.png" id="cenemas_icon" />
-                            </a>
-                        </li>
-                        <hr width="80%" align="center" />
-                        <li class="nav-item">
-                            <a class="nav-link p-2 pt-3" data-toggle="tab" href="#cinemas">
-                                <img src="~/Content/img/cinestar.png" id="cenemas_icon" />
-                            </a>
-                        </li>
-                        <hr width="80%" align="center" />
-                        <li class="nav-item">
-                            <a class="nav-link p-2 pt-3" data-toggle="tab" href="#cinemas">
-                                <img src="~/Content/img/cinestar.png" id="cenemas_icon" />
-                            </a>
-                        </li>
-                        <hr width="80%" align="center" />
-                        <li class="nav-item">
-                            <a class="nav-link p-2 pt-3 pb-3" data-toggle="tab" href="#cinemas">
-                                <img src="~/Content/img/cinestar.png" id="cenemas_icon" />
-                            </a>
-                        </li>
-                        <hr width="80%" align="center" />
-                        <li class="nav-item">
-                            <a class="nav-link p-2 pt-3" data-toggle="tab" href="#cinemas">
-                                <img src="~/Content/img/cinestar.png" id="cenemas_icon" />
-                            </a>
-                        </li>
-                        <hr width="80%" align="center" />
-                        <li class="nav-item">
-                            <a class="nav-link p-2 pt-3" data-toggle="tab" href="#cinemas">
-                                <img src="~/Content/img/cinestar.png" id="cenemas_icon" />
-                            </a>
-                        </li>
-                        <hr width="80%" align="center" />
-                        <li class="nav-item">
-                            <a class="nav-link p-2 pt-3 pb-3" data-toggle="tab" href="#cinemas">
-                                <img src="~/Content/img/cinestar.png" id="cenemas_icon" />
-                            </a>
+                    <ul class="nav flex-column" id="groupCinemaContainer">
+                        <li ng-repeat="groupCinema in scheduleList"
+                            class='nav-item border-bottom btn'>
+                            <img ng-click="onclickGroupCinema($index)" width='50' height='50' ng-src="{{ groupCinema.img }}" data-index="{{$index}}" />
                         </li>
                     </ul>
                 </div>
 
                 <div class="col-4 border-right">
-                    <div class="tab-content">
-                        <div id="cinemas" class="tab-pane fade in active">
-                            <ul class="nav-list nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#theater">
-                                        <div class="row">
-                                            <div class="profile-image">
-
-                                                <img src="~/Content/img/cinestar_hai_ba_trung.jpg" style="width:50px; height:50px; margin:10px" />
-                                            </div>
-                                            <div class="profile-info">
-                                                <span>CNS - Hai Bà Trưng</span><br />
-                                                <span><small>135 Hai Bà Trưng, Bến Nghé, Q.1</small></span><br />
-                                                <span><small>[chi tiết]</small></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <hr width="80%" align="center" />
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#theater">
-                                        <div class="row">
-                                            <div class="profile-image">
-                                                <img src="~/Content/img/cinestar_hai_ba_trung.jpg" class="img-theater" />
-                                            </div>
-                                            <div class="profile-info">
-                                                <span>CNS - Hai Bà Trưng</span><br />
-                                                <span><small>135 Hai Bà Trưng, Bến Nghé, Q.1</small></span><br />
-                                                <span><small>[chi tiết]</small></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <hr width="80%" align="center" />
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#theater">
-                                        <div class="row">
-                                            <div class="profile-image">
-                                                <img src="~/Content/img/cinestar_hai_ba_trung.jpg" class="img-theater" />
-                                            </div>
-                                            <div class="profile-info">
-                                                <span>CNS - Hai Bà Trưng</span><br />
-                                                <span><small>135 Hai Bà Trưng, Bến Nghé, Q.1</small></span><br />
-                                                <span><small>[chi tiết]</small></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <hr width="80%" align="center" />
-                                <li class="nav-item">
-
-                                    <a class="nav-link" data-toggle="tab" href="#theater">
-                                        <div class="row">
-                                            <div class="profile-image">
-                                                <img src="~/Content/img/cinestar_hai_ba_trung.jpg" class="img-theater" />
-                                            </div>
-                                            <div class="profile-info">
-                                                <span>CNS - Hai Bà Trưng</span><br />
-                                                <span><small>135 Hai Bà Trưng, Bến Nghé, Q.1</small></span><br />
-                                                <span><small>[chi tiết]</small></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <ul class="nav-list nav flex-column">
+                        <li class="nav-item border-bottom">
+                            <div class="row" ng-repeat="cinema in currentCinemaList">
+                                <div class="profile-image">
+                                    <img ng-src="{{cinema.img}}" style="width:50px; height:50px; margin:10px" />
+                                </div>
+                                <div>
+                                    <input type="hidden" value="{{cinema.id}}" />
+                                    <span class="infoMovieCinema">{{cinema.name}}</span><br />
+                                    <span class="infoMovieCinema"><small>{{cinema.address}}</small></span><br />
+                                    <span><small>[chi tiết]</small></span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="col-7">
-                    <div class="tab-content">
-                        <div id="theater" class="tab-pane fade in active">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="profile-image">
-                                        <img src="~/Content/img/solo_a_star_wars.jpg" class="img-theater" />
-                                    </div>
-                                    <div class="profile-info" style="margin:10px">
-                                        <p>
-                                            Solo: Star Wars Ngoại Truyện<br />
-                                            <small>
-                                                135 phút - 123Phim 8.1 - IMDb 7.2
-                                            </small>
-                                        </p>
-                                    </div>
-                                </div>
+                    <div class="border-bottom">
+                        <div class="row">
+                            <div class="profile-image">
+                                <img src="~/Content/img/film/solo_a_star_wars.jpg" class="img-theater" />
                             </div>
-
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="profile-image">
-                                        <img src="~/Content/img/2D.png" class="img-2d" />
-                                    </div>
-                                    <div class="profile-info text-success col-10">
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                    </div>
-                                </div>
+                            <div class="profile-info" style="margin:10px">
+                                <p>
+                                    Solo: Star Wars Ngoại Truyện<br />
+                                    <small>
+                                        135 phút - 123Phim 8.1 - IMDb 7.2
+                                    </small>
+                                </p>
                             </div>
-
-                            <hr width="80%" align="center" />
-
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="profile-image">
-                                        <img src="~/Content/img/solo_a_star_wars.jpg" class="img-theater" />
-                                    </div>
-                                    <div class="profile-info" style="margin:10px">
-                                        <p>
-                                            Solo: Star Wars Ngoại Truyện<br />
-                                            <small>
-                                                135 phút - 123Phim 8.1 - IMDb 7.2
-                                            </small>
-                                        </p>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="profile-image">
+                                <img src="~/Content/img/film/2D.png" class="img-2d" />
                             </div>
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="profile-image">
-                                        <img src="~/Content/img/2D.png" class="img-2d" />
-                                    </div>
-                                    <div class="profile-info text-success col-10">
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr width="80%" align="center" />
-
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="profile-image">
-                                        <img src="~/Content/img/solo_a_star_wars.jpg" class="img-theater" />
-                                    </div>
-                                    <div class="profile-info" style="margin:10px">
-                                        <p>
-                                            Solo: Star Wars Ngoại Truyện<br />
-                                            <small>
-                                                135 phút - 123Phim 8.1 - IMDb 7.2
-                                            </small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="profile-image">
-                                        <img src="~/Content/img/2D.png" class="img-2d" />
-                                    </div>
-                                    <div class="profile-info text-success col-10">
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr width="80%" align="center" />
-
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="profile-image">
-                                        <img src="~/Content/img/solo_a_star_wars.jpg" class="img-theater" />
-                                    </div>
-                                    <div class="profile-info" style="margin:10px">
-                                        <p>
-                                            Solo: Star Wars Ngoại Truyện<br />
-                                            <small>
-                                                135 phút - 123Phim 8.1 - IMDb 7.2
-                                            </small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="profile-image">
-                                        <img src="~/Content/img/2D.png" class="img-2d" />
-                                    </div>
-                                    <div class="profile-info text-success col-10">
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr width="80%" align="center" />
-
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="profile-image">
-                                        <img src="~/Content/img/solo_a_star_wars.jpg" class="img-theater" />
-                                    </div>
-                                    <div class="profile-info" style="margin:10px">
-                                        <p>
-                                            Solo: Star Wars Ngoại Truyện<br />
-                                            <small>
-                                                135 phút - 123Phim 8.1 - IMDb 7.2
-                                            </small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="profile-image">
-                                        <img src="~/Content/img/2D.png" class="img-2d" />
-                                    </div>
-                                    <div class="profile-info text-success col-10">
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                        <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                    </div>
-                                </div>
+                            <div class="profile-info text-success col-10">
+                                <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
+                                <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
+                                <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
                             </div>
                         </div>
                     </div>
@@ -636,7 +206,7 @@
                 <div class="col-6">
                     <div class="row">
                         <div class="col-12">
-                            <img src="~/Content/img/news_avatar_2.jpg" class="img-movie">
+                            <img src="~/Content/img/film/news_avatar_2.jpg" class="img-movie">
                         </div>
                         <div class="col-12 ml-0">
                             <p>
@@ -647,12 +217,12 @@
                             </p>
                             <div class="d-inline">
                                 <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/like.png" class="icon-common" /> 0
+                                    <img src="~/Content/img/film/like.png" class="icon-common" /> 0
                                 </a>
                             </div>
                             <div class="d-inline ml-3">
                                 <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/comment.png" class="icon-common" /> 0
+                                    <img src="~/Content/img/film/comment.png" class="icon-common" /> 0
                                 </a>
                             </div>
                         </div>
@@ -662,7 +232,7 @@
                 <div class="col-6">
                     <div class="row">
                         <div class="col-12">
-                            <img src="~/Content/img/news_avatar_2.jpg" class="img-movie">
+                            <img src="~/Content/img/film/news_avatar_2.jpg" class="img-movie">
                         </div>
                         <div class="col-12 ml-0">
                             <p>
@@ -673,12 +243,12 @@
                             </p>
                             <div class="d-inline">
                                 <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/like.png" class="icon-common" /> 0
+                                    <img src="~/Content/img/film/like.png" class="icon-common" /> 0
                                 </a>
                             </div>
                             <div class="d-inline ml-3">
                                 <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/comment.png" class="icon-common" /> 0
+                                    <img src="~/Content/img/film/comment.png" class="icon-common" /> 0
                                 </a>
                             </div>
                         </div>
@@ -692,7 +262,7 @@
                 <div class="col-4">
                     <div class="row">
                         <div class="col-12">
-                            <img src="~/Content/img/phim_ngan_bao.jpg" class="img-movie" />
+                            <img src="~/Content/img/film/phim_ngan_bao.jpg" class="img-movie" />
                         </div>
                         <div class="col-12 ml-0">
                             <p>
@@ -703,12 +273,12 @@
                             </p>
                             <div class="d-inline">
                                 <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/like.png" class="icon-common" /> 0
+                                    <img src="~/Content/img/film/like.png" class="icon-common" /> 0
                                 </a>
                             </div>
                             <div class="d-inline ml-3">
                                 <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/comment.png" class="icon-common" /> 0
+                                    <img src="~/Content/img/film/comment.png" class="icon-common" /> 0
                                 </a>
                             </div>
                         </div>
@@ -717,7 +287,7 @@
                 <div class="col-4">
                     <div class="row">
                         <div class="col-12">
-                            <img src="~/Content/img/phim_ngan_bao.jpg" class="img-movie" />
+                            <img src="~/Content/img/film/phim_ngan_bao.jpg" class="img-movie" />
                         </div>
                         <div class="col-12 ml-0">
                             <p>
@@ -728,12 +298,12 @@
                             </p>
                             <div class="d-inline">
                                 <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/like.png" class="icon-common" /> 0
+                                    <img src="~/Content/img/film/like.png" class="icon-common" /> 0
                                 </a>
                             </div>
                             <div class="d-inline ml-3">
                                 <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/comment.png" class="icon-common" /> 0
+                                    <img src="~/Content/img/film/comment.png" class="icon-common" /> 0
                                 </a>
                             </div>
                         </div>
@@ -743,7 +313,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-3">
-                                <img src="~/Content/img/black_panther.jpg" class="img-movie" />
+                                <img src="~/Content/img/film/black_panther.jpg" class="img-movie" />
                             </div>
                             <div class="col-9">
                                 <h6>
@@ -756,7 +326,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-3">
-                                <img src="~/Content/img/black_panther.jpg" class="img-movie" />
+                                <img src="~/Content/img/film/black_panther.jpg" class="img-movie" />
                             </div>
                             <div class="col-9">
                                 <h6>
@@ -769,7 +339,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-3">
-                                <img src="~/Content/img/black_panther.jpg" class="img-movie" />
+                                <img src="~/Content/img/film/black_panther.jpg" class="img-movie" />
                             </div>
                             <div class="col-9">
                                 <h6>
@@ -782,7 +352,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-3">
-                                <img src="~/Content/img/black_panther.jpg" class="img-movie" />
+                                <img src="~/Content/img/film/black_panther.jpg" class="img-movie" />
                             </div>
                             <div class="col-9">
                                 <h6>
@@ -809,9 +379,10 @@
     <div style="height:300px; background:#00ffff">
 
     </div>
-
+    <script src="~/Content/js/angular.min.js"></script>
     <script src="~/Content/js/jquery-3.3.1.min.js"></script>
     <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/home.js"></script>
 </body>
 </html>
 

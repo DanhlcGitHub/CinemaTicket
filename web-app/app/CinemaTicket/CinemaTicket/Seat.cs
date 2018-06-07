@@ -24,6 +24,8 @@ namespace CinemaTicket
         public Nullable<int> roomId { get; set; }
         public Nullable<int> px { get; set; }
         public Nullable<int> py { get; set; }
+        public Nullable<int> locationX { get; set; }
+        public Nullable<int> locationY { get; set; }
     
         public virtual Room Room { get; set; }
         public virtual TypeOfSeat TypeOfSeat { get; set; }

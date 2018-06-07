@@ -22,6 +22,7 @@ namespace CinemaTicket
         }
     
         public int cinemaId { get; set; }
+        public string cinemaName { get; set; }
         public Nullable<int> groupId { get; set; }
         public string profilePicture { get; set; }
         public string cinemaAddress { get; set; }

@@ -3,6 +3,8 @@ CREATE DATABASE CinemaBookingDB;
 
 use [CinemaBookingDB];
 
+use [Test]
+
 
 CREATE TABLE Film (
     filmId int IDENTITY(1,1) PRIMARY KEY,
@@ -44,6 +46,7 @@ CREATE TABLE PartnerAccount (
 
 CREATE TABLE Cinema (
     cinemaId int IDENTITY(1,1) PRIMARY KEY,
+	cinemaName nvarchar(255),
 	groupId int,
     profilePicture nvarchar(255),
     cinemaAddress nvarchar(255),
@@ -63,8 +66,8 @@ CREATE TABLE CinemaManager (
 
 CREATE TABLE ShowTime (
     timeId int IDENTITY(1,1) PRIMARY KEY,
-    startTime datetime,
-    endTime datetime,
+    startTime nvarchar(10),
+    endTime nvarchar(10),
 );
 
 CREATE TABLE Room (
@@ -77,7 +80,6 @@ CREATE TABLE Room (
 	matrixSizeY int,
 );
 
-
 CREATE TABLE Seat (
     seatId int IDENTITY(1,1) PRIMARY KEY,
 	typeSeatId int,
@@ -85,12 +87,12 @@ CREATE TABLE Seat (
     px int,
 	py int,
 	locationX int,
-	locationY nvarchar(2),
+	locationY int,
 );
 
 CREATE TABLE TypeOfSeat (
     typeSeatId int IDENTITY(1,1) PRIMARY KEY,
-    typeName int,
+    typeName nvarchar(20),
 	capacity int,
 	groupId int,
 	price float
@@ -101,6 +103,7 @@ CREATE TABLE MovieSchedule (
 	filmId int,
     timeId int,
     roomId int,
+	scheduleDate date,
 );
 
 CREATE TABLE Ticket (
@@ -198,8 +201,8 @@ ALTER TABLE Promotion ADD CONSTRAINT FKPromotionCinema001 FOREIGN KEY (cinemaId)
 ALTER TABLE PartnerAccount ADD CONSTRAINT FKPartnerAccountGroupCinema001 FOREIGN KEY (groupOfCinemaId) REFERENCES GroupCinema (groupId);
 ALTER TABLE CinemaManager ADD CONSTRAINT FKCinemaManagerCinema001 FOREIGN KEY (cinemaId) REFERENCES Cinema (cinemaId);
 
-ALTER TABLE Film
-ADD filmStatus int;
+ALTER TABLE MovieSchedule
+ADD scheduleDate date;
 
 ALTER TABLE Film
 DROP COLUMN isAvailable;

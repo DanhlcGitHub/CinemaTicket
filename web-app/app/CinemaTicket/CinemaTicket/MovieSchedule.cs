@@ -23,6 +23,7 @@ namespace CinemaTicket
         public Nullable<int> filmId { get; set; }
         public Nullable<int> timeId { get; set; }
         public Nullable<int> roomId { get; set; }
+        public Nullable<System.DateTime> scheduleDate { get; set; }
     
         public virtual Film Film { get; set; }
         public virtual Room Room { get; set; }

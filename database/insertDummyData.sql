@@ -6,7 +6,7 @@ INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,m
 VALUES (N'Nhắm Mắt Thấy Mùa Hè','2018-5-25',0, 100, 0, N'1',N'Cao Thúy Nhi',N'tình cảm, lãng mạn',
          N'Phim kể về Hạ (Phương Anh Đào). Câu chuyện bắt đầu khi Hạ đến thị trấn Higashikawa, Hokkaido, Nhật Bản để tìm cha (nghệ sĩ Công Ninh đảm nhận) .Hành trình của Hạ bứơc hướng mới – khám phá vùng đất có tuyết rơi vào mùa hè, nơi cha cô sống trong thời gian dài và tại đây Hạ gặp chàng trai Nhật Bản – Akira (do diễn viên Takafumi Akutsu thủ vai).',
 		 N'Công Ninh, Phương Anh Đào, Takafumi Akutsu',N'Vietnam, Nhật',N'https://youtu.be/tlNtE3IW6bE',
-		 N'Content/img/film/nham_mat_thay_mua_he.jpg',N'Content/img/film/nham_mat_thay_mua_he.jpg1;img/alter2',1);
+		 N'Content/img/film/nham_mat_thay_mua_he.jpg',N'Content/img/film/nham_mat_thay_mua_he1.jpg;',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )

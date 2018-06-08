@@ -38,7 +38,8 @@ namespace CinemaTicket.Controllers
                     dateRelease = item.dateRelease,
                     restricted = item.restricted,
                     img = item.additionPicture.Split(';')[0],
-                    length = item.filmLength
+                    length = item.filmLength,
+                    star = new string[(int)Math.Ceiling((double)item.imdb/2)]
                 });                
             return Json(obj);
         }

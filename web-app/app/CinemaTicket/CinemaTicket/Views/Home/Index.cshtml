@@ -99,27 +99,27 @@
         <div class="container">
             <div class="row">
                 <div class="col-1" style="margin-top: 30%">
-                    <img onclick="FilmManager.previous()" src="Content/img/repository/pre.png" />
+                    <img ng-click="previous()" src="Content/img/repository/pre.png" />
                 </div>
                 <div class="col-10" style="float:left">
                     <div class="row" id="filmContainer">
-                        <div ng-repeat="aFilm in FilmData" class="col-3">
+                        <div ng-repeat="aFilm in CurrentFilmList" class="col-3">
                             <img height="300" class="img-movie rounded" ng-src="{{aFilm.img}}">
                             <div class="top-right">
                                 <div class="text-center">
                                     {{aFilm.imdb}}
                                 </div>
                                 <div class="d-inline-flex" style="float:left;">
-                                    <img ng-repeat="i in getNumber({{aFilm.imdb}})" src="Content/img/film/star_full.png" class="icon_star_rating" />
+                                    <img ng-repeat="i in aFilm.star track by $index" src="Content/img/film/star_full.png" class="icon_star_rating" />
                                 </div>
                             </div>
                             <h5 class="mt-2">{{aFilm.name}}</h5>
-                            <small class="text-muted">{{aFilm.length}}</small>
+                            <small class="text-muted">{{aFilm.length}} phut</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-1" style="margin-top: 30%">
-                    <img onclick="FilmManager.next()" src="Content/img/repository/next.png" />
+                    <img ng-click="next()" src="Content/img/repository/next.png" />
                 </div>
             </div>
         </div>

@@ -3,6 +3,9 @@ CREATE DATABASE CinemaBookingDB;
 
 use [CinemaBookingDB];
 
+use [Test]
+
+
 CREATE TABLE Film (
     filmId int IDENTITY(1,1) PRIMARY KEY,
     name nvarchar(255),
@@ -18,7 +21,8 @@ CREATE TABLE Film (
 	countries nvarchar(255),
 	trailerLink nvarchar(500),
 	posterPicture nvarchar(255),
-	additionPicture nvarchar(1000)
+	additionPicture nvarchar(1000),
+	filmStatus int
 );
 
 CREATE TABLE DigitalType (
@@ -28,13 +32,21 @@ CREATE TABLE DigitalType (
 
 CREATE TABLE GroupCinema (
     GroupId int IDENTITY(1,1) PRIMARY KEY,
-	cinemaId int,
 	logoImg nvarchar(50),
     name nvarchar(255),
 );
 
+CREATE TABLE PartnerAccount (
+    partnerId nvarchar(255) PRIMARY KEY,
+	partnerPassword nvarchar(255),
+	phone nvarchar(255),
+	email nvarchar(255),
+	groupOfCinemaId int,
+);
+
 CREATE TABLE Cinema (
     cinemaId int IDENTITY(1,1) PRIMARY KEY,
+	cinemaName nvarchar(255),
 	groupId int,
     profilePicture nvarchar(255),
     cinemaAddress nvarchar(255),
@@ -44,10 +56,18 @@ CREATE TABLE Cinema (
 	introduction nvarchar(1000)
 );
 
+CREATE TABLE CinemaManager (
+    managerId nvarchar(255) PRIMARY KEY,
+	managerPassword nvarchar(255),
+	phone nvarchar(255),
+	email nvarchar(255),
+	cinemaId int,
+);
+
 CREATE TABLE ShowTime (
     timeId int IDENTITY(1,1) PRIMARY KEY,
-    startTime datetime,
-    endTime datetime,
+    startTime nvarchar(10),
+    endTime nvarchar(10),
 );
 
 CREATE TABLE Room (
@@ -56,6 +76,8 @@ CREATE TABLE Room (
     capacity int,
     name nvarchar(15),
 	digTypeId int,
+	matrixSizeX int,
+	matrixSizeY int,
 );
 
 CREATE TABLE Seat (
@@ -63,12 +85,14 @@ CREATE TABLE Seat (
 	typeSeatId int,
     roomId int,
     px int,
-	py int
+	py int,
+	locationX int,
+	locationY int,
 );
 
 CREATE TABLE TypeOfSeat (
     typeSeatId int IDENTITY(1,1) PRIMARY KEY,
-    typeName int,
+    typeName nvarchar(20),
 	capacity int,
 	groupId int,
 	price float
@@ -79,6 +103,7 @@ CREATE TABLE MovieSchedule (
 	filmId int,
     timeId int,
     roomId int,
+	scheduleDate date,
 );
 
 CREATE TABLE Ticket (
@@ -117,22 +142,6 @@ CREATE TABLE UserAccount (
 	userPassword nvarchar(255),
 	phone nvarchar(255),
 	email nvarchar(255),
-);
-
-CREATE TABLE PartnerAccount (
-    partnerId nvarchar(255) PRIMARY KEY,
-	partnerPassword nvarchar(255),
-	phone nvarchar(255),
-	email nvarchar(255),
-	groupOfCinemaId int,
-);
-
-CREATE TABLE CinemaManager (
-    managerId nvarchar(255) PRIMARY KEY,
-	managerPassword nvarchar(255),
-	phone nvarchar(255),
-	email nvarchar(255),
-	cinemaId int,
 );
 
 CREATE TABLE AdminAccount (
@@ -192,8 +201,11 @@ ALTER TABLE Promotion ADD CONSTRAINT FKPromotionCinema001 FOREIGN KEY (cinemaId)
 ALTER TABLE PartnerAccount ADD CONSTRAINT FKPartnerAccountGroupCinema001 FOREIGN KEY (groupOfCinemaId) REFERENCES GroupCinema (groupId);
 ALTER TABLE CinemaManager ADD CONSTRAINT FKCinemaManagerCinema001 FOREIGN KEY (cinemaId) REFERENCES Cinema (cinemaId);
 
-ALTER TABLE PartnerAccount
-ADD groupOfCinemaId int;
+ALTER TABLE MovieSchedule
+ADD scheduleDate date;
+
+ALTER TABLE Film
+DROP COLUMN isAvailable;
 
 
 

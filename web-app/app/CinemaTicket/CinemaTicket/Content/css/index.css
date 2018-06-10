@@ -1,0 +1,188 @@
+﻿.carousel-indicators li {
+    display: inline-block;
+    width: 13px;
+    height: 15px;
+    margin: 5px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #e8ddd0;
+    border-radius: 10px;
+}
+
+.carousel-indicators .active {
+    background-color: orangered;
+}
+
+.carousel {
+    margin-top: 50px;
+}
+
+.card m-2 {
+    max-width: 18rem;
+}
+
+.cinemas_icon {
+    margin: 10px 0px 10px 0px;
+    float: left;
+}
+
+.top-left {
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    background: orangered;
+    color: #ffffff;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.top-right {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    background: #808080;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 3px;
+}
+.info_type{
+    background: orangered;
+    color: #ffffff;
+    border-radius: 5px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-left:5px;
+    padding-right:5px;
+    te
+}
+
+.profile-image {
+    float: left;
+}
+
+.img-theater {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+}
+
+.nav-list {
+    max-height: 500px;
+    max-width: 300px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    overflow: hidden;
+}
+
+.img-2d {
+    width: 30px;
+    height: 26px;
+    margin: 10px;
+}
+
+.icon-common {
+    width: 25px;
+    height: 20px;
+}
+
+.img-movie {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.icon_star_rating {
+    width: 8px;
+    height: 8px;
+}
+
+.infoMovieCinema {
+    color: #949494;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.myContainer {
+    position: relative;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.myContainer:hover .img-movie {
+  opacity: 0.3;
+}
+
+.myContainer:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+  cursor: pointer;
+}
+
+img.ex4 {
+		width: 30px;
+		height: 30px;
+	}
+.overflow-scroll {
+    overflow-y: auto;
+    height : 500px;
+    cursor: pointer;
+}
+/* dialog*/
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 70%;
+    height: 70%;
+    margin-top: 80px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a[ng-click]{
+    cursor: pointer;
+}
+
+img {
+    cursor: pointer;
+}

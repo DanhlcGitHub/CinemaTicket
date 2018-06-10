@@ -184,8 +184,18 @@
             <PropertyRef Name="timeId" />
           </Key>
           <Property Name="timeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="startTime" Type="datetime" />
-          <Property Name="endTime" Type="datetime" />
+          <Property Name="startTime" Type="nvarchar" MaxLength="10" />
+          <Property Name="endTime" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -453,6 +463,7 @@
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Seat" EntityType="Self.Seat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShowTime" EntityType="Self.ShowTime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOfSeat" EntityType="Self.TypeOfSeat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
@@ -743,9 +754,19 @@
             <PropertyRef Name="timeId" />
           </Key>
           <Property Name="timeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="startTime" Type="DateTime" Precision="3" />
-          <Property Name="endTime" Type="DateTime" Precision="3" />
+          <Property Name="startTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="endTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleShowTime001" FromRole="ShowTime" ToRole="MovieSchedule" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -1018,6 +1039,7 @@
           <EntitySet Name="Rooms" EntityType="Self.Room" />
           <EntitySet Name="Seats" EntityType="Self.Seat" />
           <EntitySet Name="ShowTimes" EntityType="Self.ShowTime" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tickets" EntityType="Self.Ticket" />
           <EntitySet Name="TypeOfSeats" EntityType="Self.TypeOfSeat" />
           <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
@@ -1297,6 +1319,17 @@
                 <ScalarProperty Name="timeId" ColumnName="timeId" />
                 <ScalarProperty Name="startTime" ColumnName="startTime" />
                 <ScalarProperty Name="endTime" ColumnName="endTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CinemaBookingDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

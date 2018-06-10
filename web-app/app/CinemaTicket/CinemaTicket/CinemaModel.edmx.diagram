@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f1100b6d576448b5bd5d027117e50b4e" Name="Diagram1">
+      <Diagram DiagramId="c13220fbd05347a79e0743271c3e0ba7" Name="Diagram1">
         <EntityTypeShape EntityType="CinemaBookingDBModel.AdminAccount" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaBookingDBModel.BankAccount" Width="1.5" PointX="2.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaBookingDBModel.BankList" Width="1.5" PointX="12.75" PointY="13.875" IsExpanded="true" />
@@ -23,9 +23,10 @@
         <EntityTypeShape EntityType="CinemaBookingDBModel.Room" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaBookingDBModel.Seat" Width="1.5" PointX="10.5" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaBookingDBModel.ShowTime" Width="1.5" PointX="8.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaBookingDBModel.Ticket" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaBookingDBModel.TypeOfSeat" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemaBookingDBModel.UserAccount" Width="1.5" PointX="5.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.UserAccount" Width="1.5" PointX="7.75" PointY="14.875" IsExpanded="true" />
         <AssociationConnector Association="CinemaBookingDBModel.FKBookingDetailBookingTicket001" ManuallyRouted="false" />
         <AssociationConnector Association="CinemaBookingDBModel.FKBookingDetailTicket001" ManuallyRouted="false" />
         <AssociationConnector Association="CinemaBookingDBModel.FKBookingTicketCustomer001" ManuallyRouted="false" />

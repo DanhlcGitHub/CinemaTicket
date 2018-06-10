@@ -12,17 +12,12 @@ namespace CinemaTicket
     using System;
     using System.Collections.Generic;
     
-    public partial class ShowTime
+    public partial class sysdiagram
     {
-        public ShowTime()
-        {
-            this.MovieSchedules = new HashSet<MovieSchedule>();
-        }
-    
-        public int timeId { get; set; }
-        public string startTime { get; set; }
-        public string endTime { get; set; }
-    
-        public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

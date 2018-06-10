@@ -13,6 +13,17 @@
     <link rel="stylesheet" href="~/Content/css/index.css">
 </head>
 <body ng-controller="filmController">
+    <!-- filmDialog -->
+    <div id="myModal" class="modal">
+
+        <!-- filmDialogContent -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <iframe id="myIframe" width="100%" height="515" src="" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+
+    </div>
+
     <nav class="navbar fixed-top navbar-light navbar-expand-md bg-light">
         <a href="/" class="navbar-brand mr-0">Icon</a>
         <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
@@ -89,10 +100,10 @@
 
         <ul class="nav nav-pills justify-content-center">
             <li class="nav-item">
-                <a class="nav-link text-danger" href="#"><h4>Đang Chiếu</h4></a>
+                <a id="showingMovieId" ng-click="loadShowingMovie()" class="nav-link text-danger"><h4>Đang Chiếu</h4></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-muted" href="#"><h4>Sắp Chiếu</h4></a>
+                <a id="upcommingMovieId" ng-click="loadUpcommingMovie()" class="nav-link text-muted"><h4>Sắp Chiếu</h4></a>
             </li>
         </ul>
 
@@ -104,13 +115,24 @@
                 <div class="col-10" style="float:left">
                     <div class="row" id="filmContainer">
                         <div ng-repeat="aFilm in CurrentFilmList" class="col-3">
-                            <img height="300" class="img-movie rounded" ng-src="{{aFilm.img}}">
-                            <div class="top-right">
+                            <div class="myContainer">
+                                <img height="300" class="img-movie rounded" ng-src="{{aFilm.img}}">
+                                <div class="middle">
+                                    <div class="text">
+                                        <img ng-click="openTrailerDialog(aFilm.trailerUrl)" src="Content/img/repository/play-video.png" width="50" height="50" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="aFilm.restricted != 0" class="top-left">
+                                C {{ aFilm.restricted}}
+                            </div>
+                            <div ng-if="aFilm.imdb != 0" class="top-right">
                                 <div class="text-center">
                                     {{aFilm.imdb}}
                                 </div>
                                 <div class="d-inline-flex" style="float:left;">
                                     <img ng-repeat="i in aFilm.star track by $index" src="Content/img/film/star_full.png" class="icon_star_rating" />
+
                                 </div>
                             </div>
                             <h5 class="mt-2">{{aFilm.name}}</h5>
@@ -138,35 +160,35 @@
                     </ul>
                 </div>
 
-                <div class="col-4 border-right">
-                    <ul class="nav-list nav flex-column">
-                        <li class="nav-item border-bottom">
-                            <div class="row" ng-repeat="cinema in currentCinemaList">
-                                <div class="profile-image">
-                                    <img ng-src="{{cinema.img}}" style="width:50px; height:50px; margin:10px" />
-                                </div>
-                                <div>
-                                    <input type="hidden" value="{{cinema.id}}" />
-                                    <span class="infoMovieCinema">{{cinema.name}}</span><br />
-                                    <span class="infoMovieCinema"><small>{{cinema.address}}</small></span><br />
-                                    <span><small>[chi tiết]</small></span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="col-4 border-right flex-column overflow-scroll">
+                    <div ng-click="onclickCinema($index)" class="row border-bottom " ng-repeat="cinema in currentCinemaList">
+                        <div class="profile-image">
+                            <img ng-src="{{cinema.img}}" style="width:50px; height:50px; margin:10px" />
+                        </div>
+                        <div>
+                            <input type="hidden" value="{{cinema.id}}" />
+                            <span class="infoMovieCinema">{{cinema.name}}</span><br />
+                            <p class="infoMovieCinema" style="text-overflow: '...'; width: 250px; height:20px; margin:0px">{{cinema.address}}</p>
+                            <span><small>[chi tiết]</small></span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col-7">
-                    <div class="border-bottom">
+                <div class="col-7 overflow-scroll">
+                    <p ng-if="currentFilmInScheduleList == 0">
+                        không có suất chiếu
+                    </p>
+                    <div ng-repeat="aFilm in currentFilmInScheduleList" class="border-bottom">
                         <div class="row">
                             <div class="profile-image">
-                                <img src="~/Content/img/film/solo_a_star_wars.jpg" class="img-theater" />
+                                <img ng-src="{{ aFilm.img }}" class="img-theater" />
                             </div>
                             <div class="profile-info" style="margin:10px">
                                 <p>
-                                    Solo: Star Wars Ngoại Truyện<br />
+                                    <font ng-if="aFilm.restricted != 0" class="info_type">C {{ aFilm.restricted}}</font>
+                                    {{ aFilm.filmName }}<br />
                                     <small>
-                                        135 phút - 123Phim 8.1 - IMDb 7.2
+                                        {{aFilm.length}} phút - IMDb {{aFilm.imdb}}
                                     </small>
                                 </p>
                             </div>
@@ -176,209 +198,82 @@
                                 <img src="~/Content/img/film/2D.png" class="img-2d" />
                             </div>
                             <div class="profile-info text-success col-10">
-                                <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
-                                <h4 class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">12:15</a></h4>
+                                <h4 ng-repeat="time in aFilm.timeList" class="time-show" style="margin:5px; float:left"><a href="#" style=" text-decoration: none;">{{time.startTime}}</a></h4>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
-
-        <div class="col-12" style="height:100px;">
-            <div class="col-12" style="height:50px;"></div>
-            <ul class="nav nav-pills justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link text-danger" href="#"><h4>Điện Ảnh 24h</h4></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-muted" href="#"><h4>Review</h4></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-muted" href="#"><h4>Khuyến Mãi</h4></a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-12">
-                            <img src="~/Content/img/film/news_avatar_2.jpg" class="img-movie">
-                        </div>
-                        <div class="col-12 ml-0">
-                            <p>
-                                Đây là cách mà James Cameron cách mạng hóa phim 3D với Avatar 2<br />
-                                <small>
-                                    Đạo diễn Avatar chia sẻ tham vọng định hình lại công nghệ 3D theo cách khiến khán giả phải kinh ngạc.
-                                </small>
-                            </p>
-                            <div class="d-inline">
-                                <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/film/like.png" class="icon-common" /> 0
-                                </a>
-                            </div>
-                            <div class="d-inline ml-3">
-                                <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/film/comment.png" class="icon-common" /> 0
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-12">
-                            <img src="~/Content/img/film/news_avatar_2.jpg" class="img-movie">
-                        </div>
-                        <div class="col-12 ml-0">
-                            <p>
-                                Đây là cách mà James Cameron cách mạng hóa phim 3D với Avatar 2<br />
-                                <small>
-                                    Đạo diễn Avatar chia sẻ tham vọng định hình lại công nghệ 3D theo cách khiến khán giả phải kinh ngạc.
-                                </small>
-                            </p>
-                            <div class="d-inline">
-                                <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/film/like.png" class="icon-common" /> 0
-                                </a>
-                            </div>
-                            <div class="d-inline ml-3">
-                                <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/film/comment.png" class="icon-common" /> 0
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mt-4">
-            <div class="row">
-                <div class="col-4">
-                    <div class="row">
-                        <div class="col-12">
-                            <img src="~/Content/img/film/phim_ngan_bao.jpg" class="img-movie" />
-                        </div>
-                        <div class="col-12 ml-0">
-                            <p>
-                                Dàn công chúa Disney hội tụ trong ảnh nóng hổi của Wreck-It Ralph 2<br />
-                                <small>
-                                    Nếu dàn công chúa Disney là Avengers thì đây chính xác là Cuộc Chiến Vô Cực của họ.
-                                </small>
-                            </p>
-                            <div class="d-inline">
-                                <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/film/like.png" class="icon-common" /> 0
-                                </a>
-                            </div>
-                            <div class="d-inline ml-3">
-                                <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/film/comment.png" class="icon-common" /> 0
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="row">
-                        <div class="col-12">
-                            <img src="~/Content/img/film/phim_ngan_bao.jpg" class="img-movie" />
-                        </div>
-                        <div class="col-12 ml-0">
-                            <p>
-                                Dàn công chúa Disney hội tụ trong ảnh nóng hổi của Wreck-It Ralph 2<br />
-                                <small>
-                                    Nếu dàn công chúa Disney là Avengers thì đây chính xác là Cuộc Chiến Vô Cực của họ.
-                                </small>
-                            </p>
-                            <div class="d-inline">
-                                <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/film/like.png" class="icon-common" /> 0
-                                </a>
-                            </div>
-                            <div class="d-inline ml-3">
-                                <a href="#" style="text-decoration: none;">
-                                    <img src="~/Content/img/film/comment.png" class="icon-common" /> 0
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="~/Content/img/film/black_panther.jpg" class="img-movie" />
-                            </div>
-                            <div class="col-9">
-                                <h6>
-                                    Thám Tử Gà Mơ trở lại và lợi hại gấp đôi với 'hươu cao cổ' Lee Kwang Soo
-                                </h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="~/Content/img/film/black_panther.jpg" class="img-movie" />
-                            </div>
-                            <div class="col-9">
-                                <h6>
-                                    Thám Tử Gà Mơ trở lại và lợi hại gấp đôi với 'hươu cao cổ' Lee Kwang Soo
-                                </h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="~/Content/img/film/black_panther.jpg" class="img-movie" />
-                            </div>
-                            <div class="col-9">
-                                <h6>
-                                    Thám Tử Gà Mơ trở lại và lợi hại gấp đôi với 'hươu cao cổ' Lee Kwang Soo
-                                </h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="~/Content/img/film/black_panther.jpg" class="img-movie" />
-                            </div>
-                            <div class="col-9">
-                                <h6>
-                                    Thám Tử Gà Mơ trở lại và lợi hại gấp đôi với 'hươu cao cổ' Lee Kwang Soo
-                                </h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 mt-5">
-                    <div class="form-row text-center">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Xem thêm</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    </div>
+    <!-- tin tuc khuyen mai goes here-->
     </div>
 
     <br />
 
-    <div style="height:300px; background:#00ffff">
-
-    </div>
+    <footer class="footer" style="background: #222;">
+        <br /><br />
+        <div class="container center">
+            <div class="row col-sm-12">
+                <div class="col-2">
+                    <p class="text-white">123PHIM</p>
+                    <a href="#">FAQ</a><br>
+                    <a href="#">Brand Guidelines</a>
+                </div>
+                <div style="padding-top:40px;" class="col-2">
+                    <a href="#">Thỏa thuận sử dụng</a><br>
+                    <a href="#">Quy chế hoạt động</a><br>
+                    <a href="#">Chính sách bảo mật</a><br>
+                    <a href="#">Quyền lợi thành viên</a><br>
+                </div>
+                <div style=" padding-left: 40px;float:left" class="col-3">
+                    <p class="text-white">ĐỐI TÁC</p><br>
+                    <div class="row">
+                        <div ng-repeat="groupCinema in scheduleList" style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img ng-src="{{ groupCinema.img }}" alt="{{ groupCinema.name }}" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+                <div style=" padding-left:40px" class="col-2">
+                    <p class="text-white">MOBILE APP</p><br>
+                    <div class="row">
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/apple-logo.png" class="ex4"></a>
+                        </div>
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/android-logo.png" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+                <div style=" padding-left:40px" class="col-3">
+                    <p class="text-white">SOCIAL</p><br>
+                    <div class="row">
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/facebook-logo.png" class="ex4"></a>
+                        </div>
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/zalo-logo.png" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="width:80%; border:0; height:2px; background:white;">
+        <div class="col-sm-12" style="padding-top:10px;">
+            <div class="container center">
+                <div class="row">
+                    <div style="padding-top:10px; padding-left:10px">
+                        <a href="#"><img width="100" height="100" src="~/Content/img/repository/booking-cinema-logo.jpg" class=""></a>
+                    </div>
+                    <div style="padding-top:10px; padding-left:40px">
+                        <p class="text-white">BookingTicket - CAPSTONE PROJECT FPT<p>
+                        <p class="text-white">Địa chỉ: 18 Tô Ký, Phường 14, Quận 12, Tp Hồ Chí Minh</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="~/Content/js/angular.min.js"></script>
     <script src="~/Content/js/jquery-3.3.1.min.js"></script>
     <script src="~/Content/js/bootstrap.min.js"></script>

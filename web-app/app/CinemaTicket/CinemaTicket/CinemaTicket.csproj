@@ -158,6 +158,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CinemaModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Constant\Constant.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
@@ -238,6 +239,9 @@
     <Compile Include="ShowTime.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ticket.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
@@ -247,12 +251,14 @@
     <Compile Include="UserAccount.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\DBUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\common.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\img\cinemaLogo\Beta-cineplex-cao-thang.jpg" />
     <Content Include="Content\img\cinemaLogo\BHD-Star-Bitexco.jpg" />
@@ -355,8 +361,15 @@
     <Content Include="Content\img\groupLogo\galaxyCinema.png" />
     <Content Include="Content\img\groupLogo\lotteCinema.png" />
     <Content Include="Content\img\groupLogo\megaGS.png" />
+    <Content Include="Content\img\repository\android-logo.png" />
+    <Content Include="Content\img\repository\apple-logo.png" />
+    <Content Include="Content\img\repository\booking-cinema-logo.jpg" />
+    <Content Include="Content\img\repository\booking-cinema-logo.PNG" />
+    <Content Include="Content\img\repository\facebook-logo.png" />
     <Content Include="Content\img\repository\next.png" />
+    <Content Include="Content\img\repository\play-video.png" />
     <Content Include="Content\img\repository\pre.png" />
+    <Content Include="Content\img\repository\zalo-logo.png" />
     <Content Include="Content\js\angular.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\home.js" />

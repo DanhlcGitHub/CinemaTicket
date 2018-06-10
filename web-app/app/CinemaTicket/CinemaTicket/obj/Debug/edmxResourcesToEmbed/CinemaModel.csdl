@@ -209,9 +209,19 @@
       <PropertyRef Name="timeId" />
     </Key>
     <Property Name="timeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="startTime" Type="DateTime" Precision="3" />
-    <Property Name="endTime" Type="DateTime" Precision="3" />
+    <Property Name="startTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="endTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleShowTime001" FromRole="ShowTime" ToRole="MovieSchedule" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Ticket">
     <Key>
@@ -484,6 +494,7 @@
     <EntitySet Name="Rooms" EntityType="Self.Room" />
     <EntitySet Name="Seats" EntityType="Self.Seat" />
     <EntitySet Name="ShowTimes" EntityType="Self.ShowTime" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Tickets" EntityType="Self.Ticket" />
     <EntitySet Name="TypeOfSeats" EntityType="Self.TypeOfSeat" />
     <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />

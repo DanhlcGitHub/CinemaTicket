@@ -8,8 +8,8 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view2"
-        android:layout_width="108dp"
-        android:layout_height="108dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginLeft="10dp"
         card_view:cardCornerRadius="10dp">
 
@@ -17,38 +17,122 @@
             android:id="@+id/img_show"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="fitXY"
             android:src="@drawable/infinity_war" />
     </android.support.v7.widget.CardView>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="175dp"
         android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tv_show_movie_title"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:lines="1"
             android:text="Infinity War"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
 
-        <TextView
-            android:id="@+id/tv_show_time"
-            android:layout_width="150dp"
+        <RelativeLayout android:id="@+id/relative_layout_sub_info"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_show_movie_title"
-            android:paddingLeft="10dp"
-            android:text="107 phút - IMDb 5.8" />
-
-        <TextView
-            android:id="@+id/tv_show_rating"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/text_view_border"
             android:layout_marginLeft="10dp"
-            android:textAlignment="center"
-            android:text="9.3" />
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/tv_show_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="107"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_show_space"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/tv_show_time"
+                android:text=" phút - IMDb "
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tv_show_imdb_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/tv_show_space"
+                android:text="5.8"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/relative_layout_sub_info"
+            card_view:cardCornerRadius="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:background="#bababa"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/tv_show_imdb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="9.3"
+                    android:textAlignment="center" />
+
+                <ImageView
+                    android:id="@+id/icon_star_one_show"
+                    android:layout_width="7dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/tv_show_imdb"
+                    android:layout_marginLeft="8dp"
+                    android:padding="0dp"
+                    android:src="@drawable/ic_star_full_1" />
+
+                <ImageView
+                    android:id="@+id/icon_star_two_show"
+                    android:layout_width="7dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/tv_show_imdb"
+                    android:layout_toEndOf="@+id/icon_star_one_show"
+                    android:src="@drawable/ic_star_full_1" />
+
+                <ImageView
+                    android:id="@+id/icon_star_three_show"
+                    android:layout_width="7dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/tv_show_imdb"
+                    android:layout_toEndOf="@+id/icon_star_two_show"
+                    android:src="@drawable/ic_star_full_1" />
+
+                <ImageView
+                    android:id="@+id/icon_star_four_show"
+                    android:layout_width="7dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/tv_show_imdb"
+                    android:layout_toEndOf="@+id/icon_star_three_show"
+                    android:src="@drawable/ic_star_full_1" />
+
+                <ImageView
+                    android:id="@+id/icon_star_five_show"
+                    android:layout_width="7dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/tv_show_imdb"
+                    android:layout_toEndOf="@+id/icon_star_four_show"
+                    android:src="@drawable/ic_star_full_1" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
     </RelativeLayout>
 
     <RelativeLayout
@@ -57,13 +141,16 @@
 
         <TextView
             android:id="@+id/tv_show_order_ticket"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:background="@drawable/text_view_order_border"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:gravity="center"
             android:text="Đặt vé"
-            android:padding="5dp"
-            android:layout_centerInParent="true"
             android:textColor="#ffffff"
-            android:textSize="16dp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 </LinearLayout>

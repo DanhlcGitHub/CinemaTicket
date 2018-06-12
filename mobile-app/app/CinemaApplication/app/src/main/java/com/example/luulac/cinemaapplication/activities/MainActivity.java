@@ -1,4 +1,4 @@
-package com.example.luulac.cinemaapplication;
+package com.example.luulac.cinemaapplication.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.luulac.cinemaapplication.R;
 import com.example.luulac.cinemaapplication.adapters.TabLayoutMainAdapter;
 import com.example.luulac.cinemaapplication.fragments.dashboards.DashboardFragment;
 import com.example.luulac.cinemaapplication.fragments.news.NewsFragment;

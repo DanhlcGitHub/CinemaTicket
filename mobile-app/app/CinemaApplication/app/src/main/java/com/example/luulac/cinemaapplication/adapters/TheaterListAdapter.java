@@ -10,6 +10,7 @@ import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
 
 import com.example.luulac.cinemaapplication.R;
+import com.example.luulac.cinemaapplication.data.models.CinemaModel;
 import com.example.luulac.cinemaapplication.data.models.Cinemas;
 import com.example.luulac.cinemaapplication.data.models.Theater;
 
@@ -19,10 +20,10 @@ import java.util.List;
 public class TheaterListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private List<Cinemas> cinemas;
-    private HashMap<Cinemas, List<Theater>> mapCinema;
+    private List<CinemaModel> cinemas;
+    private HashMap<CinemaModel, List<Theater>> mapCinema;
 
-    public TheaterListAdapter(Context context, List<Cinemas> cinemas, HashMap<Cinemas, List<Theater>> expandableListDetail) {
+    public TheaterListAdapter(Context context, List<CinemaModel> cinemas, HashMap<CinemaModel, List<Theater>> expandableListDetail) {
         this.context = context;
         this.cinemas = cinemas;
         this.mapCinema = expandableListDetail;
@@ -73,7 +74,7 @@ public class TheaterListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int listPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Cinemas cinema = (Cinemas) getGroup(listPosition);
+        CinemaModel cinema = (CinemaModel) getGroup(listPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.theater_list, null);

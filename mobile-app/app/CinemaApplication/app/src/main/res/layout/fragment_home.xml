@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,15 +25,21 @@
             />
 
 
-        <include layout="@layout/movie_card_lager" />
+        <include
+            android:id="@+id/card_1"
+            layout="@layout/film_card_lager" />
 
-        <include layout="@layout/movie_card_lager" />
+        <include
+            android:id="@+id/card_2"
+            layout="@layout/film_card_lager" />
 
-        <include layout="@layout/movie_card_lager" />
+        <include
+            android:id="@+id/card_3"
+            layout="@layout/film_card_lager" />
 
-        <include layout="@layout/movie_card_lager" />
 
-        <include layout="@layout/card_show" />
+        <include android:id="@+id/card_into_showing"
+            layout="@layout/card_show"/>
 
         <TextView
             android:layout_width="wrap_content"

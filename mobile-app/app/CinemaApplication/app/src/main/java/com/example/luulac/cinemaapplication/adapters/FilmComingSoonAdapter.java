@@ -12,32 +12,33 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.luulac.cinemaapplication.R;
-import com.example.luulac.cinemaapplication.data.models.Movie;
+import com.example.luulac.cinemaapplication.data.models.FilmModel;
+import com.example.luulac.cinemaapplication.services.BaseService;
 
 import java.util.List;
 
-public class MovieCommingSoonAdapter extends RecyclerView.Adapter<MovieCommingSoonAdapter.MovieCommingSoonHolder> {
+public class FilmComingSoonAdapter extends RecyclerView.Adapter<FilmComingSoonAdapter.FilmCommingSoonHolder> {
 
-    private List<Movie> movies;
+    private List<FilmModel> films;
     private Context context;
 
-    public MovieCommingSoonAdapter(List<Movie> movies) {
-        this.movies = movies;
+    public FilmComingSoonAdapter(List<FilmModel> films) {
+        this.films = films;
     }
 
     @NonNull
     @Override
-    public MovieCommingSoonAdapter.MovieCommingSoonHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FilmComingSoonAdapter.FilmCommingSoonHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.card_comming_soon, parent, false);
 
-        return new MovieCommingSoonHolder(view);
+        return new FilmCommingSoonHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieCommingSoonAdapter.MovieCommingSoonHolder holder, final int position) {
-        Glide.with(context).load(movies.get(position).getImage())
+    public void onBindViewHolder(@NonNull FilmComingSoonAdapter.FilmCommingSoonHolder holder, final int position) {
+        Glide.with(context).load(BaseService.BASE_URL + films.get(position).getPosterPicture())
                 .thumbnail(0.5f)
                 .into(holder.imgCommingSoon);
         holder.tvDate.setText("01/06");
@@ -45,8 +46,8 @@ public class MovieCommingSoonAdapter extends RecyclerView.Adapter<MovieCommingSo
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(onItemClickListener != null){
-                    onItemClickListener.onItemClick(movies.get(position).getTitle());
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(films.get(position).getName());
                 }
             }
         });
@@ -54,32 +55,32 @@ public class MovieCommingSoonAdapter extends RecyclerView.Adapter<MovieCommingSo
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return films.size();
     }
 
-    public class MovieCommingSoonHolder extends RecyclerView.ViewHolder {
+    public class FilmCommingSoonHolder extends RecyclerView.ViewHolder {
 
         ImageView imgCommingSoon;
         TextView tvDate;
         CardView cardView;
 
 
-        public MovieCommingSoonHolder(View itemView) {
+        public FilmCommingSoonHolder(View itemView) {
             super(itemView);
 
-            imgCommingSoon = (ImageView) itemView.findViewById(R.id.img_movie_comming_soon);
-            tvDate =(TextView) itemView.findViewById(R.id.tv_date_comming);
-            cardView = (CardView) itemView.findViewById(R.id.cv_movie_comming_soon_item);
+            imgCommingSoon = (ImageView) itemView.findViewById(R.id.img_film_coming_soon);
+            tvDate = (TextView) itemView.findViewById(R.id.tv_date_coming);
+            cardView = (CardView) itemView.findViewById(R.id.cv_film_coming_soon_item);
         }
     }
 
     public interface OnItemClickListener {
-        void onItemClick(String movieName);
+        void onItemClick(String filmName);
     }
 
     private OnItemClickListener onItemClickListener;
 
-    public void onItemClickListener(OnItemClickListener itemClickListener){
+    public void setOnItemClickListener(OnItemClickListener itemClickListener) {
         this.onItemClickListener = itemClickListener;
     }
 }

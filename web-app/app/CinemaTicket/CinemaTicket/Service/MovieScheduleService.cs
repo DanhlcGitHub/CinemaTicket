@@ -10,6 +10,9 @@ namespace CinemaTicket.Service
     interface IMovieScheduleService
     {
         List<Object> getMovieScheduleOfCinema(int cinemaId, DateTime currentDate);
+        List<Object> GetMovieScheduleForDetailFilm(int cinemaId, DateTime currentDate, int digTypeId, int filmId);
+
+        List<MovieSchedule> FindMovieSchedule(int filmId, int timeId, int cinemaId, DateTime scheduleDate);
     }
     public class MovieScheduleService : IMovieScheduleService
     {
@@ -43,6 +46,17 @@ namespace CinemaTicket.Service
         public List<Object> getMovieScheduleOfCinema(int cinemaId, DateTime currentDate)
         {
             return movieScheduleRepository.getMovieScheduleOfCinema(cinemaId, currentDate);
+        }
+
+        public List<Object> GetMovieScheduleForDetailFilm(int cinemaId, DateTime currentDate, int digTypeId, int filmId)
+        {
+            return movieScheduleRepository.GetMovieScheduleForDetailFilm(cinemaId, currentDate, digTypeId, filmId);
+        }
+
+
+        public List<MovieSchedule> FindMovieSchedule(int filmId, int timeId, int cinemaId, DateTime scheduleDate)
+        {
+            return movieScheduleRepository.FindMovieSchedule(filmId, timeId, cinemaId, scheduleDate);
         }
     }
 }

@@ -12,10 +12,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/css/chooseTicket.css">
     <link rel="stylesheet" href="~/Content/css/common.css">
-
-
 </head>
 <body ng-controller="chooseTicketController" style="overflow-y:hidden; overflow-x:hidden;">
+    <form method="post" action="/home/ChooseSeat" id="goToChooseSeatForm" style="display:none"></form>
     <input id="chooseTicketId" type="hidden" value=@ViewBag.scheduleId />
     <div class="mainMaxWidth2 contentMain">
         <div class="col-sm-5"></div>
@@ -96,7 +95,7 @@
                         </div>
                     </div>
                 </div><div class="float-left">
-                          <button id="chooseSeatButtonId" type="button" class="btn btn-success btn-xl ">Chọn Ghế</button>
+                          <button ng-click="gotoChooseSeat()" id="chooseSeatButtonId" type="button" class="btn btn-success btn-xl ">Chọn Ghế</button>
                 </div>
             </div>
         </div>

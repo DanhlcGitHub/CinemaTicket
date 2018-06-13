@@ -59,7 +59,12 @@ var chooseTicketController = function ($scope, $http) {
             $scope.totalAmount += (parseInt($scope.data.typeOfSeats[i].userChoose)
                 * parseInt($scope.data.typeOfSeats[i].price));
         }
-    }
+    };
+    $scope.gotoChooseSeat = function () {
+        var param1 = "<input type='hidden' name='scheduleId' value='" + $scope.scheduleId + "' />";
+        document.getElementById('goToChooseSeatForm').innerHTML = param1;
+        document.getElementById('goToChooseSeatForm').submit();
+    };
 };
 
 myApp.controller("chooseTicketController", chooseTicketController);

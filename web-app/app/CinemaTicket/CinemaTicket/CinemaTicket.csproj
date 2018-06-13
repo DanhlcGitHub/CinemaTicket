@@ -164,6 +164,7 @@
     <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Controllers\SeatController.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
@@ -269,7 +270,9 @@
     <Content Include="Content\css\filmDetail.css" />
     <Content Include="Content\css\chooseTicket.css" />
     <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\chooseSeat.css" />
     <Content Include="Content\css\index.css" />
+    <Content Include="Content\css\w3.css" />
     <Content Include="Content\img\cinemaLogo\Beta-cineplex-cao-thang.jpg" />
     <Content Include="Content\img\cinemaLogo\BHD-Star-Bitexco.jpg" />
     <Content Include="Content\img\cinemaLogo\BHD-Star-LeVanViet.jpg" />
@@ -381,6 +384,7 @@
     <Content Include="Content\img\repository\next.png" />
     <Content Include="Content\img\repository\play-video.png" />
     <Content Include="Content\img\repository\pre.png" />
+    <Content Include="Content\img\repository\screen.png" />
     <Content Include="Content\img\repository\zalo-logo.png" />
     <Content Include="Content\js\angular.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -389,7 +393,6 @@
     <Content Include="Content\js\chooseSeat.js" />
     <Content Include="Content\js\home.js" />
     <Content Include="Content\js\jquery-3.3.1.min.js" />
-    <Content Include="Content\js\newword.html" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -442,6 +445,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\ChooseTicket.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\ChooseSeat.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

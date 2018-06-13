@@ -13,7 +13,7 @@ var filmController = function ($scope, $http) {
     $scope.maxItem = 8;
     $http({
         method: "POST",
-        url: "home/LoadCinema"
+        url: "Schedule/LoadScheduleGroupByCinema"
     })
     .then(function (response) {
         $scope.scheduleList = response.data;
@@ -25,7 +25,7 @@ var filmController = function ($scope, $http) {
 
     $http({
         method: "POST",
-        url: "home/LoadAvailableFilm"
+        url: "Film/LoadAvailableFilm"
     })
     .then(function (response) {
         $scope.AllFilmData = response.data;
@@ -34,15 +34,6 @@ var filmController = function ($scope, $http) {
         });
         //$scope.test1();
         $scope.CurrentFilmList = $scope.FilmData.slice($scope.pageIdex * $scope.maxItem, (($scope.pageIdex + 1) * $scope.maxItem))
-    });
-
-    $http({
-        method: "POST",
-        url: "home/Test"
-    })
-    .then(function (response) {
-        console.log("test object");
-        console.log(response);
     });
 
     $scope.onclickGroupCinema = function (index) {
@@ -104,8 +95,8 @@ var filmController = function ($scope, $http) {
         event.preventdefault();
         return false;
     },
-    $scope.test = function () {
-        console.log("test1");
+    $scope.gotoFilmDetail = function (id) {
+        window.location.href = 'home/FilmDetail?filmId='+id;
     },
     $scope.previous = function () {
         $scope.pageIdex--;
@@ -122,7 +113,7 @@ var filmController = function ($scope, $http) {
 myApp.controller("filmController", filmController);
 
 var LocalStorageManager = {
-    saveToLocalStorage: function (data,dataKey) {
+    saveToLocalStorage: function (data, dataKey) {
         var dataString = JSON.stringify(data);
         localStorage.setItem(dataKey, dataString);
     },

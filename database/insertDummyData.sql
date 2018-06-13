@@ -5,126 +5,126 @@ INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,m
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Nhắm Mắt Thấy Mùa Hè','2018-5-25',0, 100, 0, N'1',N'Cao Thúy Nhi',N'tình cảm, lãng mạn',
          N'Phim kể về Hạ (Phương Anh Đào). Câu chuyện bắt đầu khi Hạ đến thị trấn Higashikawa, Hokkaido, Nhật Bản để tìm cha (nghệ sĩ Công Ninh đảm nhận) .Hành trình của Hạ bứơc hướng mới – khám phá vùng đất có tuyết rơi vào mùa hè, nơi cha cô sống trong thời gian dài và tại đây Hạ gặp chàng trai Nhật Bản – Akira (do diễn viên Takafumi Akutsu thủ vai).',
-		 N'Công Ninh, Phương Anh Đào, Takafumi Akutsu',N'Vietnam, Nhật',N'https://youtu.be/tlNtE3IW6bE',
+		 N'Công Ninh, Phương Anh Đào, Takafumi Akutsu',N'Vietnam, Nhật',N'https://www.youtube.com/embed/tlNtE3IW6bE',
 		 N'Content/img/film/nham_mat_thay_mua_he.jpg',N'Content/img/film/nham_mat_thay_mua_he1.jpg;',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Thế Giới Khủng Long: Vương Quốc Sụp Đổ - Jurassic World: Fallen Kingdom','2018-06-08',0, 100, 8.2, N'1',N'J.A. Bayona',N'Hành động, viễn tưởng, phiêu lưu',
          N'Tất cả những yếu tố kỳ diệu, phiêu lưu, hồi hộp cùng với một trong những thương hiệu nổi tiếng và thành công nhất lịch sự điện ảnh, sự kiện này là một bước chuyển mình về hình ảnh cho thấy sự trở lại của các nhân vật được yêu thích và các loài khủng long đầy cảm hứng và đáng sợ hơn bao giờ hết. Chào mừng đến với Thế Giới Khủng Long: Vương Quốc Sụp Đổ',
-		 N'Jeff Goldblum, Chris Pratt, Bryce Dallas Howard',N'Tây Ban Nha, Mỹ',N'https://youtu.be/whixKrf1M_k',
+		 N'Jeff Goldblum, Chris Pratt, Bryce Dallas Howard',N'Tây Ban Nha, Mỹ',N'https://www.youtube.com/embed/whixKrf1M_k',
 		 N'Content/img/film/thegioikhunglong.jpg',N'Content/img/film/thegioikhunglong1.jpg;img/Jurassic2',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Doraemon: Nobita Và Đảo Giấu Vàng','2018-05-25',0, 117, 7.8, N'1',N'Kazuaki Imai',N'Hoạt hình, phiêu lưu',
          N'“Tớ sẽ tìm ra hòn đảo kho báu!”… Quyết tâm thực hiện bằng được kế hoạch sau khi hùng hồn tuyên bố với nhóm bạn Jaian, Suneo và Shizuka, nhờ bảo bối “Bản đồ truy tìm kho báu” của Doraemon, Nobita đã tìm thấy một hòn đảo mới đột nhiên xuất hiện giữa Thái Bình Dương…Nobita cùng các bạn bắt đầu chuyến phiêu lưu hướng tới đảo kho báu trên con tàu mang tên “Vầng hào quang Nobita”. Thế nhưng, chưa kịp cập bến, cả nhóm đã bị hải tặc tấn công! Trong lúc chống trả lại kẻ địch, Shizuka đã bị hải tặc bắt cóc lên tàu của chúng! Sau khi chạy thoát khỏi đám hải tặc, nhóm bạn Nobita tình cờ gặp cậu bé Flock trôi dạt trên biển cùng con vẹt robot tên Quiz. Flock vốn là một thợ cơ khí vừa trốn thoát khỏi tàu của lũ hải tặc, cậu biết được bí mật quan trọng của hòn đảo kho báu! Liệu Nobita cùng những người bạn có thể giải cứu Shizuka khỏi tay bè lũ hải tặc xấu xa và khám phá ra bí mật ẩn giấu trên hòn đảo kho báu đang ngủ yên hay không!?',
-		 N'',N'Nhật Bản',N'https://youtu.be/iUP2PPGfVPk',
+		 N'',N'Nhật Bản',N'https://www.youtube.com/embed/iUP2PPGfVPk',
 		 N'Content/img/film/nobitavadaogiauvang.jpg',N'Content/img/film/nobitavadaogiauvang1.jpg;Content/img/film/nobitavadaogiauvang2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Ong Nhí Phiêu Lưu Ký: Đại Chiến Cúp Ong Mật','2018-06-1',0, 85, 5.5, N'1',N'Noel Cleary, Sergio Delfino',N'Hoạt hình, Phiêu lưu, Hài hước',
          N'Ong Nhí Phiêu Lưu Ký: Đại Chiến Cúp Ong Mật là câu chuyện về chuyến phiêu lưu của Maya và người bạn thân nhất Willi. Maya và các bạn lập thành một đội để tham gia tranh cúp Ong Mật nhằm mục đích bảo vệ tổ ong của mình là Đồng Hoa Anh Túc (Poppy Meadow). Poster của phim cho thấy không khí “căng thẳng” và hình ảnh đầy màu sắc của hai đội chơi đối kháng trực tiếp với nhau tại cúp Ong Mật - đội của Maya và đội của Violet. Trái ngược với Maya vui vẻ, tươi sáng là cô nàng Violet xinh đẹp nhưng có phần tính toán và mưu mô, hứa hẹn sẽ gây ra không ít thử thách khó khăn cho đội ong nhí Maya.',
-		 N'',N'Đức, Úc',N'https://youtu.be/7fMgM-33QVU',
+		 N'',N'Đức, Úc',N'https://www.youtube.com/embed/7fMgM-33QVU',
 		 N'Content/img/film/ongnhiphieuluuky.jpg',N'Content/img/film/ongnhiphieuluuky1.jpg;Content/img/film/ongnhiphieuluuky2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Em Gái Mưa','2018-06-1',0, 102, 0, N'1',N'Kawaii Tuấn Anh',N'Tình cảm',
          N'Lấy cảm hứng từ Music Video Em Gái Mưa, phim kể về một mối tình mộc mạc giữa cô bé học trò và chàng giáo viên mới tốt nghiệp. Những thử thách và ngăn trở của định kiến đã khiến mối tình không',
-		 N'',N'Việt Nam',N'https://youtu.be/7paAs6jpy50',
+		 N'',N'Việt Nam',N'https://www.youtube.com/embed/7paAs6jpy50',
 		 N'Content/img/film/emgaimua.jpg',N'Content/img/film/emgaimua1.jpg;Content/img/film/emgaimua2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Ngày Sinh Tồn - Hostile','2018-06-1',0, 83, 5.3, N'1',N'Mathieu Turi',N'kinh dị, giả tưởng',
          N'Nếu bạn trở thành số ít loài người còn sống sót khi dịch bệnh bùng nổ, liệu bạn sẽ là người may mắn, hay là kẻ phải mang nỗi bất hạnh? Sau khi người thương biến mất, Juliette từ một cô nàng ngỗ ngược, cô trở thành một chiến binh chiến đấu với những sinh vật đáng sợ bởi căn bệnh quái ác khiến cho nhân loại đang đứng trước bờ vực của sự diệt vong. Trải qua rất nhiều khó khăn, thử thách, liệu hạnh phúc có mỉm cười với Juliette, và Trái đất có được giải cứu khỏi đám quái vật mang trong mình mầm bệnh nguy hiểm đó?',
-		 N'Brittany Ashworth, Grégory Fitoussi, Javier Botet',N'Pháp',N'https://youtu.be/49o3c30f70Y',
+		 N'Brittany Ashworth, Grégory Fitoussi, Javier Botet',N'Pháp',N'https://www.youtube.com/embed/49o3c30f70Y',
 		 N'Content/img/film/ngaysinhton.jpg',N'Content/img/film/ngaysinhton1.jpg;Content/img/film/ngaysinhton2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Selfie Với Thần Chết - Selfie From Hell','2018-06-1',0, 73, 3.2, N'1',N'Erdal Ceylan',N'kinh dị',
          N'Dựa trên phim ngắn cùng tên, Phim xoay quanh Julia - một vlogger nổi tiếng, cô thường xuyên selfie tự sướng và đăng tải các bức ảnh qua mạng xã hội để nhận được nhiều sự quan tâm. Thế nhưng trong một lần selfie, Julia đã mắc phải một sai lầm nghiêm trọng và tính mạng cô bị đe dọa bởi thế lực đen tối. Đứng trước sự việc đó, Hana - chị gái của Julia phải tìm cách xâm nhập vào thế giới bí ẩn này để giải cứu cho em mình.',
-		 N'',N'Canada',N'https://youtu.be/V-iiCzQ-smQ',
+		 N'',N'Canada',N'https://www.youtube.com/embed/V-iiCzQ-smQ',
 		 N'Content/img/film/selfievoithanchet.jpg',N'Content/img/film/selfievoithanchet1.jpg;Content/img/film/selfievoithanchet2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Solo: Star Wars Ngoại Truyện','2018-05-25',0, 135, 7.2, N'1',N'Ron Howard',N'Hành động, phiêu lưu, viễn tưởng',
          N'Solo: A Star Wars Story là phần phim tiền truyện làm về Han Solo, người anh hùng biểu tượng của dòng phim danh tiếng này. Theo đó, nội dung bộ phim bắt đầu khi Han Solo gặp gỡ người bạn thân Chewbacca và tay bạc khét tiếng Lando Calrissian. Họ cùng nhau bắt đầu chuyến chuyến phiêu lưu đầy thú vị.',
-		 N'Paul Bettany, Woody Harrelson, Alden Ehrenreich , Emilia Clarke',N'Mỹ',N'https://youtu.be/eLq53DPwjP4',
+		 N'Paul Bettany, Woody Harrelson, Alden Ehrenreich , Emilia Clarke',N'Mỹ',N'https://www.youtube.com/embed/eLq53DPwjP4',
 		 N'Content/img/film/starwarsngoaitruyen.jpg',N'Content/img/film/starwarsngoaitruyen1.jpg;Content/img/film/starwarsngoaitruyen2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Lăn Đến Bên Em - Rolling to You','2018-05-11',16, 107, 5.9, N'1',N'Franck Dubosc',N'Hài hước, lãng mạn',
          N'Mọi chuyện bắt đầu khi Jocelyn đến thăm ngôi nhà của mẹ mình, và bắt gặp cô gái hàng xóm bốc lửa khi đang ngồi trên chiếc xe lăn của bà, khiến cô hiểu nhầm anh là một người khuyết tật. Jocelyn quyết định dùng chiếc xe lăn như một công cụ để tán tỉnh cô gái, nhưng không ngờ cô lại muốn giới thiệu anh với Florence (Alexandra Lamy) – người chị gái khuyết tật của mình. Rất nhiều tình huống hài hước dở khóc dở cười xảy ra với Jocelyn, khi anh phải giả vờ làm người khuyết tật mỗi lúc gặp Florence mà khiến cô không nghi ngờ. “Đã lỡ phóng lao nên đành theo lao”, liệu cuối cùng Jocelyn sẽ giải quyết tình huống rắc rối mà mình tự đưa bản thân vào như thế nào?',
-		 N'Gérard Darmon, Elsa Zylberstein, Alexandra Lamy, Franck Dubosc',N'Pháp',N'https://youtu.be/t3AyFd9HuyE',
+		 N'Gérard Darmon, Elsa Zylberstein, Alexandra Lamy, Franck Dubosc',N'Pháp',N'https://www.youtube.com/embed/t3AyFd9HuyE',
 		 N'Content/img/film/landenbenem.jpg',N'Content/img/film/landenbenem1.jpg;Content/img/film/landenbenem2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Giải Cứu Tí Nị - Toy Guardians','2018-05-25',0, 100, 0, N'1',N'Shen Yu, Wang Yan',N'Hoạt hình, gia đình',
          N'Giải Cứu Tị Nị (Tên tiếng Anh: Toy Guardians) là bộ phim hoạt hình 3D kể về hành trình phiêu lưu của các anh hùng thú nhồi bông Hổ Con, Cá Sấu Răng Sún, Anh Rô-Bô, Nấm Nhí vào thế giới ảo để chiến đấu và giành lại “tuổi thơ” cho cô chủ nhỏ Tí Nị. Là một món quà bất ngờ dành cho các bé, cũng như gia đình trong dịp lễ Quốc tế thiếu nhi năm nay, bộ phim hứa hẹn sẽ mang lại cho khán giả nhiều giây phút giải trí thú vị và bổ ích từ những câu chuyện cảm động về tuổi thơ và tình bạn. Giải Cứu Tí Nị, với sự tham gia lồng tiếng của hai diễn viên Đại Nghĩa và Ngọc Trai hoá thân thành Hổ con và Cá Sấu Răng Sún',
-		 N'Đại Nghĩa, Ngọc Trai',N'Trung Quốc',N'https://youtu.be/61COgRMujDw',
+		 N'Đại Nghĩa, Ngọc Trai',N'Trung Quốc',N'https://www.youtube.com/embed/61COgRMujDw',
 		 N'Content/img/film/giaicuutini.jpg',N'Content/img/film/giaicuutini1.jpg;Content/img/film/giaicuutini2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Yêu Nữ Siêu Quậy','2018-05-11',13, 100, 0, N'1',N'Nguyễn Ngọc Hùng',N'Hài hước, tình cảm',
          N'Tai nạn bất ngờ xảy ra khi Ngân vì cứu cụ già mà hi sinh thân mình. Hồn ma vất vưởng, vẫn còn nặng tình với dương gian. Ngân quyết tâm phải hỏi bằng được: “Khanh, anh có yêu em không”. May mắn, Ngân gặp được ba con ma tập sự, đại diện cho “Thần Chết” lên dương gian để đưa Ngân về Âm phủ hỗ trợ và giúp đỡ Ngân thực hiện ước nguyện cuối cùng.',
-		 N'Hải Triều, La Thành, Khương Ngọc, Diệu Nhi',N'Việt Nam',N'https://youtu.be/KUIKp3e6TCI',
+		 N'Hải Triều, La Thành, Khương Ngọc, Diệu Nhi',N'Việt Nam',N'https://www.youtube.com/embed/KUIKp3e6TCI',
 		 N'Content/img/film/yeunusieuquay.jpg',N'Content/img/film/yeunusieuquay1.jpg;Content/img/film/yeunusieuquay2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Biệt Đội Cún Cưng - Show Dogs','2018-06-08',0, 92, 2.7, N'1',N'Raja Gosnell',N'Phiêu lưu, Hài, Gia đình',
          N'Max – một chú chó cảnh sát và cộng sự là con người đang điều tra về một nhóm tội phạm. Chúng lợi dụng 1 chương trình về chó để thực hiện phi vụ phi pháp của minh. Liệu Max và các cộng sự có phá được vụ án khó nhằn này? Liệu chuyện gì sẽ xảy ra?',
-		 N'Delia Sheppard, Will Arnett, Alan Cumming, Raja Gosnell',N'Mỹ',N'https://youtu.be/w5G0caWE7p8',
+		 N'Delia Sheppard, Will Arnett, Alan Cumming, Raja Gosnell',N'Mỹ',N'https://www.youtube.com/embed/w5G0caWE7p8',
 		 N'Content/img/film/bietdoicuncung.jpg',N'Content/img/film/bietdoicuncung1.jpg;Content/img/film/bietdoicuncung2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Gia Đình Siêu Nhân 2 - Incredibles 2','2018-06-15',0, 100, 0, N'1',N'Brad Bird',N'Hoạt hình, hành động, phiêu lưu',
          N'Bob Parr (Mr. Incredible) phải ở nhà để chăm sóc Jack-Jack trong khi Helen (Elastigirl) ra ngoài cứu thế giới.',
-		 N'',N'Mỹ',N'https://youtu.be/l_ctuuzcK_I',
+		 N'',N'Mỹ',N'https://www.youtube.com/embed/l_ctuuzcK_I',
 		 N'Content/img/film/giadinhsieunhan.jpg',N'Content/img/film/giadinhsieunhan1.jpg;Content/img/film/giadinhsieunhan2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Băng Cướp Thế Kỷ: Đẳng Cấp Quý Cô - Ocean"s 8','2018-06-15',0, 100, 0, N'1',N'Gary Ross',N'Hành động, hình sự',
          N'Tiếp nối truyền thống gia đình mình, Debbie lên kế hoạch cho một vụ trộm chiếc vòng cổ có giá trị hơn 100 triệu đô của Daphne Kluger tại sự kiện thời trang thảm đỏ Met Gala được tổ chức hàng năm ở New York. Để vụ cướp có thể diễn ra suôn sẻ, Debbie đã lên đường và tập hợp cho mình một biệt đội riêng biệt, bao gồm Amita – một chuyên gia trang sức, Constance – một kẻ chuyên móc túi, Tammy – một bà mẹ sống ở ngoại ô, Nine Ball - một tay lừa đảo. Hai thành viên còn lại là Lou và Rose.',
-		 N'Richard Armitage, Anne Hathaway, Helena Bonham Carter, Sandra Bullock, Matt Damon, Cate Blanchett, Olivia Munn',N'Mỹ',N'https://youtu.be/S5UeoL5wx44',
+		 N'Richard Armitage, Anne Hathaway, Helena Bonham Carter, Sandra Bullock, Matt Damon, Cate Blanchett, Olivia Munn',N'Mỹ',N'https://www.youtube.com/embed/S5UeoL5wx44',
 		 N'Content/img/film/bangcuoptheky.jpg',N'Content/img/film/bangcuoptheky1.jpg;Content/img/film/bangcuoptheky2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Chú Gà Không Gian - Space Chicken','2018-06-15',0, 100, 0, N'1',N'Gary Ross',N'Hành động, hình sự',
          N'Tiếp nối truyền thống gia đình mình, Debbie lên kế hoạch cho một vụ trộm chiếc vòng cổ có giá trị hơn 100 triệu đô của Daphne Kluger tại sự kiện thời trang thảm đỏ Met Gala được tổ chức hàng năm ở New York. Để vụ cướp có thể diễn ra suôn sẻ, Debbie đã lên đường và tập hợp cho mình một biệt đội riêng biệt, bao gồm Amita – một chuyên gia trang sức, Constance – một kẻ chuyên móc túi, Tammy – một bà mẹ sống ở ngoại ô, Nine Ball - một tay lừa đảo. Hai thành viên còn lại là Lou và Rose.',
-		 N'Richard Armitage, Anne Hathaway, Helena Bonham Carter, Sandra Bullock, Matt Damon, Cate Blanchett, Olivia Munn',N'Mỹ',N'https://youtu.be/S5UeoL5wx44',
+		 N'Richard Armitage, Anne Hathaway, Helena Bonham Carter, Sandra Bullock, Matt Damon, Cate Blanchett, Olivia Munn',N'Mỹ',N'https://www.youtube.com/embed/S5UeoL5wx44',
 		 N'Content/img/film/chugakhonggian.jpg',N'Content/img/film/chugakhonggian1.jpg;Content/img/film/chugakhonggian2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
 VALUES (N'Khách Sạn Tội Phạm - Hotel Artemis','2018-06-15',0, 100, 0, N'1',N'Drew           Pearce',N'Hoạt hình, hài hước',
          N'Khách sạn Tội Phạm (tên tiếng Anh: Hotel Artemis) là một bộ phim hành động tội phạm, lấy bối cảnh gỉa tưởng Los Angeles trong tương lai gần, kể về những sự kiện kinh hoàng và đẫm máu xảy ra tại bệnh viện dành riêng cho tội phạm dưới vỏ bọc của khách sạn cũ kĩ có tên Artemis. Nữ Y Tá (Jodie Foster) kiêm người điều hành quyền lực của bệnh viện cùng với trợ lý Everest (Dave Bautista) trong một đêm phải đón đủ mọi thể loại tội phạm từ buôn bán vũ khí, trộm cướp cho tới sát thủ và cả … cảnh sát. Chính các vị khách không mời mà tới này đã khiến cho những luật lệ bất di bất dịch của Khách sạn Tội Phạm bị phá vỡ sau 22 năm.',
-		 N'Jeff Goldblum, Jodie Foster, Dave Bautista, Sofia Boutella',N'Anh, Mỹ',N'https://youtu.be/Ngql_PsPELI',		 
+		 N'Jeff Goldblum, Jodie Foster, Dave Bautista, Sofia Boutella',N'Anh, Mỹ',N'https://www.youtube.com/embed/Ngql_PsPELI',		 
 		 N'Content/img/film/khachsantoipham.jpg',N'Content/img/film/khachsantoipham1.jpg;Content/img/film/khachsantoipham2.jpg',1);
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
  VALUES (N'Giành Anh Từ Biển - Adrift','2018-06-08',0, 100, 6.8, N'1',N'Baltasar Kormákur',N'Kinh dị',
          N'Một câu chuyện có thật về sóng gió tình yêu của chàng trai Richard Sharp và cô gái Tami Oldham. Những tưởng sau màn cầu hôn lãng mạn, họ sẽ có những phút giây bình yên bên nhau, cùng du ngoạn biển; nhưng những gì họ phải đối mặt là cơn bão lịch sử lớn nhất Thái Bình Dương, và 41 ngày lênh đênh trên biển sau đó.',
-		 N'Christopher Chisholm, Jackson Hurst, Lance Henriksen',N'Kịch, phim hành động, phim thám hiểm, phim mỹ',N'https://youtu.be/HdMP4sWc71M',		 
+		 N'Christopher Chisholm, Jackson Hurst, Lance Henriksen',N'Kịch, phim hành động, phim thám hiểm, phim mỹ',N'https://www.youtube.com/embed/HdMP4sWc71M',		 
 		 N'Content/img/film/gianhanhtubien.png',N'Content/img/film/gianhanhtubien1.jpg;Content/img/film/gianhanhtubien2.jpg',1);        
 
 INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
 						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
  VALUES (N'Bẫy Thời Gian - Time Trap','2018-06-22',0, 87, 6.4, N'1',N'Mark Dennis, Ben Foster',N'Hành động, Viễn tưởng',
          N'Một nhóm thám hiểm vô tình bị rơi xuống vực thẳm và họ nhận ra rằng thời gian bên dưới vực diễn ra khác với bên trên. Trong lúc tìm đường thoát thân, nhóm thám hiểm nhận ra không chỉ có duy nhất một mình họ ở tại đó… Cuộc phiêu lưu ly kỳ của họ từ bây giờ mới thực sự bắt đầu.',
-		 N'Reiley McClendon, Brianne Howey, Cassidy Gifford, Andrew Wilson',N'Mỹ',N'https://youtu.be/zFRF4Uni1JM',
+		 N'Reiley McClendon, Brianne Howey, Cassidy Gifford, Andrew Wilson',N'Mỹ',N'https://www.youtube.com/embed/zFRF4Uni1JM',
 		 N'Content/img/film/baythoigian.jpg',N'Content/img/film/baythoigian1.jpg;Content/img/film/baythoigian2.jpg',1);        
 
 /* --------------DigitalType -------------------- */

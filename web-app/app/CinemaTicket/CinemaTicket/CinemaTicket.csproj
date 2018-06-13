@@ -159,7 +159,11 @@
       <DependentUpon>CinemaModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Constant\Constant.cs" />
+    <Compile Include="Controllers\ChooseTicketController.cs" />
+    <Compile Include="Controllers\CinemaController.cs" />
+    <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
@@ -251,6 +255,9 @@
     <Compile Include="UserAccount.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\CinemaUtility.cs" />
+    <Compile Include="Utility\ScheduleUtility.cs" />
+    <Compile Include="Utility\DateUtility.cs" />
     <Compile Include="Utility\DBUtility.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +266,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\common.css" />
+    <Content Include="Content\css\filmDetail.css" />
+    <Content Include="Content\css\chooseTicket.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\img\cinemaLogo\Beta-cineplex-cao-thang.jpg" />
     <Content Include="Content\img\cinemaLogo\BHD-Star-Bitexco.jpg" />
@@ -363,17 +373,23 @@
     <Content Include="Content\img\groupLogo\megaGS.png" />
     <Content Include="Content\img\repository\android-logo.png" />
     <Content Include="Content\img\repository\apple-logo.png" />
+    <Content Include="Content\img\repository\avatar.jpg" />
     <Content Include="Content\img\repository\booking-cinema-logo.jpg" />
     <Content Include="Content\img\repository\booking-cinema-logo.PNG" />
     <Content Include="Content\img\repository\facebook-logo.png" />
+    <Content Include="Content\img\repository\icon_location.png" />
     <Content Include="Content\img\repository\next.png" />
     <Content Include="Content\img\repository\play-video.png" />
     <Content Include="Content\img\repository\pre.png" />
     <Content Include="Content\img\repository\zalo-logo.png" />
     <Content Include="Content\js\angular.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\filmDetail.js" />
+    <Content Include="Content\js\chooseTicket.js" />
+    <Content Include="Content\js\chooseSeat.js" />
     <Content Include="Content\js\home.js" />
     <Content Include="Content\js\jquery-3.3.1.min.js" />
+    <Content Include="Content\js\newword.html" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -420,6 +436,12 @@
       <DependentUpon>CinemaModel.edmx</DependentUpon>
       <LastGenOutput>CinemaModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\FilmDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\ChooseTicket.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

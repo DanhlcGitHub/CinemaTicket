@@ -9,6 +9,7 @@ namespace CinemaTicket.Service
 {
     interface ICinemaService
     {
+        List<Cinema> getCinemaHasScheduleInCurrentDate(DateTime currentDate, int filmId);
     }
     public class CinemaService : ICinemaService
     {
@@ -36,6 +37,11 @@ namespace CinemaTicket.Service
         public List<Cinema> FindBy(Expression<Func<Cinema, bool>> predicate)
         {
             return cinemaRepository.FindBy(predicate);
+        }
+
+        public List<Cinema> getCinemaHasScheduleInCurrentDate(DateTime currentDate, int filmId)
+        {
+            return cinemaRepository.getCinemaHasScheduleInCurrentDate(currentDate, filmId);
         }
     }
 }

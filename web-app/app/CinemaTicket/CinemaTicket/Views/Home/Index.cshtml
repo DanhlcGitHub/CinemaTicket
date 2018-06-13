@@ -11,6 +11,7 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/css/index.css">
+    <link rel="stylesheet" href="~/Content/css/common.css">
 </head>
 <body ng-controller="filmController">
     <!-- filmDialog -->
@@ -25,26 +26,29 @@
     </div>
 
     <nav class="navbar fixed-top navbar-light navbar-expand-md bg-light">
-        <a href="/" class="navbar-brand mr-0">Icon</a>
-        <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        
         <div class="navbar-collapse collapse" id="collapsingNavbar">
-            <ul class="navbar-nav mx-auto text-center">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Lịch chiếu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Cụm rạp</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Tin tức</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Tuyển dụng</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav text-left">
+            <div class="col-3">
+                <img src="/Content/img/repository/booking-cinema-logo.jpg" style="width: 50px;height: 50px; margin-top: 0%" />
+            </div>
+            <div class="col-6 text-center" >
+                <ul class="navbar-nav for-center">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Lịch chiếu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Cụm rạp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tin tức</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tuyển dụng</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <ul class="navbar-nav text-left col-3">
                 <li class="nav-item">
                     <img src="~/Content/img/film/account_white.png" style="margin:10px 5px 10px 5px; width:25px; height:25px;" />
                 </li>
@@ -116,7 +120,8 @@
                     <div class="row" id="filmContainer">
                         <div ng-repeat="aFilm in CurrentFilmList" class="col-3">
                             <div class="myContainer">
-                                <img height="300" class="img-movie rounded" ng-src="{{aFilm.img}}">
+                                <img ng-click="gotoFilmDetail(aFilm.id)"
+                                     height="300" class="img-movie rounded" ng-src="{{aFilm.img}}">
                                 <div class="middle">
                                     <div class="text">
                                         <img ng-click="openTrailerDialog(aFilm.trailerUrl)" src="Content/img/repository/play-video.png" width="50" height="50" />

@@ -95,6 +95,7 @@ CREATE TABLE TypeOfSeat (
     typeName nvarchar(20),
 	capacity int,
 	groupId int,
+	isPrimary bit,
 	price float
 );
 
@@ -201,8 +202,8 @@ ALTER TABLE Promotion ADD CONSTRAINT FKPromotionCinema001 FOREIGN KEY (cinemaId)
 ALTER TABLE PartnerAccount ADD CONSTRAINT FKPartnerAccountGroupCinema001 FOREIGN KEY (groupOfCinemaId) REFERENCES GroupCinema (groupId);
 ALTER TABLE CinemaManager ADD CONSTRAINT FKCinemaManagerCinema001 FOREIGN KEY (cinemaId) REFERENCES Cinema (cinemaId);
 
-ALTER TABLE MovieSchedule
-ADD scheduleDate date;
+ALTER TABLE TypeOfSeat
+ADD isPrimary bit;
 
 ALTER TABLE Film
 DROP COLUMN isAvailable;

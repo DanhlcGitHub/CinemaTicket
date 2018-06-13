@@ -45,15 +45,16 @@
     border-radius: 5px;
     padding: 3px;
 }
-.info_type{
+
+.info_type {
     background: orangered;
     color: #ffffff;
     border-radius: 5px;
-    padding-top:0px;
-    padding-bottom:0px;
-    padding-left:5px;
-    padding-right:5px;
-    te
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    te;
 }
 
 .profile-image {
@@ -107,82 +108,64 @@
 }
 
 .middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .myContainer:hover .img-movie {
-  opacity: 0.3;
+    opacity: 0.3;
 }
 
 .myContainer:hover .middle {
-  opacity: 1;
+    opacity: 1;
 }
 
 .text {
-  color: white;
-  font-size: 16px;
-  padding: 16px 32px;
-  cursor: pointer;
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
+    cursor: pointer;
 }
 
 img.ex4 {
-		width: 30px;
-		height: 30px;
-	}
+    width: 30px;
+    height: 30px;
+}
+
 .overflow-scroll {
     overflow-y: auto;
-    height : 500px;
-    cursor: pointer;
-}
-/* dialog*/
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    border: 1px solid #888;
-    width: 70%;
-    height: 70%;
-    margin-top: 80px;
-}
-
-/* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
+    height: 500px;
     cursor: pointer;
 }
 
-a[ng-click]{
+a[ng-click] {
     cursor: pointer;
 }
 
 img {
     cursor: pointer;
+}
+/* --------------------nav------------------- */
+
+/* 2 cai nay moi them vao */
+.carousel {
+    margin-top: 75px;
+}
+
+.mynav {
+    background-color: rgba(255,255,255,.95);
+    -webkit-box-shadow: 0 7px 6px -6px #777;
+    -moz-box-shadow: 0 7px 6px -6px #777;
+    box-shadow: 0 7px 6px -6px #777;
+    font-size: 18px;
+}
+/* ------------for center---------------- */
+.for-center{
+    margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
 }

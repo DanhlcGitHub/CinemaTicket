@@ -382,6 +382,7 @@
     <Content Include="Content\img\repository\facebook-logo.png" />
     <Content Include="Content\img\repository\icon_location.png" />
     <Content Include="Content\img\repository\next.png" />
+    <Content Include="Content\img\repository\paypal.png" />
     <Content Include="Content\img\repository\play-video.png" />
     <Content Include="Content\img\repository\pre.png" />
     <Content Include="Content\img\repository\screen.png" />

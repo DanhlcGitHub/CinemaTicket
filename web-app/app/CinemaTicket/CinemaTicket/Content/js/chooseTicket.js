@@ -2,6 +2,8 @@
 var myApp = angular.module("chooseTicketModule", []);
 var chooseTicketController = function ($scope, $http) {
     $scope.scheduleId;
+    $scope.quantityDataKey = "quantityDataKey";
+    $scope.totalAmountKey = "totalAmoutKey";
     $scope.totalAmount = 0;
 
     angular.element(document).ready(function () {
@@ -61,6 +63,8 @@ var chooseTicketController = function ($scope, $http) {
         }
     };
     $scope.gotoChooseSeat = function () {
+        LocalStorageManager.saveToLocalStorage($scope.data.typeOfSeats, $scope.quantityDataKey);
+        LocalStorageManager.saveToLocalStorage($scope.totalAmount, $scope.totalAmountKey);
         var param1 = "<input type='hidden' name='scheduleId' value='" + $scope.scheduleId + "' />";
         document.getElementById('goToChooseSeatForm').innerHTML = param1;
         document.getElementById('goToChooseSeatForm').submit();
@@ -69,3 +73,19 @@ var chooseTicketController = function ($scope, $http) {
 
 myApp.controller("chooseTicketController", chooseTicketController);
 
+var LocalStorageManager = {
+    saveToLocalStorage: function (data, dataKey) {
+        var dataString = JSON.stringify(data);
+        localStorage.setItem(dataKey, dataString);
+    },
+    loadDataFromStorage: function (dataKey) {
+        // read from local storage
+        if (localStorage.getItem(dataKey)) {
+            var dataString = localStorage.getItem(dataKey);
+            return JSON.parse(dataString);
+        }
+    },
+    removeDataFromStorage: function (dataKey) {
+        localStorage.removeItem(dataKey);
+    }
+}

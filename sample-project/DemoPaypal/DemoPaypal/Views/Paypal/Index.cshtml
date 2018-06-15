@@ -1,25 +1,38 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
+﻿<div id="paypal-button">thanh toan</div>
 
-<h2>Index</h2>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-    <input type="hidden" name="cmd" value="_s-xclick">
-    <input type="hidden" name="hosted_button_id" value="5M9CCJEJHD496">
-    <table>
-        <tr><td><input type="hidden" name="on0" value="Ph&#432;&#417;ng th&#7913;c thanh toán">Ph&#432;&#417;ng th&#7913;c thanh toán</td></tr>
-        <tr>
-            <td>
-                <select name="os0">
-                    <option value="visa">visa $0.02 USD</option>
-                    <option value="paypal">paypal $0.02 USD</option>
-                </select>
-            </td>
-        </tr>
-    </table>
-    <input type="hidden" name="currency_code" value="USD">
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
+<script>
+    paypal.Button.render({
 
+        env: 'sandbox', // Or 'sandbox'
+
+        client: {
+            sandbox: 'AWT16aVyr2SNJR2uBG46HHvz-DIY98lIP3aPAO-sUs36sOvtN9Ay3H0z-4e8cj4qZyNR5Aj3qrsxw0W3',
+            production: 'AXWr3Vji-q_UZFmrhTIxcSMBctnfsofDOxwsi3_llRLpDzwJ83NtZzt7wT5Sg_eB916xA5eC6c7O1APa'
+        },
+
+        commit: true, // Show a 'Pay Now' button
+
+        payment: function (data, actions) {
+            return actions.payment.create({
+                payment: {
+                    transactions: [
+                        {
+                            amount: { total: '2.00', currency: 'USD' }
+                        }
+                    ]
+                }
+            });
+        },
+
+        onAuthorize: function (data, actions) {
+            return actions.payment.execute().then(function (payment) {
+                alert("payment success!");
+                // The payment is complete!
+                // You can now show a confirmation message to the customer
+            });
+        }
+
+    }, '#paypal-button');
+</script>

@@ -15,6 +15,7 @@ var seatController = function ($scope, $http) {
     $scope.alpha = ["A", "B", "C", "D", "E", "F", "J", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"];
 
     // init data
+    $scope.scheduleId = $("#scheduleId").val() ;
     $scope.totalAmount = LocalStorageManager.loadDataFromStorage($scope.totalAmountKey);
     $scope.quantityData = LocalStorageManager.loadDataFromStorage($scope.quantityDataKey);
     for (var i = 0; i < $scope.quantityData.length; i++) {
@@ -65,7 +66,7 @@ var seatController = function ($scope, $http) {
             var seat = $scope.choosedList[i];
             $scope.matrix[seat.py].seats[seat.px] = seat;
         }
-        $scope.middeSeatFlag  = $scope.validMiddleSeat();
+        $scope.middeSeatFlag = $scope.validMiddleSeat();
         if ($scope.middeSeatFlag == true) alert("khong the de trong ghe o giua");
     };
     $scope.validMiddleSeat = function () {
@@ -134,6 +135,18 @@ var seatController = function ($scope, $http) {
                         console.log("success!");
                         // gửi qua bên kia list choosed list
                         // gửi qua bên kia schedule; mỗi scheduleId + 1 seat -> 1 order detail duy nhất
+                        console.log(JSON.stringify($scope.choosedList));
+                        $http({
+                            method: "POST",
+                            url: "/Ticket/CheckSeatAvailable",
+                            params: {
+                                choosedList: JSON.stringify($scope.choosedList),
+                                scheduleId: $scope.scheduleId
+                            }
+                        })
+                        .then(function (response) {
+                            alert(response.data);
+                        });
                     } else {
                         alert("Email và phone sai format!");
                     }

@@ -1,38 +1,61 @@
-﻿<div id="paypal-button">thanh toan</div>
+﻿
+<div  id="primaryButton"  />primaryButton</div>
+<div id="secondaryButton"
+       onclick="chainFunction()" >secondaryButton</div>
 
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
 <script>
-    paypal.Button.render({
+    var chainFunction = function () {
+        document.getElementById('primaryButton').click()
+    };
 
-        env: 'sandbox', // Or 'sandbox'
+        paypal.Button.render({
+            env: 'sandbox', // Or 'sandbox'
 
-        client: {
-            sandbox: 'AWT16aVyr2SNJR2uBG46HHvz-DIY98lIP3aPAO-sUs36sOvtN9Ay3H0z-4e8cj4qZyNR5Aj3qrsxw0W3',
-            production: 'AXWr3Vji-q_UZFmrhTIxcSMBctnfsofDOxwsi3_llRLpDzwJ83NtZzt7wT5Sg_eB916xA5eC6c7O1APa'
-        },
+            client: {
+                sandbox: 'AWT16aVyr2SNJR2uBG46HHvz-DIY98lIP3aPAO-sUs36sOvtN9Ay3H0z-4e8cj4qZyNR5Aj3qrsxw0W3',
+                production: 'AXWr3Vji-q_UZFmrhTIxcSMBctnfsofDOxwsi3_llRLpDzwJ83NtZzt7wT5Sg_eB916xA5eC6c7O1APa'
+            },
 
-        commit: true, // Show a 'Pay Now' button
+            commit: true, // Show a 'Pay Now' button
 
-        payment: function (data, actions) {
-            return actions.payment.create({
-                payment: {
-                    transactions: [
-                        {
-                            amount: { total: '2.00', currency: 'USD' }
+            payment: function (data, actions) {
+                    return actions.payment.create({
+                        payment: {
+                            transactions: [
+                                {
+                                    amount: { total: '2.00', currency: 'USD' }
+                                }
+                            ]
                         }
-                    ]
-                }
-            });
-        },
+                    });
+            },
 
-        onAuthorize: function (data, actions) {
-            return actions.payment.execute().then(function (payment) {
-                alert("payment success!");
-                // The payment is complete!
-                // You can now show a confirmation message to the customer
-            });
-        }
+            onAuthorize: function (data, actions) {
 
-    }, '#paypal-button');
+                // Get the payment details
+
+                return actions.payment.get().then(function (paymentDetails) {
+
+                    // Show a confirmation using the details from paymentDetails
+                    // Then listen for a click on your confirm button
+
+                    document.querySelector('#confirm-button')
+                        .addEventListener('click', function () {
+                            alert("Execute the payment");
+                            // Execute the payment
+
+                            return actions.payment.execute().then(function () {
+                                // Show a success page to the buyer
+                            });
+                        });
+                });
+            },
+            onCancel: function (data, actions) {
+                alert("cancel");
+            }
+
+        }, '#primaryButton');
+
 </script>

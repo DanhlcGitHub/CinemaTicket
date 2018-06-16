@@ -16,5 +16,23 @@ namespace DemoPaypal.Controllers
             return View();
         }
 
+        public ActionResult demo1()
+        {
+            return View();
+        }
+
+        public ActionResult demo2()
+        {
+            return View();
+        }
+
+        public JsonResult checkout()
+        {
+            var obj = new
+            {
+                paymentID = 123456
+            };
+            return Json(obj); 
+        }
     }
 }

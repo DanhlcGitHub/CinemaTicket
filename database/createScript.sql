@@ -114,6 +114,7 @@ CREATE TABLE Ticket (
 	paymentCode nvarchar(50),
 	qrCode int,
 	ticketStatus nvarchar(20),
+	ticketTimeout date,
 	price float,
 );
 
@@ -202,8 +203,8 @@ ALTER TABLE Promotion ADD CONSTRAINT FKPromotionCinema001 FOREIGN KEY (cinemaId)
 ALTER TABLE PartnerAccount ADD CONSTRAINT FKPartnerAccountGroupCinema001 FOREIGN KEY (groupOfCinemaId) REFERENCES GroupCinema (groupId);
 ALTER TABLE CinemaManager ADD CONSTRAINT FKCinemaManagerCinema001 FOREIGN KEY (cinemaId) REFERENCES Cinema (cinemaId);
 
-ALTER TABLE TypeOfSeat
-ADD isPrimary bit;
+ALTER TABLE Ticket
+ADD ticketTimeout date;
 
 ALTER TABLE Film
 DROP COLUMN isAvailable;

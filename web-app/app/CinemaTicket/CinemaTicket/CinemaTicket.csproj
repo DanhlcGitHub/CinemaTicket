@@ -165,6 +165,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\SeatController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
@@ -382,6 +383,7 @@
     <Content Include="Content\img\repository\facebook-logo.png" />
     <Content Include="Content\img\repository\icon_location.png" />
     <Content Include="Content\img\repository\next.png" />
+    <Content Include="Content\img\repository\paypal.png" />
     <Content Include="Content\img\repository\play-video.png" />
     <Content Include="Content\img\repository\pre.png" />
     <Content Include="Content\img\repository\screen.png" />

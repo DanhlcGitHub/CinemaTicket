@@ -19,6 +19,87 @@
     <link rel="stylesheet" href="~/Content/css/common.css">
 </head>
 <body ng-controller="seatController">
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="content">
+                <div class="box-a row container" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+                    <div class="img-film column">
+                        <img style="width: 180px;" src="img/bietdoicuncung.jpg">
+                    </div>
+                    <div class="info column" style="margin-left: 40px;">
+                        <div class="title-info container">
+                            <span class="icon">C16</span>
+                            <span class="icon">2D</span>
+                            <span class="icon">Digital</span>
+                            <p style="display: inline-block">Biệt Đội Cún Cưng-Show Dogs</p>
+                            <hr>
+                        </div>
+                        <div class="content-info">
+                            <h2>Lotte Cinema - Nam Sài Gòn</h2>
+                            <p>135 Hai Bà Trưng, P.Bến Nghé, Quận 1</p>
+                            <div class="info-sticket">
+                                <table style="width:100%">
+                                    <tr>
+                                        <th>Mã vé:</th>
+                                        <td>2685058</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Suất chiếu:</th>
+                                        <td>08:40 08/06</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phòng:</th>
+                                        <td>Lotte - Nam Sài Gòn - Room06</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="box-b" style="width: 80%; margin-left: 10%; margin-right: 10%; margin-top: 30px;">
+                    <h4>Thông tin đặt vé</h4>
+                    <table style="width:100%">
+                        <tr>
+                            <th>Họ tên:</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Điện thoại</th>
+                            <td>09341822715</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>danhlc@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <th>Trạng thái:</th>
+                            <td>đang chờ kết quả thanh toán</td>
+                        </tr>
+                        <tr>
+                            <th>Tổng tiền</th>
+                            <td>160.000đ</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="box-c" style="background: green; width: 80%; margin-left: 10%; margin-right: 10%; margin-top: 20px;">
+                    <span style="color: white;">
+                        <p style="text-align: left">Mã thanh toán Payoo:</p>
+                        <p style="text-align: center; font-size: 50px; font-weight: bold">888511473</p>
+                    </span>
+                </div>
+                <div style="width: 80%; margin-left: 10%; margin-right: 10%; margin-top: 30px;">
+                    <p><i class="far fa-circle"></i>Vui lòng sử dụng mã thanh toán bên trên đến cửa hàng gần nhất để hoàn tất việc đặt vé</p>
+                    <p><i class="far fa-circle"></i>Mã vé sẽ được gửi qua số điện thoại và email của bạn</p>
+                    <p><i class="far fa-circle"></i>Giao dịch sẽ hết hạn lúc 09:53 08/06/2018</p>
+                    <p><i class="far fa-circle"></i>Tìm cửa hàng gần nhà <a href="#" style="color: orange">tại đây</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <input id="scheduleId" type="hidden" value=@ViewBag.scheduleId />
     <!-- Sidebar -->
     <div class="w3-sidebar w3-bar-block w3-card" style="width:25%;right:0;top:0">
@@ -45,11 +126,11 @@
             <div class="w3-bar-item w3-button w3-border-bottom">
                 <span><input id="male" class="w3-radio" type="radio" name="gender" value="male" checked=""></span>
                 <span><img class="icon" src="~/Content/img/repository/paypal.png" /></span>
-                <span class="w3-large" >Thanh toán qua paypal</span>
+                <span class="w3-large">Thanh toán qua paypal</span>
             </div>
 
         </div>
-        <button id="checkoutButton" ng-click="checkout()" class="w3-btn w3-padding-large w3-green fixedBottom" style="height: 80px;" >Thanh toán</button>
+        <button id="checkoutButton" ng-click="checkout()" class="w3-btn w3-padding-large w3-green fixedBottom" style="height: 80px;">Thanh toán</button>
     </div>
 
     <!-- Page Content -->
@@ -86,7 +167,7 @@
                         <b>{{row.alphaName}}</b>
                     </div>
                     <div class="w3-rest w3-center w3-text-light-grey">
-                        <button  ng-repeat="seat in row.seats" ng-click="onclickSeat(seat.seatId,seat.px,seat.py)" class="{{seat.className}}"  type="button" >{{seat.px + 1}}</button>
+                        <button ng-repeat="seat in row.seats" ng-click="onclickSeat(seat.seatId,seat.px,seat.py)" class="{{seat.className}}" type="button">{{seat.px + 1}}</button>
                     </div>
                 </div>
             </div>

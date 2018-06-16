@@ -1,0 +1,143 @@
+﻿
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<div id="paypal-button-container"></div>
+<div id="confirm" class="hidden">
+    <div>Ship to:</div>
+    <div><span id="recipient"></span>, <span id="line1"></span>, <span id="city"></span></div>
+    <div><span id="state"></span>, <span id="zip"></span>, <span id="country"></span></div>
+    <div><span id="item1"></span>, <span id="item2"></span>, <span id="item3"></span></div>
+    <button id="confirmButton">Complete Payment</button>
+</div>
+<div id="thanks" class="hidden">
+    Thanks, <span id="thanksname"></span>!
+</div>
+<script>
+
+    var myListItem = [
+                              {
+                                  name: "item 1",
+                                  description: "item 1 description",
+                                  price: "1.00",
+                                  currency: "USD",
+                                  tax: "1.00",
+                                  quantity: 1
+                              },
+                              {
+                                  "name": "item 2",
+                                  "description": "item 2 description",
+                                  "price": "1.00",
+                                  "currency": "USD",
+                                  "tax": "1.00",
+                                  "quantity": 1
+                              }, {
+                                  "name": "item 3",
+                                  "description": "item 3 description",
+                                  "price": "1.00",
+                                  "currency": "USD",
+                                  "tax": "1.00",
+                                  "quantity": 1
+                              }, ]
+    paypal.Button.render({
+
+        env: 'sandbox', // sandbox | production
+
+        client: {
+            sandbox: 'AWT16aVyr2SNJR2uBG46HHvz-DIY98lIP3aPAO-sUs36sOvtN9Ay3H0z-4e8cj4qZyNR5Aj3qrsxw0W3',
+            production: 'AXWr3Vji-q_UZFmrhTIxcSMBctnfsofDOxwsi3_llRLpDzwJ83NtZzt7wT5Sg_eB916xA5eC6c7O1APa'
+        },
+        commit: false, // Show a 'Pay Now' button
+        payment: function (data, actions) {
+            return actions.payment.create({
+                payment: {
+                    transactions: [
+                      {
+                          amount:
+                          {
+                              total: "6.00",
+                              currency: "USD",
+                              details:
+                              {
+                                  subtotal: "3.00",
+                                  tax: "3.00",
+                                  shipping: "1.00",
+                                  shipping_discount: "-1.00"
+                              }
+                          },
+                          description: "Galaxy Quang trung - 22h30",
+                          custom: "PHim biet doi thu cung - ghe D2,D3 Galaxy Quang trung - 22h30",
+                          invoice_number: "merchant invoice",
+                          item_list:
+                          {
+                              items: myListItem,
+                          },
+                          related_resources: [
+
+                          ]
+                      }],
+                }
+            });
+        },
+
+        // Wait for the payment to be authorized by the customer
+
+        onAuthorize: function (data, actions) {
+            if (1 == 2) {
+                // Get the payment details
+
+                return actions.payment.get().then(function (data) {
+                    //check infor if right
+                    // Display the payment details and a confirmation button
+                    if (1 === 2) { // !timeout
+                        var shipping = data.payer.payer_info.shipping_address;
+
+                        document.querySelector('#recipient').innerText = shipping.recipient_name;
+                        document.querySelector('#line1').innerText = shipping.line1;
+                        document.querySelector('#city').innerText = shipping.city;
+                        document.querySelector('#state').innerText = shipping.state;
+                        document.querySelector('#zip').innerText = shipping.postal_code;
+                        document.querySelector('#country').innerText = shipping.country_code;
+
+                        document.querySelector('#paypal-button-container').style.display = 'none';
+                        document.querySelector('#confirm').style.display = 'block';
+
+                        document.querySelector('#item1').innerText = data.transactions[0].item_list.items[0].name;
+                        document.querySelector('#item2').innerText = data.transactions[0].item_list.items[1].name;
+                        document.querySelector('#item3').innerText = data.transactions[0].item_list.items[2].name;
+
+                        // Listen for click on confirm button
+
+                        document.querySelector('#confirmButton').addEventListener('click', function () {
+
+                            // Disable the button and show a loading message
+
+                            document.querySelector('#confirm').innerText = 'Loading...';
+                            document.querySelector('#confirm').disabled = true;
+
+                            // Execute the payment
+
+                            return actions.payment.execute().then(function () {
+
+                                // Show a thank-you note
+
+                                document.querySelector('#thanksname').innerText = shipping.recipient_name;
+
+                                document.querySelector('#confirm').style.display = 'none';
+                                document.querySelector('#thanks').style.display = 'block';
+                            });
+                        });
+                    } else {
+                        alert("Time out");
+                    };
+                });
+            } else {
+                alert("st wrong");
+            }
+        },
+        onError: function (err) {
+            console.log("some error occur");
+        }
+
+
+    }, '#paypal-button-container');
+
+</script>

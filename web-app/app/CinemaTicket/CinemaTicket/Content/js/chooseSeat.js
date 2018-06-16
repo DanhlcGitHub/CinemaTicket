@@ -156,6 +156,27 @@ var seatController = function ($scope, $http) {
             alert("Bạn chưa chọn đủ " + $scope.totalTicket + " vé!");
         }
     };
+    $scope.openConfirmDialog = function (url) {
+        console.log(url);
+        var modal = document.getElementById('myModal');
+        var myIframe = document.getElementById('myIframe');
+        modal.style.display = "block";
+        var span = document.getElementsByClassName("close")[0];
+        $('#myIframe').prop('src', url);
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                $('#myIframe').prop('src', "");
+            }
+        }
+    };
 }
 
 myApp.controller("seatController", seatController);
@@ -183,4 +204,30 @@ function validateEmail(inputemail) {
 }
 function validatePhone(inputphone) {
     return inputphone.match(/\d/g).length === 10;
+}
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function () {
+    modal.style.display = "block";
+    console.log("123");
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+
+    }
 }

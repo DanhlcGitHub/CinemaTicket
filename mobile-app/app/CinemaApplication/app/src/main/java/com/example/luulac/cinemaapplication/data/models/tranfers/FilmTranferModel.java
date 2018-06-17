@@ -1,57 +1,28 @@
-package com.example.luulac.cinemaapplication.data.models.showtimes;
+package com.example.luulac.cinemaapplication.data.models.tranfers;
 
-public class ShowTimeChildModel {
+import java.io.Serializable;
 
-    private  int id;
-    private int scheduleId;
-    private String timeStart;
-    private String timeEnd;
-    private String type;
-    private String price;
+public class FilmTranferModel implements Serializable{
+
     private int filmId;
     private int roomId;
     private int groupId;
+    private int scheduleId;
     private int col;
     private int row;
+    private String datetime;
 
-    public int getId() {
-        return id;
+    public FilmTranferModel() {
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTimeStart() {
-        return timeStart;
-    }
-
-    public void setTimeStart(String timeStart) {
-        this.timeStart = timeStart;
-    }
-
-    public String getTimeEnd() {
-        return timeEnd;
-    }
-
-    public void setTimeEnd(String timeEnd) {
-        this.timeEnd = timeEnd;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
+    public FilmTranferModel(int filmId, int roomId, int groupId, int scheduleId, int col, int row, String datetime) {
+        this.filmId = filmId;
+        this.roomId = roomId;
+        this.groupId = groupId;
+        this.scheduleId = scheduleId;
+        this.col = col;
+        this.row = row;
+        this.datetime = datetime;
     }
 
     public int getFilmId() {
@@ -100,5 +71,13 @@ public class ShowTimeChildModel {
 
     public void setRow(int row) {
         this.row = row;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 }

@@ -25,7 +25,10 @@
         </activity>
         <activity android:name=".activities.FilmActivity"></activity>
         <activity android:name=".activities.OrderTicketActivity"></activity>
-
+        <activity android:name=".activities.ChoiceSeatsActivity"></activity>
+        <activity android:name=".activities.PaymentActivity"></activity>
+        <activity android:name=".activities.FinishPaymentActivity"></activity>
+        <activity android:name=".activities.PaypalPaymentActivity"></activity>
     </application>
 
 </manifest>

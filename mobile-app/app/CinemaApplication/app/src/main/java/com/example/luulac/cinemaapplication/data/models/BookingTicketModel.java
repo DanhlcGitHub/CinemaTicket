@@ -1,71 +1,81 @@
 package com.example.luulac.cinemaapplication.data.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BookingTicketModel {
+public class BookingTicketModel implements Serializable {
 
-    private int BookingId;
-    private int CustomerId;
-    private int PaymentMethodId;
-    private int Quantity;
-    private String BookingDate;
+    private int bookingId;
+    private int customerId;
+    private int paymentMethodId;
+    private int quantity;
+    private String bookingDate;
 
-    private CustomerModel Customer;
-    private List<BookingDetailModel> BookingDetail;
+    private CustomerModel customer;
+    private List<BookingDetailModel> bookingDetails;
+
+    public BookingTicketModel() {
+    }
+
+    public BookingTicketModel(int quantity, CustomerModel customer, List<BookingDetailModel> bookingDetails) {
+        this.quantity = quantity;
+        this.customer = customer;
+        this.bookingDetails = bookingDetails;
+    }
 
     public int getBookingId() {
-        return BookingId;
+        return bookingId;
     }
 
     public void setBookingId(int bookingId) {
-        BookingId = bookingId;
+        this.bookingId = bookingId;
     }
 
     public int getCustomerId() {
-        return CustomerId;
+        return customerId;
     }
 
     public void setCustomerId(int customerId) {
-        CustomerId = customerId;
+        this.customerId = customerId;
     }
 
     public int getPaymentMethodId() {
-        return PaymentMethodId;
+        return paymentMethodId;
     }
 
     public void setPaymentMethodId(int paymentMethodId) {
-        PaymentMethodId = paymentMethodId;
+        this.paymentMethodId = paymentMethodId;
     }
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 
     public String getBookingDate() {
-        return BookingDate;
+        return bookingDate;
     }
 
     public void setBookingDate(String bookingDate) {
-        BookingDate = bookingDate;
+        this.bookingDate = bookingDate;
     }
 
     public CustomerModel getCustomer() {
-        return Customer;
+        return customer;
     }
 
     public void setCustomer(CustomerModel customer) {
-        Customer = customer;
+        this.customer = customer;
     }
 
-    public List<BookingDetailModel> getBookingDetail() {
-        return BookingDetail;
+    public List<BookingDetailModel> getBookingDetails() {
+        return bookingDetails;
     }
 
-    public void setBookingDetail(List<BookingDetailModel> bookingDetail) {
-        BookingDetail = bookingDetail;
+    public void setBookingDetails(List<BookingDetailModel> bookingDetails) {
+        this.bookingDetails = bookingDetails;
     }
 }

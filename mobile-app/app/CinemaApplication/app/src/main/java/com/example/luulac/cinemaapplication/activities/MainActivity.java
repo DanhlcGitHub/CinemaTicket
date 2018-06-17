@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.example.luulac.cinemaapplication.R;
 import com.example.luulac.cinemaapplication.adapters.TabLayoutMainAdapter;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -51,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new TabLayoutMainAdapter(getSupportFragmentManager());
 
         DashboardFragment dashboardFragment = new DashboardFragment();
-        fragmentList = new ArrayList<>();
-        titleList = new ArrayList<>();
+
         fragmentList = dashboardFragment.getFragments();
         titleList = dashboardFragment.getTitles();
 
@@ -170,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
-
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

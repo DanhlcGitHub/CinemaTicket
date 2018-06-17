@@ -65,14 +65,14 @@ public class ShowingFragment extends Fragment {
                 adapter.setOnItemClickedListener(new FilmShowingAdapter.OnItemClickedListener() {
                     @Override
                     public void onItemClick(String filmName) {
-                        Toast.makeText(getContext(), "Now Showing Card view " + filmName + " clicked.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Film " + filmName + " clicked!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
 
             @Override
             public void onFailure(Call<List<FilmModel>> request, Throwable t) {
-                Toast.makeText(context, "Failed to retrieve item.", Toast.LENGTH_SHORT).show();;
+                Toast.makeText(context, "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();;
             }
         });
 

@@ -1,14 +1,20 @@
 package com.example.luulac.cinemaapplication.data.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CustomerModel {
+public class CustomerModel implements Serializable{
 
     private int customerId;
     private String userId;
     private String phone;
     private String email;
     private List<BookingTicketModel> bookingTicket;
+
+    public CustomerModel(String phone, String email) {
+        this.phone = phone;
+        this.email = email;
+    }
 
     public int getCustomerId() {
         return customerId;

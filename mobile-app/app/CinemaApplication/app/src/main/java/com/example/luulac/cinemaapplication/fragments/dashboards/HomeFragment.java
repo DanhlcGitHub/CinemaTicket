@@ -35,8 +35,9 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
-    private static final String TAG = "HomeFragment";
-
+    private static final int NUMBER_CARD_LANGER = 3;
+    private static final int NUMBER_START_CARD_SMALL = 3;
+    private static final int NUMBER_ALL_CARD= 6;
     private Context context;
 
     @Override
@@ -51,22 +52,28 @@ public class HomeFragment extends Fragment {
 
         context = view.getContext();
 
+        //call service from servcer get data for home fragment
         HomeService ideaService = ServiceBuilder.buildService(HomeService.class);
         Call<HomeModel> request = ideaService.getDataForHomeScreen();
 
+        //receiving and process data from the server
         request.enqueue(new Callback<HomeModel>() {
             @Override
             public void onResponse(Call<HomeModel> request, Response<HomeModel> response) {
+
                 HomeModel data = response.body();
+
                 List<FilmModel> films = data.getFilms();
+
                 CardView cardViewLager = null;
                 CardView cardShowing = view.findViewById(R.id.card_into_showing);
-                LinearLayout linearLayout = null;
 
+                LinearLayout linearLayout = null;
 
                 FilmModel film = null;
 
-                for (int i = 0; i < 3; i++) {
+                //Load 3 card langer film and set on click for it
+                for (int i = 0; i < NUMBER_CARD_LANGER; i++) {
                     switch (i) {
                         case 0:
                             cardViewLager = (CardView) view.findViewById(R.id.card_1);
@@ -93,11 +100,10 @@ public class HomeFragment extends Fragment {
                     TextView filmImdb = (TextView) cardViewLager.findViewById(R.id.tv_card_langer_imdb);
                     filmImdb.setText(film.getImdb() + "");
 
-                    TextView filmBookingTicket = (TextView) cardViewLager.findViewById(R.id.tv_film_card_lager_booking_ticket);
-
                     final int filmId = film.getFilmId();
                     final String filmName = film.getName();
 
+                    //set click when user click to card langer
                     cardViewLager.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -109,7 +115,8 @@ public class HomeFragment extends Fragment {
                     });
                 }
 
-                for (int i = 3; i < 6; i++) {
+                //Load 3 card small film and set on click for it
+                for (int i = NUMBER_START_CARD_SMALL; i < NUMBER_ALL_CARD; i++) {
                     switch (i) {
                         case 3:
                             linearLayout = cardShowing.findViewById(R.id.card_show_1);
@@ -136,13 +143,31 @@ public class HomeFragment extends Fragment {
                     TextView filmImdb = (TextView) linearLayout.findViewById(R.id.tv_show_imdb);
                     filmImdb.setText(film.getImdb() + "");
 
-                    TextView filmBookingTicket = (TextView) linearLayout.findViewById(R.id.tv_film_card_lager_booking_ticket);
+                    final int filmId = film.getFilmId();
+                    final String filmName = film.getName();
+
+                    //set click when user click card small
+                    cardViewLager.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(context, FilmActivity.class);
+                            intent.putExtra("filmId", filmId);
+                            intent.putExtra("filmName", filmName);
+                            startActivity(intent);
+                        }
+                    });
                 }
+
+                //Note: Not have data for News then can't show infomation of News
+                //Note: Not finish load News
+
+                //load News in this
             }
 
+            //Fail to connect to server
             @Override
             public void onFailure(Call<HomeModel> request, Throwable t) {
-                Toast.makeText(context, "Failed to retrieve item.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();
             }
         });
         return view;

@@ -66,14 +66,14 @@ public class CommingSoonFragment extends Fragment {
                 adapter.setOnItemClickListener(new FilmComingSoonAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(String filmName) {
-                        Toast.makeText(getContext(), "Comming Soon Card View " + filmName +" clicked!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Film " + filmName +" clicked!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
 
             @Override
             public void onFailure(Call<List<FilmModel>> request, Throwable t) {
-                Toast.makeText(context, "Failed to retrieve item.", Toast.LENGTH_SHORT).show();;
+                Toast.makeText(context, "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();;
             }
         });
 

@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.luulac.cinemaapplication.R;
@@ -25,10 +26,13 @@ public class FilmActivity extends AppCompatActivity {
     private TabLayoutMainAdapter adapter;
     private List<Fragment> fragmentList;
     private List<String> titleList;
+    private int filmId;
+    private String filmName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_film);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_film_activity);
@@ -37,12 +41,14 @@ public class FilmActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs_film_activity);
-
         viewPager = (ViewPager) findViewById(R.id.viewpager_film_activity);
 
         Intent intent = this.getIntent();
 
-        toolbar.setTitle(intent.getStringExtra("filmName"));
+        filmName = intent.getStringExtra("filmName");
+        filmId = intent.getIntExtra("filmId", 0);
+
+        toolbar.setTitle(filmName);
 
         adapter = new TabLayoutMainAdapter(getSupportFragmentManager());
 
@@ -55,9 +61,6 @@ public class FilmActivity extends AppCompatActivity {
 
         fragment = filmFragment;
         loadFragment(fragment);
-
-
-
     }
 
     @Override
@@ -98,7 +101,10 @@ public class FilmActivity extends AppCompatActivity {
 
 
     private void loadFragment(Fragment fragment) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("filmId", filmId);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        fragment.setArguments(bundle);
         transaction.replace(R.id.frame_container_film_activity, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

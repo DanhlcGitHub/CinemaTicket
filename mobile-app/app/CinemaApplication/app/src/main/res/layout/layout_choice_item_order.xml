@@ -39,7 +39,7 @@
         android:layout_below="@+id/icon_choice_item_order"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="7dp"
         android:layout_toEndOf="@+id/tv_choice_item_order_price_ticket"
         android:text="VND" />
 
@@ -61,7 +61,7 @@
         android:layout_toEndOf="@+id/btn_choice_item_order_remove"
         android:background="@drawable/number_order_ticket"
         android:gravity="center"
-        android:text="2"
+        android:text="0"
         android:textSize="18sp" />
 
     <Button android:id="@+id/btn_choice_item_order_add"

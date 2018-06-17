@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="#c9c9c9"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#c9c9c9">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar_finish_payment"
@@ -30,8 +30,8 @@
                     android:id="@+id/icon_cancel_order"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/icon_cancel" />
 
                 <RelativeLayout
@@ -63,12 +63,11 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_finish_payment"
-        android:background="#ffffff"
-        android:layout_below="@+id/appbar_finish_payment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/appbar_finish_payment"
         android:layout_margin="10dp"
-        >
+        android:background="#ffffff">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -161,6 +160,7 @@
                     android:layout_alignParentRight="true">
 
                     <ImageView
+                        android:id="@+id/img_film_fp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_toEndOf="@+id/tv_finish_payment_film_name"
@@ -173,9 +173,9 @@
                 android:id="@+id/liner_finish_payment_detail"
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
+                android:layout_below="@+id/rl_finish_payment_top"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@+id/rl_finish_payment_top"
                 android:background="#e5e0e0" />
 
             <!-- list ticket info -->
@@ -185,9 +185,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/liner_finish_payment_detail"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
 
                 <!-- textview list ticket -->
                 <TextView
@@ -205,27 +205,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_finish_payment_list_ticket"
-                    android:text="Vé 2D cả tuần"
-                    android:textColor="#3a3a3a" />
-
-                <!-- textview space ticket type and number of tickets -->
-                <TextView
-                    android:id="@+id/tv_finish_payment_x"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_finish_payment_list_ticket"
-                    android:layout_toEndOf="@+id/tv_finish_payment_type_ticket"
-                    android:text="  x  "
-                    android:textColor="#3a3a3a" />
-
-                <!-- number of tickets -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_finish_payment_list_ticket"
-                    android:layout_toEndOf="@+id/tv_finish_payment_x"
-                    android:text="2"
-                    android:textColor="#3a3a3a" />
+                    android:text="A1 B2"
+                    android:textColor="#3a3a3a"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -234,9 +216,9 @@
                 android:id="@+id/liner_finish_payment_info"
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
+                android:layout_below="@+id/rl_finish_payment_list_ticket_info"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@+id/rl_finish_payment_list_ticket_info"
                 android:background="#e5e0e0" />
 
             <!-- Date, time, ciname name ticket -->
@@ -314,11 +296,31 @@
                             android:textColor="@android:color/darker_gray" />
 
                         <TextView
+                            android:id="@+id/tv_fp_group_cinema_name_middle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_finish_payment_cinema_name"
                             android:layout_marginTop="5dp"
-                            android:text="Lotte - Diamon"
+                            android:text="Lotte"
+                            android:textColor="@android:color/black" />
+
+                        <TextView android:id="@+id/tv_fp_space"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/tv_fp_group_cinema_name_middle"
+                            android:layout_below="@+id/tv_finish_payment_cinema_name"
+                            android:layout_marginTop="5dp"
+                            android:text=" - "
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_fp_cinema_name_middle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_finish_payment_cinema_name"
+                            android:layout_toEndOf="@+id/tv_fp_space"
+                            android:layout_marginTop="5dp"
+                            android:text="Diamon"
                             android:textColor="@android:color/black" />
                     </RelativeLayout>
                 </LinearLayout>
@@ -329,9 +331,9 @@
                 android:id="@+id/liner_finish_payment_date_time_name"
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
+                android:layout_below="@+id/rl_finish_payment_date_time_name"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@+id/rl_finish_payment_date_time_name"
                 android:background="#e5e0e0" />
 
             <!-- phone number and email -->
@@ -368,7 +370,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_finish_payment_phone_title"
                             android:layout_marginTop="5dp"
-                            android:text="01652345678"
+                            android:text="01653333505"
                             android:textColor="@android:color/black" />
                     </RelativeLayout>
 
@@ -391,7 +393,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_finish_payment_email_title"
                             android:layout_marginTop="5dp"
-                            android:text="mail@gmail.com"
+                            android:text="luulac2008@gmail.com"
                             android:textColor="@android:color/black" />
                     </RelativeLayout>
                 </LinearLayout>
@@ -402,9 +404,9 @@
                 android:id="@+id/liner_finish_payment_phone_email"
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
+                android:layout_below="@+id/rl_finish_payment_phone_email"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@+id/rl_finish_payment_phone_email"
                 android:background="#e5e0e0" />
 
             <!-- layout total -->
@@ -427,7 +429,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_finish_payment_title"
                     android:layout_marginTop="5dp"
-                    android:text="160.000"
+                    android:text="0.0"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
@@ -435,9 +437,9 @@
                     android:id="@+id/tv_finish_payment_money_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_below="@+id/tv_finish_payment_title"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toEndOf="@+id/tv_finish_payment_totel"
                     android:text=" VND" />
 
@@ -450,11 +452,11 @@
 
     <!-- payment code -->
     <RelativeLayout
-        android:layout_below="@+id/card_finish_payment"
         android:layout_width="match_parent"
-        android:background="#0ea600"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card_finish_payment"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        android:background="#0ea600">
 
         <TextView
             android:id="@+id/tv_finish_payment_title_payment_code"
@@ -466,14 +468,15 @@
             android:textColor="@android:color/white" />
 
         <TextView
+            android:id="@+id/tv_payment_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_finish_payment_title_payment_code"
             android:layout_marginBottom="15dp"
             android:gravity="center"
             android:text="888517553"
-            android:textColor="@android:color/black"
 
+            android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
     </RelativeLayout>

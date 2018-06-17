@@ -1,11 +1,13 @@
 package com.example.luulac.cinemaapplication.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.luulac.cinemaapplication.R;
@@ -49,8 +51,16 @@ public class ScheduleDateAdapter extends RecyclerView.Adapter<ScheduleDateAdapte
         if(position != 0){
             holder.dateText.setWidth(90);
         }
+
         holder.dateText.setText(filmScheduleModels.get(position).getDateOfWeek());
         holder.dateNumber.setText(filmScheduleModels.get(position).getDay());
+        final TextView dayNumber = holder.dateNumber;
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dayNumber.setBackgroundColor(Color.BLUE);
+            }
+        });
 
     }
 
@@ -60,12 +70,13 @@ public class ScheduleDateAdapter extends RecyclerView.Adapter<ScheduleDateAdapte
     }
 
     public class ScheduleHolder extends RecyclerView.ViewHolder{
-
+        RelativeLayout relativeLayout;
         TextView dateText;
         TextView dateNumber;
 
         public ScheduleHolder(View itemView) {
             super(itemView);
+            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.rel_schedule_date_item);
             dateText = (TextView) itemView.findViewById(R.id.tv_schedule_date_item_text);
             dateNumber = (TextView) itemView.findViewById(R.id.tv_schedule_date_item_number);
         }

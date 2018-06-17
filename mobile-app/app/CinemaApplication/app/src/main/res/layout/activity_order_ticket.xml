@@ -102,7 +102,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_order_ticket_sub"
+                android:id="@+id/tv_order_ticket_restricted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_view_order_border"
@@ -113,26 +113,11 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/tv_order_ticket_sub_two"
+                android:id="@+id/tv_order_ticket_sub_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="128 phút"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_order_ticket_sub_space"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text=" - "
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_order_ticket_sub_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 2D - Phụ Đề"
+                android:text="128 phút  - 2D - Phụ Đề"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -144,11 +129,10 @@
             card_view:cardCornerRadius="5dp"
             card_view:cardUseCompatPadding="true">
 
-            <ImageView
+            <ImageView android:id="@+id/img_order_ticket_film"
                 android:layout_width="100dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="0dp"
-
                 android:src="@drawable/avengers" />
         </android.support.v7.widget.CardView>
 
@@ -224,7 +208,7 @@
     <LinearLayout
         android:id="@+id/liner_order_ticket_two_button"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:orientation="horizontal"
@@ -243,7 +227,7 @@
                 android:layout_marginLeft="30dp"
                 android:gravity="center_vertical"
                 android:paddingBottom="5dp"
-                android:text="180.000"
+                android:text="0000.0"
                 android:textColor="@android:color/holo_green_light"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -263,6 +247,7 @@
             android:background="#e5e0e0" />
 
         <RelativeLayout
+            android:id="@+id/rv_order_ticket_continues"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"

@@ -1,8 +1,9 @@
 package com.example.luulac.cinemaapplication.data.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class TicketModel {
+public class TicketModel implements Serializable{
     private int ticketId;
     private int scheduleId;
     private int seatId;
@@ -10,11 +11,14 @@ public class TicketModel {
     private int qrCode;
     private String ticketStatus;
     private double price;
-    private MovieSchedule schedule;
-    private SeatModel seatModel;
-    private List<BookingDetailModel> bookingDetail;
 
     public TicketModel() {
+    }
+
+    public TicketModel(int scheduleId, int seatId, double price) {
+        this.scheduleId = scheduleId;
+        this.seatId = seatId;
+        this.price = price;
     }
 
     public int getTicketId() {
@@ -73,27 +77,5 @@ public class TicketModel {
         this.price = price;
     }
 
-    public MovieSchedule getSchedule() {
-        return schedule;
-    }
 
-    public void setSchedule(MovieSchedule schedule) {
-        this.schedule = schedule;
-    }
-
-    public SeatModel getSeatModel() {
-        return seatModel;
-    }
-
-    public void setSeatModel(SeatModel seatModel) {
-        this.seatModel = seatModel;
-    }
-
-    public List<BookingDetailModel> getBookingDetail() {
-        return bookingDetail;
-    }
-
-    public void setBookingDetail(List<BookingDetailModel> bookingDetail) {
-        this.bookingDetail = bookingDetail;
-    }
 }

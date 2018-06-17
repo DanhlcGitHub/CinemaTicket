@@ -1,18 +1,21 @@
 package com.example.luulac.cinemaapplication.data.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class SeatModel {
+public class SeatModel implements Serializable {
     private int seatId;
     private int typeSeatId;
     private int roomId;
     private int px;
     private int py;
     private RoomModel roomModel;
-    private TypeOfSeatModel typeSeat;
+    private TypeOfSeatModel typeOfSeat;
     private List<TicketModel> ticket;
+    private boolean isSelected;
 
     public SeatModel() {
+        isSelected = false;
     }
 
     public int getSeatId() {
@@ -64,11 +67,11 @@ public class SeatModel {
     }
 
     public TypeOfSeatModel getTypeSeat() {
-        return typeSeat;
+        return typeOfSeat;
     }
 
-    public void setTypeSeat(TypeOfSeatModel typeSeat) {
-        this.typeSeat = typeSeat;
+    public void setTypeSeat(TypeOfSeatModel typeOfSeat) {
+        this.typeOfSeat = typeOfSeat;
     }
 
     public List<TicketModel> getTicket() {
@@ -77,5 +80,13 @@ public class SeatModel {
 
     public void setTicket(List<TicketModel> ticket) {
         this.ticket = ticket;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

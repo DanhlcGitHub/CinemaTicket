@@ -19,6 +19,7 @@ public class FilmFragment extends Fragment {
 
     private static List<Fragment> fragments;
     private static List<String> titles;
+    private static int filmId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,14 +30,28 @@ public class FilmFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_film_about, null);
+
+        //The value of movieId is derived from FilmActivity
+        filmId = this.getArguments().getInt("filmId");
+
         return view;
     }
 
-
     public static List<Fragment> getFragments() {
         fragments = new ArrayList<>();
-        fragments.add(new ScheduleShowFragment());
-        fragments.add(new FilmInfomationFragment());
+        Bundle bundle = new Bundle();
+
+        //Pass values of filmId to fragment (ScheduleShowFragment and FilmInfomationFragment)
+        bundle.putInt("filmId", filmId);
+
+        ScheduleShowFragment scheduleShowFragment = new ScheduleShowFragment();
+        scheduleShowFragment.setArguments(bundle);
+
+        FilmInfomationFragment filmInfomationFragment = new FilmInfomationFragment();
+        filmInfomationFragment.setArguments(bundle);
+
+        fragments.add(scheduleShowFragment);
+        fragments.add(filmInfomationFragment);
 
         return fragments;
     }

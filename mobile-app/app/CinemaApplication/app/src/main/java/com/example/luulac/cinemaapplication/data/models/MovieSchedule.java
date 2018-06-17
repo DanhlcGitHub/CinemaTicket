@@ -1,6 +1,8 @@
 package com.example.luulac.cinemaapplication.data.models;
 
-public class MovieSchedule {
+import java.io.Serializable;
+
+public class MovieSchedule implements Serializable{
 
     private int scheduleId;
     private FilmModel film;

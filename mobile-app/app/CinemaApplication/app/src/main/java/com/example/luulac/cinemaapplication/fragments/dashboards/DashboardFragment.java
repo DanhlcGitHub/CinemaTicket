@@ -15,8 +15,6 @@ import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
-    private static final String TAG = "DashboardFragment";
-
     private static List<Fragment> fragments;
     private static List<String> titles;
 
@@ -29,7 +27,6 @@ public class DashboardFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_dashboard, null);
 
         return view;

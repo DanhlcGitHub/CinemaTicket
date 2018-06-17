@@ -1,12 +1,19 @@
 package com.example.luulac.cinemaapplication.data.models;
 
-public class BookingDetailModel {
+import java.io.Serializable;
+
+public class BookingDetailModel implements Serializable{
 
     private int bookingDetailId;
     private int bookingId;
     private int ticketId;
-    private BookingTicketModel booking;
-    private TicketModel ticket;
+
+    public BookingDetailModel() {
+    }
+
+    public BookingDetailModel(int ticketId) {
+        this.ticketId = ticketId;
+    }
 
     public int getBookingDetailId() {
         return bookingDetailId;
@@ -30,21 +37,5 @@ public class BookingDetailModel {
 
     public void setTicketId(int ticketId) {
         this.ticketId = ticketId;
-    }
-
-    public BookingTicketModel getBooking() {
-        return booking;
-    }
-
-    public void setBooking(BookingTicketModel booking) {
-        this.booking = booking;
-    }
-
-    public TicketModel getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(TicketModel ticket) {
-        this.ticket = ticket;
     }
 }

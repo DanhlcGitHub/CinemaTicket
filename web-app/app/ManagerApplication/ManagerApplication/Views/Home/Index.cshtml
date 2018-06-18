@@ -1,7 +1,90 @@
 ﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
 }
-<head>
-    <link rel="stylesheet" href="~/Content/css/common.css">
-</head>
-<h2 class="text-red">Html goes here</h2>
+<style>
+    table {
+        width: 500px;
+        table-layout: fixed;
+    }
+
+    .td {
+        text-overflow: ellipsis;
+    }
+    .th-filmd-id, .th-film-length, .th-film-imdb, .th-film-status {
+        width: 50px;
+    }
+
+</style>
+<!-- Content Header (Page header) -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">List Film</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="th-filmd-id">Film Id</th>
+                                <th>Film Name</th>
+                                <th>Date Release</th>
+                                <th class="th-film-length">Length</th>
+                                <th class="th-film-imdb">IMDb</th>
+                                <th>Author</th>
+                                <th>Movie Genre</th>
+                                <th>Actors</th>
+                                <th>Countries</th>
+                                <th class="th-film-status">Film Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < 60; i++)
+                            {
+                            <tr>
+                                <td>1</td>
+                                <td nowrap="nowrap">Nhắm Mắt Thấy Mùa Hè</td>
+                                <td>2018-05-25 00:00:00.000</td>
+                                <td>100</td>
+                                <td>0</td>
+                                <td>Cao Thúy Nhi</td>
+                                <td>tình cảm, lãng mạn</td>
+                                <td >Công Ninh, Phương Anh Đào, Takafumi Akutsu</td>
+                                <td>Vietnam, Nhật</td>
+                                <td>1</td>
+                            </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Rendering engine</th>
+                                <th>Browser</th>
+                                <th>Platform(s)</th>
+                                <th>Engine version</th>
+                                <th>CSS grade</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+    });
+
+</script>

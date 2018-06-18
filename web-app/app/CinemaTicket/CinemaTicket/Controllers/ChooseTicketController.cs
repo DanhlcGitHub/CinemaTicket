@@ -35,6 +35,7 @@ namespace CinemaTicket.Controllers
                 digitalType = "2d",
                 groupCinemaImg = serverPath + groupCinema.logoImg,
                 cinemaName = cinema.cinemaName,
+                cinemaAddress = cinema.cinemaAddress,
                 roomId = room.roomId,
                 roomName = room.name,
                 startTime = time.startTime,

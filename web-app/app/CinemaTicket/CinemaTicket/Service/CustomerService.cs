@@ -9,6 +9,7 @@ namespace CinemaTicket.Service
 {
     interface ICustomerService
     {
+        int createCustomer(Customer cus);
     }
     public class CustomerService : ICustomerService
     {
@@ -36,6 +37,11 @@ namespace CinemaTicket.Service
         public List<Customer> FindBy(Expression<Func<Customer, bool>> predicate)
         {
             return CustomerRepository.FindBy(predicate);
+        }
+
+        public int createCustomer(Customer cus)
+        {
+            return CustomerRepository.createCustomer(cus);
         }
     }
 }

@@ -14,31 +14,40 @@
     <meta http-equiv="pragma" content="no-cache" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="~/Content/css/w3.css">
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/css/chooseSeat.css">
     <link rel="stylesheet" href="~/Content/css/common.css">
 </head>
 <body ng-controller="seatController">
-    <div id="myModal" class="modal">
-
-        <div class="modal-content">
+    <form method="post" action="/" id="gotoHomeForm" style="display:none"></form>
+    <form method="post" action="/home/BackToChooseTicket" id="BackToChooseTicketForm" style="display:none"></form>
+    <div id="successDialog" class="modal ">
+        <div class="modal-content overflow-scroll">
+            <h1>Thanh toán thành công</h1>
+            <button class="w3-btn w3-red" id="goHomeBtn" ng-click="goHome()">Tiếp tục mua vé</button>
+        </div>
+    </div>
+    <div id="myModal" class="modal ">
+        <div class="modal-content overflow-scroll">
             <span class="close">&times;</span>
             <div class="content">
                 <div class="box-a row container" style="width: 80%; margin-left: 10%; margin-right: 10%;">
                     <div class="img-film column">
-                        <img style="width: 180px;" src="img/bietdoicuncung.jpg">
+                        <img style="width: 180px;" ng-src="{{scheduleData.img}}">
                     </div>
                     <div class="info column" style="margin-left: 40px;">
                         <div class="title-info container">
                             <span class="icon">C16</span>
                             <span class="icon">2D</span>
                             <span class="icon">Digital</span>
-                            <p style="display: inline-block">Biệt Đội Cún Cưng-Show Dogs</p>
+                            <p style="display: inline-block">{{scheduleData.filmName}}</p>
                             <hr>
+                            <p><i class="far fa-circle"></i>Giao dịch sẽ hết hạn trong vòng: <span ng-model="countDown" style="color: red; font-weight: bold;">{{Math.floor(countDown/60)}}:{{countDown%60}}</span> s</p>
                         </div>
                         <div class="content-info">
-                            <h2>Lotte Cinema - Nam Sài Gòn</h2>
-                            <p>135 Hai Bà Trưng, P.Bến Nghé, Quận 1</p>
+                            <h2>{{scheduleData.cinemaName}}</h2>
+                            <p>{{scheduleData.cinemaAddress}}</p>
                             <div class="info-sticket">
                                 <table style="width:100%">
                                     <tr>
@@ -47,11 +56,15 @@
                                     </tr>
                                     <tr>
                                         <th>Suất chiếu:</th>
-                                        <td>08:40 08/06</td>
+                                        <td>{{scheduleData.startTime}} {{scheduleData.date}}</td>
                                     </tr>
                                     <tr>
                                         <th>Phòng:</th>
-                                        <td>Lotte - Nam Sài Gòn - Room06</td>
+                                        <td>{{scheduleData.cinemaName}} - {{scheduleData.roomName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ghế: </th>
+                                        <td><span ng-repeat="seat in choosedList">{{alpha[seat.py]}}{{seat.px+1}}</span></td>
                                     </tr>
                                 </table>
                             </div>
@@ -64,15 +77,15 @@
                     <table style="width:100%">
                         <tr>
                             <th>Họ tên:</th>
-                            <td></td>
+                            <td>danhlc</td>
                         </tr>
                         <tr>
                             <th>Điện thoại</th>
-                            <td>09341822715</td>
+                            <td>{{phone}}</td>
                         </tr>
                         <tr>
                             <th>Email:</th>
-                            <td>danhlc@gmail.com</td>
+                            <td>{{email}}</td>
                         </tr>
                         <tr>
                             <th>Trạng thái:</th>
@@ -80,21 +93,20 @@
                         </tr>
                         <tr>
                             <th>Tổng tiền</th>
-                            <td>160.000đ</td>
+                            <td>{{totalAmount}}đ</td>
                         </tr>
                     </table>
                 </div>
                 <div class="box-c" style="background: green; width: 80%; margin-left: 10%; margin-right: 10%; margin-top: 20px;">
                     <span style="color: white;">
-                        <p style="text-align: left">Mã thanh toán Payoo:</p>
-                        <p style="text-align: center; font-size: 50px; font-weight: bold">888511473</p>
+                        <!--<p style="text-align: left">Thanh toán Papal:</p>-->
+                        <p id="paypal-button-container" style="text-align: center; font-size: 50px; font-weight: bold">Thanh Toan Paypal</p>
                     </span>
                 </div>
                 <div style="width: 80%; margin-left: 10%; margin-right: 10%; margin-top: 30px;">
-                    <p><i class="far fa-circle"></i>Vui lòng sử dụng mã thanh toán bên trên đến cửa hàng gần nhất để hoàn tất việc đặt vé</p>
+                    <p><i class="far fa-circle"></i>Vui lòng bấm nút bên trên để hoàn tất thanh toán</p>
                     <p><i class="far fa-circle"></i>Mã vé sẽ được gửi qua số điện thoại và email của bạn</p>
-                    <p><i class="far fa-circle"></i>Giao dịch sẽ hết hạn lúc 09:53 08/06/2018</p>
-                    <p><i class="far fa-circle"></i>Tìm cửa hàng gần nhà <a href="#" style="color: orange">tại đây</a></p>
+
                 </div>
             </div>
         </div>
@@ -117,11 +129,11 @@
             </div>
             <p>
                 <label>E-mail</label>
-                <input id="emailId" class="w3-input" type="text" value="{{email}}">
+                <input id="emailId" class="w3-input" type="text" value="danhle@gmail.com">
             </p>
             <p>
                 <label>Phone</label>
-                <input id="phoneId" class="w3-input" type="text">
+                <input id="phoneId" class="w3-input" type="text" value="1234567899">
             </p>
             <div class="w3-bar-item w3-button w3-border-bottom">
                 <span><input id="male" class="w3-radio" type="radio" name="gender" value="male" checked=""></span>
@@ -167,20 +179,21 @@
                         <b>{{row.alphaName}}</b>
                     </div>
                     <div class="w3-rest w3-center w3-text-light-grey">
-                        <button ng-repeat="seat in row.seats" ng-click="onclickSeat(seat.seatId,seat.px,seat.py)" class="{{seat.className}}" type="button">{{seat.px + 1}}</button>
+                        <button ng-repeat="seat in row.seats" ng-click="onclickSeat(seat.seatId,seat.px,seat.py,seat.seatStatus)" class="{{seat.className}}" type="button">{{seat.px + 1}}</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="w3-container w3-row w3-margin-top">
             <div class="center-div">
-                <button type="button" class="btn-xl"></button> Ghế trống
+                <button type="button" class="btn-seat"></button> Ghế trống
                 <button type="button" class="btn-xl" style="width:60px;"></button> Ghế đôi
-                <button type="button" class="btn-xl btn-success"></button> Ghế đã chọn
-                <button type="button" class="btn-xl btn-warning"></button> Ghế đã có người chọn
+                <button type="button" class="btn-seat-choosing"></button> Ghế đang chọn
+                <button type="button" class="btn-seat-buyed"></button> Ghế đã có người chọn
             </div>
         </div>
     </div>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="~/Content/js/jquery-3.3.1.min.js"></script>
     <script src="~/Content/js/chooseSeat.js"></script>

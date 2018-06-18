@@ -26,6 +26,7 @@ namespace CinemaTicket
         public Nullable<int> qrCode { get; set; }
         public string ticketStatus { get; set; }
         public Nullable<double> price { get; set; }
+        public Nullable<System.DateTime> ticketTimeout { get; set; }
     
         public virtual ICollection<BookingDetail> BookingDetails { get; set; }
         public virtual MovieSchedule MovieSchedule { get; set; }

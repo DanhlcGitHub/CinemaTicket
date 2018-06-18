@@ -1,4 +1,5 @@
-﻿using CinemaTicket.Service;
+﻿using CinemaTicket.Constant;
+using CinemaTicket.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace CinemaTicket.Controllers
             int roomIdData = (int)new MovieScheduleService().FindByID(scheduleIdData).roomId;
             Room room = new RoomService().FindByID(roomIdData);
             List<Seat> seats = new SeatService().FindBy(s => s.roomId == roomIdData);
+            List<Ticket> ticketList = new TicketService().FindBy(tic => tic.scheduleId == scheduleIdData);
             var obj = new
             {
                 matrixX = room.matrixSizeX,
@@ -25,6 +27,8 @@ namespace CinemaTicket.Controllers
                 seats = seats.Select(s => new
                 {
                     id = s.seatId,
+                    seatStatus = ticketList.Find(t => t.seatId == s.seatId) == null
+                                        ? TicketStatus.available : ticketList.Find(t => t.seatId == s.seatId).ticketStatus,
                     type = s.typeSeatId,
                     px = s.px,
                     py = s.py,

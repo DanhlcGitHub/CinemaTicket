@@ -39,6 +39,12 @@ namespace CinemaTicket.Controllers
             return View();
         }
 
+        public ActionResult BackToChooseTicket(string scheduleId)
+        {
+            ViewBag.scheduleId = scheduleId;
+            return View("~/Views/Home/ChooseTicket.cshtml");
+        }
+
         public ActionResult ChooseSeat(string scheduleId)
         {
             //scheduleId

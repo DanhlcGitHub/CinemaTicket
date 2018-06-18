@@ -24,6 +24,8 @@ namespace CinemaTicket
         public Nullable<int> paymentMethodId { get; set; }
         public Nullable<int> quantity { get; set; }
         public Nullable<System.DateTime> bookingDate { get; set; }
+        public string paymentCode { get; set; }
+        public string qrCode { get; set; }
     
         public virtual ICollection<BookingDetail> BookingDetails { get; set; }
         public virtual Customer Customer { get; set; }

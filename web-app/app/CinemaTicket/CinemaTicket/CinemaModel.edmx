@@ -49,6 +49,8 @@
           <Property Name="paymentMethodId" Type="int" />
           <Property Name="quantity" Type="int" />
           <Property Name="bookingDate" Type="datetime" />
+          <Property Name="paymentCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="qrCode" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Cinema">
           <Key>
@@ -208,6 +210,7 @@
           <Property Name="qrCode" Type="int" />
           <Property Name="ticketStatus" Type="nvarchar" MaxLength="20" />
           <Property Name="price" Type="float" />
+          <Property Name="ticketTimeout" Type="date" />
         </EntityType>
         <EntityType Name="TypeOfSeat">
           <Key>
@@ -217,6 +220,7 @@
           <Property Name="typeName" Type="nvarchar" MaxLength="20" />
           <Property Name="capacity" Type="int" />
           <Property Name="groupId" Type="int" />
+          <Property Name="isPrimary" Type="bit" />
           <Property Name="price" Type="float" />
         </EntityType>
         <EntityType Name="UserAccount">
@@ -591,6 +595,8 @@
           <Property Name="paymentMethodId" Type="Int32" />
           <Property Name="quantity" Type="Int32" />
           <Property Name="bookingDate" Type="DateTime" Precision="3" />
+          <Property Name="paymentCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="qrCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BookingDetails" Relationship="Self.FKBookingDetailBookingTicket001" FromRole="BookingTicket" ToRole="BookingDetail" />
           <NavigationProperty Name="Customer" Relationship="Self.FKBookingTicketCustomer001" FromRole="BookingTicket" ToRole="Customer" />
         </EntityType>
@@ -779,6 +785,7 @@
           <Property Name="qrCode" Type="Int32" />
           <Property Name="ticketStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Double" />
+          <Property Name="ticketTimeout" Type="DateTime" Precision="0" />
           <NavigationProperty Name="BookingDetails" Relationship="Self.FKBookingDetailTicket001" FromRole="Ticket" ToRole="BookingDetail" />
           <NavigationProperty Name="MovieSchedule" Relationship="Self.FKTicketMovieSchedule001" FromRole="Ticket" ToRole="MovieSchedule" />
           <NavigationProperty Name="Seat" Relationship="Self.FKTicketSeat001" FromRole="Ticket" ToRole="Seat" />
@@ -791,6 +798,7 @@
           <Property Name="typeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="capacity" Type="Int32" />
           <Property Name="groupId" Type="Int32" />
+          <Property Name="isPrimary" Type="Boolean" />
           <Property Name="price" Type="Double" />
           <NavigationProperty Name="GroupCinema" Relationship="Self.FKTypeOfSeatGroupCinema001" FromRole="TypeOfSeat" ToRole="GroupCinema" />
           <NavigationProperty Name="Seats" Relationship="Self.FKSeatTypeOfSeat001" FromRole="TypeOfSeat" ToRole="Seat" />
@@ -1169,6 +1177,8 @@
                 <ScalarProperty Name="paymentMethodId" ColumnName="paymentMethodId" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
+                <ScalarProperty Name="paymentCode" ColumnName="paymentCode" />
+                <ScalarProperty Name="qrCode" ColumnName="qrCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1343,6 +1353,7 @@
                 <ScalarProperty Name="qrCode" ColumnName="qrCode" />
                 <ScalarProperty Name="ticketStatus" ColumnName="ticketStatus" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="ticketTimeout" ColumnName="ticketTimeout" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1353,6 +1364,7 @@
                 <ScalarProperty Name="typeName" ColumnName="typeName" />
                 <ScalarProperty Name="capacity" ColumnName="capacity" />
                 <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="isPrimary" ColumnName="isPrimary" />
                 <ScalarProperty Name="price" ColumnName="price" />
               </MappingFragment>
             </EntityTypeMapping>

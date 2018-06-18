@@ -3,7 +3,7 @@ CREATE DATABASE CinemaBookingDB;
 
 use [CinemaBookingDB];
 
-use [Test]
+/*use [Test]*/
 
 
 CREATE TABLE Film (
@@ -109,12 +109,13 @@ CREATE TABLE MovieSchedule (
 
 CREATE TABLE Ticket (
     ticketId int IDENTITY(1,1) PRIMARY KEY,
+	bookingId int,
 	scheduleId int,
 	seatId int,
 	paymentCode nvarchar(50),
-	qrCode int,
+	qrCode nvarchar(255),
 	ticketStatus nvarchar(20),
-	ticketTimeout date,
+	/*ticketTimeout date,*/
 	price float,
 );
 
@@ -122,15 +123,17 @@ CREATE TABLE BookingTicket (
     bookingId int IDENTITY(1,1) PRIMARY KEY,
 	customerId int,
 	paymentMethodId int,
+	paymentCode nvarchar(255),
+	qrCode nvarchar(255),
 	quantity int,
 	bookingDate datetime,
 );
 
-CREATE TABLE BookingDetail (
+/*CREATE TABLE BookingDetail (
     bookingDetailId int IDENTITY(1,1) PRIMARY KEY,
 	bookingId int,
 	ticketId int,
-);
+);*/
 
 CREATE TABLE Customer (
     customerId int IDENTITY(1,1) PRIMARY KEY,
@@ -153,19 +156,19 @@ CREATE TABLE AdminAccount (
 	email nvarchar(255),
 );
 
-CREATE TABLE BankAccount (
+/*CREATE TABLE BankAccount (
     cardNumber nvarchar(50) PRIMARY KEY,
 	ownerName nvarchar(255),
 	expDate date,
 	email nvarchar(255),
 	BankId int,
-);
+);*/
 
-CREATE TABLE BankList (
+/*CREATE TABLE BankList (
     bankId int IDENTITY(1,1) PRIMARY KEY,
 	bankName nvarchar(255),
 	imgLogo nvarchar(255),
-);
+);*/
 
 CREATE TABLE Promotion (
     promotionId int IDENTITY(1,1) PRIMARY KEY,
@@ -194,20 +197,21 @@ ALTER TABLE TypeOfSeat ADD CONSTRAINT FKTypeOfSeatGroupCinema001 FOREIGN KEY (gr
 ALTER TABLE Ticket ADD CONSTRAINT FKTicketMovieSchedule001 FOREIGN KEY (scheduleId) REFERENCES MovieSchedule (scheduleId);
 ALTER TABLE Ticket ADD CONSTRAINT FKTicketSeat001 FOREIGN KEY (seatId) REFERENCES Seat (seatId);
 
-ALTER TABLE BookingDetail ADD CONSTRAINT FKBookingDetailTicket001 FOREIGN KEY (ticketId) REFERENCES Ticket (ticketId);
-ALTER TABLE BookingDetail ADD CONSTRAINT FKBookingDetailBookingTicket001 FOREIGN KEY (bookingId) REFERENCES BookingTicket (bookingId);
+/*ALTER TABLE BookingDetail ADD CONSTRAINT FKBookingDetailTicket001 FOREIGN KEY (ticketId) REFERENCES Ticket (ticketId);
+ALTER TABLE BookingDetail ADD CONSTRAINT FKBookingDetailBookingTicket001 FOREIGN KEY (bookingId) REFERENCES BookingTicket (bookingId);*/
 ALTER TABLE BookingTicket ADD CONSTRAINT FKBookingTicketCustomer001 FOREIGN KEY (customerId) REFERENCES Customer (customerId);
+ALTER TABLE Ticket ADD CONSTRAINT FKTicketBookingTicket001 FOREIGN KEY (bookingId) REFERENCES BookingTicket (bookingId);
 
 ALTER TABLE News ADD CONSTRAINT FKNewsFilm001 FOREIGN KEY (filmId) REFERENCES Film (filmId);
 ALTER TABLE Promotion ADD CONSTRAINT FKPromotionCinema001 FOREIGN KEY (cinemaId) REFERENCES Cinema (cinemaId);
 ALTER TABLE PartnerAccount ADD CONSTRAINT FKPartnerAccountGroupCinema001 FOREIGN KEY (groupOfCinemaId) REFERENCES GroupCinema (groupId);
 ALTER TABLE CinemaManager ADD CONSTRAINT FKCinemaManagerCinema001 FOREIGN KEY (cinemaId) REFERENCES Cinema (cinemaId);
 
-ALTER TABLE Ticket
-ADD ticketTimeout date;
+/*ALTER TABLE BookingTicket
+ADD qrCode nvarchar(255);
 
 ALTER TABLE Film
-DROP COLUMN isAvailable;
+DROP COLUMN isAvailable;*/
 
 
 

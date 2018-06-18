@@ -1,8 +1,11 @@
 ﻿var myApp = angular.module("seatModule", []);
 var seatController = function ($scope, $http) {
+    $scope.seatData;
+    $scope.Math = window.Math;
     $scope.quantityDataKey = "quantityDataKey";
     $scope.totalAmountKey = "totalAmoutKey";
     $scope.totalAmount = 0;
+    $scope.totalAmoutUSD = 0;
     $scope.quantityData;
     $scope.orderData; // contain scheduleId, seatId List
     $scope.matrix = []; // 
@@ -12,10 +15,17 @@ var seatController = function ($scope, $http) {
     $scope.countClick = 0;
     $scope.choosedList = [];
     $scope.middeSeatFlag = false;
-    $scope.alpha = ["A", "B", "C", "D", "E", "F", "J", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"];
+    $scope.email;
+    $scope.phone;
+    $scope.ticketData;
+    $scope.currentCart = [];
+    $scope.countDown = 60;
+    $scope.exchangeRate = 23000;
 
+    $scope.alpha = ["A", "B", "C", "D", "E", "F", "J", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"];
+    $scope.TicketStatusEnum = Object.freeze({ "available": "btn-seat", "buyed": "btn-seat-buyed", "buying": "btn-seat-buyed" });
     // init data
-    $scope.scheduleId = $("#scheduleId").val() ;
+
     $scope.totalAmount = LocalStorageManager.loadDataFromStorage($scope.totalAmountKey);
     $scope.quantityData = LocalStorageManager.loadDataFromStorage($scope.quantityDataKey);
     for (var i = 0; i < $scope.quantityData.length; i++) {
@@ -23,22 +33,32 @@ var seatController = function ($scope, $http) {
     }
     console.log("init");
     console.log($scope.totalAmount);
+    $scope.totalAmoutUSD = Math.round((parseFloat($scope.totalAmount) / $scope.exchangeRate) * 100) / 100;
     console.log($scope.quantityData);
-    // window click---------------------
+    // beforeunload---------------------
+    window.addEventListener('beforeunload', function (e) {
+        /* $http({
+             method: "POST",
+             url: "/Ticket/ChangeTicketStatus",
+             params: { ticketList: $("#scheduleId").val() }
+         })
+         .then(function (response) {
+             $scope.scheduleData = response.data;
+         });*/
+        alert("Before unload");
+    });
+
     $http({
         method: "POST",
         url: "/Seat/FindAllSeatByScheduleId",
         params: { scheduleId: $("#scheduleId").val() }
     })
     .then(function (response) {
-        $scope.data = response.data.seats;
-        console.log("data receive");
-        console.log(response);
+        $scope.seatData = response.data.seats;//seat data
         $scope.matrixX = response.data.matrixX;
         $scope.matrixY = response.data.matrixY;
         $scope.displayData($scope.matrixX, $scope.matrixY);
-        console.log("after display");
-        console.log($scope.matrix);
+        $scope.scheduleId = $("#scheduleId").val();
     });
 
     $http({
@@ -49,25 +69,27 @@ var seatController = function ($scope, $http) {
     .then(function (response) {
         $scope.scheduleData = response.data;
     });
-    $scope.onclickSeat = function (seatId, px, py) {
-        console.log(px + ":" + px);
-        var index = 0;
-        index = $scope.countClick % $scope.totalTicket;
-        $scope.choosedList[index] = {
-            isNull: false,
-            className: 'btn-seat-choosing',
-            seatId: seatId,
-            px: px,
-            py: py
-        };
-        $scope.countClick++;
-        $scope.displayData($scope.matrixX, $scope.matrixY);
-        for (var i = 0 ; i < $scope.choosedList.length ; i++) {
-            var seat = $scope.choosedList[i];
-            $scope.matrix[seat.py].seats[seat.px] = seat;
+    $scope.onclickSeat = function (seatId, px, py, seatStatus) {
+        if (seatStatus == "available") {
+            console.log(px + ":" + px);
+            var index = 0;
+            index = $scope.countClick % $scope.totalTicket;
+            $scope.choosedList[index] = {
+                isNull: false,
+                className: 'btn-seat-choosing',
+                seatId: seatId,
+                px: px,
+                py: py
+            };
+            $scope.countClick++;
+            $scope.displayData($scope.matrixX, $scope.matrixY);
+            for (var i = 0 ; i < $scope.choosedList.length ; i++) {
+                var seat = $scope.choosedList[i];
+                $scope.matrix[seat.py].seats[seat.px] = seat;
+            }
+            $scope.middeSeatFlag = $scope.validMiddleSeat();
+            if ($scope.middeSeatFlag == true) alert("khong the de trong ghe o giua");
         }
-        $scope.middeSeatFlag = $scope.validMiddleSeat();
-        if ($scope.middeSeatFlag == true) alert("khong the de trong ghe o giua");
     };
     $scope.validMiddleSeat = function () {
         for (var i = 0 ; i < $scope.matrix.length; i++) {
@@ -106,20 +128,31 @@ var seatController = function ($scope, $http) {
                 $scope.matrix[i].seats[j] = seatObj;
             }
         }
-        for (var i = 0; i < $scope.data.length; i++) {
+        for (var i = 0; i < $scope.seatData.length; i++) {
             //console.log("x: " + $scope.data[i].px + " y: " + $scope.data[i].py);
             //console.log("-----------------------------------------------------" + i);
             var seatObj = {
                 isNull: false,
-                className: 'btn-seat',
+                className: $scope.TicketStatusEnum[$scope.seatData[i].seatStatus],
                 isChoosing: false,
-                seatId: $scope.data[i].id,
-                px: parseInt($scope.data[i].px),
-                py: $scope.data[i].py
+                seatId: $scope.seatData[i].id,
+                seatStatus: $scope.seatData[i].seatStatus,
+                px: parseInt($scope.seatData[i].px),
+                py: $scope.seatData[i].py
             }
 
             $scope.matrix[seatObj.py].seats[seatObj.px] = seatObj;
         }
+    };
+    $scope.countController = function () {
+        var timer = setInterval(function () {
+            if ($scope.countDown == 0) {
+                clearInterval($scope.countController);
+                return;
+            }
+            $scope.countDown--;
+            $scope.$apply()
+        }, 1000);
     };
     $scope.checkout = function () {
         // check condition
@@ -127,25 +160,44 @@ var seatController = function ($scope, $http) {
             if ($scope.middeSeatFlag == true) {
                 alert("Bạn không được để trống ghế ở giữa");
             } else {
-                if ($("#emailId").val() == "" || $("#phoneId").val() == "") {
+                $scope.email = $("#emailId").val();
+                $scope.phone = $("#phoneId").val();
+                if ($scope.email == "" || $scope.phone == "") {
                     alert("Thông tin E-mail và Điện thoại không được bỏ trống!");
                 } else {
                     // check format email and phone
                     if (validateEmail($("#emailId").val()) && validatePhone($("#phoneId").val())) {
                         console.log("success!");
-                        // gửi qua bên kia list choosed list
-                        // gửi qua bên kia schedule; mỗi scheduleId + 1 seat -> 1 order detail duy nhất
-                        console.log(JSON.stringify($scope.choosedList));
+                        // get ticketId, check status, show thanh toan dialog
                         $http({
                             method: "POST",
-                            url: "/Ticket/CheckSeatAvailable",
+                            url: "/Ticket/GetTicketList",
                             params: {
                                 choosedList: JSON.stringify($scope.choosedList),
-                                scheduleId: $scope.scheduleId
+                                scheduleIdStr: $scope.scheduleId
                             }
                         })
                         .then(function (response) {
-                            alert(response.data);
+                            console.log("ticket data");
+                            $scope.ticketData = response.data;
+                            console.log(response.data);
+                            if (!$scope.IsSeatStillAvailable()) {//not available
+                                alert("Loại vé bạn chọn đã hết hoặc không đủ số lượng ghế trống!");
+                            } else {
+                                //change available to buying
+                                $http({
+                                    method: "POST",
+                                    url: "/Ticket/ChangeAvailableToBuying",
+                                    params: { ticketListStr: JSON.stringify($scope.ticketData) }
+                                })
+                               .then(function (response) {
+                                   console.log("ticket data after update");
+                                   $scope.ticketData = response.data;
+                               });
+                                $scope.countController();
+                                $scope.renderPaypalButton();
+                                $scope.openConfirmDialog();
+                            }
                         });
                     } else {
                         alert("Email và phone sai format!");
@@ -156,26 +208,117 @@ var seatController = function ($scope, $http) {
             alert("Bạn chưa chọn đủ " + $scope.totalTicket + " vé!");
         }
     };
-    $scope.openConfirmDialog = function (url) {
-        console.log(url);
+    $scope.openConfirmDialog = function () {
         var modal = document.getElementById('myModal');
-        var myIframe = document.getElementById('myIframe');
         modal.style.display = "block";
         var span = document.getElementsByClassName("close")[0];
-        $('#myIframe').prop('src', url);
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function () {
-            modal.style.display = "none";
+
+            if ($scope.countDown === 0) {//time out
+                //$scope.BackToChooseTicket();
+                //change status from buying to available
+                $http({
+                    method: "POST",
+                    url: "/Ticket/BuyingToAvailable",
+                    params: { scheduleId: $("#scheduleId").val() }
+                })
+                .then(function (response) {
+                    $scope.scheduleData = response.data;
+                });
+                // reload page
+            } else {
+                modal.style.display = "none";
+            }
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
-                modal.style.display = "none";
-                $('#myIframe').prop('src', "");
+
             }
         }
+    };
+    $scope.openSuccessDialog = function () {
+        var sucessDialog = document.getElementById('successDialog');
+        sucessDialog.style.display = "block";
+    };
+    $scope.renderPaypalButton = function () {
+        paypal.Button.render({
+
+            env: 'sandbox', // sandbox | production
+
+            client: {
+                sandbox: 'AWT16aVyr2SNJR2uBG46HHvz-DIY98lIP3aPAO-sUs36sOvtN9Ay3H0z-4e8cj4qZyNR5Aj3qrsxw0W3',
+                production: 'AXWr3Vji-q_UZFmrhTIxcSMBctnfsofDOxwsi3_llRLpDzwJ83NtZzt7wT5Sg_eB916xA5eC6c7O1APa'
+            },
+            commit: false, // Show a 'Pay Now' button
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: $scope.totalAmoutUSD, currency: 'USD' }
+                            }
+                        ]
+                    }
+                });
+            },
+
+            onAuthorize: function (data, actions) {
+                return actions.payment.get().then(function (data) {
+                    if ($scope.countDown !== 0) { // !timeout
+                        return actions.payment.execute().then(function () {
+                            // Show a thank-you note
+                            $http({
+                                method: "POST",
+                                url: "/Ticket/MakeOrder",
+                                params: {
+                                    ticketListStr: JSON.stringify($scope.ticketData),
+                                    email: $scope.email,
+                                    phone: $scope.phone
+                                }
+                            })
+                               .then(function (response) {
+                                   console.log("ticket data after update MakeOrder");
+                                   $scope.ticketData = response.data;
+                               });
+                            var modal = document.getElementById('myModal');
+                            modal.style.display = "none";
+                            $scope.openSuccessDialog();
+                        });
+                    } else {
+                        alert("Time out"); //$scope.BackToChooseTicket();
+                    };
+                });
+            },
+            onError: function (err) {
+                console.log("some error occur");
+            }
+        }, '#paypal-button-container');
+    };
+    $scope.BackToChooseTicket = function () {
+        var param1 = "<input type='hidden' name='scheduleId' value='" + $scope.scheduleId + "' />";
+        document.getElementById('BackToChooseTicketForm').innerHTML = param1;
+        document.getElementById('BackToChooseTicketForm').submit();
+    }
+    $scope.IsSeatStillAvailable = function () {
+        for (var i = 0 ; i < $scope.ticketData.length; i++) {
+            var aTicket = $scope.ticketData[i];
+            if (aTicket.ticketStatus == "buying") {
+                return false;//not available
+            }
+        }
+        return true;//still available
+    }
+    $scope.getSeatClassName = function (seatStatus) {
+        if (seatStatus == "available") {
+            return "";
+        }
+    };
+    $scope.goHome = function () {
+        document.getElementById('gotoHomeForm').submit();
     };
 }
 
@@ -204,30 +347,4 @@ function validateEmail(inputemail) {
 }
 function validatePhone(inputphone) {
     return inputphone.match(/\d/g).length === 10;
-}
-var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function () {
-    modal.style.display = "block";
-    console.log("123");
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-
-    }
 }

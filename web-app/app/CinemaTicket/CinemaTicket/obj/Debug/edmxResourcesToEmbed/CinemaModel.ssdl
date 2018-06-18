@@ -44,6 +44,8 @@
     <Property Name="paymentMethodId" Type="int" />
     <Property Name="quantity" Type="int" />
     <Property Name="bookingDate" Type="datetime" />
+    <Property Name="paymentCode" Type="nvarchar" MaxLength="255" />
+    <Property Name="qrCode" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Cinema">
     <Key>
@@ -203,6 +205,7 @@
     <Property Name="qrCode" Type="int" />
     <Property Name="ticketStatus" Type="nvarchar" MaxLength="20" />
     <Property Name="price" Type="float" />
+    <Property Name="ticketTimeout" Type="date" />
   </EntityType>
   <EntityType Name="TypeOfSeat">
     <Key>
@@ -212,6 +215,7 @@
     <Property Name="typeName" Type="nvarchar" MaxLength="20" />
     <Property Name="capacity" Type="int" />
     <Property Name="groupId" Type="int" />
+    <Property Name="isPrimary" Type="bit" />
     <Property Name="price" Type="float" />
   </EntityType>
   <EntityType Name="UserAccount">

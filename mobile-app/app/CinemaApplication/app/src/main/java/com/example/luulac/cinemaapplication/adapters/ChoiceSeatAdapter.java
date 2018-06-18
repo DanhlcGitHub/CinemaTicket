@@ -20,9 +20,13 @@ import java.util.List;
 public class ChoiceSeatAdapter extends RecyclerView.Adapter<ChoiceSeatAdapter.ChoiceSeatHolder> {
     private Context context;
     private List<SeatModel> seatModels;
+    private List<Character> resultAbc;
+    private int row;
 
-    public ChoiceSeatAdapter(List<SeatModel> seatModels) {
+    public ChoiceSeatAdapter(List<SeatModel> seatModels, List<Character> resultAbc, int row) {
         this.seatModels = seatModels;
+        this.resultAbc = resultAbc;
+        this.row = row;
     }
 
     @NonNull
@@ -32,7 +36,6 @@ public class ChoiceSeatAdapter extends RecyclerView.Adapter<ChoiceSeatAdapter.Ch
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.layout_seat_item, null);
 
-
         return new ChoiceSeatHolder(view);
     }
 
@@ -40,9 +43,15 @@ public class ChoiceSeatAdapter extends RecyclerView.Adapter<ChoiceSeatAdapter.Ch
     public void onBindViewHolder(@NonNull final ChoiceSeatHolder holder, final int position) {
         if (seatModels.get(position).getSeatId() == 0) {
             holder.seatItem.setBackgroundResource(R.drawable.text_choice_seat_null);
-
+        }else{
+            holder.seatItem.setBackgroundResource(R.drawable.text_view_seat);
+            holder.seatItem.setText(resultAbc.get(seatModels.get(position).getPy()).toString() + ((position % row)+ 1));
         }
 
+        if (seatModels.get(position).isBooked()) {
+            holder.seatItem.setBackgroundResource(R.drawable.text_choice_seat_booked);
+            holder.seatItem.setText(resultAbc.get(seatModels.get(position).getPy()).toString() + ((position % row)+ 1));
+        }
     }
 
     @Override

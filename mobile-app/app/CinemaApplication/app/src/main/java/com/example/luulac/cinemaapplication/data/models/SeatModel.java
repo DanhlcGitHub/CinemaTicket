@@ -9,9 +9,8 @@ public class SeatModel implements Serializable {
     private int roomId;
     private int px;
     private int py;
-    private RoomModel roomModel;
-    private TypeOfSeatModel typeOfSeat;
-    private List<TicketModel> ticket;
+    private Double price;
+    private boolean isBooked;
     private boolean isSelected;
 
     public SeatModel() {
@@ -58,35 +57,27 @@ public class SeatModel implements Serializable {
         this.py = py;
     }
 
-    public RoomModel getRoomModel() {
-        return roomModel;
-    }
-
-    public void setRoomModel(RoomModel roomModel) {
-        this.roomModel = roomModel;
-    }
-
-    public TypeOfSeatModel getTypeSeat() {
-        return typeOfSeat;
-    }
-
-    public void setTypeSeat(TypeOfSeatModel typeOfSeat) {
-        this.typeOfSeat = typeOfSeat;
-    }
-
-    public List<TicketModel> getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(List<TicketModel> ticket) {
-        this.ticket = ticket;
-    }
-
     public boolean isSelected() {
         return isSelected;
     }
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        isBooked = booked;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

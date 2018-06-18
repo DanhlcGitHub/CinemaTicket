@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#484747">
+    android:background="#363636">
 
 
     <android.support.v7.widget.Toolbar
@@ -57,27 +57,15 @@
         android:textColor="@android:color/white" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcv_cs_abc"
-        android:layout_width="20dp"
+        android:id="@+id/rcv_cs_seat"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/liner_order_ticket_two_button"
         android:layout_below="@+id/tv_cs_film_name"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="8dp"></android.support.v7.widget.RecyclerView>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcv_cs_seat"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/liner_order_ticket_two_button"
-        android:layout_below="@+id/tv_cs_film_name"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/rcv_cs_abc"></android.support.v7.widget.RecyclerView>
+        android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
 
     <!-- list seat info-->
     <LinearLayout
@@ -106,8 +94,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_seat_item"
-                android:text="Ghế trống"
                 android:layout_centerHorizontal="true"
+                android:text="Ghế trống"
                 android:textSize="12sp" />
         </RelativeLayout>
 
@@ -130,8 +118,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_seat_item_booking"
                 android:layout_centerHorizontal="true"
-                android:textSize="12sp"
-                android:text="Đang chọn" />
+                android:text="Đang chọn"
+                android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -147,13 +135,14 @@
                 android:layout_margin="2dp"
                 android:background="@drawable/text_choice_seat_booked"
                 android:gravity="center" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_seat_item_selected"
                 android:layout_centerHorizontal="true"
-                android:textSize="12sp"
-                android:text="Ghế đã đặt" />
+                android:text="Ghế đã đặt"
+                android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -169,13 +158,14 @@
                 android:layout_margin="2dp"
                 android:background="@drawable/text_view_seat"
                 android:gravity="center" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_seat_item_vip"
                 android:layout_centerHorizontal="true"
-                android:textSize="12sp"
-                android:text="Ghế VIP" />
+                android:text="Ghế VIP"
+                android:textSize="12sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -191,13 +181,14 @@
                 android:layout_margin="2dp"
                 android:background="@drawable/text_view_seat"
                 android:gravity="center" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_seat_item_double"
                 android:layout_centerHorizontal="true"
-                android:textSize="12sp"
-                android:text="Ghế đôi" />
+                android:text="Ghế đôi"
+                android:textSize="12sp" />
         </RelativeLayout>
 
 

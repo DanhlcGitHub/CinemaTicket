@@ -54,7 +54,7 @@ public class FilmActivity extends AppCompatActivity {
 
         FilmFragment filmFragment = new FilmFragment();
 
-        fragmentList = filmFragment.getFragments();
+        fragmentList = filmFragment.getFragments(filmId);
         titleList = filmFragment.getTitles();
 
         setTabLayoutMain(fragmentList, titleList);

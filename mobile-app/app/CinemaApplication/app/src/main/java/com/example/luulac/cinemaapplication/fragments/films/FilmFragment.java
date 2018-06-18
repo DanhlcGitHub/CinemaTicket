@@ -24,6 +24,8 @@ public class FilmFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        filmId = this.getArguments().getInt("filmId");
+
     }
 
     @Nullable
@@ -32,15 +34,13 @@ public class FilmFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_film_about, null);
 
         //The value of movieId is derived from FilmActivity
-        filmId = this.getArguments().getInt("filmId");
 
         return view;
     }
 
-    public static List<Fragment> getFragments() {
+    public static List<Fragment> getFragments(int filmId) {
         fragments = new ArrayList<>();
         Bundle bundle = new Bundle();
-
         //Pass values of filmId to fragment (ScheduleShowFragment and FilmInfomationFragment)
         bundle.putInt("filmId", filmId);
 

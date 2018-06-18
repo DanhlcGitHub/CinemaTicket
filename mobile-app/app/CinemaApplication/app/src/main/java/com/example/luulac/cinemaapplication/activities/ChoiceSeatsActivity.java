@@ -46,7 +46,7 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
     private int count = 0;
     private List<SeatModel> seats = new ArrayList<>();
     private List<SeatModel> data;
-    final SeatCollectionModel seatCollectionModel = new SeatCollectionModel();
+    private RelativeLayout relativeLayout;
 
 
     @Override
@@ -63,7 +63,7 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
         final ScheduleTranferModel scheduleTranfer = (ScheduleTranferModel) intent.getSerializableExtra("scheduleTranfer");
 
         OrderService orderService = ServiceBuilder.buildService(OrderService.class);
-        Call<List<SeatModel>> request = orderService.getOrderChoiceSeats(filmTranfer.getRoomId());
+        Call<List<SeatModel>> request = orderService.getOrderChoiceSeats(filmTranfer.getRoomId(), filmTranfer.getScheduleId());
 
         request.enqueue(new Callback<List<SeatModel>>() {
             @Override
@@ -75,7 +75,6 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                 }
 
                 for (int i = 0; i < data.size(); i++) {
-
                     int tmpX = data.get(i).getPx();
                     int tmpY = data.get(i).getPy();
 
@@ -93,24 +92,8 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                     resultAbc.add(tmp);
                 }
 
-                //new adapter for recycler view seats attachment date: List<Character>
-                ChoiceSeatAbcAdapter abcAdapter = new ChoiceSeatAbcAdapter(resultAbc);
-
-                //Get recycler view abc from layout
-                RecyclerView rcvAbc = findViewById(R.id.rcv_cs_abc);
-
-                //new liner layout for recycler view abc and set orientation is VERTICAL
-                LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext());
-                linearLayout.setOrientation(LinearLayout.VERTICAL);
-
-                //set layout for recycler view abc is liner layout
-                rcvAbc.setLayoutManager(linearLayout);
-
-                //set adapter for recycler view abc
-                rcvAbc.setAdapter(abcAdapter);
-
                 //new adapter for recycler view seats attachment date: List<SeatModel>
-                adapter = new ChoiceSeatAdapter(seats);
+                adapter = new ChoiceSeatAdapter(seats, resultAbc, filmTranfer.getRow());
 
                 //Get recycler view seat from layout
                 RecyclerView recyclerView = findViewById(R.id.rcv_cs_seat);
@@ -124,49 +107,62 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                 //set adapter for recycler view of seat
                 recyclerView.setAdapter(adapter);
 
+                final int quantity = scheduleTranfer.getQuantityTicket();
+
+                relativeLayout = findViewById(R.id.liner_cs_bottom);
+
+                relativeLayout.setBackgroundColor(Color.GRAY);
+
+                relativeLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "Please choose " + (quantity - count) +" seats to continues!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 recyclerView.addOnItemTouchListener(
                         new RecyclerItemClickListener(context, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-
                             @Override
                             public void onItemClick(View view, int position) {
+                                if (!seats.get(position).isBooked() && seats.get(position).getSeatId() != 0) {
 
-                                if (count < scheduleTranfer.getQuantityTicket()) {
+                                    if (count <= quantity) {
 
-                                    //get character of Px (A, B, C,...)
-                                    String tmpPx = resultAbc.get(seats.get(position).getPy()).toString();
+                                        //get character of Px (A, B, C,...)
+                                        String tmpPx = resultAbc.get(seats.get(position).getPy()).toString();
 
-                                    //get index of position (1, 2, 3,...)
-                                    //because index begin 0 then + 1 to index
-                                    String tmpPy = (seats.get(position).getPx() + 1) + "";
+                                        //get index of position (1, 2, 3,...)
+                                        //because index begin 0 then + 1 to index
+                                        String tmpPy = (seats.get(position).getPx() + 1) + "";
 
-                                    //seat String (A1, B2, C3,...)
-                                    String seatString = tmpPx + tmpPy;
+                                        //seat String (A1, B2, C3,...)
+                                        String seatString = tmpPx + tmpPy;
 
-                                    //
-                                    String stringSeats = "";
-
-                                    if (seats.get(position).getSeatId() != 0) {
+                                        String stringSeats = "";
 
                                         TextView tvSeatItem = view.findViewById(R.id.tv_seat_item);
+
                                         if (!seats.get(position).isSelected()) {
 
-                                            //add ticket name String to list String ticket
-                                            litsStringSeatSelected.add(seatString);
+                                            if(count != quantity){
+                                                //add ticket name String to list String ticket
+                                                litsStringSeatSelected.add(seatString);
 
-                                            //set background: green (selected)
-                                            tvSeatItem.setBackgroundResource(R.drawable.text_choice_seat_selected);
+                                                //set background: green (selected)
+                                                tvSeatItem.setBackgroundResource(R.drawable.text_choice_seat_selected);
 
-                                            //set seat status: selected
-                                            seats.get(position).setSelected(true);
+                                                //set seat status: selected
+                                                seats.get(position).setSelected(true);
 
-                                            //new ticketModel
-                                            TicketModel ticket = new TicketModel(filmTranfer.getScheduleId(), seats.get(position).getSeatId(), seats.get(position).getTypeSeat().getPrice());
+                                                //new ticketModel
+                                                TicketModel ticket = new TicketModel(filmTranfer.getScheduleId(), seats.get(position).getSeatId(), seats.get(position).getPrice());
 
-                                            //add ticket to list tickets
-                                            tickets.add(ticket);
+                                                //add ticket to list tickets
+                                                tickets.add(ticket);
 
-                                            //increase count one unit
-                                            count++;
+                                                //increase count one unit
+                                                count++;
+                                            }
                                         } else {
 
                                             //remove ticket name String from list String ticket
@@ -190,44 +186,54 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                                             //reduce one unit of count
                                             count--;
                                         }
-                                    }
 
-                                    //get all item int listStringSeatSelected and append to stringSeat
-                                    //result ( A1 B2 C3 ...)
-                                    for (String item : litsStringSeatSelected) {
-                                        stringSeats += item + " ";
-                                    }
+                                        //get all item int listStringSeatSelected and append to stringSeat
+                                        //result ( A1 B2 C3 ...)
+                                        for (String item : litsStringSeatSelected) {
+                                            stringSeats += item + " ";
+                                        }
 
-                                    final String tmpStringSeats = stringSeats;
+                                        final String tmpStringSeats = stringSeats;
 
-                                    listSelectedSeat.setText(stringSeats);
+                                        listSelectedSeat.setText(stringSeats);
 
-                                    //active click when customer choice enough seat
-                                    if (count == scheduleTranfer.getQuantityTicket()) {
 
-                                        RelativeLayout relativeLayout = findViewById(R.id.liner_cs_bottom);
-                                        relativeLayout.setBackgroundColor(Color.GREEN);
+                                        //active click when customer choice enough seat
+                                        if (count == scheduleTranfer.getQuantityTicket()) {
 
-                                        //set event when click
-                                        relativeLayout.setOnClickListener(new View.OnClickListener() {
 
-                                            @Override
-                                            public void onClick(View v) {
-                                                Bundle bundle = new Bundle();
-                                                bundle.putSerializable("list", (Serializable) tickets);
+                                            relativeLayout.setBackgroundColor(Color.GREEN);
 
-                                                Intent intentPayment = new Intent(getApplicationContext(), PaymentActivity.class);
+                                            //set event when click
+                                            relativeLayout.setOnClickListener(new View.OnClickListener() {
 
-                                                intentPayment.putExtra("scheduleTranfer", scheduleTranfer);
-                                                intentPayment.putExtra("filmTranfer", filmTranfer);
-                                                intentPayment.putExtra("stringSeats", tmpStringSeats);
-                                                intentPayment.putExtra("listTicket", bundle);
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putSerializable("list", (Serializable) tickets);
 
-                                                startActivity(intentPayment);
-                                            }
-                                        });
+                                                    Intent intentPayment = new Intent(getApplicationContext(), PaymentActivity.class);
+
+                                                    intentPayment.putExtra("scheduleTranfer", scheduleTranfer);
+                                                    intentPayment.putExtra("filmTranfer", filmTranfer);
+                                                    intentPayment.putExtra("stringSeats", tmpStringSeats);
+                                                    intentPayment.putExtra("listTicket", bundle);
+
+                                                    startActivity(intentPayment);
+                                                }
+                                            });
+                                        }else{
+                                            relativeLayout.setBackgroundColor(Color.GRAY);
+                                            relativeLayout.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Toast.makeText(getApplicationContext(), "Please choose " + (quantity - count) +" seats to continues!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
                                     }
                                 }
+
                             }
 
                             @Override

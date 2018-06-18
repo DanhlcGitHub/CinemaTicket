@@ -258,6 +258,7 @@
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\CinemaUtility.cs" />
+    <Compile Include="Utility\RandomUtility.cs" />
     <Compile Include="Utility\ScheduleUtility.cs" />
     <Compile Include="Utility\DateUtility.cs" />
     <Compile Include="Utility\DBUtility.cs" />
@@ -422,6 +423,15 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Home\FilmDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\ChooseTicket.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\ChooseSeat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="CinemaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CinemaModel.Designer.cs</LastGenOutput>
@@ -441,15 +451,6 @@
       <DependentUpon>CinemaModel.edmx</DependentUpon>
       <LastGenOutput>CinemaModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\FilmDetail.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\ChooseTicket.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\ChooseSeat.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -23,6 +23,7 @@ namespace CinemaTicket
         public string typeName { get; set; }
         public Nullable<int> capacity { get; set; }
         public Nullable<int> groupId { get; set; }
+        public Nullable<bool> isPrimary { get; set; }
         public Nullable<double> price { get; set; }
     
         public virtual GroupCinema GroupCinema { get; set; }

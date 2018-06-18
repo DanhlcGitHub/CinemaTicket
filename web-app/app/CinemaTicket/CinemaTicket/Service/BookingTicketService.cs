@@ -9,6 +9,7 @@ namespace CinemaTicket.Service
 {
     interface IBookingTicketService
     {
+        int CreateOrder(BookingTicket entity);
     }
     public class BookingTicketService : IBookingTicketService
     {
@@ -36,6 +37,11 @@ namespace CinemaTicket.Service
         public List<BookingTicket> FindBy(Expression<Func<BookingTicket, bool>> predicate)
         {
             return bookingTicketRepository.FindBy(predicate);
+        }
+
+        public int CreateOrder(BookingTicket entity)
+        {
+            return bookingTicketRepository.CreateOrder(entity);
         }
     }
 }

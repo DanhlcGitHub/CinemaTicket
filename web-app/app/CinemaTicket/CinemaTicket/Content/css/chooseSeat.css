@@ -10,40 +10,60 @@
 }
 
 .btn-seat {
-    width:30px;height:30px;
-    max-width:30px; max-height:30px;
-    font-size: 0px;
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
     border-radius: 4px;
     cursor: pointer;
     margin: 2px;
-    background-color: white;
-    color:red;
-    text-align:center;
+    background-color: #f5a623;;
+    color: white;
+    text-align: center;
 }
 
 .btn-seat-choosing {
-    width:30px;height:30px;
-    max-width:30px; max-height:30px;
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
     font-size: 12px;
     border-radius: 4px;
     cursor: pointer;
-    margin: 0px 2px 2px 0px;/* top right bottom left*/
+    margin: 0px 2px 2px 0px; /* top right bottom left*/
     background-color: green;
-    color:white;
-    text-align:center;
+    color: white;
+    text-align: center;
+}
+
+.btn-seat-buyed {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0px 2px 2px 0px; /* top right bottom left*/
+    background-color: black;
+    color: white;
+    text-align: center;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .btn-seat-hidden {
-    width:30px;height:30px;
-    max-width:30px; max-height:30px;
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
     font-size: 12px;
     cursor: pointer;
     margin: 2px;
-    text-align:center;
+    text-align: center;
     visibility: hidden;
 }
-
-
 
 .center-div {
     margin: auto;

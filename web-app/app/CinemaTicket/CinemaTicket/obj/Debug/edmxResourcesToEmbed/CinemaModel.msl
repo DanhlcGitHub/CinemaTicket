@@ -48,6 +48,8 @@
           <ScalarProperty Name="paymentMethodId" ColumnName="paymentMethodId" />
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
+          <ScalarProperty Name="paymentCode" ColumnName="paymentCode" />
+          <ScalarProperty Name="qrCode" ColumnName="qrCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -222,6 +224,7 @@
           <ScalarProperty Name="qrCode" ColumnName="qrCode" />
           <ScalarProperty Name="ticketStatus" ColumnName="ticketStatus" />
           <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="ticketTimeout" ColumnName="ticketTimeout" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -232,6 +235,7 @@
           <ScalarProperty Name="typeName" ColumnName="typeName" />
           <ScalarProperty Name="capacity" ColumnName="capacity" />
           <ScalarProperty Name="groupId" ColumnName="groupId" />
+          <ScalarProperty Name="isPrimary" ColumnName="isPrimary" />
           <ScalarProperty Name="price" ColumnName="price" />
         </MappingFragment>
       </EntityTypeMapping>

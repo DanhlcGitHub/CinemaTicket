@@ -7,21 +7,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.luulac.cinemaapplication.R;
-import com.example.luulac.cinemaapplication.adapters.ChoiceSeatAbcAdapter;
 import com.example.luulac.cinemaapplication.adapters.ChoiceSeatAdapter;
 import com.example.luulac.cinemaapplication.adapters.RecyclerItemClickListener;
-import com.example.luulac.cinemaapplication.data.models.SeatCollectionModel;
 import com.example.luulac.cinemaapplication.data.models.SeatModel;
 import com.example.luulac.cinemaapplication.data.models.TicketModel;
 import com.example.luulac.cinemaapplication.data.models.tranfers.FilmTranferModel;
@@ -116,7 +111,7 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                 relativeLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Please choose " + (quantity - count) +" seats to continues!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Please choose " + (quantity - count) + " seats to continues!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -144,7 +139,7 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
 
                                         if (!seats.get(position).isSelected()) {
 
-                                            if(count != quantity){
+                                            if (count != quantity) {
                                                 //add ticket name String to list String ticket
                                                 litsStringSeatSelected.add(seatString);
 
@@ -189,14 +184,17 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
 
                                         //get all item int listStringSeatSelected and append to stringSeat
                                         //result ( A1 B2 C3 ...)
-                                        for (String item : litsStringSeatSelected) {
-                                            stringSeats += item + " ";
+                                        if (count == 0) {
+                                            listSelectedSeat.setText("Vui lòng chọn ghế");
+                                        }else{
+                                            for (String item : litsStringSeatSelected) {
+                                                stringSeats += item + " ";
+                                            }
+
+                                            listSelectedSeat.setText(stringSeats);
                                         }
 
                                         final String tmpStringSeats = stringSeats;
-
-                                        listSelectedSeat.setText(stringSeats);
-
 
                                         //active click when customer choice enough seat
                                         if (count == scheduleTranfer.getQuantityTicket()) {
@@ -212,7 +210,7 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                                                     Bundle bundle = new Bundle();
                                                     bundle.putSerializable("list", (Serializable) tickets);
 
-                                                    Intent intentPayment = new Intent(getApplicationContext(), PaymentActivity.class);
+                                                    Intent intentPayment = new Intent(getApplicationContext(), PaymentApplicationActivity.class);
 
                                                     intentPayment.putExtra("scheduleTranfer", scheduleTranfer);
                                                     intentPayment.putExtra("filmTranfer", filmTranfer);
@@ -222,12 +220,12 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                                                     startActivity(intentPayment);
                                                 }
                                             });
-                                        }else{
+                                        } else {
                                             relativeLayout.setBackgroundColor(Color.GRAY);
                                             relativeLayout.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    Toast.makeText(getApplicationContext(), "Please choose " + (quantity - count) +" seats to continues!", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(), "Please choose " + (quantity - count) + " seats to continues!", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         }

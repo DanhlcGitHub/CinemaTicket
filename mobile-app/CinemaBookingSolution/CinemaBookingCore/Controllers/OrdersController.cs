@@ -114,19 +114,29 @@ namespace CinemaBookingCore.Controllers
 
                         seatCollectionModel.isSuccesBookingTicket = true;
                     }
-                    else if (ticket.TicketTimeout < DateTime.Now)
-                    {
-                        ticket.TicketTimeout = DateTime.Now.AddMinutes(5);
-                        ticket.TicketStatus = "Buyding";
-                        context.Update(ticket);
-                        context.SaveChanges();
-
-                        seatCollectionModel.isSuccesBookingTicket = true;
-                    }
                     else
                     {
-                        seatCollectionModel.isSuccesBookingTicket = false;
+                        switch (ticket.TicketStatus)
+                        {
+                            case "Available":
+                                ticket.TicketStatus = "Buyding";
+                                context.Update(ticket);
+                                context.SaveChanges();
+
+                                seatCollectionModel.isSuccesBookingTicket = true;
+                                break;
+
+                            case "Buyding":
+                                seatCollectionModel.isSuccesBookingTicket = false;
+                                break;
+
+                            case "Success":
+                                seatCollectionModel.isSuccesBookingTicket = true;
+                                break;
+
+                        }
                     }
+
                 }
 
             }
@@ -143,10 +153,8 @@ namespace CinemaBookingCore.Controllers
         [HttpPost("finishPaypalPayment")]
         public IActionResult FinishPaypalPayment([FromBody] BookingTicket bookingTicketModel)
         {
-
             try
             {
-
                 Customer customer = context.Customer.Where(c => c.Phone == bookingTicketModel.Customer.Phone && c.Email == bookingTicketModel.Customer.Email).FirstOrDefault();
                 if (customer == null)
                 {
@@ -190,6 +198,22 @@ namespace CinemaBookingCore.Controllers
             }
 
             return Ok(bookingTicketModel);
+        }
+
+
+        [HttpPut("changeStatusTicket")]
+        public IActionResult changeStatusTicket([FromBody]List<Ticket> tickets)
+        {
+
+            Ticket ticket;
+            foreach (var item in tickets)
+            {
+                ticket = context.Ticket.Where(t => t.TicketId == item.TicketId).FirstOrDefault();
+                ticket.TicketStatus = "Available";
+            }
+            context.SaveChanges();
+
+            return Ok(tickets);
         }
     }
 }

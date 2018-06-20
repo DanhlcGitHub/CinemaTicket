@@ -32,7 +32,7 @@
                     android:layout_height="30dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/icon_cancel" />
+                    android:src="@drawable/ic_dash_board" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -45,8 +45,8 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:lines="1"
-                        android:text="Payoo"
-                        android:textColor="@android:color/holo_red_light"
+                        android:text="Thông tin vé"
+                        android:textColor="@android:color/white"
                         android:textSize="16dp" />
 
                     <TextView
@@ -54,7 +54,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_finish_payment_title_payment_type"
-                        android:text="Thanh toán qua cửa hàng tiện lợi"
                         android:textSize="12sp" />
                 </RelativeLayout>
             </LinearLayout>

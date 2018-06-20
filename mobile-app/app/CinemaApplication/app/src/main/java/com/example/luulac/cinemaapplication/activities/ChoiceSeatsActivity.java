@@ -1,15 +1,18 @@
 package com.example.luulac.cinemaapplication.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +46,8 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
     private List<SeatModel> data;
     private RelativeLayout relativeLayout;
 
+    private ImageView iconCancelOrder;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,9 +58,26 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
 
         context = this.getApplicationContext();
 
+        iconCancelOrder = (ImageView) findViewById(R.id.icon_cancel_order);
+
+        iconCancelOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                comfirmCancelOrder();
+            }
+        });
+
         final Intent intent = this.getIntent();
         final FilmTranferModel filmTranfer = (FilmTranferModel) intent.getSerializableExtra("filmTranfer");
         final ScheduleTranferModel scheduleTranfer = (ScheduleTranferModel) intent.getSerializableExtra("scheduleTranfer");
+
+        TextView tvGroupCinemaName = (TextView) findViewById(R.id.tv_choice_seat_short_key);
+        TextView tvCinemaName = (TextView) findViewById(R.id.tv_choice_seat_cinema_name);
+        TextView tvFilmSubInfo = (TextView) findViewById(R.id.tv_choice_seat_full);
+
+        tvGroupCinemaName.setText(scheduleTranfer.getGroupCinemaName());
+        tvCinemaName.setText(scheduleTranfer.getCinemaName());
+        tvFilmSubInfo.setText(scheduleTranfer.getShowTime() + " - " + scheduleTranfer.getCinemaName() + " - " + scheduleTranfer.getRoomName());
 
         OrderService orderService = ServiceBuilder.buildService(OrderService.class);
         Call<List<SeatModel>> request = orderService.getOrderChoiceSeats(filmTranfer.getRoomId(), filmTranfer.getScheduleId());
@@ -217,7 +239,7 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                                                     intentPayment.putExtra("stringSeats", tmpStringSeats);
                                                     intentPayment.putExtra("listTicket", bundle);
 
-                                                    startActivity(intentPayment);
+                                                    startActivityForResult(intentPayment, REQUEST_CODE_ORDER);
                                                 }
                                             });
                                         } else {
@@ -245,5 +267,35 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
             public void onFailure(Call<List<SeatModel>> request, Throwable t) {
             }
         });
+    }
+    public static final int REQUEST_CODE_ORDER = 256;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE_ORDER){
+            finish();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        comfirmCancelOrder();
+    }
+
+    public void comfirmCancelOrder(){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Hủy đặt vé")
+                .setMessage("Bạn có muốn hủy đơn hàng này?")
+                .setPositiveButton("Có", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("Không", null)
+                .show();
     }
 }

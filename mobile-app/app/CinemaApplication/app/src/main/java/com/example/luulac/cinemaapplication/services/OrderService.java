@@ -14,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface OrderService {
@@ -26,6 +27,9 @@ public interface OrderService {
 
     @POST("orders/bookingTicket")
     Call<SeatCollectionModel> orderTicket(@Body SeatCollectionModel seatCollectionModel);
+
+    @PUT("orders/changeStatusTicket")
+    Call<List<TicketModel>> changeStatusTicket(@Body List<TicketModel> tickets);
 
     @POST("orders/finishPaypalPayment")
         Call<BookingTicketModel> finishPaypalPayment(@Body BookingTicketModel bookingTicketModel);

@@ -76,9 +76,6 @@ public class ShowingFragment extends Fragment {
             }
         });
 
-
-
-
         return view;
     }
 }

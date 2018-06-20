@@ -1,9 +1,11 @@
 package com.example.luulac.cinemaapplication.activities;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -43,8 +45,10 @@ import retrofit2.Response;
 
 public class PaymentApplicationActivity extends AppCompatActivity {
 
-    private SeatCollectionModel resultSaveSeat;
     private static final int PAYPAL_REQUEST_CODE = 7;
+    public static final int REQUEST_CODE_ORDER = 256;
+
+
     private static PayPalConfiguration config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(Config.PAYPAL_CLIENT_ID);
 
     private String amount = "";
@@ -52,11 +56,13 @@ public class PaymentApplicationActivity extends AppCompatActivity {
     private FilmTranferModel filmTranfer;
     private ScheduleTranferModel scheduleTranfer;
     private SeatCollectionModel seatCollectionModel;
+    private BookingTicketModel result;
 
     private EditText edtEmail;
     private EditText edtPhone;
+    private ImageView iconCancelOrder;
+    List<TicketModel> resultChangeTickets;
 
-    private BookingTicketModel result;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +76,15 @@ public class PaymentApplicationActivity extends AppCompatActivity {
         scheduleTranfer = (ScheduleTranferModel) intent.getSerializableExtra("scheduleTranfer");
         List<TicketModel> seats = (ArrayList<TicketModel>) (intent.getBundleExtra("listTicket").getSerializable("list"));
         stringSeats = intent.getStringExtra("stringSeats");
+
+        iconCancelOrder = (ImageView) findViewById(R.id.icon_cancel_order);
+
+        iconCancelOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                comfirmCancelOrder();
+            }
+        });
 
         seatCollectionModel = new SeatCollectionModel(filmTranfer.getScheduleId(), seats);
 
@@ -205,7 +220,7 @@ public class PaymentApplicationActivity extends AppCompatActivity {
                                 intentPaymentFinished.putExtra("email", edtEmail.getText().toString());
                                 intentPaymentFinished.putExtra("phone", edtPhone.getText().toString());
 
-                                startActivity(intentPaymentFinished);
+                                startActivityForResult(intentPaymentFinished, REQUEST_CODE_ORDER);
                             }
 
                             @Override
@@ -219,10 +234,58 @@ public class PaymentApplicationActivity extends AppCompatActivity {
                     }
                 }
             }else if(resultCode == Activity.RESULT_CANCELED){
-                Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+
+                //process when user cancel paypal
+                //=> return ticketStatus Buying -> Available
+                OrderService orderService = ServiceBuilder.buildService(OrderService.class);
+                List<TicketModel> ticketModels = seatCollectionModel.getTicketModels();
+                resultChangeTickets = new ArrayList<>();
+                Call<List<TicketModel>> request = orderService.changeStatusTicket(ticketModels);
+
+                //receiving and process data from the server
+                request.enqueue(new Callback<List<TicketModel>>() {
+                    @Override
+                    public void onResponse(Call<List<TicketModel>> request, Response<List<TicketModel>> response) {
+                        resultChangeTickets = response.body();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<TicketModel>> request, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Toast.makeText(this, "Hủy thanh toán", Toast.LENGTH_SHORT).show();
             }
         }else if(requestCode == PaymentActivity.RESULT_EXTRAS_INVALID){
             Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+        }else if (requestCode == REQUEST_CODE_ORDER){
+            finish();
         }
+
     }
+
+    @Override
+    public void onBackPressed() {
+        comfirmCancelOrder();
+    }
+
+    public void comfirmCancelOrder(){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Hủy đặt vé")
+                .setMessage("Bạn có muốn hủy đơn hàng này?")
+                .setPositiveButton("Có", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("Không", null)
+                .show();
+    }
+
+
 }

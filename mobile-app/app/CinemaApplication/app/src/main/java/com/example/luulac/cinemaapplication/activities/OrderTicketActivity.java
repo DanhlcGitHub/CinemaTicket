@@ -1,9 +1,11 @@
 package com.example.luulac.cinemaapplication.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -34,6 +36,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OrderTicketActivity extends AppCompatActivity {
+
+    public static final int REQUEST_CODE_ORDER = 256;
     private OrderChoiceTicketModel model;
     private int numberTicketOrder = 0;
     private Double totalPrice = 0.0;
@@ -42,12 +46,23 @@ public class OrderTicketActivity extends AppCompatActivity {
     public static final int NUMBER_MAX_TICKET = 8;
     public static final int NUMBER_MIN_TICKET = 0;
 
+    ImageView iconCancelOrder;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_order_ticket);
+
+        iconCancelOrder = (ImageView) findViewById(R.id.icon_cancel_order);
+
+        iconCancelOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                comfirmCancelOrder();
+            }
+        });
 
         final Intent intent = this.getIntent();
         final FilmTranferModel filmTranfer = (FilmTranferModel) intent.getSerializableExtra("filmTranfer");
@@ -173,7 +188,7 @@ public class OrderTicketActivity extends AppCompatActivity {
                         intentChoiceSeat.putExtra("scheduleTranfer", scheduleTranfer);
                         intentChoiceSeat.putExtra("filmTranfer", filmTranfer);
 
-                        startActivity(intentChoiceSeat);
+                        startActivityForResult(intentChoiceSeat, REQUEST_CODE_ORDER);
                     }
                 });
             }
@@ -185,8 +200,36 @@ public class OrderTicketActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        comfirmCancelOrder();
+    }
+
+    public void comfirmCancelOrder(){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Hủy đặt vé")
+                .setMessage("Bạn có muốn hủy đơn hàng này?")
+                .setPositiveButton("Có", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("Không", null)
+                .show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE_ORDER){
+            finish();
+        }
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
-        finish();
         return true;
     }
 }

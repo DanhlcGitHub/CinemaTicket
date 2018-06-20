@@ -37,7 +37,8 @@ public class PaypalPaymentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_paypal_payment);
-
+        //khong dung activity nay nua
+/*
         final Intent intent = this.getIntent();
 
         final FilmTranferModel filmTranfer = (FilmTranferModel) intent.getSerializableExtra("filmTranfer");
@@ -95,10 +96,10 @@ public class PaypalPaymentActivity extends AppCompatActivity {
                         intentPaymentFinished.putExtra("seatCollectionModel", seatCollectionModel);
 
                         startActivity(intentPaymentFinished);
-                       /* }
+                       *//* }
                         else{
                             Toast.makeText(getApplicationContext(), "Có lỗi trong quá trình giao dịch. Mời bạn thử lại.", Toast.LENGTH_LONG).show();;
-                        }*/
+                        }*//*
                     }
 
                     @Override
@@ -108,6 +109,6 @@ public class PaypalPaymentActivity extends AppCompatActivity {
                 });
 
             }
-        });
+        });*/
     }
 }

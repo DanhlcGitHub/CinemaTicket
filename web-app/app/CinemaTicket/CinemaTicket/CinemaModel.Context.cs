@@ -26,9 +26,6 @@ namespace CinemaTicket
         }
     
         public virtual DbSet<AdminAccount> AdminAccounts { get; set; }
-        public virtual DbSet<BankAccount> BankAccounts { get; set; }
-        public virtual DbSet<BankList> BankLists { get; set; }
-        public virtual DbSet<BookingDetail> BookingDetails { get; set; }
         public virtual DbSet<BookingTicket> BookingTickets { get; set; }
         public virtual DbSet<Cinema> Cinemas { get; set; }
         public virtual DbSet<CinemaManager> CinemaManagers { get; set; }
@@ -43,7 +40,6 @@ namespace CinemaTicket
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Seat> Seats { get; set; }
         public virtual DbSet<ShowTime> ShowTimes { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<TypeOfSeat> TypeOfSeats { get; set; }
         public virtual DbSet<UserAccount> UserAccounts { get; set; }

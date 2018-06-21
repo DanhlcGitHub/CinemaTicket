@@ -34,6 +34,9 @@ CREATE TABLE GroupCinema (
     GroupId int IDENTITY(1,1) PRIMARY KEY,
 	logoImg nvarchar(50),
     name nvarchar(255),
+	address nvarchar(255),
+	email nvarchar(255),
+	phone nvarchar(40),
 );
 
 CREATE TABLE PartnerAccount (
@@ -42,6 +45,7 @@ CREATE TABLE PartnerAccount (
 	phone nvarchar(255),
 	email nvarchar(255),
 	groupOfCinemaId int,
+	isAvailable bit,
 );
 
 CREATE TABLE Cinema (
@@ -62,6 +66,7 @@ CREATE TABLE CinemaManager (
 	phone nvarchar(255),
 	email nvarchar(255),
 	cinemaId int,
+	isAvailable bit,
 );
 
 CREATE TABLE ShowTime (
@@ -147,6 +152,7 @@ CREATE TABLE UserAccount (
 	userPassword nvarchar(255),
 	phone nvarchar(255),
 	email nvarchar(255),
+	tix float,
 );
 
 CREATE TABLE AdminAccount (

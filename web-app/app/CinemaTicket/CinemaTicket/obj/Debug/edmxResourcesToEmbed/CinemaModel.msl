@@ -11,45 +11,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BankAccounts">
-      <EntityTypeMapping TypeName="CinemaBookingDBModel.BankAccount">
-        <MappingFragment StoreEntitySet="BankAccount">
-          <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
-          <ScalarProperty Name="ownerName" ColumnName="ownerName" />
-          <ScalarProperty Name="expDate" ColumnName="expDate" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="BankId" ColumnName="BankId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BankLists">
-      <EntityTypeMapping TypeName="CinemaBookingDBModel.BankList">
-        <MappingFragment StoreEntitySet="BankList">
-          <ScalarProperty Name="bankId" ColumnName="bankId" />
-          <ScalarProperty Name="bankName" ColumnName="bankName" />
-          <ScalarProperty Name="imgLogo" ColumnName="imgLogo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BookingDetails">
-      <EntityTypeMapping TypeName="CinemaBookingDBModel.BookingDetail">
-        <MappingFragment StoreEntitySet="BookingDetail">
-          <ScalarProperty Name="bookingDetailId" ColumnName="bookingDetailId" />
-          <ScalarProperty Name="bookingId" ColumnName="bookingId" />
-          <ScalarProperty Name="ticketId" ColumnName="ticketId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="BookingTickets">
       <EntityTypeMapping TypeName="CinemaBookingDBModel.BookingTicket">
         <MappingFragment StoreEntitySet="BookingTicket">
           <ScalarProperty Name="bookingId" ColumnName="bookingId" />
           <ScalarProperty Name="customerId" ColumnName="customerId" />
           <ScalarProperty Name="paymentMethodId" ColumnName="paymentMethodId" />
-          <ScalarProperty Name="quantity" ColumnName="quantity" />
-          <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
           <ScalarProperty Name="paymentCode" ColumnName="paymentCode" />
           <ScalarProperty Name="qrCode" ColumnName="qrCode" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -203,28 +174,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="CinemaBookingDBModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Tickets">
       <EntityTypeMapping TypeName="CinemaBookingDBModel.Ticket">
         <MappingFragment StoreEntitySet="Ticket">
           <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+          <ScalarProperty Name="bookingId" ColumnName="bookingId" />
           <ScalarProperty Name="scheduleId" ColumnName="scheduleId" />
           <ScalarProperty Name="seatId" ColumnName="seatId" />
           <ScalarProperty Name="paymentCode" ColumnName="paymentCode" />
           <ScalarProperty Name="qrCode" ColumnName="qrCode" />
           <ScalarProperty Name="ticketStatus" ColumnName="ticketStatus" />
           <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="ticketTimeout" ColumnName="ticketTimeout" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

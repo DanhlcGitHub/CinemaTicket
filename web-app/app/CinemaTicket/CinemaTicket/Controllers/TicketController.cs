@@ -106,18 +106,10 @@ namespace CinemaTicket.Controllers
                     
                     string code = aTicket.ticketId + RandomUtility.RandomString(9);
                     aTicket.paymentCode = code;
+                    aTicket.bookingId = orderId;
                     new TicketService().Update(aTicket);
                 }
                 ticketList.Add(aTicket);
-            }
-            //insert ticket to orderDetail
-            foreach (var item in ticketList)
-            {
-                BookingDetail orderDetail = new BookingDetail();
-                orderDetail.bookingId = order.bookingId;
-                orderDetail.ticketId = item.ticketId;
-                orderDetail.bookingId = orderId;
-                new BookingDetailService().Create(orderDetail);
             }
             //send email for customer
             var obj = ticketList

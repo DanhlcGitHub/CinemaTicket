@@ -14,21 +14,16 @@ namespace CinemaTicket
     
     public partial class Ticket
     {
-        public Ticket()
-        {
-            this.BookingDetails = new HashSet<BookingDetail>();
-        }
-    
         public int ticketId { get; set; }
+        public Nullable<int> bookingId { get; set; }
         public Nullable<int> scheduleId { get; set; }
         public Nullable<int> seatId { get; set; }
         public string paymentCode { get; set; }
-        public Nullable<int> qrCode { get; set; }
+        public string qrCode { get; set; }
         public string ticketStatus { get; set; }
         public Nullable<double> price { get; set; }
-        public Nullable<System.DateTime> ticketTimeout { get; set; }
     
-        public virtual ICollection<BookingDetail> BookingDetails { get; set; }
+        public virtual BookingTicket BookingTicket { get; set; }
         public virtual MovieSchedule MovieSchedule { get; set; }
         public virtual Seat Seat { get; set; }
     }

@@ -14,32 +14,6 @@
           <Property Name="phone" Type="nvarchar" MaxLength="255" />
           <Property Name="email" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="BankAccount">
-          <Key>
-            <PropertyRef Name="cardNumber" />
-          </Key>
-          <Property Name="cardNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ownerName" Type="nvarchar" MaxLength="255" />
-          <Property Name="expDate" Type="date" />
-          <Property Name="email" Type="nvarchar" MaxLength="255" />
-          <Property Name="BankId" Type="int" />
-        </EntityType>
-        <EntityType Name="BankList">
-          <Key>
-            <PropertyRef Name="bankId" />
-          </Key>
-          <Property Name="bankId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="bankName" Type="nvarchar" MaxLength="255" />
-          <Property Name="imgLogo" Type="nvarchar" MaxLength="255" />
-        </EntityType>
-        <EntityType Name="BookingDetail">
-          <Key>
-            <PropertyRef Name="bookingDetailId" />
-          </Key>
-          <Property Name="bookingDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="bookingId" Type="int" />
-          <Property Name="ticketId" Type="int" />
-        </EntityType>
         <EntityType Name="BookingTicket">
           <Key>
             <PropertyRef Name="bookingId" />
@@ -47,10 +21,10 @@
           <Property Name="bookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="customerId" Type="int" />
           <Property Name="paymentMethodId" Type="int" />
-          <Property Name="quantity" Type="int" />
-          <Property Name="bookingDate" Type="datetime" />
           <Property Name="paymentCode" Type="nvarchar" MaxLength="255" />
           <Property Name="qrCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="bookingDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Cinema">
           <Key>
@@ -189,28 +163,18 @@
           <Property Name="startTime" Type="nvarchar" MaxLength="10" />
           <Property Name="endTime" Type="nvarchar" MaxLength="10" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="ticketId" />
           </Key>
           <Property Name="ticketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bookingId" Type="int" />
           <Property Name="scheduleId" Type="int" />
           <Property Name="seatId" Type="int" />
           <Property Name="paymentCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="qrCode" Type="int" />
+          <Property Name="qrCode" Type="nvarchar" MaxLength="255" />
           <Property Name="ticketStatus" Type="nvarchar" MaxLength="20" />
           <Property Name="price" Type="float" />
-          <Property Name="ticketTimeout" Type="date" />
         </EntityType>
         <EntityType Name="TypeOfSeat">
           <Key>
@@ -232,30 +196,6 @@
           <Property Name="phone" Type="nvarchar" MaxLength="255" />
           <Property Name="email" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FKBookingDetailBookingTicket001">
-          <End Role="BookingTicket" Type="Self.BookingTicket" Multiplicity="0..1" />
-          <End Role="BookingDetail" Type="Self.BookingDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BookingTicket">
-              <PropertyRef Name="bookingId" />
-            </Principal>
-            <Dependent Role="BookingDetail">
-              <PropertyRef Name="bookingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKBookingDetailTicket001">
-          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
-          <End Role="BookingDetail" Type="Self.BookingDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ticket">
-              <PropertyRef Name="ticketId" />
-            </Principal>
-            <Dependent Role="BookingDetail">
-              <PropertyRef Name="ticketId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FKBookingTicketCustomer001">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="BookingTicket" Type="Self.BookingTicket" Multiplicity="*" />
@@ -412,6 +352,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FKTicketBookingTicket001">
+          <End Role="BookingTicket" Type="Self.BookingTicket" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingTicket">
+              <PropertyRef Name="bookingId" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="bookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKTicketMovieSchedule001">
           <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
@@ -450,9 +402,6 @@
         </Association>
         <EntityContainer Name="CinemaBookingDBModelStoreContainer">
           <EntitySet Name="AdminAccount" EntityType="Self.AdminAccount" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BankAccount" EntityType="Self.BankAccount" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BankList" EntityType="Self.BankList" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BookingDetail" EntityType="Self.BookingDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingTicket" EntityType="Self.BookingTicket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cinema" EntityType="Self.Cinema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CinemaManager" EntityType="Self.CinemaManager" Schema="dbo" store:Type="Tables" />
@@ -467,18 +416,9 @@
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Seat" EntityType="Self.Seat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShowTime" EntityType="Self.ShowTime" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOfSeat" EntityType="Self.TypeOfSeat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FKBookingDetailBookingTicket001" Association="Self.FKBookingDetailBookingTicket001">
-            <End Role="BookingTicket" EntitySet="BookingTicket" />
-            <End Role="BookingDetail" EntitySet="BookingDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FKBookingDetailTicket001" Association="Self.FKBookingDetailTicket001">
-            <End Role="Ticket" EntitySet="Ticket" />
-            <End Role="BookingDetail" EntitySet="BookingDetail" />
-          </AssociationSet>
           <AssociationSet Name="FKBookingTicketCustomer001" Association="Self.FKBookingTicketCustomer001">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="BookingTicket" EntitySet="BookingTicket" />
@@ -531,6 +471,10 @@
             <End Role="TypeOfSeat" EntitySet="TypeOfSeat" />
             <End Role="Seat" EntitySet="Seat" />
           </AssociationSet>
+          <AssociationSet Name="FKTicketBookingTicket001" Association="Self.FKTicketBookingTicket001">
+            <End Role="BookingTicket" EntitySet="BookingTicket" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
           <AssociationSet Name="FKTicketMovieSchedule001" Association="Self.FKTicketMovieSchedule001">
             <End Role="MovieSchedule" EntitySet="MovieSchedule" />
             <End Role="Ticket" EntitySet="Ticket" />
@@ -558,34 +502,6 @@
           <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="BankAccount">
-          <Key>
-            <PropertyRef Name="cardNumber" />
-          </Key>
-          <Property Name="cardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ownerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="expDate" Type="DateTime" Precision="0" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="BankId" Type="Int32" />
-        </EntityType>
-        <EntityType Name="BankList">
-          <Key>
-            <PropertyRef Name="bankId" />
-          </Key>
-          <Property Name="bankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="bankName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="imgLogo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="BookingDetail">
-          <Key>
-            <PropertyRef Name="bookingDetailId" />
-          </Key>
-          <Property Name="bookingDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="bookingId" Type="Int32" />
-          <Property Name="ticketId" Type="Int32" />
-          <NavigationProperty Name="BookingTicket" Relationship="Self.FKBookingDetailBookingTicket001" FromRole="BookingDetail" ToRole="BookingTicket" />
-          <NavigationProperty Name="Ticket" Relationship="Self.FKBookingDetailTicket001" FromRole="BookingDetail" ToRole="Ticket" />
-        </EntityType>
         <EntityType Name="BookingTicket">
           <Key>
             <PropertyRef Name="bookingId" />
@@ -593,12 +509,12 @@
           <Property Name="bookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="customerId" Type="Int32" />
           <Property Name="paymentMethodId" Type="Int32" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="bookingDate" Type="DateTime" Precision="3" />
           <Property Name="paymentCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="qrCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BookingDetails" Relationship="Self.FKBookingDetailBookingTicket001" FromRole="BookingTicket" ToRole="BookingDetail" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="bookingDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Customer" Relationship="Self.FKBookingTicketCustomer001" FromRole="BookingTicket" ToRole="Customer" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FKTicketBookingTicket001" FromRole="BookingTicket" ToRole="Ticket" />
         </EntityType>
         <EntityType Name="Cinema">
           <Key>
@@ -764,29 +680,19 @@
           <Property Name="endTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleShowTime001" FromRole="ShowTime" ToRole="MovieSchedule" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="ticketId" />
           </Key>
           <Property Name="ticketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bookingId" Type="Int32" />
           <Property Name="scheduleId" Type="Int32" />
           <Property Name="seatId" Type="Int32" />
           <Property Name="paymentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="qrCode" Type="Int32" />
+          <Property Name="qrCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ticketStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Double" />
-          <Property Name="ticketTimeout" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="BookingDetails" Relationship="Self.FKBookingDetailTicket001" FromRole="Ticket" ToRole="BookingDetail" />
+          <NavigationProperty Name="BookingTicket" Relationship="Self.FKTicketBookingTicket001" FromRole="Ticket" ToRole="BookingTicket" />
           <NavigationProperty Name="MovieSchedule" Relationship="Self.FKTicketMovieSchedule001" FromRole="Ticket" ToRole="MovieSchedule" />
           <NavigationProperty Name="Seat" Relationship="Self.FKTicketSeat001" FromRole="Ticket" ToRole="Seat" />
         </EntityType>
@@ -812,30 +718,6 @@
           <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FKBookingDetailBookingTicket001">
-          <End Role="BookingTicket" Type="Self.BookingTicket" Multiplicity="0..1" />
-          <End Role="BookingDetail" Type="Self.BookingDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BookingTicket">
-              <PropertyRef Name="bookingId" />
-            </Principal>
-            <Dependent Role="BookingDetail">
-              <PropertyRef Name="bookingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKBookingDetailTicket001">
-          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
-          <End Role="BookingDetail" Type="Self.BookingDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ticket">
-              <PropertyRef Name="ticketId" />
-            </Principal>
-            <Dependent Role="BookingDetail">
-              <PropertyRef Name="ticketId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FKBookingTicketCustomer001">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="BookingTicket" Type="Self.BookingTicket" Multiplicity="*" />
@@ -845,6 +727,18 @@
             </Principal>
             <Dependent Role="BookingTicket">
               <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTicketBookingTicket001">
+          <End Role="BookingTicket" Type="Self.BookingTicket" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingTicket">
+              <PropertyRef Name="bookingId" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="bookingId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1030,9 +924,6 @@
         </Association>
         <EntityContainer Name="CinemaBookingDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminAccounts" EntityType="Self.AdminAccount" />
-          <EntitySet Name="BankAccounts" EntityType="Self.BankAccount" />
-          <EntitySet Name="BankLists" EntityType="Self.BankList" />
-          <EntitySet Name="BookingDetails" EntityType="Self.BookingDetail" />
           <EntitySet Name="BookingTickets" EntityType="Self.BookingTicket" />
           <EntitySet Name="Cinemas" EntityType="Self.Cinema" />
           <EntitySet Name="CinemaManagers" EntityType="Self.CinemaManager" />
@@ -1047,21 +938,16 @@
           <EntitySet Name="Rooms" EntityType="Self.Room" />
           <EntitySet Name="Seats" EntityType="Self.Seat" />
           <EntitySet Name="ShowTimes" EntityType="Self.ShowTime" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tickets" EntityType="Self.Ticket" />
           <EntitySet Name="TypeOfSeats" EntityType="Self.TypeOfSeat" />
           <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
-          <AssociationSet Name="FKBookingDetailBookingTicket001" Association="Self.FKBookingDetailBookingTicket001">
-            <End Role="BookingTicket" EntitySet="BookingTickets" />
-            <End Role="BookingDetail" EntitySet="BookingDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FKBookingDetailTicket001" Association="Self.FKBookingDetailTicket001">
-            <End Role="Ticket" EntitySet="Tickets" />
-            <End Role="BookingDetail" EntitySet="BookingDetails" />
-          </AssociationSet>
           <AssociationSet Name="FKBookingTicketCustomer001" Association="Self.FKBookingTicketCustomer001">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="BookingTicket" EntitySet="BookingTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FKTicketBookingTicket001" Association="Self.FKTicketBookingTicket001">
+            <End Role="BookingTicket" EntitySet="BookingTickets" />
+            <End Role="Ticket" EntitySet="Tickets" />
           </AssociationSet>
           <AssociationSet Name="FKCinemaGroupCinema001" Association="Self.FKCinemaGroupCinema001">
             <End Role="GroupCinema" EntitySet="GroupCinemas" />
@@ -1140,45 +1026,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BankAccounts">
-            <EntityTypeMapping TypeName="CinemaBookingDBModel.BankAccount">
-              <MappingFragment StoreEntitySet="BankAccount">
-                <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
-                <ScalarProperty Name="ownerName" ColumnName="ownerName" />
-                <ScalarProperty Name="expDate" ColumnName="expDate" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="BankId" ColumnName="BankId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BankLists">
-            <EntityTypeMapping TypeName="CinemaBookingDBModel.BankList">
-              <MappingFragment StoreEntitySet="BankList">
-                <ScalarProperty Name="bankId" ColumnName="bankId" />
-                <ScalarProperty Name="bankName" ColumnName="bankName" />
-                <ScalarProperty Name="imgLogo" ColumnName="imgLogo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BookingDetails">
-            <EntityTypeMapping TypeName="CinemaBookingDBModel.BookingDetail">
-              <MappingFragment StoreEntitySet="BookingDetail">
-                <ScalarProperty Name="bookingDetailId" ColumnName="bookingDetailId" />
-                <ScalarProperty Name="bookingId" ColumnName="bookingId" />
-                <ScalarProperty Name="ticketId" ColumnName="ticketId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BookingTickets">
             <EntityTypeMapping TypeName="CinemaBookingDBModel.BookingTicket">
               <MappingFragment StoreEntitySet="BookingTicket">
                 <ScalarProperty Name="bookingId" ColumnName="bookingId" />
                 <ScalarProperty Name="customerId" ColumnName="customerId" />
                 <ScalarProperty Name="paymentMethodId" ColumnName="paymentMethodId" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
                 <ScalarProperty Name="paymentCode" ColumnName="paymentCode" />
                 <ScalarProperty Name="qrCode" ColumnName="qrCode" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1332,28 +1189,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CinemaBookingDBModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="CinemaBookingDBModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
                 <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+                <ScalarProperty Name="bookingId" ColumnName="bookingId" />
                 <ScalarProperty Name="scheduleId" ColumnName="scheduleId" />
                 <ScalarProperty Name="seatId" ColumnName="seatId" />
                 <ScalarProperty Name="paymentCode" ColumnName="paymentCode" />
                 <ScalarProperty Name="qrCode" ColumnName="qrCode" />
                 <ScalarProperty Name="ticketStatus" ColumnName="ticketStatus" />
                 <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="ticketTimeout" ColumnName="ticketTimeout" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

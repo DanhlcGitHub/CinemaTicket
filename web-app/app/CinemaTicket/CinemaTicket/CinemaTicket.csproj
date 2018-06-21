@@ -123,17 +123,8 @@
     <Compile Include="AdminAccount.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="BankAccount.cs">
-      <DependentUpon>CinemaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BankList.cs">
-      <DependentUpon>CinemaModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="BaseRepository\BaseRepository.cs" />
     <Compile Include="BaseRepository\IBaseRepository.cs" />
-    <Compile Include="BookingDetail.cs">
-      <DependentUpon>CinemaModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="BookingTicket.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
@@ -170,9 +161,6 @@
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomRepository\AdminAccountRepository.cs" />
-    <Compile Include="CustomRepository\BankAccountRepository.cs" />
-    <Compile Include="CustomRepository\BankListRepository.cs" />
-    <Compile Include="CustomRepository\BookingDetailRepository.cs" />
     <Compile Include="CustomRepository\BookingTicketRepository.cs" />
     <Compile Include="CustomRepository\CinemaManagerRepository.cs" />
     <Compile Include="CustomRepository\CinemaRepository.cs" />
@@ -222,9 +210,6 @@
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\AdminAccountService.cs" />
-    <Compile Include="Service\BankAccountService.cs" />
-    <Compile Include="Service\BankListService.cs" />
-    <Compile Include="Service\BookingDetailService.cs" />
     <Compile Include="Service\BookingTicketService.cs" />
     <Compile Include="Service\CinemaManagerService.cs" />
     <Compile Include="Service\CinemaService.cs" />
@@ -243,9 +228,6 @@
     <Compile Include="Service\TypeOfSeatService.cs" />
     <Compile Include="Service\UserAccountService.cs" />
     <Compile Include="ShowTime.cs">
-      <DependentUpon>CinemaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Ticket.cs">

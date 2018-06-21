@@ -1,4 +1,3 @@
-F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csprojResolveAssemblyReference.cache
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\CinemaTicket.dll.config
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\CinemaTicket.dll
 F:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\CinemaTicket.pdb

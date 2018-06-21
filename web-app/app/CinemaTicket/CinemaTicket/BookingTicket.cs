@@ -16,18 +16,18 @@ namespace CinemaTicket
     {
         public BookingTicket()
         {
-            this.BookingDetails = new HashSet<BookingDetail>();
+            this.Tickets = new HashSet<Ticket>();
         }
     
         public int bookingId { get; set; }
         public Nullable<int> customerId { get; set; }
         public Nullable<int> paymentMethodId { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public Nullable<System.DateTime> bookingDate { get; set; }
         public string paymentCode { get; set; }
         public string qrCode { get; set; }
+        public Nullable<int> quantity { get; set; }
+        public Nullable<System.DateTime> bookingDate { get; set; }
     
-        public virtual ICollection<BookingDetail> BookingDetails { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

@@ -75,7 +75,32 @@ namespace CinemaTicket.Controllers
             return Json(obj);
         }
 
-        public JsonResult MakeOrder(string ticketListStr,string email, string phone)
+        public JsonResult BuyingToAvailable(string ticketListStr)
+        {
+            JArray list = JArray.Parse(ticketListStr);
+            List<Ticket> ticketList = new List<Ticket>();
+            foreach (JObject item in list)
+            {
+                int ticketId = (int)item.GetValue("ticketId");
+                Ticket aTicket = new TicketService().FindByID(ticketId);
+                if (aTicket.ticketStatus == TicketStatus.buying)
+                {
+                    aTicket.ticketStatus = TicketStatus.available;
+                    new TicketService().Update(aTicket);
+                }
+                ticketList.Add(aTicket);
+            }
+            var obj = ticketList
+                .Select(item => new
+                {
+                    ticketId = item.ticketId,
+                    ticketStatus = item.ticketStatus,
+                });
+            return Json(obj);
+        }
+
+        public JsonResult MakeOrder(string ticketListStr,string email, string phone,string filmName, string cinemaName,
+            string date, string roomName, string startTime)
         {
             JArray list = JArray.Parse(ticketListStr);
             List<Ticket> ticketList = new List<Ticket>();
@@ -112,6 +137,9 @@ namespace CinemaTicket.Controllers
                 ticketList.Add(aTicket);
             }
             //send email for customer
+            string mailContent = getEmailContent(ticketList, order, filmName, cinemaName, date, roomName, startTime);
+            string mailSubject = "CinemaBookingTicket - Mã vé xem phim tại " + cinemaName;
+            MailUtility.SendEmail(mailSubject,mailContent, email);
             var obj = ticketList
                 .Select(item => new
                 {
@@ -119,6 +147,27 @@ namespace CinemaTicket.Controllers
                     ticketStatus = item.ticketStatus,
                 });
             return Json(obj);
+        }
+
+        private string getEmailContent(List<Ticket> ticketList, BookingTicket bt,string filmName, string cinemaName,
+            string date, string roomName, string startTime)
+        {
+            string content = "Chúc mừng quý khách đã đặt vé thành công!\n";
+            content+= "Phim " + filmName + "\n";
+            content += "Tại " + cinemaName + "\n";
+            content+=   date + " - " + startTime +" - " +roomName + "\n";
+            content+= "Mã đặt vé của bạn là: " + bt.paymentCode + "\n";
+            content += "Mã từng vé của bạn là: \n";
+            for (int i = 0 ; i<ticketList.Count; i++)
+            {
+                Ticket aTicket = ticketList[i];
+                Seat seat = new SeatService().FindByID(aTicket.seatId);
+                content += "/t" + (i + 1) +
+                            ". Ghế: " + ConstantArray.Alphabet[(int)seat.py] + "" + ((int)seat.px + 1) +
+                            "- Mã vé: " + aTicket.paymentCode + "\n";
+            }
+            content += "Chúc quý khách xem phim vui vẻ";
+            return content;
         }
     }
 }

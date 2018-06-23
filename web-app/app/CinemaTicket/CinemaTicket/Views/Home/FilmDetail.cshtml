@@ -25,49 +25,49 @@
     <form method="post" action="/home/ChooseTicket" id="goToChooseTicketForm" style="display:none"></form>
     <input id="filmId" type="hidden" value=@ViewBag.filmId />
     <div class="mainMaxWidth2 contentMain">
-        <div class="col-sm-5"></div>
-        <div class="col-sm-7">
-            <nav class="navbar navbar-expand-sm bg-info navbar-dark fixed-top">
-                <ul class="navbar-nav navbar-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Lịch chiếu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Cụm rạp</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Tin tức</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ứng dụng</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link"><i class="fa fa-user"></i> Đăng nhập</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Thành phố
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Hồ Chí Minh</a>
-                            <a class="dropdown-item" href="#">Hà Nội</a>
-                            <a class="dropdown-item" href="#">Nha Trang</a>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top shadow p-3 mb-5 bg-white rounded">
+            <div class="left">
+                <a href="#">
+                    <img src="~/Content/img/repository/booking-cinema-logo.PNG" class="ex1" alt="Cinque Terre" style="height:30%">
+                </a>
+            </div>
+            <ul class="navbar-nav navbar-center">
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Lịch chiếu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Cụm rạp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Tin tức</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Ứng dụng</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Thành phố
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Hồ Chí Minh</a>
+                        <a class="dropdown-item" href="#">Hà Nội</a>
+                        <a class="dropdown-item" href="#">Nha Trang</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
     </div>
     <div class="container">
-        <div class="row" style="padding-top: 160px;">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-3">
-                <!--<img ng-src="{{filmData.img}}" width="255" height="370" class="img-rounded" alt="Cinque Terre">-->
+        <div class="row col-sm-12" style="padding-top: 100px;">
+            <div class="col-sm-4">
                 <div class="myContainer">
                     <img ng-click="gotoFilmDetail(aFilm.id)" width="255"
-                         height="370" class="img-movie rounded" ng-src="{{filmData.img}}">
+                         height="370" class="img-movie rounded" ng-src="{{filmData.img}}" alt="Film image">
                     <div class="middle">
                         <div class="text">
                             <img ng-click="openTrailerDialog(filmData.trailerUrl)" src="~/Content/img/repository/play-video.png" width="50" height="50" />
@@ -75,133 +75,148 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <p class="text-primary ex1" style="color: red">{{filmData.releaseDate}}</p>
-                <h3 class="text-primary"><mark ng-if="filmData.restricted!=0" class="ex1">{{filmData.restricted}}</mark> {{filmData.name[0]}}</h3>
-                <h3 class="text-primary">{{filmData.name[1]}}</h3>
-                <p class="text-primary">{{filmData.length}} phút - {{filmData.imdb}} IMDb - {{filmData.digitalType}} Digital</p>
-                <button type="button" class="btn btn-danger">Mua vé</button>
-            </div>
-            <div class="col-sm-3">
-                <div class="container container-circle">
-                    <div id="activeBorder" class="active-border">
-                        <div id="circle" class="circle">
-                            <span class="prec 270" id="prec">{{filmData.imdb}} </span>
+            <div class="col-sm-8" style="padding-top:10px">
+                <h3 class="text-primary"><mark class="ex1">C18</mark>{{filmData.name}}</h3>
+                <div class="row col-sm-12" style="padding-top:15px">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Ngày phát hành</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.dateRelease}}</p>
+                            </div>
                         </div>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <h6 class="ex1 text-nowrap">143 người đánh giá</h6>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Đạo diễn</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.author}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Diễn viên</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.actorList}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Thể Loại</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.movieGenre}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Định dạng</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">2D/Digital</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Quốc Gia SX</p>
+                                <button type="button" class="btn btn-danger">Mua vé</button>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.countries}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
+                            <p class="font-weight-bold">Nội dung</p>
+                        </div>
+                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
+                            <p class="">
+                                {{filmData.content}}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container" style="padding-top:10rem;">
-        <br>
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs justify-content-center" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#home">Lịch Chiếu</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu1">Thông tin</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu2">Đánh giá</a>
-            </li>
-        </ul>
-    </div>
     <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="tab-content" style="font-size:14px;">
         <div id="home" class="container tab-pane active">
             <br>
             <div class="row" style="padding-top: 60px;">
 
-                <div class="card" style="left:8%">
-                    <div class="card-body">
-                        <div class="row ">
-                            <div class="card-group">
-                                <div class="float-right">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <ul class="nav nav-pills flex-column" role="tablist">
-                                                <li ng-click="groupClickHandler($index)" ng-repeat="group in groupCinemaList" class="nav-item active">
-                                                    <a ng-if="$index == 0" href="#" class="nav-link active" data-toggle="pill">
-                                                        <img ng-src="{{group.img}}" class="ex1">
-                                                        {{group.name}}
-                                                    </a>
-                                                    <a ng-if="$index != 0" class="nav-link" data-toggle="pill">
-                                                        <img ng-src="{{group.img}}" class="ex1">
-                                                        {{group.name}}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                <div class="row col-sm-12 h-100">
+                    <div class="col-sm-3 h-100 border " style="padding-left:0px; padding-right:0px;">
+                        <div class="list-group list-group-flush">
+                            <a ng-click="groupClickHandler($index)" ng-repeat="group in groupCinemaList" class="list-group-item list-group-item-action font-weight-bold"
+                               style="padding-bottom:20px; padding-top:20px">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img ng-src="{{group.img}}" class="ex1">
+                                    </div>
+                                    <div class="col-sm-9" style="padding-top:10px">
+                                        {{group.name}}
                                     </div>
                                 </div>
-                                <div class="float-left overflow-scroll">
-                                    <div class="card float-left ">
-                                        <div class="card-body">
-                                            <div class="tab-content float-left">
-                                                <div id="CineStar" class="container tab-pane active">
-                                                    <ul class="nav nav-pills ">
-                                                        <li ng-click="dateClickHandler($index)" ng-repeat="d in dateList" class="nav-item">
-                                                            <a ng-if="$index == 0" class="nav-link text-center active" data-toggle="pill" href="#monday">
-                                                                Thứ {{ d.dateOfWeek + 1 }}<br> {{ d.date }}
-                                                            </a>
-                                                            <a ng-if="$index != 0" class="nav-link text-center" data-toggle="pill" href="#monday">
-                                                                Thứ {{ d.dateOfWeek + 1 }}<br> {{ d.date }}
-                                                            </a>
-                                                        </li>
-                                                        <button type="button" style="center;" class="ex1 btn btn-primary">Share</button>
-                                                    </ul>
-                                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-9  no-gutters" style="padding-left:0px; padding-right:0px">
+                        <div class=" col-sm-12 border border-bottom-0" style="padding-top:6px">
+                            <div  class="list-group list-group-flush" style="flex-direction: row;">
+                                <a ng-click="dateClickHandler($index)" ng-repeat="d in dateList" ng-if="$index == 0" class="list-group-item list-group-item-action" href="#monday">
+                                    <div class="row text-center text-danger font-weight-bold" style="justify-content:center;">Thứ {{ d.dateOfWeek + 1 }}</div>
+                                    <div class="text-center text-danger font-weight-bold">{{ d.date }}</div>
+                                </a>
+                                <a ng-click="dateClickHandler($index)" ng-repeat="d in dateList" ng-if="$index != 0" class="list-group-item list-group-item-action border-top-0" href="#tuesday">
+                                    <div class="row text-center font-weight-bold" style="justify-content:center;">Thứ {{ d.dateOfWeek + 1 }}</div>
+                                    <div class="text-center font-weight-bold">{{ d.date }}</div>
+                                </a>
+                                <button type="button" style="center;" class=" btn-primary border-top-0">Share</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 border border-top" style="overflow-y: auto; max-height:728px">
+                            <ul class="list-group list-group-flush">
+                                <li ng-repeat="item in currentData" class="list-group-item">
+                                    <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                        <div class="row col-sm-12">
+                                            <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                <img ng-src="{{item.img}}" class="ex1">
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <span class="text-danger font-weight-bold">CNS</span>- <span class="font-weight-bold">{{item.name}}</span><br> <span class="gray">{{item.address}}</span> <span class="red">[Bản đồ]</span>
                                             </div>
                                         </div>
 
-                                        <div class="container-fluid " style="margin: 0">
-                                            <ul class="nav nav-pills list-group">
-                                                <li ng-repeat="item in currentData" class="nav-item list-group-item">
-                                                    <a class="nav-link text-left" href="#demo">
-                                                        <img ng-src="{{item.img}}" class="ex1">
-                                                        <span class="pink">{{item.name}}</span><br> <span class="gray">{{item.address}}</span> <span class="red">[Bản đồ]</span>
-                                                    </a>
-                                                    <div ng-repeat="digType in item.digTypeList" class="row" style="padding-top:4px; padding-left:2%">
-                                                        <img ng-if="digType.type == 1" src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
-                                                        <a ng-repeat="time in digType.times" ng-click="gotoChooseTicket(filmData.id,time.timeId,item.id)" style="margin-left:2%"><h5 class="text-success">{{time.startTime}}</h5></a>
-                                                    </div>
-                                                </li>
-                                            </ul>
+
+                                    </button>
+                                    <div ng-repeat="digType in item.digTypeList" class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img ng-if="digType.type == 1" src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="margin-left:3%" ng-repeat="time in digType.times"
+                                               ng-click="gotoChooseTicket(filmData.id,time.timeId,item.id)">
+                                                <p class="text-success font-weight-bold" style="font-size:25px;">{{time.startTime}}</p>
+                                            </a>
                                         </div>
                                     </div>
-
-                                </div>
-                            </div>
-
+                                </li>
+                            </ul>
                         </div>
-
                     </div>
+
                 </div>
+
+
             </div>
         </div>
-        <div id="menu1" class="container tab-pane fade">
-            <br>
-            <h3>Menu 1</h3>
-            <p>Not yet</p>
-        </div>
-        <div id="menu2" class="container tab-pane fade">
-            <br>
-            <h3>Menu 2</h3>
-            <p>Not yet</p>
-        </div>
-    </div>
     </div>
     <p style="padding-bottom:10%"></p>
-
-    </div>
     <footer class="footer" style="background: #222;">
         <br /><br />
         <div class="container center">
@@ -265,7 +280,7 @@
         </div>
     </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="~/Content/js/angular.min.js"></script>
     <script src="~/Content/js/jquery-3.3.1.min.js"></script>
     <script src="~/Content/js/bootstrap.min.js"></script>
     <script src="~/Content/js/filmDetail.js"></script>

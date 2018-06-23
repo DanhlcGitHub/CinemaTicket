@@ -18,6 +18,7 @@ var filmController = function ($scope, $http) {
                 })
            .then(function (response) {
                $scope.filmData = response.data;
+               console.log($scope.filmData);
         });
 
         $http({

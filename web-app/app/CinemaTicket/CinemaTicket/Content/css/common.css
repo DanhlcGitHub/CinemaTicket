@@ -1,7 +1,15 @@
 ﻿img.ex4 {
-		width: 30px;
-		height: 30px;
-	}
+    width: 30px;
+    height: 30px;
+}
+
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
 /* dialog*/
 /* The Modal (background) */
 .modal {
@@ -33,15 +41,15 @@
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
 .overflow-scroll {
     overflow-y: auto;
-    height : 500px;
+    height: 500px;
     cursor: pointer;
 }

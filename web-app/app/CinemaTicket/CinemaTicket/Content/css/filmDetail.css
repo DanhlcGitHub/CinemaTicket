@@ -153,3 +153,33 @@ body {
 .myContainer:hover .middle {
   opacity: 1;
 }
+/*------------------------*/
+.body {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	    line-height: 1.42857143;
+}
+
+.bg-light {
+    background-color: #ffffff!important;
+	background-color: rgba(245, 245, 245, 0.4) !important;
+}
+
+.navbar-nav.navbar-center {
+   position: absolute;
+   left: 50%;
+   transform: translatex(-50%);
+  }
+ul.ex1{
+  height:586px;
+  overflow-y:scroll;
+  width:100%;
+}
+.navbar-nav .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+}
+
+/* change the color of active or hovered links */
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: #ff2300;
+}

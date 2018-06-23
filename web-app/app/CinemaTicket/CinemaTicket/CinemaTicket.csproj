@@ -240,6 +240,7 @@
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\CinemaUtility.cs" />
+    <Compile Include="Utility\MailUtility.cs" />
     <Compile Include="Utility\RandomUtility.cs" />
     <Compile Include="Utility\ScheduleUtility.cs" />
     <Compile Include="Utility\DateUtility.cs" />
@@ -377,6 +378,7 @@
     <Content Include="Content\js\chooseTicket.js" />
     <Content Include="Content\js\chooseSeat.js" />
     <Content Include="Content\js\home.js" />
+    <Content Include="Content\js\index.html" />
     <Content Include="Content\js\jquery-3.3.1.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">

@@ -19,7 +19,7 @@ var seatController = function ($scope, $http) {
     $scope.phone;
     $scope.ticketData;
     $scope.currentCart = [];
-    $scope.countDown = 60;
+    $scope.countDown = 300;
     $scope.exchangeRate = 23000;
 
     $scope.alpha = ["A", "B", "C", "D", "E", "F", "J", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"];
@@ -145,11 +145,24 @@ var seatController = function ($scope, $http) {
         }
     };
     $scope.countController = function () {
+        $scope.countDown = 300;
         var timer = setInterval(function () {
             if ($scope.countDown == 0) {
-                clearInterval($scope.countController);
+                //auto change seat status from buying to available
+                $http({
+                    method: "POST",
+                    url: "/Ticket/BuyingToAvailable",
+                    params: { ticketListStr: JSON.stringify($scope.ticketData) }
+                })
+                .then(function (response) {
+                    console.log("ticket data after time out");
+                    $scope.ticketData = response.data;
+                });             
+                //$scope.messageDialog("Hết thời gian đặt vé, ấn nút bên dưới để tiếp tục!");
+                clearInterval(timer);
                 return;
             }
+            console.log($scope.countDown);
             $scope.countDown--;
             $scope.$apply()
         }, 1000);
@@ -209,28 +222,31 @@ var seatController = function ($scope, $http) {
         }
     };
     $scope.openConfirmDialog = function () {
+        $scope.countController = 300;
         var modal = document.getElementById('myModal');
         modal.style.display = "block";
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function () {
-
-            if ($scope.countDown === 0) {//time out
-                //$scope.BackToChooseTicket();
-                //change status from buying to available
+            console.log("close click");
+            $scope.countDown = 0;
+            /*if ($scope.countDown > 0) {
+                $scope.countDown = -1;
+                console.log("count down when x click: " + $scope.countDown);
                 $http({
                     method: "POST",
                     url: "/Ticket/BuyingToAvailable",
-                    params: { scheduleId: $("#scheduleId").val() }
+                    params: { ticketListStr: JSON.stringify($scope.ticketData) }
                 })
                 .then(function (response) {
-                    $scope.scheduleData = response.data;
+                    console.log("ticket data after time out");
+                    $scope.ticketData = response.data;
                 });
-                // reload page
-            } else {
-                modal.style.display = "none";
-            }
+            }*/
+            $scope.messageDialog("Bạn đã hủy đặt vé. ");
+            modal.style.display = "none";
+            // reload page
         }
 
         // When the user clicks anywhere outside of the modal, close it
@@ -240,9 +256,11 @@ var seatController = function ($scope, $http) {
             }
         }
     };
-    $scope.openSuccessDialog = function () {
-        var sucessDialog = document.getElementById('successDialog');
-        sucessDialog.style.display = "block";
+    $scope.messageDialog = function (message) {
+        var messageDialog = document.getElementById('messageDialog');
+        document.getElementById('messageContent').innerHTML = message; 
+        document.getElementById('mainContainer').className = "disable-body";
+        messageDialog.style.display = "block";
     };
     $scope.renderPaypalButton = function () {
         paypal.Button.render({
@@ -277,7 +295,12 @@ var seatController = function ($scope, $http) {
                                 params: {
                                     ticketListStr: JSON.stringify($scope.ticketData),
                                     email: $scope.email,
-                                    phone: $scope.phone
+                                    phone: $scope.phone,
+                                    filmName : $scope.scheduleData.filmName,
+                                    cinemaName: $scope.scheduleData.cinemaName,
+                                    date: $scope.scheduleData.date,
+                                    roomName: $scope.scheduleData.roomName,
+                                    startTime: $scope.scheduleData.startTime,
                                 }
                             })
                                .then(function (response) {
@@ -286,10 +309,12 @@ var seatController = function ($scope, $http) {
                                });
                             var modal = document.getElementById('myModal');
                             modal.style.display = "none";
-                            $scope.openSuccessDialog();
+                            $scope.messageDialog("Đặt vé thành công, bấm nút bên dưới để tiếp tục!");
                         });
                     } else {
-                        alert("Time out"); //$scope.BackToChooseTicket();
+                        var modal = document.getElementById('myModal');
+                        modal.style.display = "none";
+                        $scope.messageDialog("Đã hết thời gian đặt vé, Đặt vé thất bại, bấm nút bên dưới để tiếp tục!");
                     };
                 });
             },

@@ -9,9 +9,15 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/css/index.css">
     <link rel="stylesheet" href="~/Content/css/common.css">
+    <link rel="stylesheet" href="~/Content/css/w3.css">
 </head>
 <body ng-controller="filmController">
     <!-- filmDialog -->
@@ -25,53 +31,44 @@
 
     </div>
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-md bg-light">
-        
-        <div class="navbar-collapse collapse" id="collapsingNavbar">
-            <div class="col-3">
-                <img src="/Content/img/repository/booking-cinema-logo.jpg" style="width: 50px;height: 50px; margin-top: 0%" />
+    <div class="mainMaxWidth2 contentMain">
+        <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top shadow p-3 mb-5 bg-white rounded">
+            <div class="left">
+                <a href="#">
+                    <img src="web-logo.png" class="ex1" alt="Cinque Terre" style="height:30%">
+                </a>
             </div>
-            <div class="col-6 text-center" >
-                <ul class="navbar-nav for-center">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Lịch chiếu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Cụm rạp</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Tin tức</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Tuyển dụng</a>
-                    </li>
-                </ul>
-            </div>
-            
-            <ul class="navbar-nav text-left col-3">
+            <ul class="navbar-nav navbar-center">
                 <li class="nav-item">
-                    <img src="~/Content/img/film/account_white.png" style="margin:10px 5px 10px 5px; width:25px; height:25px;" />
+                    <a class="nav-link font-weight-bold" href="#">Lịch chiếu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Đăng nhập</a>
+                    <a class="nav-link font-weight-bold" href="#">Cụm rạp</a>
                 </li>
                 <li class="nav-item">
-                    <img src="~/Content/img/film/ic_location_small.png" style="margin:10px 5px 10px 5px;" />
+                    <a class="nav-link font-weight-bold" href="#">Tin tức</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Ứng dụng</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-user"></i> Đăng nhập</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Hồ Chí Minh
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Thành phố
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Hồ Chí Minh</a>
                         <a class="dropdown-item" href="#">Hà Nội</a>
-                        <a class="dropdown-item" href="#">Đà Nẵng</a>
+                        <a class="dropdown-item" href="#">Nha Trang</a>
                     </div>
                 </li>
             </ul>
-        </div>
-    </nav>
+        </nav>
+    </div>
     <div>
 
         <div id="carousel" class="carousel slide" data-ride="carousel">
@@ -104,10 +101,10 @@
 
         <ul class="nav nav-pills justify-content-center">
             <li class="nav-item">
-                <a id="showingMovieId" ng-click="loadShowingMovie()" class="nav-link text-danger"><h4>Đang Chiếu</h4></a>
+                <a id="showingMovieId" ng-click="loadShowingMovie()" class="nav-link text-danger"><h4 class="font-weight-bold">Đang Chiếu</h4></a>
             </li>
             <li class="nav-item">
-                <a id="upcommingMovieId" ng-click="loadUpcommingMovie()" class="nav-link text-muted"><h4>Sắp Chiếu</h4></a>
+                <a id="upcommingMovieId" ng-click="loadUpcommingMovie()" class="nav-link text-muted"><h4 class="font-weight-bold">Sắp Chiếu</h4></a>
             </li>
         </ul>
 
@@ -212,9 +209,71 @@
             </div>
         </div>
     </div>
-    <!-- tin tuc khuyen mai goes here-->
-    </div>
+    <!-- ban lai ve container -->
+    <br /><br />
+    <div class="w3-container" style="width: 70%; margin: auto;">
 
+        <div class="w3-container">
+            <h4 class="w3-center">Bán lại vé</h4>
+            <p class="w3-center">Nhập email để tìm kiếm vé của bạn</p>
+            <div class="w3-row">
+                <div class="w3-col m10">
+                    <input class="w3-input w3-border" name="email" type="text" placeholder="Email">
+                </div>
+                <div class="w3-col m2">
+                    <button class="w3-btn w3-block w3-red">Tim kiem</button>
+                </div>
+            </div>
+            <div style="display: none;">
+                <p class="w3-center">Nhập mã xác nhận</p>
+                <div class="w3-row" style="width:50%;margin: auto;">
+                    <div class="w3-col m10">
+                        <input class="w3-input w3-border" name="email" type="text" placeholder="confirm code">
+                    </div>
+                    <div class="w3-col m2">
+                        <button class="w3-btn w3-block w3-teal">Xác nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="w3-container" >
+            <div class="w3-card-4">
+                <div class="w3-container" style="padding: 10px 10px">
+                    <div class="w3-col m7">
+                        <span style="font-weight: 700;">Gia đình siêu nhân 2</span><br>
+                        <span style="color: #CA4137; font-weight: bold">Galaxy</span>
+                        <span style="font-weight: 700;font-size: 14px;"> - Quốc Thanh </span><br>
+                        <span style="color: #9b9b9b;font-size: 12px;">12/04/2018 - 14:40 - RẠP 4</span>
+                        <span style="color: green; font-weight: bold">Status: đã mua</span>
+                    </div>
+                    <div class="w3-col m5">
+                        <input class="w3-input w3-border" name="ticketCode" type="text" placeholder="mã vé">
+                        <button class="w3-btn w3-block w3-teal">Xác nhận bán lại vé</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="w3-card-4">
+                <div class="w3-container" style="padding: 10px 10px">
+                    <div class="w3-col m7">
+                        <span style="font-weight: 700;">Gia đình siêu nhân 2</span><br>
+                        <span style="color: #CA4137; font-weight: bold">Galaxy</span>
+                        <span style="font-weight: 700;font-size: 14px;"> - Quốc Thanh </span><br>
+                        <span style="color: #9b9b9b;font-size: 12px;">12/04/2018 - 14:40 - RẠP 4</span>
+                        <span style="color: green; font-weight: bold">Status: đã mua</span>
+                    </div>
+                    <div class="w3-col m5">
+                        <input class="w3-input w3-border" name="ticketCode" type="text" placeholder="mã vé">
+                        <button class="w3-btn w3-block w3-teal">Xác nhận bán lại vé</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <!-- tin tuc khuyen mai goes here-->
+    </div>
     <br />
 
     <footer class="footer" style="background: #222;">
@@ -279,7 +338,7 @@
             </div>
         </div>
     </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="~/Content/js/angular.min.js"></script>
     <script src="~/Content/js/jquery-3.3.1.min.js"></script>
     <script src="~/Content/js/bootstrap.min.js"></script>
     <script src="~/Content/js/home.js"></script>

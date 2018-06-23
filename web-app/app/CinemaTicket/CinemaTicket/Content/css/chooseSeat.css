@@ -31,7 +31,7 @@
     font-size: 12px;
     border-radius: 4px;
     cursor: pointer;
-    margin: 0px 2px 2px 0px; /* top right bottom left*/
+    margin: 2px;
     background-color: green;
     color: white;
     text-align: center;
@@ -45,7 +45,7 @@
     font-size: 12px;
     border-radius: 4px;
     cursor: pointer;
-    margin: 0px 2px 2px 0px; /* top right bottom left*/
+    margin: 2px;
     background-color: black;
     color: white;
     text-align: center;
@@ -93,3 +93,16 @@
             background: #ddd;
             color: black;
         }
+
+.disable-body{
+   background: black;
+    opacity: 0.2;
+}
+
+.center-text{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);  
+    text-align: center;
+    cursor: pointer;
+}

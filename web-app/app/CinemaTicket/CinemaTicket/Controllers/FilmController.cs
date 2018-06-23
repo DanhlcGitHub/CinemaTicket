@@ -39,19 +39,25 @@ namespace CinemaTicket.Controllers
         public JsonResult LoadFilmById(string filmId)
         {
             FilmService filmService = new FilmService();
-            Film aFilm = filmService.FindByID(Convert.ToInt32(filmId));
+            Film item = filmService.FindByID(Convert.ToInt32(filmId));
             string serverPath = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
             var obj = new
             {
-                id = aFilm.filmId,
-                name = aFilm.name.Split('-'),
-                releaseDate = String.Format("{0:dd/MM/yyyy}", aFilm.dateRelease),
-                img = serverPath+ aFilm.additionPicture.Split(';')[0],
-                trailerUrl = aFilm.trailerLink,
-                length = aFilm.filmLength,
-                restricted = aFilm.restricted,
-                imdb = aFilm.imdb,
-                digitalType = "2d"
+                id = item.filmId,
+                name = item.name,
+                filmStatus = item.filmStatus,
+                trailerUrl = item.trailerLink,
+                imdb = item.imdb,
+                dateRelease = String.Format("{0:dd/MM/yyyy}", item.dateRelease),
+                restricted = item.restricted,
+                img = serverPath + item.additionPicture.Split(';')[0],
+                length = item.filmLength,
+                star = new string[(int)Math.Ceiling((double)item.imdb / 2)],
+                author = item.author,
+                actorList = item.actorList,
+                movieGenre = item.movieGenre,
+                countries = item.countries,
+                content = item.filmContent,
             };
             return Json(obj);
         }

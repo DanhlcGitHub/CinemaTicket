@@ -1,0 +1,150 @@
+﻿.fixedBottom {
+    position: fixed;
+    bottom: 0;
+    width: 25%;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+.btn-seat {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: #f5a623;;
+    color: white;
+    text-align: center;
+}
+
+.btn-seat-choosing {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: green;
+    color: white;
+    text-align: center;
+}
+
+.btn-seat-buyed {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-seat-resell {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: #cc4699;
+    color: white;
+    text-align: center;
+}
+
+.btn-seat-hidden {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 2px;
+    text-align: center;
+    visibility: hidden;
+}
+
+.center-div {
+    margin: auto;
+    width: 80%;
+    padding: 0px;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    width: 75%;
+}
+
+    .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+        .navbar a:hover {
+            background: #ddd;
+            color: black;
+        }
+
+.disable-body{
+   background: black;
+    opacity: 0.2;
+}
+
+.center-text{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);  
+    text-align: center;
+    cursor: pointer;
+}
+
+.inlineContainer{
+
+}
+
+.inlineContainer div{
+     display: inline-block;
+}
+/*----------------- resell drop down ----------------------*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    color:white;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    height: 50px;
+    display: block;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .btn-seat-resell {background-color: #3e8e41;}

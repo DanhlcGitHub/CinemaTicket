@@ -50,6 +50,7 @@
     <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="cinemaId" Type="Int32" />
+    <Property Name="isAvailable" Type="Boolean" />
     <NavigationProperty Name="Cinema" Relationship="Self.FKCinemaManagerCinema001" FromRole="CinemaManager" ToRole="Cinema" />
   </EntityType>
   <EntityType Name="Customer">
@@ -100,6 +101,9 @@
     <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="logoImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Cinemas" Relationship="Self.FKCinemaGroupCinema001" FromRole="GroupCinema" ToRole="Cinema" />
     <NavigationProperty Name="PartnerAccounts" Relationship="Self.FKPartnerAccountGroupCinema001" FromRole="GroupCinema" ToRole="PartnerAccount" />
     <NavigationProperty Name="TypeOfSeats" Relationship="Self.FKTypeOfSeatGroupCinema001" FromRole="GroupCinema" ToRole="TypeOfSeat" />
@@ -136,6 +140,7 @@
     <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="groupOfCinemaId" Type="Int32" />
+    <Property Name="isAvailable" Type="Boolean" />
     <NavigationProperty Name="GroupCinema" Relationship="Self.FKPartnerAccountGroupCinema001" FromRole="PartnerAccount" ToRole="GroupCinema" />
   </EntityType>
   <EntityType Name="Promotion">
@@ -187,6 +192,16 @@
     <Property Name="endTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleShowTime001" FromRole="ShowTime" ToRole="MovieSchedule" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="Ticket">
     <Key>
       <PropertyRef Name="ticketId" />
@@ -199,6 +214,7 @@
     <Property Name="qrCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ticketStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="price" Type="Double" />
+    <Property Name="resellDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="BookingTicket" Relationship="Self.FKTicketBookingTicket001" FromRole="Ticket" ToRole="BookingTicket" />
     <NavigationProperty Name="MovieSchedule" Relationship="Self.FKTicketMovieSchedule001" FromRole="Ticket" ToRole="MovieSchedule" />
     <NavigationProperty Name="Seat" Relationship="Self.FKTicketSeat001" FromRole="Ticket" ToRole="Seat" />
@@ -224,6 +240,7 @@
     <Property Name="userPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tix" Type="Double" />
   </EntityType>
   <Association Name="FKBookingTicketCustomer001">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -445,6 +462,7 @@
     <EntitySet Name="Rooms" EntityType="Self.Room" />
     <EntitySet Name="Seats" EntityType="Self.Seat" />
     <EntitySet Name="ShowTimes" EntityType="Self.ShowTime" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Tickets" EntityType="Self.Ticket" />
     <EntitySet Name="TypeOfSeats" EntityType="Self.TypeOfSeat" />
     <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />

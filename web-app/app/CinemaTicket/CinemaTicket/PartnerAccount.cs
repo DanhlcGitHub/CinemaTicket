@@ -19,6 +19,7 @@ namespace CinemaTicket
         public string phone { get; set; }
         public string email { get; set; }
         public Nullable<int> groupOfCinemaId { get; set; }
+        public Nullable<bool> isAvailable { get; set; }
     
         public virtual GroupCinema GroupCinema { get; set; }
     }

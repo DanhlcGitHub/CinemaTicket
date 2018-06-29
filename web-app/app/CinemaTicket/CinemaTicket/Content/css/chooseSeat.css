@@ -53,6 +53,20 @@
     cursor: not-allowed;
 }
 
+.btn-seat-resell {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: #4279b9;
+    color: white;
+    text-align: center;
+}
+
 .btn-seat-hidden {
     width: 30px;
     height: 30px;
@@ -94,11 +108,6 @@
             color: black;
         }
 
-.disable-body{
-   background: black;
-    opacity: 0.2;
-}
-
 .center-text{
     position: relative;
     top: 50%;
@@ -106,3 +115,68 @@
     text-align: center;
     cursor: pointer;
 }
+
+.inlineContainer{
+
+}
+
+.inlineContainer div{
+     display: inline-block;
+}
+/*----------------- resell drop down ----------------------*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    color:white;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    height: 50px;
+    display: block;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .btn-seat-resell {}
+
+/* change header*/
+.navbar-nav .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+}
+
+/* change the color of active or hovered links */
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-link {
+    color: #ff2300;
+}
+.gray { color: #999999; }
+.red { color: #FF0000; }
+span.ex1 {
+    color: red;
+	}
+mark.ex1 {
+		background-color: red;
+    color: white;
+	}	
+	
+	button.ex1 {
+    background-color: #FF0000; /* Green */
+    border: none;
+    width:100px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.button1 {border-radius: 30px;}
+
+.modal-backdrop.in { z-index: auto;}
+
+

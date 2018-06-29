@@ -20,23 +20,40 @@ namespace CinemaTicket.Controllers
             Room room = new RoomService().FindByID(roomIdData);
             List<Seat> seats = new SeatService().FindBy(s => s.roomId == roomIdData);
             List<Ticket> ticketList = new TicketService().FindBy(tic => tic.scheduleId == scheduleIdData);
+
+            List<object> objectList = new List<object>();
+            foreach (var item in seats)
+            {
+                Ticket ticket = ticketList.Find(t => t.seatId == item.seatId) == null
+                                        ? null : ticketList.Find(t => t.seatId == item.seatId);
+                string emailOwner = "";
+                if (ticket != null && ticket.bookingId != null)
+                {
+                    int cusId = (int)new BookingTicketService().FindByID(ticket.bookingId).customerId;
+                    emailOwner = new CustomerService().FindByID(cusId).email;
+                }
+                var aObj = new
+                {
+                    id = item.seatId,
+                    seatStatus = ticket == null ? TicketStatus.available : ticket.ticketStatus,
+                    type = item.typeSeatId,
+                    px = item.px,
+                    py = item.py,
+                    resellDescription = ticket == null ? "" : ticket.resellDescription,
+                    emailOwner = emailOwner,
+                };
+                objectList.Add(aObj);
+            }
+            var seatData = from s in objectList
+                           select s;
             var obj = new
             {
                 matrixX = room.matrixSizeX,
                 matrixY = room.matrixSizeY,
-                seats = seats.Select(s => new
-                {
-                    id = s.seatId,
-                    seatStatus = ticketList.Find(t => t.seatId == s.seatId) == null
-                                        ? TicketStatus.available : ticketList.Find(t => t.seatId == s.seatId).ticketStatus,
-                    type = s.typeSeatId,
-                    px = s.px,
-                    py = s.py,
-                })
+                seats = seatData
             };
             return Json(obj);
         }
 
     }
 }
-

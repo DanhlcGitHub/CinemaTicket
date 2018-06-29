@@ -1,0 +1,368 @@
+﻿@using CinemaTicket;
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html ng-app="homeModule">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/common.css">
+    <link rel="stylesheet" href="~/Content/css/index.css">
+    
+    <link rel="stylesheet" href="~/Content/css/w3.css">
+</head>
+<body ng-controller="filmController">
+    <!-- filmDialog -->
+    <div id="myModal" class="modal">
+
+        <!-- filmDialogContent -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <iframe id="myIframe" width="100%" height="515" src="" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+
+    </div>
+
+    <form method="post" target="_blank" action="/home/ChooseTicket1" id="goToChooseTicketForm" style="display:none"></form>
+
+    <div class="mainMaxWidth2 contentMain">
+        <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top shadow p-3 mb-5 bg-white rounded">
+            <div class="left">
+                <a href="#">
+                    <img src="~/Content/img/repository/booking-cinema-logo.PNG" class="ex1" alt="Cinque Terre" style="height:30%">
+                </a>
+            </div>
+            <ul class="navbar-nav navbar-center">
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#noibat">Nổi bật</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#lichchieu">Lịch chiếu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#banlaive">Bán lại vé</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Ứng dụng</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Thành phố
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Hồ Chí Minh</a>
+                        <a class="dropdown-item" href="#">Hà Nội</a>
+                        <a class="dropdown-item" href="#">Nha Trang</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div>
+        <a name="noibat" />
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                @{int i = 0;}
+                @foreach (Film film in ViewBag.hightLight)
+                {
+                    i++;
+                    var active = i == 1 ? "active" : "";
+                    <div class="carousel-item @active">
+                        <img height="500" class="d-block w-100" src="@Url.Content(film.posterPicture)" alt="topFilm">
+                    </div>
+                }
+            </div>
+            <ol class="carousel-indicators  ">
+                <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel" data-slide-to="1"></li>
+                <li data-target="#carousel" data-slide-to="2"></li>
+                <li data-target="#carousel" data-slide-to="3"></li>
+            </ol>
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a id="showingMovieId" ng-click="loadShowingMovie()" class="nav-link text-danger"><h4 class="font-weight-bold">Đang Chiếu</h4></a>
+            </li>
+            <li class="nav-item">
+                <a id="upcommingMovieId" ng-click="loadUpcommingMovie()" class="nav-link text-muted"><h4 class="font-weight-bold">Sắp Chiếu</h4></a>
+            </li>
+        </ul>
+        <!--tat ca cac phim dang chieu, va sap chieu -->
+        <div class="container">
+            <div class="row ">
+                <div class="col-1" style="margin-top: 30%">
+                    <img ng-click="previous()" src="Content/img/repository/pre.png" />
+                </div>
+                <div class="col-10 " style="float:left">
+                    <div class="row" id="filmContainer">
+                        <div ng-repeat="aFilm in CurrentFilmList" class="col-3 hideinfo">
+                            <div class="myContainer">
+                                <img ng-click="gotoFilmDetail(aFilm.id)"
+                                     height="300" class="img-movie rounded" ng-src="{{aFilm.img}}">
+                                <div class="middle">
+                                    <div class="text">
+                                        <img ng-click="openTrailerDialog(aFilm.trailerUrl)" src="Content/img/repository/play-video.png" width="50" height="50" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="aFilm.restricted != 0" class="top-left">
+                                C {{ aFilm.restricted}}
+                            </div>
+                            <div ng-if="aFilm.imdb != 0" class="top-right">
+                                <div class="text-center">
+                                    {{aFilm.imdb}}
+                                </div>
+                                <div class="d-inline-flex" style="float:left;">
+                                    <img ng-repeat="i in aFilm.star track by $index" src="Content/img/film/star_full.png" class="icon_star_rating" />
+
+                                </div>
+                            </div>
+                            <div ng-click="gotoFilmDetail(aFilm.id)" class="showbutton" style=" padding-top:15px; padding-left:0px; padding-right:0px; padding-bottom:0px;"><button type="button" class="btn btn-danger btn-block">Mua Vé</button></div>
+                            <b class="mt-2 overme info">{{aFilm.name}}</b>
+                            <small class="text-muted info" style="font-weight: 600;">{{aFilm.length}} phút</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1" style="margin-top: 30%">
+                    <img ng-click="next()" src="Content/img/repository/next.png" />
+                </div>
+            </div>
+        </div>
+        <br/><br />
+        <a name="lichchieu" />
+        <!---Quick navigate-->
+        <div class="tab-content">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link text-danger"><h4 class="font-weight-bold">Lịch chiếu</h4></a>
+                </li>
+            </ul>
+            <div id="home" class="container tab-pane active">
+                <br>
+                <div class="row">
+
+                    <div class="row col-sm-12 h-100" style="padding-bottom:50px">
+                        <div class="col-sm-1 h-100 border " style="padding-left:0px; padding-right:0px;">
+                            <div class="list-group list-group-flush">
+                                <a id="{{'groupcinema' + $index}}" ng-repeat="groupCinema in scheduleList" class="list-group-item list-group-item-action font-weight-bold" href="#CineStar" style="padding-bottom:20px; padding-top:20px; opacity:0.4">
+                                    <div class="row justify-content-center align-self-center">
+                                        <img ng-click="onclickGroupCinema($index)"
+                                             ng-src="{{ groupCinema.img }}" data-index="{{$index}}" class="ex1">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 border border-top overflow-scroll" style="padding-left:0px; padding-right:0px">
+                            <ul class="list-group list-group-flush">
+                                <li  class="list-group-item" ng-click="onclickCinema($index)" ng-repeat="cinema in currentCinemaList" >
+                                    <button id="{{'cinema' + $index}}" type="button" class="list-group-item list-group-item-action btn" style="padding-left:0px; padding-right:0px">
+                                        <div class="row col-sm-12">
+                                            <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                                <img ng-src="{{cinema.img}}" class="ex1">
+                                            </div>
+                                            <div class="col-sm-9" style="font-size:11px;">
+                                                <input type="hidden" value="{{cinema.id}}" />
+                                                <span class="text-warning font-weight-bold">{{cinema.name}}</span><br>
+                                                <span class="gray" style="text-overflow: '...'; width: 250px; height:20px; margin:0px">{{cinema.address}}</span><br> <span class="red">[Bản đồ]</span>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-8  no-gutters" style="padding-left:0px; padding-right:0px">
+                            <div class="col-sm-12 border border-top" style="overflow-y: auto;max-height:820px">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" ng-repeat="aFilm in currentFilmInScheduleList">
+                                        <div class="row">
+                                            <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                                <div class="row col-sm-12">
+                                                    <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                        <img ng-src="{{ aFilm.img }}" class="ex1">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <span class="font-weight-bold b"><mark ng-if="aFilm.restricted != 0" class="ex1">C{{ aFilm.restricted}}</mark>{{ aFilm.filmName }}</span><br> <span class="gray">{{aFilm.length}} phút - IMDb {{aFilm.imdb}}</span>
+
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="row" style="padding-top:4px;">
+                                            <div class="col-sm-1">
+                                                <img src="~/Content/img/film/2D.png" class="ex2">
+                                            </div>
+                                            <div class="row col-sm-11">
+                                                <a ng-repeat="time in aFilm.timeList"  style="margin-left:3%">
+                                                    <p ng-click="gotoChooseTicket(aFilm.filmId,time.id,time.startTime)" class="text-success font-weight-bold" style="font-size:25px;">{{time.startTime}}</p></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ban lai ve container -->
+    <br /><br />
+    <a name="banlaive" />
+    <div class="w3-container" style="width: 70%; margin: auto;">
+
+        <div class="w3-container">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link text-danger"><h4 class="font-weight-bold">Bán lại vé</h4></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted"><h4 class="font-weight-bold">Đổi vé</h4></a>
+                </li>
+            </ul>
+
+            <div id="inputEmailResellEmailBlock">
+                <p class="w3-center" style="font-weight:600;">Nhập email để tìm kiếm vé của bạn</p>
+                <div class="w3-row">
+                    <div class="w3-col m10">
+                        <input id="resellEmailTxt" class="w3-input w3-border" name="email" type="text" placeholder="Email">
+                    </div>
+                    <div class="w3-col m2">
+                        <button id="findResellTicketBtn" ng-click="resellTicketSearch()" class="w3-btn w3-block w3-red">Tìm kiếm</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="confirmResellEmailBlock" style="display: none;">
+                <p class="w3-center" style="font-weight:600;">Mã xác nhận vừa được gửi qua email của bạn, nhập mã xác nhận</p>
+                <div class="w3-row">
+                    <div class="w3-col m10">
+                        <input id="resellConfirmCodeTxt" type="password" class="w3-input w3-border" name="Mã xác nhận" type="text" placeholder="confirm code">
+                    </div>
+                    <div class="w3-col m2">
+                        <button ng-click="checkResellConfirmCode()" class="w3-btn w3-block w3-red">Xác nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div id="resellTicketList" class="w3-container overflow-scroll" style="display: none">
+            <div ng-repeat="item in resellData" class=" w3-card-4 w3-margin-bottom">
+                <div class="w3-container" style="padding: 10px 10px">
+                    <div class="w3-col m7">
+                        <span style="font-weight: 700;">{{item.filmName}}</span><br>
+                        <span style="color: #CA4137; font-weight: bold">{{item.cinemaNames[0]}}</span>
+                        <span style="font-weight: 700;font-size: 14px;"> - {{item.cinemaNames[1]}} -   Ghế : {{item.seatName}} </span><br>
+                        <span style="color: #9b9b9b;font-size: 12px;">{{item.date}} - {{item.startTime}} - {{item.roomName}}</span>
+                        <span class="{{item.status}}">Status: {{item.statusvn}}</span>
+                    </div>
+                    <div ng-if="item.status == 'buyed'" class="w3-col m5">
+                        <!--<input id="{{'ticketCode' + $index}}"  class="w3-input w3-border" name="ticketCode" type="text" placeholder="mã vé">-->
+                        <input class="w3-input w3-border" name="ticketCode" type="text" style="visibility:hidden;">
+                        <button ng-click="postSellingTicket($index)" class="w3-btn w3-block w3-teal">Đăng bán</button>
+                    </div>
+                    <div ng-if="item.status == 'resell'" class="w3-col m5">
+                        <input id="{{'customerEmail' + $index}}" class="w3-input w3-border" name="email" type="text" placeholder="Nhập email người mua">
+                        <button ng-click="resellTicket($index)" class="w3-btn w3-block w3-red">Xác nhận bán</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <!-- tin tuc khuyen mai goes here-->
+    </div>
+    <br />
+
+    <footer class="footer" style="background: #222;">
+        <br /><br />
+        <div class="container center">
+            <div class="row col-sm-12">
+                <div class="col-2">
+                    <p class="text-white">123PHIM</p>
+                    <a href="#">FAQ</a><br>
+                    <a href="#">Brand Guidelines</a>
+                </div>
+                <div style="padding-top:40px;" class="col-2">
+                    <a href="#">Thỏa thuận sử dụng</a><br>
+                    <a href="#">Quy chế hoạt động</a><br>
+                    <a href="#">Chính sách bảo mật</a><br>
+                    <a href="#">Quyền lợi thành viên</a><br>
+                </div>
+                <div style=" padding-left: 40px;float:left" class="col-3">
+                    <p class="text-white">ĐỐI TÁC</p><br>
+                    <div class="row">
+                        <div ng-repeat="groupCinema in scheduleList" style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img ng-src="{{ groupCinema.img }}" alt="{{ groupCinema.name }}" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+                <div style=" padding-left:40px" class="col-2">
+                    <p class="text-white">MOBILE APP</p><br>
+                    <div class="row">
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/apple-logo.png" class="ex4"></a>
+                        </div>
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/android-logo.png" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+                <div style=" padding-left:40px" class="col-3">
+                    <p class="text-white">SOCIAL</p><br>
+                    <div class="row">
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/facebook-logo.png" class="ex4"></a>
+                        </div>
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/zalo-logo.png" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="width:80%; border:0; height:2px; background:white;">
+        <div class="col-sm-12" style="padding-top:10px;">
+            <div class="container center">
+                <div class="row">
+                    <div style="padding-top:10px; padding-left:10px">
+                        <a href="#"><img width="100" height="100" src="~/Content/img/repository/booking-cinema-logo.jpg" class=""></a>
+                    </div>
+                    <div style="padding-top:10px; padding-left:40px">
+                        <p class="text-white">BookingTicket - CAPSTONE PROJECT FPT<p>
+                        <p class="text-white">Địa chỉ: 18 Tô Ký, Phường 14, Quận 12, Tp Hồ Chí Minh</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/Content/js/angular.min.js"></script>
+    <script src="~/Content/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/home.js"></script>
+</body>
+</html>
+
+

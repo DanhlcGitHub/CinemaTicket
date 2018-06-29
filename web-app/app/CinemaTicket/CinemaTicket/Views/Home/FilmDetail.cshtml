@@ -22,7 +22,8 @@
         </div>
 
     </div>
-    <form method="post" action="/home/ChooseTicket" id="goToChooseTicketForm" style="display:none"></form>
+    <form method="post" target="_blank" action="/home/ChooseTicket" id="goToChooseTicketForm" style="display:none"></form>
+    <form method="post" target="_blank" action="/home/ChooseTicketAndSeat" id="goToChooseTicketAndTicketForm" style="display:none"></form>
     <input id="filmId" type="hidden" value=@ViewBag.filmId />
     <div class="mainMaxWidth2 contentMain">
         <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top shadow p-3 mb-5 bg-white rounded">
@@ -122,7 +123,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <p class="font-weight-bold">Quốc Gia SX</p>
-                                <button type="button" class="btn btn-danger">Mua vé</button>
+                                <a href="#muave"><button type="button" class="btn btn-danger">Mua vé</button></a>
                             </div>
                             <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
                                 <p class="">{{filmData.countries}}</p>
@@ -145,6 +146,7 @@
     </div>
     <!-- Tab panes -->
     <div class="tab-content" style="font-size:14px;">
+        <a name="muave"></a>
         <div id="home" class="container tab-pane active">
             <br>
             <div class="row" style="padding-top: 60px;">
@@ -158,7 +160,7 @@
                                     <div class="col-sm-3">
                                         <img ng-src="{{group.img}}" class="ex1">
                                     </div>
-                                    <div class="col-sm-9" style="padding-top:10px">
+                                    <div id="{{'groupcinema' + $index}}" class="col-sm-9" style="padding-top:10px">
                                         {{group.name}}
                                     </div>
                                 </div>
@@ -168,11 +170,7 @@
                     <div class="col-sm-9  no-gutters" style="padding-left:0px; padding-right:0px">
                         <div class=" col-sm-12 border border-bottom-0" style="padding-top:6px">
                             <div  class="list-group list-group-flush" style="flex-direction: row;">
-                                <a ng-click="dateClickHandler($index)" ng-repeat="d in dateList" ng-if="$index == 0" class="list-group-item list-group-item-action" href="#monday">
-                                    <div class="row text-center text-danger font-weight-bold" style="justify-content:center;">Thứ {{ d.dateOfWeek + 1 }}</div>
-                                    <div class="text-center text-danger font-weight-bold">{{ d.date }}</div>
-                                </a>
-                                <a ng-click="dateClickHandler($index)" ng-repeat="d in dateList" ng-if="$index != 0" class="list-group-item list-group-item-action border-top-0" href="#tuesday">
+                                <a id="{{'dateofweek' + $index}}"  ng-click="dateClickHandler($index)" ng-repeat="d in dateList" class="list-group-item list-group-item-action border-top-0" href="#tuesday">
                                     <div class="row text-center font-weight-bold" style="justify-content:center;">Thứ {{ d.dateOfWeek + 1 }}</div>
                                     <div class="text-center font-weight-bold">{{ d.date }}</div>
                                 </a>
@@ -200,7 +198,7 @@
                                         </div>
                                         <div class="row col-sm-11">
                                             <a href="#" style="margin-left:3%" ng-repeat="time in digType.times"
-                                               ng-click="gotoChooseTicket(filmData.id,time.timeId,item.id)">
+                                               ng-click="gotoChooseTicket(filmData.id,time.timeId,item.id,time.startTime)">
                                                 <p class="text-success font-weight-bold" style="font-size:25px;">{{time.startTime}}</p>
                                             </a>
                                         </div>

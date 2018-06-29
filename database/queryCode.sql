@@ -49,3 +49,17 @@ GO
 
 select * from MovieSchedule ms JOIN Room r ON ms.roomId = r.roomId
 where ms.filmId = 3 and ms.timeId = 1 and ms.scheduleDate = '2018-06-08' and r.cinemaId = 1 
+
+create proc spGetTicketByEmail
+@email nvarchar(255)
+as
+begin
+	select * from Ticket t JOIN BookingTicket b ON t.bookingId = b.bookingId
+		where b.bookingId in (select customerId from Customer where email = @email)
+end
+
+DROP PROCEDURE spGetTicketByEmail;  
+GO 
+
+
+

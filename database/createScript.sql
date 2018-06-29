@@ -120,6 +120,7 @@ CREATE TABLE Ticket (
 	paymentCode nvarchar(50),
 	qrCode nvarchar(255),
 	ticketStatus nvarchar(20),
+	resellDescription nvarchar(50),
 	/*ticketTimeout date,*/
 	price float,
 );

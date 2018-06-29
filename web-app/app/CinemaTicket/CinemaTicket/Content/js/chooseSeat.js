@@ -1,4 +1,5 @@
-﻿var myApp = angular.module("seatModule", []);
+﻿
+var myApp = angular.module("seatModule", []);
 var seatController = function ($scope, $http) {
     $scope.seatData;
     $scope.Math = window.Math;
@@ -21,9 +22,10 @@ var seatController = function ($scope, $http) {
     $scope.currentCart = [];
     $scope.countDown = 60;
     $scope.exchangeRate = 23000;
+    $scope.isActionClick = false;
 
     $scope.alpha = ["A", "B", "C", "D", "E", "F", "J", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"];
-    $scope.TicketStatusEnum = Object.freeze({ "available": "btn-seat", "buyed": "btn-seat-buyed", "buying": "btn-seat-buyed" });
+    $scope.TicketStatusEnum = Object.freeze({ "available": "btn-seat", "buyed": "btn-seat-buyed", "buying": "btn-seat-buyed", "resell": "btn-seat-resell" });
     // init data
 
     $scope.totalAmount = LocalStorageManager.loadDataFromStorage($scope.totalAmountKey);
@@ -37,15 +39,21 @@ var seatController = function ($scope, $http) {
     console.log($scope.quantityData);
     // beforeunload---------------------
     window.addEventListener('beforeunload', function (e) {
-        /* $http({
-             method: "POST",
-             url: "/Ticket/ChangeTicketStatus",
-             params: { ticketList: $("#scheduleId").val() }
-         })
-         .then(function (response) {
-             $scope.scheduleData = response.data;
-         });*/
-        alert("Before unload");
+        //auto change seat status from buying to available
+        if ($scope.ticketData != "" && $scope.ticketData != null) {
+            $http({
+                method: "POST",
+                url: "/Ticket/BuyingToAvailable",
+                params: { ticketListStr: JSON.stringify($scope.ticketData) }
+            })
+            .then(function (response) {
+                $scope.ticketData = response.data;
+            });
+        }
+    });
+
+    $("#myBtn").click(function () {
+        $("#validateModal").modal();
     });
 
     $http({
@@ -88,7 +96,10 @@ var seatController = function ($scope, $http) {
                 $scope.matrix[seat.py].seats[seat.px] = seat;
             }
             $scope.middeSeatFlag = $scope.validMiddleSeat();
-            if ($scope.middeSeatFlag == true) alert("khong the de trong ghe o giua");
+            if ($scope.middeSeatFlag == true) {
+                $("#validateModal").modal();
+                $("#modalMessage").html("Không thể để trống ghế ở giữa!");
+            }
         }
     };
     $scope.validMiddleSeat = function () {
@@ -145,11 +156,28 @@ var seatController = function ($scope, $http) {
         }
     };
     $scope.countController = function () {
+        //$scope.countDown = 30;
         var timer = setInterval(function () {
             if ($scope.countDown == 0) {
-                clearInterval($scope.countController);
+                //auto change seat status from buying to available
+                $http({
+                    method: "POST",
+                    url: "/Ticket/BuyingToAvailable",
+                    params: { ticketListStr: JSON.stringify($scope.ticketData) }
+                })
+                .then(function (response) {
+                    console.log("ticket data after time out");
+                    $scope.ticketData = response.data;
+                });
+                if ($scope.isActionClick == false) {
+                    $('#confirmTicketModal').modal('hide');
+                    $('#backdropModal').modal();
+                    $("#backdropMessage").html("Hết thời gian đặt vé, bấm nút bên dưới để tiếp tục!");
+                }
+                clearInterval(timer);
                 return;
             }
+            console.log($scope.countDown);
             $scope.countDown--;
             $scope.$apply()
         }, 1000);
@@ -158,12 +186,14 @@ var seatController = function ($scope, $http) {
         // check condition
         if ($scope.choosedList.length == $scope.totalTicket) {
             if ($scope.middeSeatFlag == true) {
-                alert("Bạn không được để trống ghế ở giữa");
+                $("#validateModal").modal();
+                $("#modalMessage").html("Bạn không được để trống ghế ở giữa");
             } else {
                 $scope.email = $("#emailId").val();
                 $scope.phone = $("#phoneId").val();
                 if ($scope.email == "" || $scope.phone == "") {
-                    alert("Thông tin E-mail và Điện thoại không được bỏ trống!");
+                    $("#validateModal").modal();
+                    $("#modalMessage").html("Thông tin E-mail và Điện thoại không được bỏ trống!");
                 } else {
                     // check format email and phone
                     if (validateEmail($("#emailId").val()) && validatePhone($("#phoneId").val())) {
@@ -182,7 +212,8 @@ var seatController = function ($scope, $http) {
                             $scope.ticketData = response.data;
                             console.log(response.data);
                             if (!$scope.IsSeatStillAvailable()) {//not available
-                                alert("Loại vé bạn chọn đã hết hoặc không đủ số lượng ghế trống!");
+                                $("#validateModal").modal();
+                                $("#modalMessage").html("Loại vé bạn chọn đã hết hoặc không đủ số lượng ghế trống!");
                             } else {
                                 //change available to buying
                                 $http({
@@ -200,49 +231,30 @@ var seatController = function ($scope, $http) {
                             }
                         });
                     } else {
-                        alert("Email và phone sai format!");
+                        $("#validateModal").modal();
+                        $("#modalMessage").html("Email và phone sai format!");
                     }
                 }
             }
         } else {
-            alert("Bạn chưa chọn đủ " + $scope.totalTicket + " vé!");
+            $("#validateModal").modal();
+            $("#modalMessage").html("Bạn chưa chọn đủ " + $scope.totalTicket + " vé!");
         }
     };
     $scope.openConfirmDialog = function () {
-        var modal = document.getElementById('myModal');
-        modal.style.display = "block";
+        //$scope.countController = 300;
+        $('#confirmTicketModal').modal();
         var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function () {
-
-            if ($scope.countDown === 0) {//time out
-                //$scope.BackToChooseTicket();
-                //change status from buying to available
-                $http({
-                    method: "POST",
-                    url: "/Ticket/BuyingToAvailable",
-                    params: { scheduleId: $("#scheduleId").val() }
-                })
-                .then(function (response) {
-                    $scope.scheduleData = response.data;
-                });
-                // reload page
-            } else {
-                modal.style.display = "none";
-            }
+            $('#confirmTicketModal').modal('hide');
+            $scope.countDown = 0;
+            $scope.isActionClick = true;
+            $('#backdropModal').modal();
+            $("#backdropMessage").html("Bạn đã hủy đặt vé, bấm nút bên dưới để tiếp tục!");
+            // reload page
         }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-
-            }
-        }
-    };
-    $scope.openSuccessDialog = function () {
-        var sucessDialog = document.getElementById('successDialog');
-        sucessDialog.style.display = "block";
     };
     $scope.renderPaypalButton = function () {
         paypal.Button.render({
@@ -277,19 +289,27 @@ var seatController = function ($scope, $http) {
                                 params: {
                                     ticketListStr: JSON.stringify($scope.ticketData),
                                     email: $scope.email,
-                                    phone: $scope.phone
+                                    phone: $scope.phone,
+                                    filmName : $scope.scheduleData.filmName,
+                                    cinemaName: $scope.scheduleData.cinemaName,
+                                    date: $scope.scheduleData.date,
+                                    roomName: $scope.scheduleData.roomName,
+                                    startTime: $scope.scheduleData.startTime,
                                 }
                             })
                                .then(function (response) {
                                    console.log("ticket data after update MakeOrder");
                                    $scope.ticketData = response.data;
                                });
-                            var modal = document.getElementById('myModal');
-                            modal.style.display = "none";
-                            $scope.openSuccessDialog();
+                            $('#confirmTicketModal').modal('hide');
+                            $('#backdropModal').modal();
+                            $("#backdropMessage").html("Đặt vé thành công, bấm nút bên dưới để tiếp tục!");
                         });
                     } else {
-                        alert("Time out"); //$scope.BackToChooseTicket();
+                        $('#confirmTicketModal').modal('hide');
+                        $('#backdropModal').modal();
+                        $("#backdropMessage").html("Đã hết thời gian đặt vé, Đặt vé thất bại, bấm nút bên dưới để tiếp tục!");
+
                     };
                 });
             },

@@ -1,0 +1,286 @@
+﻿@{
+    ViewBag.Title = "FilmDetail";
+}
+
+<!DOCTYPE html>
+<html ng-app="detailFilmModule">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FilmDetail</title>
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/filmDetail.css">
+    <link rel="stylesheet" href="~/Content/css/common.css">
+</head>
+<body ng-controller="filmController">
+    <!-- filmDialog -->
+    <div id="myModal" class="modal">
+
+        <!-- filmDialogContent -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <iframe id="myIframe" width="100%" height="515" src="" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+
+    </div>
+    <form method="post" target="_blank" action="/home/ChooseTicket" id="goToChooseTicketForm" style="display:none"></form>
+    <input id="filmId" type="hidden" value=@ViewBag.filmId />
+    <div class="mainMaxWidth2 contentMain">
+        <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top shadow p-3 mb-5 bg-white rounded">
+            <div class="left">
+                <a href="#">
+                    <img src="~/Content/img/repository/booking-cinema-logo.PNG" class="ex1" alt="Cinque Terre" style="height:30%">
+                </a>
+            </div>
+            <ul class="navbar-nav navbar-center">
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Lịch chiếu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Cụm rạp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Tin tức</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Ứng dụng</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Thành phố
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Hồ Chí Minh</a>
+                        <a class="dropdown-item" href="#">Hà Nội</a>
+                        <a class="dropdown-item" href="#">Nha Trang</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="row col-sm-12" style="padding-top: 100px;">
+            <div class="col-sm-4">
+                <div class="myContainer">
+                    <img ng-click="gotoFilmDetail(aFilm.id)" width="255"
+                         height="370" class="img-movie rounded" ng-src="{{filmData.img}}" alt="Film image">
+                    <div class="middle">
+                        <div class="text">
+                            <img ng-click="openTrailerDialog(filmData.trailerUrl)" src="~/Content/img/repository/play-video.png" width="50" height="50" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8" style="padding-top:10px">
+                <h3 class="text-primary"><mark class="ex1">C18</mark>{{filmData.name}}</h3>
+                <div class="row col-sm-12" style="padding-top:15px">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Ngày phát hành</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.dateRelease}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Đạo diễn</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.author}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Diễn viên</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.actorList}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Thể Loại</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.movieGenre}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Định dạng</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">2D/Digital</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Quốc Gia SX</p>
+                                <a href="#muave"><button type="button" class="btn btn-danger">Mua vé</button></a>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.countries}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
+                            <p class="font-weight-bold">Nội dung</p>
+                        </div>
+                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
+                            <p class="">
+                                {{filmData.content}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tab panes -->
+    <div class="tab-content" style="font-size:14px;">
+        <a name="muave"></a>
+        <div id="home" class="container tab-pane active">
+            <br>
+            <div class="row" style="padding-top: 60px;">
+
+                <div class="row col-sm-12 h-100">
+                    <div class="col-sm-3 h-100 border " style="padding-left:0px; padding-right:0px;">
+                        <div class="list-group list-group-flush">
+                            <a ng-click="groupClickHandler($index)" ng-repeat="group in groupCinemaList" class="list-group-item list-group-item-action font-weight-bold"
+                               style="padding-bottom:20px; padding-top:20px">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img ng-src="{{group.img}}" class="ex1">
+                                    </div>
+                                    <div id="{{'groupcinema' + $index}}" class="col-sm-9" style="padding-top:10px">
+                                        {{group.name}}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-9  no-gutters" style="padding-left:0px; padding-right:0px">
+                        <div class=" col-sm-12 border border-bottom-0" style="padding-top:6px">
+                            <div  class="list-group list-group-flush" style="flex-direction: row;">
+                                <a id="{{'dateofweek' + $index}}"  ng-click="dateClickHandler($index)" ng-repeat="d in dateList" class="list-group-item list-group-item-action border-top-0" href="#tuesday">
+                                    <div class="row text-center font-weight-bold" style="justify-content:center;">Thứ {{ d.dateOfWeek + 1 }}</div>
+                                    <div class="text-center font-weight-bold">{{ d.date }}</div>
+                                </a>
+                                <button type="button" style="center;" class=" btn-primary border-top-0">Share</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 border border-top" style="overflow-y: auto; max-height:728px">
+                            <ul class="list-group list-group-flush">
+                                <li ng-repeat="item in currentData" class="list-group-item">
+                                    <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                        <div class="row col-sm-12">
+                                            <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                <img ng-src="{{item.img}}" class="ex1">
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <span class="text-danger font-weight-bold">CNS</span>- <span class="font-weight-bold">{{item.name}}</span><br> <span class="gray">{{item.address}}</span> <span class="red">[Bản đồ]</span>
+                                            </div>
+                                        </div>
+
+
+                                    </button>
+                                    <div ng-repeat="digType in item.digTypeList" class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img ng-if="digType.type == 1" src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="margin-left:3%" ng-repeat="time in digType.times"
+                                               ng-click="gotoChooseTicket(filmData.id,time.timeId,item.id,time.startTime)">
+                                                <p class="text-success font-weight-bold" style="font-size:25px;">{{time.startTime}}</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <p style="padding-bottom:10%"></p>
+    <footer class="footer" style="background: #222;">
+        <br /><br />
+        <div class="container center">
+            <div class="row col-sm-12">
+                <div class="col-2">
+                    <p class="text-white">123PHIM</p>
+                    <a href="#">FAQ</a><br>
+                    <a href="#">Brand Guidelines</a>
+                </div>
+                <div style="padding-top:40px;" class="col-2">
+                    <a href="#">Thỏa thuận sử dụng</a><br>
+                    <a href="#">Quy chế hoạt động</a><br>
+                    <a href="#">Chính sách bảo mật</a><br>
+                    <a href="#">Quyền lợi thành viên</a><br>
+                </div>
+                <div style=" padding-left: 40px;float:left" class="col-3">
+                    <p class="text-white">ĐỐI TÁC</p><br>
+                    <div class="row">
+                        <div ng-repeat="group in groupCinemaList" style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img ng-src="{{ group.img }}" alt="{{ group.name }}" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+                <div style=" padding-left:40px" class="col-2">
+                    <p class="text-white">MOBILE APP</p><br>
+                    <div class="row">
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/apple-logo.png" class="ex4"></a>
+                        </div>
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/android-logo.png" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+                <div style=" padding-left:40px" class="col-3">
+                    <p class="text-white">SOCIAL</p><br>
+                    <div class="row">
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/facebook-logo.png" class="ex4"></a>
+                        </div>
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/zalo-logo.png" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="width:80%; border:0; height:2px; background:white;">
+        <div class="col-sm-12" style="padding-top:10px;">
+            <div class="container center">
+                <div class="row">
+                    <div style="padding-top:10px; padding-left:10px">
+                        <a href="#"><img width="100" height="100" src="~/Content/img/repository/booking-cinema-logo.jpg" class=""></a>
+                    </div>
+                    <div style="padding-top:10px; padding-left:40px">
+                        <p class="text-white">BookingTicket - CAPSTONE PROJECT FPT<p>
+                        <p class="text-white">Địa chỉ: 18 Tô Ký, Phường 14, Quận 12, Tp Hồ Chí Minh</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/Content/js/angular.min.js"></script>
+    <script src="~/Content/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/filmDetail.js"></script>
+
+</body>
+</html>

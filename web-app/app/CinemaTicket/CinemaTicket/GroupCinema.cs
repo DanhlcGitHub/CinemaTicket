@@ -24,6 +24,9 @@ namespace CinemaTicket
         public int GroupId { get; set; }
         public string logoImg { get; set; }
         public string name { get; set; }
+        public string address { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
     
         public virtual ICollection<Cinema> Cinemas { get; set; }
         public virtual ICollection<PartnerAccount> PartnerAccounts { get; set; }

@@ -143,3 +143,31 @@ div.transbox {
 .footer{
     position: fixed; bottom: 0; width: 100%;
 }
+
+/* header */
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: #ff2300;
+}
+.gray { color: #999999; }
+.red { color: #FF0000; }
+span.ex1 {
+    color: red;
+	}
+mark.ex1 {
+		background-color: red;
+    color: white;
+	}	
+	
+	button.ex1 {
+    background-color: #FF0000; /* Green */
+    border: none;
+    width:100px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.button1 {border-radius: 30px;}

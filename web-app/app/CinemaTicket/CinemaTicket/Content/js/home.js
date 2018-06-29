@@ -11,6 +11,8 @@ var filmController = function ($scope, $http) {
     $scope.currentCinemaIndex = 0; // which cinema is focus
     $scope.pageIdex = 0;
     $scope.maxItem = 8;
+    $scope.resellEmail;
+    $scope.resellData;
     $http({
         method: "POST",
         url: "Schedule/LoadScheduleGroupByCinema"
@@ -37,6 +39,13 @@ var filmController = function ($scope, $http) {
     });
 
     $scope.onclickGroupCinema = function (index) {
+        for (var i = 0 ; i < $scope.scheduleList.length; i++) {
+            var anId = "groupcinema" + i;
+            document.getElementById(anId).style.opacity = 0.4;
+        }
+        var elementId = "groupcinema" + index;
+        document.getElementById(elementId).style.opacity = 1;
+
         $scope.currentGroupCinemaIndex = index;
         $scope.currentCinemaIndex = 0;
         $scope.currentCinemaList = $scope.scheduleList[$scope.currentGroupCinemaIndex].cinemas;
@@ -49,6 +58,13 @@ var filmController = function ($scope, $http) {
         console.log("currentCinemaIndex: " + $scope.currentCinemaIndex);
     };
     $scope.onclickCinema = function (index) {
+        for (var i = 0 ; i < $scope.currentCinemaList.length; i++) {
+            var anId = "cinema" + i;
+            document.getElementById(anId).style.borderColor = "white";
+        }
+        var elementId = "cinema" + index;
+        document.getElementById(elementId).style.border = "1px solid red";
+
         $scope.currentCinemaIndex = index;
         $scope.currentFilmInScheduleList = $scope.currentCinemaList[$scope.currentCinemaIndex].films;
     };
@@ -96,7 +112,7 @@ var filmController = function ($scope, $http) {
         return false;
     },
     $scope.gotoFilmDetail = function (id) {
-        window.location.href = 'home/FilmDetail?filmId='+id;
+        window.location.href = 'home/FilmDetail?filmId=' + id;
     },
     $scope.previous = function () {
         $scope.pageIdex--;
@@ -108,6 +124,104 @@ var filmController = function ($scope, $http) {
         if ($scope.pageIdex >= (Math.ceil($scope.FilmData.length / $scope.maxItem))) $scope.pageIdex = 0;
         $scope.CurrentFilmList = $scope.FilmData.slice($scope.pageIdex * $scope.maxItem, (($scope.pageIdex + 1) * $scope.maxItem));
     };
+    $scope.resellTicketSearch = function () {
+        $scope.resellEmail = document.getElementById("resellEmailTxt").value;
+        document.getElementById("findResellTicketBtn").disabled = true;
+        if (validateEmail($scope.resellEmail)) {
+            $http({
+                method: "POST",
+                url: "Ticket/SendResellConfirmCode",
+                params: { email: $scope.resellEmail }
+            })
+            .then(function (response) {
+                $("#confirmResellEmailBlock").slideToggle("slow");
+                document.getElementById("inputEmailResellEmailBlock").style.display = "none"
+            });
+        } else {
+            document.getElementById("findResellTicketBtn").disabled = false;
+            alert("Wrong email format!");
+        }
+    };
+    //checkResellConfirmCode
+    $scope.checkResellConfirmCode = function () {
+        var confirmCode = document.getElementById("resellConfirmCodeTxt").value;
+        console.log("confirmCode: " + confirmCode);
+        $http({
+            method: "POST",
+            url: "Ticket/GetTicketListBelongToMail",
+            params: { confirmCode: confirmCode, email: $scope.resellEmail }
+        })
+        .then(function (response) {
+            if (response.data.isWrong == "true") {
+                alert("Mã xác nhận không đúng.");
+            } else {
+                document.getElementById("confirmResellEmailBlock").style.display = "none";
+                $("#resellTicketList").slideToggle("slow");
+                $scope.resellData = response.data;
+                console.log("resell ticket data");
+                console.log(response.data);
+            }
+        });
+
+    };
+    $scope.postSellingTicket = function (index) {
+        var ticketId = $scope.resellData[index].ticketId;
+        $http({
+            method: "POST",
+            url: "Ticket/PostSellingTicket",
+            params: { ticketId: ticketId }
+        })
+        .then(function (response) {
+            $scope.resellData[index].status = response.data.status;
+            $scope.resellData[index].statusvn = response.data.statusvn;
+        });
+    };
+    $scope.resellTicket = function (index) {
+        var inputId = "customerEmail" + index;
+        var ticketId = $scope.resellData[index].ticketId;
+        var buyerEmail = document.getElementById(inputId).value;
+        if (validateEmail(buyerEmail)) {
+            $http({
+                method: "POST",
+                url: "Ticket/ResellTicket",
+                params: { ticketId: ticketId, buyerEmail : buyerEmail, sellerEmail : $scope.resellEmail }
+            })
+            .then(function (response) {
+                $scope.resellData[index].status = response.data.status;
+                $scope.resellData[index].statusvn = response.data.statusvn;
+            });
+        } else {
+            alert("Email không hợp lệ.");
+        }
+    };
+    $scope.gotoChooseTicket = function (filmId, timeId, startTime) {
+        $http({
+            method: "POST",
+            url: "utility/CompareScheduleTimeForToday",
+            params: { startTime: startTime }
+        })
+        .then(function (response) {
+            if (response.data.valid == "false") {
+                alert("Xuất chiếu đã hết hạn");
+            } else {
+                var cinemaId = $scope.currentCinemaList[$scope.currentCinemaIndex].id;
+                console.log("go to choose seat");
+                console.log("filmId " + filmId);
+                console.log("timeId " + timeId);
+                console.log("cinemaId " + cinemaId);
+
+                var param1 = "<input type='hidden' name='filmId' value='" + filmId + "' />";
+                var param2 = "<input type='hidden' name='timeId' value='" + timeId + "' />";
+                var param3 = "<input type='hidden' name='cinemaId' value='" + cinemaId + "' />";
+
+                document.getElementById('goToChooseTicketForm').innerHTML = param1 + param2 + param3;
+                document.getElementById('goToChooseTicketForm').submit();
+            }
+        });
+    };
+    $scope.getPath = function () {
+
+    }
 }
 
 myApp.controller("filmController", filmController);
@@ -127,4 +241,9 @@ var LocalStorageManager = {
     removeDataFromStorage: function (dataKey) {
         localStorage.removeItem(dataKey);
     }
+}
+
+function validateEmail(inputemail) {
+    var regEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return inputemail.match(regEmail);
 }

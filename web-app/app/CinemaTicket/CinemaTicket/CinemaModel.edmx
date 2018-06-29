@@ -49,6 +49,7 @@
           <Property Name="phone" Type="nvarchar" MaxLength="255" />
           <Property Name="email" Type="nvarchar" MaxLength="255" />
           <Property Name="cinemaId" Type="int" />
+          <Property Name="isAvailable" Type="bit" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -94,6 +95,9 @@
           <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="logoImg" Type="nvarchar" MaxLength="50" />
           <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="address" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="phone" Type="nvarchar" MaxLength="40" />
         </EntityType>
         <EntityType Name="MovieSchedule">
           <Key>
@@ -122,6 +126,7 @@
           <Property Name="phone" Type="nvarchar" MaxLength="255" />
           <Property Name="email" Type="nvarchar" MaxLength="255" />
           <Property Name="groupOfCinemaId" Type="int" />
+          <Property Name="isAvailable" Type="bit" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -163,6 +168,16 @@
           <Property Name="startTime" Type="nvarchar" MaxLength="10" />
           <Property Name="endTime" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="ticketId" />
@@ -175,6 +190,7 @@
           <Property Name="qrCode" Type="nvarchar" MaxLength="255" />
           <Property Name="ticketStatus" Type="nvarchar" MaxLength="20" />
           <Property Name="price" Type="float" />
+          <Property Name="resellDescription" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TypeOfSeat">
           <Key>
@@ -195,6 +211,7 @@
           <Property Name="userPassword" Type="nvarchar" MaxLength="255" />
           <Property Name="phone" Type="nvarchar" MaxLength="255" />
           <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="tix" Type="float" />
         </EntityType>
         <Association Name="FKBookingTicketCustomer001">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -416,6 +433,7 @@
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Seat" EntityType="Self.Seat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShowTime" EntityType="Self.ShowTime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOfSeat" EntityType="Self.TypeOfSeat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
@@ -543,6 +561,7 @@
           <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="cinemaId" Type="Int32" />
+          <Property Name="isAvailable" Type="Boolean" />
           <NavigationProperty Name="Cinema" Relationship="Self.FKCinemaManagerCinema001" FromRole="CinemaManager" ToRole="Cinema" />
         </EntityType>
         <EntityType Name="Customer">
@@ -593,6 +612,9 @@
           <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="logoImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cinemas" Relationship="Self.FKCinemaGroupCinema001" FromRole="GroupCinema" ToRole="Cinema" />
           <NavigationProperty Name="PartnerAccounts" Relationship="Self.FKPartnerAccountGroupCinema001" FromRole="GroupCinema" ToRole="PartnerAccount" />
           <NavigationProperty Name="TypeOfSeats" Relationship="Self.FKTypeOfSeatGroupCinema001" FromRole="GroupCinema" ToRole="TypeOfSeat" />
@@ -629,6 +651,7 @@
           <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="groupOfCinemaId" Type="Int32" />
+          <Property Name="isAvailable" Type="Boolean" />
           <NavigationProperty Name="GroupCinema" Relationship="Self.FKPartnerAccountGroupCinema001" FromRole="PartnerAccount" ToRole="GroupCinema" />
         </EntityType>
         <EntityType Name="Promotion">
@@ -680,6 +703,16 @@
           <Property Name="endTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleShowTime001" FromRole="ShowTime" ToRole="MovieSchedule" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="ticketId" />
@@ -692,6 +725,7 @@
           <Property Name="qrCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ticketStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Double" />
+          <Property Name="resellDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BookingTicket" Relationship="Self.FKTicketBookingTicket001" FromRole="Ticket" ToRole="BookingTicket" />
           <NavigationProperty Name="MovieSchedule" Relationship="Self.FKTicketMovieSchedule001" FromRole="Ticket" ToRole="MovieSchedule" />
           <NavigationProperty Name="Seat" Relationship="Self.FKTicketSeat001" FromRole="Ticket" ToRole="Seat" />
@@ -717,6 +751,7 @@
           <Property Name="userPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tix" Type="Double" />
         </EntityType>
         <Association Name="FKBookingTicketCustomer001">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -938,6 +973,7 @@
           <EntitySet Name="Rooms" EntityType="Self.Room" />
           <EntitySet Name="Seats" EntityType="Self.Seat" />
           <EntitySet Name="ShowTimes" EntityType="Self.ShowTime" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tickets" EntityType="Self.Ticket" />
           <EntitySet Name="TypeOfSeats" EntityType="Self.TypeOfSeat" />
           <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
@@ -1062,6 +1098,7 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="cinemaId" ColumnName="cinemaId" />
+                <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1111,6 +1148,9 @@
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="logoImg" ColumnName="logoImg" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1142,6 +1182,7 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="groupOfCinemaId" ColumnName="groupOfCinemaId" />
+                <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1189,6 +1230,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CinemaBookingDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="CinemaBookingDBModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
@@ -1200,6 +1252,7 @@
                 <ScalarProperty Name="qrCode" ColumnName="qrCode" />
                 <ScalarProperty Name="ticketStatus" ColumnName="ticketStatus" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="resellDescription" ColumnName="resellDescription" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1222,6 +1275,7 @@
                 <ScalarProperty Name="userPassword" ColumnName="userPassword" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tix" ColumnName="tix" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

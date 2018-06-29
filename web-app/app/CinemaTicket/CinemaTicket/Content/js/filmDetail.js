@@ -15,10 +15,11 @@ var filmController = function ($scope, $http) {
             method: "POST",
             url: "/Film/LoadFilmById",
             params: { filmId: $("#filmId").val() }
-                })
+        })
            .then(function (response) {
                $scope.filmData = response.data;
-        });
+               console.log($scope.filmData);
+           });
 
         $http({
             method: "POST",
@@ -26,6 +27,7 @@ var filmController = function ($scope, $http) {
         })
         .then(function (response) {
             $scope.groupCinemaList = response.data;
+            
         });
 
         $http({
@@ -44,16 +46,31 @@ var filmController = function ($scope, $http) {
         .then(function (response) {
             $scope.data = response.data;
             $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
-               console.log($scope.data);
+            console.log($scope.data);
         });
     });
+
     $scope.groupClickHandler = function (index) {
+        for (var i = 0 ; i < $scope.groupCinemaList.length; i++) {
+            var anId = "groupcinema" + i;
+            document.getElementById(anId).style.color = "black";
+        }
+        var elementId = "groupcinema" + index;
+        document.getElementById(elementId).style.color = "red";
+
         $scope.groupIndex = index;
         $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
         console.log("current data");
         console.log($scope.currentData);
     };
     $scope.dateClickHandler = function (index) {
+        for (var i = 0 ; i < $scope.groupCinemaList.length; i++) {
+            var anId = "dateofweek" + i;
+            document.getElementById(anId).style.color = "black";
+        }
+        var elementId = "dateofweek" + index;
+        document.getElementById(elementId).style.color = "red";
+
         $scope.dateIndex = index;
         $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
         console.log("current data");
@@ -80,25 +97,36 @@ var filmController = function ($scope, $http) {
             }
         }
     };
-    $scope.gotoChooseTicket = function (filmId, timeId, cinemaId) {
+    $scope.gotoChooseTicket = function (filmId, timeId, cinemaId,startTime) {
         var selectDate = $scope.dateList[$scope.dateIndex].fullDate;
-        console.log("filmId " + filmId);
-        console.log("timeId " + timeId);
-        console.log("cinemaId " + cinemaId);
-        console.log("selectDate " + selectDate);
+        $http({
+            method: "POST",
+            url: "/utility/CompareScheduleTimeForSelectedDate",
+            params: { startTime: startTime, selectDate: selectDate }
+        })
+        .then(function (response) {
+            if (response.data.valid == "false") {
+                alert("Xuất chiếu đã hết hạn");
+            } else {
+                console.log("filmId " + filmId);
+                console.log("timeId " + timeId);
+                console.log("cinemaId " + cinemaId);
+                console.log("selectDate " + selectDate);
 
-        var param1 = "<input type='hidden' name='filmId' value='" + filmId + "' />";
-        var param2 = "<input type='hidden' name='timeId' value='" + timeId + "' />";
-        var param3 = "<input type='hidden' name='cinemaId' value='" + cinemaId + "' />";
-        var param4 = "<input type='hidden' name='selectDate' value='" + selectDate + "' />";
-        document.getElementById('goToChooseTicketForm').innerHTML = param1 + param2 + param3 + param4;
-        document.getElementById('goToChooseTicketForm').submit();
+                var param1 = "<input type='hidden' name='filmId' value='" + filmId + "' />";
+                var param2 = "<input type='hidden' name='timeId' value='" + timeId + "' />";
+                var param3 = "<input type='hidden' name='cinemaId' value='" + cinemaId + "' />";
+                var param4 = "<input type='hidden' name='selectDate' value='" + selectDate + "' />";
+                document.getElementById('goToChooseTicketAndTicketForm').innerHTML = param1 + param2 + param3 + param4;
+                document.getElementById('goToChooseTicketAndTicketForm').submit();
+            }
+        }
+    );
     }
 }
+    myApp.controller("filmController", filmController);
 
-myApp.controller("filmController", filmController);
-
-/* console.log(window.location.hostname);
-               console.log(window.location.href);
-               console.log(window.location.pathname);
-               console.log(window.location.href.replace(window.location.pathname, ''));*/
+    /* console.log(window.location.hostname);
+                   console.log(window.location.href);
+                   console.log(window.location.pathname);
+                   console.log(window.location.href.replace(window.location.pathname, ''));*/

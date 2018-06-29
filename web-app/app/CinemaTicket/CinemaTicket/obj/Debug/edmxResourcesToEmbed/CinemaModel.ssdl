@@ -44,6 +44,7 @@
     <Property Name="phone" Type="nvarchar" MaxLength="255" />
     <Property Name="email" Type="nvarchar" MaxLength="255" />
     <Property Name="cinemaId" Type="int" />
+    <Property Name="isAvailable" Type="bit" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
@@ -89,6 +90,9 @@
     <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="logoImg" Type="nvarchar" MaxLength="50" />
     <Property Name="name" Type="nvarchar" MaxLength="255" />
+    <Property Name="address" Type="nvarchar" MaxLength="255" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" />
+    <Property Name="phone" Type="nvarchar" MaxLength="40" />
   </EntityType>
   <EntityType Name="MovieSchedule">
     <Key>
@@ -117,6 +121,7 @@
     <Property Name="phone" Type="nvarchar" MaxLength="255" />
     <Property Name="email" Type="nvarchar" MaxLength="255" />
     <Property Name="groupOfCinemaId" Type="int" />
+    <Property Name="isAvailable" Type="bit" />
   </EntityType>
   <EntityType Name="Promotion">
     <Key>
@@ -158,6 +163,16 @@
     <Property Name="startTime" Type="nvarchar" MaxLength="10" />
     <Property Name="endTime" Type="nvarchar" MaxLength="10" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="Ticket">
     <Key>
       <PropertyRef Name="ticketId" />
@@ -170,6 +185,7 @@
     <Property Name="qrCode" Type="nvarchar" MaxLength="255" />
     <Property Name="ticketStatus" Type="nvarchar" MaxLength="20" />
     <Property Name="price" Type="float" />
+    <Property Name="resellDescription" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TypeOfSeat">
     <Key>
@@ -190,6 +206,7 @@
     <Property Name="userPassword" Type="nvarchar" MaxLength="255" />
     <Property Name="phone" Type="nvarchar" MaxLength="255" />
     <Property Name="email" Type="nvarchar" MaxLength="255" />
+    <Property Name="tix" Type="float" />
   </EntityType>
   <Association Name="FKBookingTicketCustomer001">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -411,6 +428,7 @@
     <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Seat" EntityType="Self.Seat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShowTime" EntityType="Self.ShowTime" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TypeOfSeat" EntityType="Self.TypeOfSeat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />

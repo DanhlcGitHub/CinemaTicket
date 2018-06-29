@@ -22,6 +22,7 @@ namespace CinemaTicket
         public string qrCode { get; set; }
         public string ticketStatus { get; set; }
         public Nullable<double> price { get; set; }
+        public string resellDescription { get; set; }
     
         public virtual BookingTicket BookingTicket { get; set; }
         public virtual MovieSchedule MovieSchedule { get; set; }

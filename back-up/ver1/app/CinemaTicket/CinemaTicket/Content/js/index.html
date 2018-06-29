@@ -1,0 +1,720 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <title>Page Title</title>
+    <style>
+        mark.ex1 {
+            background-color: red;
+            color: white;
+        }
+
+        p.ex1 {
+            padding-top: 60px;
+        }
+
+        h1.ex1 {
+            padding-top: 60px;
+        }
+
+        h6.ex1 {
+            padding-top: 10px;
+        }
+
+        .pink {
+            font-weight: bold;
+            color: #ffc0cb;
+        }
+
+        .red {
+            color: #FF0000;
+        }
+
+        .gray {
+            color: #999999;
+        }
+
+        img.ex1 {
+            width: 50px;
+            height: 50px;
+        }
+
+        ime.ex2 {
+            width: 40px;
+            height: 40px;
+        }
+
+        img.ex4 {
+            width: 30px;
+            height: 30px;
+        }
+
+        .container.container-circle {
+            width: 110px;
+            height: 110px;
+            margin: 100px auto;
+        }
+
+        .checked {
+            color: orange;
+            padding-top: 20px;
+        }
+
+        .prec {
+            top: 30px;
+            position: relative;
+            font-size: 30px;
+        }
+
+        .circle {
+            position: relative;
+            top: 5px;
+            left: 5px;
+            text-align: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            background-color: #E6F4F7;
+        }
+
+        .navbar-nav.navbar-center {
+            position: absolute;
+            left: 50%;
+            transform: translatex(-50%);
+        }
+
+        ul.ex1 {
+            height: 586px;
+            overflow-y: scroll;
+            width: 100%;
+        }
+
+        .navbar-nav .navbar-nav .nav-link {
+            color: rgba(255,255,255,.5);
+        }
+
+        /* change the color of active or hovered links */
+        .navbar-nav .nav-item.active .nav-link,
+        .navbar-nav .nav-item:hover .nav-link {
+            color: #ff2300;
+        }
+
+
+        .card {
+            max-width: calc(106%);
+        }
+
+        .wrapper {
+            height: 100%;
+        }
+
+        .flex-column {
+            flex-direction: column;
+        }
+
+        .flex-grow-1 {
+            flex-grow: 1;
+        }
+
+        .footer {
+            /* position: absolute; */
+            /* bottom: 0; */
+            width: 100%;
+            /* height: 42px; You can also remove this as height can now be dynamic */
+        }
+
+
+        .body {
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            line-height: 1.42857143;
+        }
+
+        .bg-light {
+            background-color: #ffffff !important;
+            background-color: rgba(245, 245, 245, 0.4) !important;
+        }
+
+        span.b {
+            white-space: normal;
+        }
+    </style>
+    <link rel="stylesheet" href="css/circle.css">
+</head>
+<body>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="home" class="container tab-pane active">
+            <br>
+            <div class="row">
+
+                <div class="row col-sm-12 h-100" style="padding-bottom:50px">
+                    <div class="col-sm-1 h-100 border " style="padding-left:0px; padding-right:0px;">
+                        <div class="list-group list-group-flush">
+                            <a class="list-group-item list-group-item-action font-weight-bold" href="#CineStar" style="padding-bottom:20px; padding-top:20px">
+                                <div class="row justify-content-center align-self-center">
+                                    <img src="https://s3img.vcdn.vn/123phim/2017/11/433007c685123da4226af33de215e38a.png" class="ex1">
+                                </div>
+
+
+                            </a>
+                            <a class="list-group-item list-group-item-action font-weight-bold" href="#CineStar" style="padding-bottom:20px; padding-top:20px">
+                                <div class="row justify-content-center align-self-center">
+                                    <img src="https://s3img.vcdn.vn/123phim/2018/02/854e065ed5dfd5441965c99c5e197d56.png" class="ex1" style="opacity:0.4">
+                                </div>
+
+                            </a>
+                            <a class="list-group-item list-group-item-action font-weight-bold" href="#CineStar" style="padding-bottom:20px; padding-top:20px">
+                                <div class="row justify-content-center align-self-center">
+                                    <img src="https://s3img.vcdn.vn/123phim/2017/11/1200c1cac740bdfc228596186754e937.png" class="ex1" style="opacity:0.4">
+                                </div>
+
+
+
+                            </a>
+                            <a class="list-group-item list-group-item-action font-weight-bold" href="#CineStar" style="padding-bottom:20px; padding-top:20px">
+                                <div class="row justify-content-center align-self-center">
+                                    <img src="https://s3img.vcdn.vn/123phim/2017/11/4c803c0b121014f0d1d84675f20c3d4d.png" class="ex1" style="opacity:0.4">
+                                </div>
+
+
+
+                            </a>
+                            <a class="list-group-item list-group-item-action font-weight-bold" href="#CineStar" style="padding-bottom:20px; padding-top:20px">
+                                <div class="row justify-content-center align-self-center">
+                                    <img src="https://s3img.vcdn.vn/123phim/2017/11/058edb9a2f770927f1c70cbafdf5f35f.jpg" class="ex1" style="opacity:0.4">
+                                </div>
+
+
+
+                            </a>
+                            <a class="list-group-item list-group-item-action font-weight-bold" href="#CineStar" style="padding-bottom:20px; padding-top:20px">
+                                <div class="row justify-content-center align-self-center">
+                                    <img src="https://s3img.vcdn.vn/123phim/2015/06/7397224ce337a9c829638cbb8ff47ab2.png" class="ex1" style="opacity:0.4">
+                                </div>
+
+
+
+                            </a>
+                            <a class="list-group-item list-group-item-action font-weight-bold" href="#CineStar" style="padding-bottom:20px; padding-top:20px">
+                                <div class="row justify-content-center align-self-center">
+                                    <img src="https://s3img.vcdn.vn/123phim/2017/11/526c679660edac88b195a9008590b1e8.png" class="ex1" style="opacity:0.4">
+                                </div>
+
+
+
+                            </a>
+                            <a class="list-group-item list-group-item-action font-weight-bold" href="#CineStar" style="padding-bottom:20px; padding-top:20px">
+                                <div class="row justify-content-center align-self-center">
+                                    <img src="https://s3img.vcdn.vn/123phim/2014/04/b216b21c3fbc33d5c60f2b504a7506cd.png" class="ex1" style="opacity:0.4">
+                                </div>
+
+
+
+                            </a>
+                            <a class="list-group-item list-group-item-action font-weight-bold" href="#CineStar" style="padding-bottom:20px; padding-top:20px">
+                                <div class="row justify-content-center align-self-center">
+                                    <img src="https://s3img.vcdn.vn/123phim/2014/04/6747883e8f7ef84d6cbd9c49dc5f3e0a.png" class="ex1" style="opacity:0.4">
+                                </div>
+
+
+
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3 border border-top" style="overflow-y: auto; max-height:820px;padding-left:0px; padding-right:0px">
+                        <div class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="list-group-item" style="opacity:0.4">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="list-group-item" style="opacity:0.4">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="list-group-item" style="opacity:0.4">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="list-group-item" style="opacity:0.4">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="list-group-item" style="opacity:0.4">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="list-group-item" style="opacity:0.4">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="list-group-item" style="opacity:0.4">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="list-group-item" style="opacity:0.4">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="list-group-item" style="opacity:0.4">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+                            <li class="list-group-item" style="opacity:0.4">
+                                <button type="button" class="list-group-item list-group-item-action btn" href="#demo" style="padding-left:0px; padding-right:0px">
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                                            <img src="glx-pic.jpg" class="ex1">
+                                        </div>
+                                        <div class="col-sm-9" style="font-size:11px;">
+                                            <span class="text-warning font-weight-bold">GLX</span>- <span class="font-weight-bold">Nguyễn Du</span><br> <span class="gray">116 Nguyễn Du, Q.1</span><br> <span class="red">[Bản đồ]</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </li>
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-8  no-gutters" style="padding-left:0px; padding-right:0px">
+                        <div class="col-sm-12 border border-top" style="overflow-y: auto;max-height:820px">
+                            <div class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                    <img src="https://s3img.vcdn.vn/123phim/2015/03/9fae6901cdcf6f3a82dd85aa4d07f8a3.jpg" class="ex1">
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <span class="font-weight-bold b"><mark class="ex1">C13</mark>- Thế Giới Khủng Long: Vương Quốc Sụp Đổ - Jurassic World: Fallen Kingdom</span><br> <span class="gray">128 phút - 123Phim 8.2 - IMDb 6.7</span>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+
+
+                                        </button>
+                                    </div>
+                                    <div class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">08:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">10:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">12:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                        </div>
+
+
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                    <img src="https://s3img.vcdn.vn/123phim/2015/03/9fae6901cdcf6f3a82dd85aa4d07f8a3.jpg" class="ex1">
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <span class="font-weight-bold b"><mark class="ex1">C13</mark>- Thế Giới Khủng Long: Vương Quốc Sụp Đổ - Jurassic World: Fallen Kingdom</span><br> <span class="gray">128 phút - 123Phim 8.2 - IMDb 6.7</span>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+
+
+                                        </button>
+                                    </div>
+                                    <div class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">08:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">10:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">12:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                        </div>
+
+
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                    <img src="https://s3img.vcdn.vn/123phim/2015/03/9fae6901cdcf6f3a82dd85aa4d07f8a3.jpg" class="ex1">
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <span class="font-weight-bold b"><mark class="ex1">C13</mark>- Thế Giới Khủng Long: Vương Quốc Sụp Đổ - Jurassic World: Fallen Kingdom</span><br> <span class="gray">128 phút - 123Phim 8.2 - IMDb 6.7</span>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+
+
+                                        </button>
+                                    </div>
+                                    <div class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">08:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">10:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">12:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                        </div>
+
+
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                    <img src="https://s3img.vcdn.vn/123phim/2015/03/9fae6901cdcf6f3a82dd85aa4d07f8a3.jpg" class="ex1">
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <span class="font-weight-bold b"><mark class="ex1">C13</mark>- Thế Giới Khủng Long: Vương Quốc Sụp Đổ - Jurassic World: Fallen Kingdom</span><br> <span class="gray">128 phút - 123Phim 8.2 - IMDb 6.7</span>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+
+
+                                        </button>
+                                    </div>
+                                    <div class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">08:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">10:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">12:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                        </div>
+
+
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                    <img src="https://s3img.vcdn.vn/123phim/2015/03/9fae6901cdcf6f3a82dd85aa4d07f8a3.jpg" class="ex1">
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <span class="font-weight-bold b"><mark class="ex1">C13</mark>- Thế Giới Khủng Long: Vương Quốc Sụp Đổ - Jurassic World: Fallen Kingdom</span><br> <span class="gray">128 phút - 123Phim 8.2 - IMDb 6.7</span>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+
+
+                                        </button>
+                                    </div>
+                                    <div class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">08:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">10:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">12:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                        </div>
+
+
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                    <img src="https://s3img.vcdn.vn/123phim/2015/03/9fae6901cdcf6f3a82dd85aa4d07f8a3.jpg" class="ex1">
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <span class="font-weight-bold b"><mark class="ex1">C13</mark>- Thế Giới Khủng Long: Vương Quốc Sụp Đổ - Jurassic World: Fallen Kingdom</span><br> <span class="gray">128 phút - 123Phim 8.2 - IMDb 6.7</span>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+
+
+                                        </button>
+                                    </div>
+                                    <div class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">08:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">10:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">12:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                        </div>
+
+
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                    <img src="https://s3img.vcdn.vn/123phim/2015/03/9fae6901cdcf6f3a82dd85aa4d07f8a3.jpg" class="ex1">
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <span class="font-weight-bold b"><mark class="ex1">C13</mark>- Thế Giới Khủng Long: Vương Quốc Sụp Đổ - Jurassic World: Fallen Kingdom</span><br> <span class="gray">128 phút - 123Phim 8.2 - IMDb 6.7</span>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+
+
+                                        </button>
+                                    </div>
+                                    <div class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">08:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">10:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">12:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                        </div>
+
+
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                            <div class="row col-sm-12">
+                                                <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                    <img src="https://s3img.vcdn.vn/123phim/2015/03/9fae6901cdcf6f3a82dd85aa4d07f8a3.jpg" class="ex1">
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <span class="font-weight-bold b"><mark class="ex1">C13</mark>- Thế Giới Khủng Long: Vương Quốc Sụp Đổ - Jurassic World: Fallen Kingdom</span><br> <span class="gray">128 phút - 123Phim 8.2 - IMDb 6.7</span>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+
+
+                                        </button>
+                                    </div>
+                                    <div class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">08:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">10:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">12:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">14:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">15:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">17:00</p></a>
+                                            <a href="#" style="padding-left:3%"><p class="text-success font-weight-bold" style="font-size:25px;">19:00</p></a>
+                                        </div>
+
+
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

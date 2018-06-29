@@ -9,6 +9,7 @@ namespace CinemaTicket.Service
 {
     interface ITicketService
     {
+        List<Ticket> getTicketByEmail(string email);
     }
     public class TicketService : ITicketService
     {
@@ -36,6 +37,11 @@ namespace CinemaTicket.Service
         public List<Ticket> FindBy(Expression<Func<Ticket, bool>> predicate)
         {
             return ticketRepository.FindBy(predicate);
+        }
+
+        public List<Ticket> getTicketByEmail(string email)
+        {
+            return ticketRepository.getTicketByEmail(email);
         }
     }
 }

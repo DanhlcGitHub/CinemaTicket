@@ -10,17 +10,158 @@
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/css/filmDetail.css">
     <link rel="stylesheet" href="~/Content/css/common.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body ng-controller="filmController">
-    <!-- filmDialog -->
-    <div id="myModal" class="modal">
+    <!-- The Video Modal -->
+    <div class="modal" id="myModalTrailer">
 
-        <!-- filmDialogContent -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <iframe id="myIframe" width="100%" height="515" src="" frameborder="0" allowfullscreen=""></iframe>
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+            <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-body" style="padding:0;">
+                    <button type="button" class="close mynewclassclose" data-dismiss="modal" aria-hidden="true">
+                        <img src="http://expediaholiday.d.seven2.net/_images/modal_close.png" />
+                    </button>
+                    <div class="videoWrapper">
+                        <iframe id="myIframe" width="100%" height="100%" src=""></iframe>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+
+
+            </div>
         </div>
+    </div>
+    
+    <!-- The Login Modal -->
+    <div class="modal" id="myModalLogin">
 
+        <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
+
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header d-block" style="background-color:#e8e8e8">
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title font-weight-bold text-center">Đăng nhập</h4>
+                    <div class="text-center">
+                        <span class="text-center">Cần tạo tài khoản? </span><a href="#"><span ng-click="showRegister()" class="text-center text-success">Đăng ký</span></a>
+                    </div>
+
+
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="email" id="login_username" class="form-control" placeholder="Tên đăng nhập">
+                                    <input type="password" id="login_password" class="form-control" placeholder="Mật khẩu">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 float-left">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Ghi nhớ
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-right">
+                                    <a href="#" class="float-right">Quên mật khẩu?</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="button" ng-click="login()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Đăng nhập</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+
+
+            </div>
+        </div>
+    </div>
+    <!--register modal-->
+    <div class="modal" id="myModalRegister">
+
+        <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
+
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header d-block" style="background-color:#e8e8e8">
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title font-weight-bold text-center">Đăng ký</h4>
+                    <div class="text-center">
+                        <span class="text-center">Bạn đã có tài khoản? </span><a href="#"><span class="text-center text-success" ng-click="showLogin()">Đăng nhập</span></a>
+                    </div>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-7 float-left" style="padding-left:0px; padding-right:0px">
+                                        <input id="register_email" type="text" class="form-control" placeholder="eMail">
+                                    </div>
+                                    <div class="col-sm-5 float-right" style="padding-left:0px; padding-right:0px">
+                                        <input id="register_phone" type="text" class="form-control" placeholder="Số điện thoại">
+                                    </div>
+                                    <input id="register_username" type="text" class="form-control" placeholder="Tên đăng nhập">
+                                    <input id="register_password" type="password" class="form-control" placeholder="Mật khẩu">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="text-center">
+                                    <span class="text-center" style="color: gray">Bằng vào việc đăng ký và sử dụng trang web, bạn đã đồng ý với các </span><a href="#"><span>Điều khoản & Quy chế</span></a>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="button" ng-click="register()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Hoàn tất</button>
+                            </div>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+
+
+            </div>
+        </div>
+    </div>
+    <!-- validate Modal -->
+    <div class="modal fade" id="validateModal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                    <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                </div>
+                <div class="modal-body justify-content-center align-self-center ">
+                    <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button id="dismissBtn" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
+
+                </div>
+
+            </div>
+        </div>
     </div>
     <form method="post" target="_blank" action="/home/ChooseTicket" id="goToChooseTicketForm" style="display:none"></form>
     <form method="post" target="_blank" action="/home/ChooseTicketAndSeat" id="goToChooseTicketAndTicketForm" style="display:none"></form>
@@ -48,17 +189,18 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+                    <span class="nav-link" ng-if="userData == ''" ng-click="showLogin()"><i class="fa fa-user"></i> Đăng nhập</span>
+                    <div class="original-box">
+                        <span class="nav-link" ng-if="userData != ''"><i class="fa fa-user"></i> {{userData.username}}</span>
+                        <div class="popup-box popup-box-left border" style="height:35px; width: 100px">
+                            <a ng-click="logout()" href="#">Đăng xuất</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        Thành phố
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Hồ Chí Minh</a>
-                        <a class="dropdown-item" href="#">Hà Nội</a>
-                        <a class="dropdown-item" href="#">Nha Trang</a>
-                    </div>
+                    <span ng-click="showRegister()" class="nav-link dropdown-toggle" data-toggle="dropdown" id="myBtn2">
+                        Đăng ký
+                    </span>
                 </li>
             </ul>
         </nav>
@@ -66,7 +208,7 @@
     <div class="container">
         <div class="row col-sm-12" style="padding-top: 100px;">
             <div class="col-sm-4">
-                <div class="myContainer">
+                <div class="myContainer" style="margin: 0 25px 0 25px">
                     <img ng-click="gotoFilmDetail(aFilm.id)" width="255"
                          height="370" class="img-movie rounded" ng-src="{{filmData.img}}" alt="Film image">
                     <div class="middle">

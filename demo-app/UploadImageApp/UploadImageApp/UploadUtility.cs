@@ -9,6 +9,7 @@ namespace UploadImageApp
 {
     public class UploadUtility
     {
+        
         public static void Upload(string fileName, string uri)
         {
             // Get the object used to communicate with the server.  
@@ -16,8 +17,8 @@ namespace UploadImageApp
             request.Method = WebRequestMethods.Ftp.UploadFile;
 
             // This example assumes the FTP site uses anonymous logon. 
-            string username = "a1442518";
-            string password = "congdanh123";
+            string username = "fptstudent";
+            string password = "123456789";//
             request.Credentials = new NetworkCredential(username, password);
 
             // Copy the contents of the file to the request stream.  

@@ -21,6 +21,11 @@ var myApp = angular.module("chooseTicketModule", []);
 var chooseTicketController = function ($scope, $http) {
     $scope.scheduleId;
     $scope.totalAmount = 0;
+    $scope.userKey = "userKey";
+    $scope.userData = LocalStorageManager.loadDataFromStorage($scope.userKey);
+    if ($scope.userData == undefined) {
+        $scope.userData = "";
+    }
 
     angular.element(document).ready(function () {
         console.log("init");
@@ -35,8 +40,7 @@ var chooseTicketController = function ($scope, $http) {
             $scope.chooseTicketData = response.data;
             console.log($scope.chooseTicketData);
             
-            document.getElementById("filmInforSidebar").style.background = "linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ) url('" + $scope.chooseTicketData.img + "' no-repeat)";
-            //document.getElementById("filmInforSidebar").style.backgroundImage = "url('" + $scope.chooseTicketData.img + "')";
+            document.getElementById("filmInforSidebar").style.backgroundImage = "url('" + $scope.chooseTicketData.img + "')";
             $scope.calculateTotalAmout();
 
             //set data for service
@@ -124,7 +128,7 @@ var chooseTicketController = function ($scope, $http) {
     $scope.phone;
     $scope.ticketData;
     $scope.currentCart = [];
-    $scope.countDown = 60;
+    $scope.countDown = 300;
     $scope.exchangeRate = 23000;
     $scope.isActionClick = false;
 
@@ -455,7 +459,42 @@ var chooseTicketController = function ($scope, $http) {
     $scope.goHome = function () {
         document.getElementById('gotoHomeForm').submit();
     };
-
+    /*================ Login  Part*/
+    $scope.showLogin = function () {
+        $("#myModalLogin").modal();
+    };
+    $scope.login = function () {
+        var username = $("#login_username").val();
+        var password = $("#login_password").val();
+        if (username == "" || password == "") {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Bạn chưa nhập tài khoản và mật khẩu!");
+        } else {
+            $http({
+                method: "POST",
+                url: "/Login/CheckLogin",
+                params: { username: username, password: password }
+            })
+            .then(function (response) {
+                console.log(response.data);
+                var status = response.data.status;
+                if (status == "valid") {
+                    $('#validateModal').modal();
+                    $("#myModalLogin").modal('hide');
+                    $("#modalMessage").html("Đăng nhập thành công!");
+                    $scope.userData = response.data;
+                    LocalStorageManager.saveToLocalStorage(response.data, $scope.userKey);
+                } else if (status == "notValid") {
+                    $('#validateModal').modal();
+                    $("#modalMessage").html("Đăng nhập thất bại, sai tên đăng nhập hoặc mật khẩu!");
+                }
+            });
+        }
+    };
+    $scope.logout = function () {
+        LocalStorageManager.removeDataFromStorage($scope.userKey);
+        $scope.userData = "";
+    }
 };
 myApp.controller("chooseTicketController", chooseTicketController);
 

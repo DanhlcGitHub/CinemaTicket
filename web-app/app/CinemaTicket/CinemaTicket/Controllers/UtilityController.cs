@@ -15,7 +15,7 @@ namespace CinemaTicket.Controllers
         public JsonResult CompareScheduleTimeForToday(string startTime)
         {
             DateTime today = DateTime.Now;
-            string dateInput = today.Year + "-" + today.Month + "-" + today.Day + " " + startTime;
+            string dateInput = today.Year + "-" + today.Month + "-" + today.Day + " " + startTime;//21:30
             DateTime currentDate = DateTime.Parse(dateInput);
             var obj = new
             {

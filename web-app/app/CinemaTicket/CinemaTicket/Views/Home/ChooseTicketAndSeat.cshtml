@@ -42,7 +42,13 @@
                     </div>
                     <div class="col-sm-5 float-right" style="padding-left:0px; padding-right:0px">
                         <div class="nav-item float-right">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+                            <a class="nav-link" ng-if="userData == ''" href="#" ng-click="showLogin()"><i class="fa fa-user"></i> Đăng nhập</a>
+                            <div class="original-box">
+                                <span class="nav-link" ng-if="userData != ''"><i class="fa fa-user"></i> {{userData.username}}</span>
+                                <div class="popup-box popup-box-left border" style="height:35px; width: 100px">
+                                    <a ng-click="logout()" href="#">Đăng xuất</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -69,7 +75,7 @@
         <!-- area choose quantity -->
         <div id="chooseTicketContent">
             <div class="col-sm-12">
-                <div class="row" style="padding-top: 7%;padding-left:70px">
+                <div class="row" style="padding-top: 7%; padding-left: 25%">
                     <img ng-src="{{chooseTicketData.groupCinemaImg}}" class="ex1 ex2 pull-left">
                     <div style="padding-top: 10px; padding-left: 20px">
                         <p class="ex2" style="margin-bottom: 0;">{{chooseTicketData.cinemaName}}</p><br>
@@ -78,7 +84,7 @@
 
                 </div>
 
-                <div class="table-responsive borderless" style="padding-top: 7%; padding-left:70px">
+                <div class="table-responsive borderless" style="padding-top: 7%; padding-left:25%">
                     <table class="table">
                         <tbody>
                             <tr ng-repeat="seatType in chooseTicketData.typeOfSeats" class="" style="border-top: hidden;">
@@ -109,12 +115,16 @@
 
                         <div class="">
                             <div class="card" style="width:31rem; height:95px">
-                                <div class="card-body ">
-                                    <h4>TỔNG TIỀN:{{totalAmount}} </h4>
+                                <div class="card-body " style="padding-left: 0px; padding-right: 0px; padding-top: 0px;">
+                                    <div class="col-sm-8 float-left">
+                                        <h4>TỔNG TIỀN:{{totalAmount}} </h4>
+                                    </div>
+                                    <div class="col-sm-4 float-right" style="background-color:green">
+                                        <h4 class="text-center text-white font-weight-bold" href="#" style="height:85px;padding-top:30px" ng-click="gotoChooseSeat()">Chọn Ghế </h4>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div><div class="">
-                            <button id="chooseSeatButtonId" type="button" class="btn btn-success btn-xx" ng-click="gotoChooseSeat()">Chọn Ghế</button>
                         </div>
                     </div>
                 </div>
@@ -140,11 +150,11 @@
                 </div><br /><br />
                 <p>
                     <label>E-mail</label>
-                    <input id="emailId" class="w3-input" type="text" value="danhlcse61769@fpt.edu.vn">
+                    <input id="emailId" class="w3-input" type="text" value="{{userData.email}}">
                 </p>
                 <p>
                     <label>Phone</label>
-                    <input id="phoneId" class="w3-input" type="text" value="1234567899">
+                    <input id="phoneId" class="w3-input" type="text" value="{{userData.phone}}">
                 </p>
                 <b>Hình thức thanh toán</b><br />
                 <div>
@@ -194,9 +204,9 @@
                                 </div>
                                 <div ng-if="seat.seatStatus == 'resell'" class="original-box">
                                     <button class="{{seat.className}}" type="button">{{seat.px + 1}}</button>
-                                    <div class="popup-box popup-box-left">
-                                        <p>{{seat.emailOwner}}</p>
-                                        <p>{{seat.resellDescription}}</p>
+                                    <div class="popup-box popup-box-left" style="height:70px;width:250px;text-align:left">
+                                        <b>{{seat.emailOwner}}</b><br />
+                                        <b style="color:red">Mô tả: {{seat.resellDescription}}</b>
                                     </div>
                                 </div>
                             </div>
@@ -216,24 +226,64 @@
     </div>
 
     <!-- The Modal Area ============================================================================-->
-    <!-- validate Modal -->
-    <div class="modal fade" id="validateModal" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
+    <!-- The Login Modal -->
+    <div class="modal" id="myModalLogin">
+
+        <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
+
             <div class="modal-content">
-                <div class="modal-header justify-content-center align-self-center border-bottom-0">
-                    <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
-                </div>
-                <div class="modal-body justify-content-center align-self-center ">
-                    <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button id="dismissBtn" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
+
+                <!-- Modal Header -->
+                <div class="modal-header d-block" style="background-color:#e8e8e8">
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title font-weight-bold text-center">Đăng nhập</h4>
+                    <div class="text-center">
+                        <span class="text-center">Cần tạo tài khoản? </span><a href="#"><span ng-click="showRegister()" class="text-center text-success">Đăng ký</span></a>
+                    </div>
+
 
                 </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="email" id="login_username" class="form-control" placeholder="Tên đăng nhập">
+                                    <input type="password" id="login_password" class="form-control" placeholder="Mật khẩu">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 float-left">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Ghi nhớ
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-right">
+                                    <a href="#" class="float-right">Quên mật khẩu?</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="button" ng-click="login()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Đăng nhập</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+
 
             </div>
         </div>
     </div>
+
 
     <!-- backdropModal -->
     <div class="modal fade" id="backdropModal" data-backdrop="static" data-keyboard="false" role="dialog">
@@ -255,81 +305,180 @@
 
     <!-- confirm ticket modal  -->
     <div class="modal fade" id="confirmTicketModal" data-backdrop="static" data-keyboard="false" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <span id="btnCloseConfirmDialog" class="close">&times;</span>
-                <div class="content">
-                    <div class="box-a row container" style="width: 80%; margin-left: 10%; margin-right: 10%;">
-                        <div class="img-film column">
-                            <img style="width: 180px;" ng-src="{{scheduleData.img}}">
-                        </div>
-                        <div class="info column" style="margin-left: 40px;">
-                            <div class="title-info container">
-                                <span class="icon">C16</span>
-                                <span class="icon">2D</span>
-                                <span class="icon">Digital</span>
-                                <p style="display: inline-block">{{scheduleData.filmName}}</p>
-                                <hr>
-                                <p><i class="far fa-circle"></i>Giao dịch sẽ hết hạn trong vòng: <span ng-model="countDown" style="color: red; font-weight: bold;">{{Math.floor(countDown/60)}}:{{countDown%60}}</span> s</p>
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 60% !important;">
+            <!--<div class="modal-content">
+      
+                <div class="modal-body">
+                    <div class="container">
+                        <button type="button" class="close" data-dismiss="modal" style="right:0px"><img src="close_black.png" class="img-rounded" alt="Cinque Terre" "></button>
+                        <div class="row col-sm-12">
+
+                            <div class="col-sm-4">
+                                <img src="https://s3img.vcdn.vn/mobile/123phim/2018/04/thuong-men-simon-15226451346899_220x310.jpg" class="img-rounded" alt="Cinque Terre" style="height:300px">
                             </div>
-                            <div class="content-info">
-                                <h2>{{scheduleData.cinemaName}}</h2>
-                                <p>{{scheduleData.cinemaAddress}}</p>
-                                <div class="info-sticket">
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th>Mã vé:</th>
-                                            <td>2685058</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Suất chiếu:</th>
-                                            <td>{{scheduleData.startTime}} {{scheduleData.date}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Phòng:</th>
-                                            <td>{{scheduleData.cinemaName}} - {{scheduleData.roomName}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Ghế: </th>
-                                            <td><span ng-repeat="seat in choosedList">{{alpha[seat.py]}}{{seat.px+1}}</span></td>
-                                        </tr>
-                                    </table>
+                            <div class="col-sm-8">
+                                <div class="row col-sm-12">
+
+                                    <div class="row col-sm-12">
+                                        <div class="col-sm-12">
+                                            <span class="text-warning font-weight-bold " style="font-size:25px">GLX</span><span class="font-weight-bold" style="font-size:25px"> - Nguyễn Du</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
+                                            <p class="font-weight-bold">Thông tin vé</p>
+                                        </div>
+                                        <hr>
+     
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p class="font-weight-bold">Suất chiếu</p>
+                                            </div>
+                                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                                <p class="">12:50 27/06</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p class="font-weight-bold">Phòng</p>
+                                            </div>
+                                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                                <p class="">Rạp 1</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p class="font-weight-bold">Ghế</p>
+                                            </div>
+                                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                                <p class="">C06, C07, C08, C09</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
+                                            <p class="font-weight-bold">Thông tin người đặt vé</p>
+                                        </div>
+                                        <hr>
+                                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="font-weight-bold">Điện thoại:</p>
+                                                </div>
+                                                <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                                    <p class="">123456789</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="font-weight-bold">Email:</p>
+                                                </div>
+                                                <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                                    <p class="">danlc@gmail.com</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="font-weight-bold">Tổng tiền</p>
+                                                </div>
+                                                <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                                    <p class="">260.000 đ</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="button-glow col-sm-12" style="padding-left:0px; padding-right: 0px">
+                                        <button type="button" class="btn btn-danger btn-block">Mua vé</button>
+                                    </div>
+
                                 </div>
                             </div>
-                            <hr>
                         </div>
                     </div>
-                    <div class="box-b" style="width: 80%; margin-left: 10%; margin-right: 10%; margin-top: 30px;">
-                        <h4>Thông tin đặt vé</h4>
-                        <table style="width:100%">
-                            <tr>
-                                <th>Họ tên:</th>
-                                <td>danhlc</td>
-                            </tr>
-                            <tr>
-                                <th>Điện thoại</th>
-                                <td>{{phone}}</td>
-                            </tr>
-                            <tr>
-                                <th>Email:</th>
-                                <td>{{email}}</td>
-                            </tr>
-                            <tr>
-                                <th>Trạng thái:</th>
-                                <td>đang chờ kết quả thanh toán</td>
-                            </tr>
-                            <tr>
-                                <th>Tổng tiền</th>
-                                <td>{{totalAmount}}đ</td>
-                            </tr>
-                        </table>
+                </div>
+            </div>-->
+            <div class="modal-content">
+                <div class="float-right"><span id="btnCloseConfirmDialog" class="close float-right">&times;</span></div>
+            
+            <div class="content">
+                <div class="box-a row container" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+                    <div class="img-film column">
+                        <img style="width: 200px; height: 100%" ng-src="{{scheduleData.img}}">
                     </div>
-                    <p id="paypal-button-container" style="text-align: center; font-size: 50px; font-weight: bold">Thanh Toan Paypal</p>
-                    <div style="width: 80%; margin-left: 10%; margin-right: 10%; margin-top: 30px;">
-                        <p><i class="far fa-circle"></i>Vui lòng bấm nút bên trên để hoàn tất thanh toán</p>
-                        <p><i class="far fa-circle"></i>Mã vé sẽ được gửi qua số điện thoại và email của bạn</p>
+                    <div class="info column" style="margin-left: 40px;">
+                        <p><i class="far fa-circle"></i>Giao dịch sẽ hết hạn trong vòng: <span ng-model="countDown" style="color: red; font-weight: bold;">{{Math.floor(countDown/60)}}:{{countDown%60}}</span> s</p>
+                        <div class="content-info">
+                            <h2>{{scheduleData.cinemaName}}</h2>
+                            <p>{{scheduleData.cinemaAddress}}</p>
+                            <div class="info-sticket">
+                                <table style="width:100%">
+                                    <tr>
+                                        <th>Suất chiếu:</th>
+                                        <td>{{scheduleData.startTime}} {{scheduleData.date}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phòng:</th>
+                                        <td>{{scheduleData.cinemaName}} - {{scheduleData.roomName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ghế: </th>
+                                        <td><span ng-repeat="seat in choosedList">{{alpha[seat.py]}}{{seat.px+1}}</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="content-info">
+                            <div class="info-sticket">
+                                <table style="width:100%">
+                                    <tr>
+                                        <th>Điện thoại:</th>
+                                        <td>{{phone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td>{{email}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tổng tiền:</th>
+                                        <td>{{totalAmount}}đ</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="draw">
+                            <p id="paypal-button-container" style="text-align: center; font-weight: bold">Thanh Toan Paypal</p>
+                        </div>
+                        
+                    </div>
+                </div>
+               
 
-                    </div>
+                <!--<p id="paypal-button-container" style="text-align: center; font-size: 50px; font-weight: bold">Thanh Toan Paypal</p>
+                <div style="width: 80%; margin-left: 10%; margin-right: 10%; margin-top: 30px;">
+                    <p><i class="far fa-circle"></i>Vui lòng bấm nút bên trên để hoàn tất thanh toán</p>
+                    <p><i class="far fa-circle"></i>Mã vé sẽ được gửi qua số điện thoại và email của bạn</p>
+
+                </div>-->
+            </div>
+
+        </div>
+        </div>
+    </div>
+    <!-- validate Modal -->
+    <div class="modal fade" id="validateModal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                    <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                </div>
+                <div class="modal-body justify-content-center align-self-center ">
+                    <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button id="dismissBtn" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
+
                 </div>
 
             </div>

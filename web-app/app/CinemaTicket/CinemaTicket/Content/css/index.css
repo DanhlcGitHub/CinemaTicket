@@ -400,3 +400,72 @@ span.b {
 .hideinfo:hover .info {
     display: none;
 }
+
+p.ex1 {
+	color: gray;
+   width: 100%; 
+   text-align: center; 
+   border-bottom: 1px solid #000; 
+   line-height: 0.1em;
+   margin: 10px 0 20px; 
+   text-color:#999999;
+} 
+
+p.ex1 span { 
+    background:#fff; 
+    padding:0 10px; 
+}
+
+button.ex1 {
+    background-color: #FF0000; /* Green */
+    border: none;
+    width: 100px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.button1 {
+    border-radius: 30px;
+}
+/*----------------------popup box hover-------------------------*/
+.original-box {
+	position:relative;
+	float:left;
+	overflow:hidden;
+}
+.popup-box {
+	position:absolute;
+	top:0px;
+	width:230px;
+	height:230px;
+	padding:10px;
+	background-color:white;
+	color: black;
+	-moz-transition:all 0.4s;
+	-webkit-transition:all 0.4s;
+	-o-transition:all 0.4s;
+	transition:all 0.4s;
+	opacity:0;
+	filter:Alpha(opacity=0);
+    z-index: 999;
+}
+.original-box:hover {
+	overflow:visible;
+	cursor:pointer;
+}
+.original-box:hover .popup-box {
+	top:25px;
+	opacity:1;
+	filter:Alpha(opacity=100);
+}
+.popup-box-left {
+	left:0px;
+}
+.original-box:hover .popup-box-left {
+	left:25px;
+}
+/*-------------------------------------------------------------*/
+	

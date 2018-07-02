@@ -1,9 +1,8 @@
 ﻿/// <reference path="bootstrap.min.js" />
-$(function () {
-    //FilmManager.loadFilmList();
-    //FilmManager.loadCinema();
-    //console.log("run it");
+$(document).ready(function () {
+
 });
+
 
 var myApp = angular.module("homeModule", []);
 var filmController = function ($scope, $http) {
@@ -13,6 +12,15 @@ var filmController = function ($scope, $http) {
     $scope.maxItem = 8;
     $scope.resellEmail;
     $scope.resellData;
+    $scope.userKey = "userKey";
+    $scope.userData = LocalStorageManager.loadDataFromStorage($scope.userKey);
+    if ($scope.userData == undefined) {
+        $scope.userData = "";
+    }
+    $('#myModalTrailer').on("hidden.bs.modal", function () {
+        $('#myIframe').prop('src', "");
+    });
+
     $http({
         method: "POST",
         url: "Schedule/LoadScheduleGroupByCinema"
@@ -70,24 +78,8 @@ var filmController = function ($scope, $http) {
     };
     $scope.openTrailerDialog = function (url) {
         console.log(url);
-        var modal = document.getElementById('myModal');
-        var myIframe = document.getElementById('myIframe');
-        modal.style.display = "block";
-        var span = document.getElementsByClassName("close")[0];
         $('#myIframe').prop('src', url);
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-                $('#myIframe').prop('src', "");
-            }
-        }
+        $('#myModalTrailer').modal();
     };
     $scope.loadUpcommingMovie = function (event) {
         $("#showingMovieId").attr('class', 'nav-link text-muted');
@@ -184,7 +176,7 @@ var filmController = function ($scope, $http) {
             $http({
                 method: "POST",
                 url: "Ticket/ResellTicket",
-                params: { ticketId: ticketId, buyerEmail : buyerEmail, sellerEmail : $scope.resellEmail }
+                params: { ticketId: ticketId, buyerEmail: buyerEmail, sellerEmail: $scope.resellEmail }
             })
             .then(function (response) {
                 $scope.resellData[index].status = response.data.status;
@@ -219,8 +211,86 @@ var filmController = function ($scope, $http) {
             }
         });
     };
-    $scope.getPath = function () {
+    /*================ Login & Register Part*/
+    $scope.showLogin = function () {
+        $("#myModalRegister").modal('hide');
+        $("#myModalLogin").modal();
+    };
+    $scope.showRegister = function () {
+        $("#myModalLogin").modal('hide');
+        $("#myModalRegister").modal();
+    };
+    $scope.login = function () {
+        var username = $("#login_username").val();
+        var password = $("#login_password").val();
+        if (username == "" || password == "") {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Bạn chưa nhập tài khoản và mật khẩu!");
 
+        } else {
+            $http({
+                method: "POST",
+                url: "Login/CheckLogin",
+                params: { username: username, password: password }
+            })
+            .then(function (response) {
+                console.log(response.data);
+                var status = response.data.status;
+                if (status == "valid") {
+                    $('#validateModal').modal();
+                    $("#myModalLogin").modal('hide');
+                    $("#modalMessage").html("Đăng nhập thành công!");
+                    $scope.userData = response.data;
+                    LocalStorageManager.saveToLocalStorage(response.data, $scope.userKey);
+                } else if (status == "notValid") {
+                    $('#validateModal').modal();
+                    $("#modalMessage").html("Đăng nhập thất bại, sai tên đăng nhập hoặc mật khẩu!");
+                }
+            });
+        }
+    };
+    $scope.register = function () {
+        var username = $("#register_username").val();
+        var password = $("#register_password").val();
+        var phone = $("#register_phone").val();
+        var email = $("#register_email").val();
+        if (username == "" || password == "" || phone == "" || email == "") {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Bạn chưa điền đầy đủ thông tin!");
+        } else if (!validateEmail(email)) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Sai định dạng email");
+        } else if (!validatePhone(phone)) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Số điện thoại phải từ 10-11 chữ số");
+        } else if (username.length < 6 || username.length > 20 || password.length < 6 || password.length > 20) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Tên đăng nhập và mật khẩu phải từ 6 kí tự và bé hơn 20 kí tự");
+        } else {
+            $http({
+                method: "POST",
+                url: "Login/CheckRegister",
+                params: { username: username, password: password, phone: phone, email: email }
+            })
+            .then(function (response) {
+                console.log(response.data);
+                var status = response.data.status;
+                if (status == "valid") {
+                    $('#validateModal').modal();
+                    $("#myModalRegister").modal('hide');
+                    $("#modalMessage").html("Tạo tài khoản thành công!");
+                    $scope.userData = response.data;
+                    LocalStorageManager.saveToLocalStorage(response.data, $scope.userKey);
+                } else if (status == "notValid") {
+                    $('#validateModal').modal();
+                    $("#modalMessage").html("Tên đăng nhập đã tồn tại!");
+                }
+            });
+        }
+    };
+    $scope.logout = function () {
+        LocalStorageManager.removeDataFromStorage($scope.userKey);
+        $scope.userData = "";
     }
 }
 
@@ -246,4 +316,7 @@ var LocalStorageManager = {
 function validateEmail(inputemail) {
     var regEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return inputemail.match(regEmail);
+}
+function validatePhone(inputphone) {
+    return inputphone.match(/\d/g).length === 10;
 }

@@ -136,12 +136,6 @@ CREATE TABLE BookingTicket (
 	bookingDate datetime,
 );
 
-/*CREATE TABLE BookingDetail (
-    bookingDetailId int IDENTITY(1,1) PRIMARY KEY,
-	bookingId int,
-	ticketId int,
-);*/
-
 CREATE TABLE Customer (
     customerId int IDENTITY(1,1) PRIMARY KEY,
 	userId nvarchar(255) null,
@@ -154,7 +148,6 @@ CREATE TABLE UserAccount (
 	userPassword nvarchar(255),
 	phone nvarchar(255),
 	email nvarchar(255),
-	tix float,
 );
 
 CREATE TABLE AdminAccount (
@@ -164,31 +157,12 @@ CREATE TABLE AdminAccount (
 	email nvarchar(255),
 );
 
-/*CREATE TABLE BankAccount (
-    cardNumber nvarchar(50) PRIMARY KEY,
-	ownerName nvarchar(255),
-	expDate date,
-	email nvarchar(255),
-	BankId int,
-);*/
-
-/*CREATE TABLE BankList (
-    bankId int IDENTITY(1,1) PRIMARY KEY,
-	bankName nvarchar(255),
-	imgLogo nvarchar(255),
-);*/
-
 CREATE TABLE Promotion (
     promotionId int IDENTITY(1,1) PRIMARY KEY,
 	cinemaId int,
 	urlDocument nvarchar(255),
 );
 
-CREATE TABLE News (
-    newsId int IDENTITY(1,1) PRIMARY KEY,
-	filmId int,
-	urlDocument nvarchar(255),
-);
 
 /* ------------------------------------------------ */
 ALTER TABLE MovieSchedule ADD CONSTRAINT FKMovieScheduleFilm001 FOREIGN KEY (filmId) REFERENCES Film (filmId);
@@ -205,13 +179,9 @@ ALTER TABLE TypeOfSeat ADD CONSTRAINT FKTypeOfSeatGroupCinema001 FOREIGN KEY (gr
 ALTER TABLE Ticket ADD CONSTRAINT FKTicketMovieSchedule001 FOREIGN KEY (scheduleId) REFERENCES MovieSchedule (scheduleId);
 ALTER TABLE Ticket ADD CONSTRAINT FKTicketSeat001 FOREIGN KEY (seatId) REFERENCES Seat (seatId);
 
-/*ALTER TABLE BookingDetail ADD CONSTRAINT FKBookingDetailTicket001 FOREIGN KEY (ticketId) REFERENCES Ticket (ticketId);
-ALTER TABLE BookingDetail ADD CONSTRAINT FKBookingDetailBookingTicket001 FOREIGN KEY (bookingId) REFERENCES BookingTicket (bookingId);*/
 ALTER TABLE BookingTicket ADD CONSTRAINT FKBookingTicketCustomer001 FOREIGN KEY (customerId) REFERENCES Customer (customerId);
 ALTER TABLE Ticket ADD CONSTRAINT FKTicketBookingTicket001 FOREIGN KEY (bookingId) REFERENCES BookingTicket (bookingId);
 
-ALTER TABLE News ADD CONSTRAINT FKNewsFilm001 FOREIGN KEY (filmId) REFERENCES Film (filmId);
-ALTER TABLE Promotion ADD CONSTRAINT FKPromotionCinema001 FOREIGN KEY (cinemaId) REFERENCES Cinema (cinemaId);
 ALTER TABLE PartnerAccount ADD CONSTRAINT FKPartnerAccountGroupCinema001 FOREIGN KEY (groupOfCinemaId) REFERENCES GroupCinema (groupId);
 ALTER TABLE CinemaManager ADD CONSTRAINT FKCinemaManagerCinema001 FOREIGN KEY (cinemaId) REFERENCES Cinema (cinemaId);
 

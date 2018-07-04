@@ -34,8 +34,8 @@ namespace CinemaTicket.Controllers
             [HttpPost]
         public JsonResult CompareScheduleTimeForSelectedDate(string startTime,string selectDate)
         {
-            //DateTime today = DateTime.Now;
-            DateTime today = DateTime.Parse("2017-06-23");
+            DateTime today = DateTime.Now;
+            /*DateTime today = DateTime.Parse("2017-06-23");*/
             string dateInput = selectDate + " " + startTime;
             DateTime selectedDate = DateTime.Parse(dateInput);
             var obj = new

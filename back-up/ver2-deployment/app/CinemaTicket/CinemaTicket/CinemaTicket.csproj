@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{61FF5B95-4711-4487-B6C6-16438C93F400}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CinemaTicket</RootNamespace>
+    <AssemblyName>CinemaTicket</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminAccount.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BaseRepository\BaseRepository.cs" />
+    <Compile Include="BaseRepository\IBaseRepository.cs" />
+    <Compile Include="BookingTicket.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cinema.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CinemaManager.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CinemaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CinemaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CinemaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CinemaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CinemaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Constant\Constant.cs" />
+    <Compile Include="Controllers\ChooseTicketController.cs" />
+    <Compile Include="Controllers\CinemaController.cs" />
+    <Compile Include="Controllers\FilmController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Controllers\SeatController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
+    <Compile Include="Controllers\UtilityController.cs" />
+    <Compile Include="Customer.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomRepository\AdminAccountRepository.cs" />
+    <Compile Include="CustomRepository\BookingTicketRepository.cs" />
+    <Compile Include="CustomRepository\CinemaManagerRepository.cs" />
+    <Compile Include="CustomRepository\CinemaRepository.cs" />
+    <Compile Include="CustomRepository\CustomerRepository.cs" />
+    <Compile Include="CustomRepository\DigitalTypeRepository.cs" />
+    <Compile Include="CustomRepository\GroupCinemaRepository.cs" />
+    <Compile Include="CustomRepository\MovieScheduleRepository.cs" />
+    <Compile Include="CustomRepository\NewsRepository.cs" />
+    <Compile Include="CustomRepository\PartnerAccountRepository.cs" />
+    <Compile Include="CustomRepository\PromotionRepository.cs" />
+    <Compile Include="CustomRepository\RoomRepository.cs" />
+    <Compile Include="CustomRepository\SeatRepository.cs" />
+    <Compile Include="CustomRepository\ShowTimeRepository.cs" />
+    <Compile Include="CustomRepository\TicketRepository.cs" />
+    <Compile Include="CustomRepository\TypeOfSeatRepository.cs" />
+    <Compile Include="CustomRepository\UserAccountRepository.cs" />
+    <Compile Include="DigitalType.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Film.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GroupCinema.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieSchedule.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="News.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PartnerAccount.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Promotion.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CustomRepository\FilmRepository.cs" />
+    <Compile Include="Room.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Seat.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\AdminAccountService.cs" />
+    <Compile Include="Service\BookingTicketService.cs" />
+    <Compile Include="Service\CinemaManagerService.cs" />
+    <Compile Include="Service\CinemaService.cs" />
+    <Compile Include="Service\CustomerService.cs" />
+    <Compile Include="Service\DigitalTypeService.cs" />
+    <Compile Include="Service\FilmService.cs" />
+    <Compile Include="Service\GroupCinemaServcie.cs" />
+    <Compile Include="Service\MovieScheduleService.cs" />
+    <Compile Include="Service\NewsService.cs" />
+    <Compile Include="Service\PartnerAccountService.cs" />
+    <Compile Include="Service\PromotionService.cs" />
+    <Compile Include="Service\RoomService.cs" />
+    <Compile Include="Service\SeatService.cs" />
+    <Compile Include="Service\ShowTimeService.cs" />
+    <Compile Include="Service\TicketService.cs" />
+    <Compile Include="Service\TypeOfSeatService.cs" />
+    <Compile Include="Service\UserAccountService.cs" />
+    <Compile Include="ShowTime.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ticket.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeOfSeat.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserAccount.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\CinemaUtility.cs" />
+    <Compile Include="Utility\ConstantUtility.cs" />
+    <Compile Include="Utility\MailUtility.cs" />
+    <Compile Include="Utility\RandomUtility.cs" />
+    <Compile Include="Utility\ScheduleUtility.cs" />
+    <Compile Include="Utility\DateUtility.cs" />
+    <Compile Include="Utility\DBUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\chooseSeatAndTicket.css" />
+    <Content Include="Content\css\common.css" />
+    <Content Include="Content\css\filmDetail.css" />
+    <Content Include="Content\css\chooseTicket.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\chooseSeat.css" />
+    <Content Include="Content\css\index.css" />
+    <Content Include="Content\css\w3.css" />
+    <Content Include="Content\img\cinemaLogo\Beta-cineplex-cao-thang.jpg" />
+    <Content Include="Content\img\cinemaLogo\BHD-Star-Bitexco.jpg" />
+    <Content Include="Content\img\cinemaLogo\BHD-Star-LeVanViet.jpg" />
+    <Content Include="Content\img\cinemaLogo\BHD-Star-PhamHung.jpg" />
+    <Content Include="Content\img\cinemaLogo\BHD-Star-Vincom-QuangTrung.jpg" />
+    <Content Include="Content\img\cinemaLogo\BHD-Star-Vincom-ThaoDien.jpg" />
+    <Content Include="Content\img\cinemaLogo\BHD-Star-Vincom3-2.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-aeon-binh-tan.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-celadon-tan-phu.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-crescent-mall.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-CT-Plaza.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-go-vap.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-golden-plaza.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-hoang-van-thu.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-hung-vuong-plaza.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-liberty-citypoint.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-pandora-city.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-parkson-dong-khoi.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-parkson-paragon.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-pearl-plaza.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-saigonres-nguyen-xi.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-sc-vivocity.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-su-van-hanh.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-thao-dien-pearl.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-thu-duc.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cgv-vincom-dong-khoi.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cinestar-hai-ba-trung.jpg" />
+    <Content Include="Content\img\cinemaLogo\Cinestar-quoc-thanh.jpg" />
+    <Content Include="Content\img\cinemaLogo\DDC-dong-da.jpg" />
+    <Content Include="Content\img\cinemaLogo\Galaxy-huynh-tan-phat.jpg" />
+    <Content Include="Content\img\cinemaLogo\Galaxy-kinh-duong-vuong.jpg" />
+    <Content Include="Content\img\cinemaLogo\Galaxy-nguyen-du.jpg" />
+    <Content Include="Content\img\cinemaLogo\Galaxy-nguyen-van-qua.jpg" />
+    <Content Include="Content\img\cinemaLogo\Galaxy-pham-van-chi.jpg" />
+    <Content Include="Content\img\cinemaLogo\Galaxy-quang-trung.jpg" />
+    <Content Include="Content\img\cinemaLogo\Galaxy-tan-binh.jpg" />
+    <Content Include="Content\img\cinemaLogo\Galaxy-trung-chanh.jpg" />
+    <Content Include="Content\img\cinemaLogo\Lotte-cinema-cantavil.jpg" />
+    <Content Include="Content\img\cinemaLogo\Lotte-cinema-cong-hoa.jpg" />
+    <Content Include="Content\img\cinemaLogo\Lotte-cinema-diamond.jpg" />
+    <Content Include="Content\img\cinemaLogo\Lotte-cinema-go-vap.jpg" />
+    <Content Include="Content\img\cinemaLogo\Lotte-cinema-nam-sai-gon.jpg" />
+    <Content Include="Content\img\cinemaLogo\Lotte-cinema-nowzone.jpg" />
+    <Content Include="Content\img\cinemaLogo\Lotte-cinema-phu-tho.jpg" />
+    <Content Include="Content\img\cinemaLogo\Lotte-cinema-thu-duc.jpg" />
+    <Content Include="Content\img\cinemaLogo\Mega-gs-cao-thang.jpg" />
+    <Content Include="Content\img\film\2D.png" />
+    <Content Include="Content\img\film\account.png" />
+    <Content Include="Content\img\film\account_black.png" />
+    <Content Include="Content\img\film\account_white.png" />
+    <Content Include="Content\img\film\avatar.png" />
+    <Content Include="Content\img\film\bangcuoptheky1.jpg" />
+    <Content Include="Content\img\film\bangcuoptheky.jpg" />
+    <Content Include="Content\img\film\bangcuoptheky2.jpg" />
+    <Content Include="Content\img\film\baythoigian.jpg" />
+    <Content Include="Content\img\film\baythoigian1.jpg" />
+    <Content Include="Content\img\film\bietdoicuncung.jpg" />
+    <Content Include="Content\img\film\bietdoicuncung1.jpg" />
+    <Content Include="Content\img\film\black_panther.jpg" />
+    <Content Include="Content\img\film\chugakhonggian.jpg" />
+    <Content Include="Content\img\film\chugakhonggian1.jpg" />
+    <Content Include="Content\img\film\comment.png" />
+    <Content Include="Content\img\film\deadpool2_banner.jpg" />
+    <Content Include="Content\img\film\nobitavadaogiauvang1.jpg" />
+    <Content Include="Content\img\film\nobitavadaogiauvang.jpg" />
+    <Content Include="Content\img\film\emgaimua1.jpg" />
+    <Content Include="Content\img\film\giadinhsieunhan1.jpg" />
+    <Content Include="Content\img\film\giadinhsieunhan.jpg" />
+    <Content Include="Content\img\film\giadinhsieunhan2.jpg" />
+    <Content Include="Content\img\film\giaicuutini1.jpg" />
+    <Content Include="Content\img\film\giaicuutini.jpg" />
+    <Content Include="Content\img\film\gianhanhtubien1.jpg" />
+    <Content Include="Content\img\film\ic_location.png" />
+    <Content Include="Content\img\film\ic_location_small.png" />
+    <Content Include="Content\img\film\khachsantoipham1.jpg" />
+    <Content Include="Content\img\film\landenbenem1.jpg" />
+    <Content Include="Content\img\film\like.png" />
+    <Content Include="Content\img\film\news_avatar_2.jpg" />
+    <Content Include="Content\img\film\ngaysinhton1.jpg" />
+    <Content Include="Content\img\film\nham_mat_thay_mua_he.jpg" />
+    <Content Include="Content\img\film\nham_mat_thay_mua_he1.jpg" />
+    <Content Include="Content\img\film\ongkinhsatnhan1.jpg" />
+    <Content Include="Content\img\film\ongnhiphieuluuky.jpg" />
+    <Content Include="Content\img\film\ongnhiphieuluuky1.jpg" />
+    <Content Include="Content\img\film\phim_ngan_bao.jpg" />
+    <Content Include="Content\img\film\selfievoithanchet1.jpg" />
+    <Content Include="Content\img\film\starwarsngoaitruyen1.jpg" />
+    <Content Include="Content\img\film\starwarsngoaitruyen.jpg" />
+    <Content Include="Content\img\film\star_1_2.png" />
+    <Content Include="Content\img\film\star_full.png" />
+    <Content Include="Content\img\film\thegioikhunglong.jpg" />
+    <Content Include="Content\img\film\thegioikhunglong1.jpg" />
+    <Content Include="Content\img\film\yeunusieuquay1.jpg" />
+    <Content Include="Content\img\groupLogo\betaCineplex.png" />
+    <Content Include="Content\img\groupLogo\bhdStar.png" />
+    <Content Include="Content\img\groupLogo\cgvCinema.png" />
+    <Content Include="Content\img\groupLogo\cineStar.png" />
+    <Content Include="Content\img\groupLogo\ddcCinema.jpg" />
+    <Content Include="Content\img\groupLogo\galaxyCinema.png" />
+    <Content Include="Content\img\groupLogo\lotteCinema.png" />
+    <Content Include="Content\img\groupLogo\megaGS.png" />
+    <Content Include="Content\img\repository\android-logo.png" />
+    <Content Include="Content\img\repository\apple-logo.png" />
+    <Content Include="Content\img\repository\avatar.jpg" />
+    <Content Include="Content\img\repository\booking-cinema-logo.jpg" />
+    <Content Include="Content\img\repository\booking-cinema-logo.PNG" />
+    <Content Include="Content\img\repository\facebook-logo.png" />
+    <Content Include="Content\img\repository\icon_location.png" />
+    <Content Include="Content\img\repository\next.png" />
+    <Content Include="Content\img\repository\paypal.png" />
+    <Content Include="Content\img\repository\paypal.svg" />
+    <Content Include="Content\img\repository\play-video.png" />
+    <Content Include="Content\img\repository\Post-notification.png" />
+    <Content Include="Content\img\repository\pre.png" />
+    <Content Include="Content\img\repository\screen.png" />
+    <Content Include="Content\img\repository\zalo-logo.png" />
+    <Content Include="Content\js\angular.min.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\chooseSeatAndTicket.js" />
+    <Content Include="Content\js\filmDetail.js" />
+    <Content Include="Content\js\chooseTicket.js" />
+    <Content Include="Content\js\chooseSeat.js" />
+    <Content Include="Content\js\home.js" />
+    <Content Include="Content\js\jquery-3.3.1.min.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="DAO\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\FilmDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\ChooseTicket.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\ChooseSeat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\ChooseTicketAndSeat.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="CinemaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CinemaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CinemaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CinemaModel.edmx</DependentUpon>
+      <LastGenOutput>CinemaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CinemaModel.edmx.diagram">
+      <DependentUpon>CinemaModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="CinemaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CinemaModel.edmx</DependentUpon>
+      <LastGenOutput>CinemaModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\CinemaBookingTicket - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\CinemaBookingTicket - Web Deploy.pubxml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>12785</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:12785/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

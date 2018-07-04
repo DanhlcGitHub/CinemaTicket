@@ -27,31 +27,7 @@ namespace CinemaTicket.Controllers
             return View();//"~/Views/Home/FilmDetail.cshtml"
         }
 
-        public ActionResult ChooseTicket(string filmId,string timeId, string cinemaId, string selectDate)
-        {
-            int filmIdData = Convert.ToInt32(filmId);
-            int timeIdData = Convert.ToInt32(timeId);
-            int cinemaIdData = Convert.ToInt32(cinemaId);
-            DateTime scheduleDate = DateTime.Parse(selectDate);
-            MovieScheduleService msService = new MovieScheduleService();
-            MovieSchedule schedule = msService.FindMovieSchedule(filmIdData, timeIdData, cinemaIdData, scheduleDate).First();
-            ViewBag.scheduleId = schedule.scheduleId;
-            return View();
-        }
-
-        public ActionResult ChooseTicket1(string filmId, string timeId, string cinemaId)
-        {
-            int filmIdData = Convert.ToInt32(filmId);
-            int timeIdData = Convert.ToInt32(timeId);
-            int cinemaIdData = Convert.ToInt32(cinemaId);
-            DateTime scheduleDate = DateTime.Parse("2018-06-08");
-            //DateTime scheduleDate = DateTime.Today;
-            MovieScheduleService msService = new MovieScheduleService();
-            MovieSchedule schedule = msService.FindMovieSchedule(filmIdData, timeIdData, cinemaIdData, scheduleDate).First();
-            ViewBag.scheduleId = schedule.scheduleId;
-            return View("~/Views/Home/ChooseTicket.cshtml");
-        }
-
+ 
         public ActionResult ChooseTicketAndSeat(string filmId, string timeId, string cinemaId, string selectDate)
         {
             int filmIdData = Convert.ToInt32(filmId);
@@ -64,19 +40,23 @@ namespace CinemaTicket.Controllers
             return View();
         }
 
+        public ActionResult ChooseTicketAndSeatToday(string filmId, string timeId, string cinemaId)
+        {
+            int filmIdData = Convert.ToInt32(filmId);
+            int timeIdData = Convert.ToInt32(timeId);
+            int cinemaIdData = Convert.ToInt32(cinemaId);
+            //DateTime scheduleDate = DateTime.Parse("2018-06-08");
+            DateTime scheduleDate = DateTime.Today;
+            MovieScheduleService msService = new MovieScheduleService();
+            MovieSchedule schedule = msService.FindMovieSchedule(filmIdData, timeIdData, cinemaIdData, scheduleDate).First();
+            ViewBag.scheduleId = schedule.scheduleId;
+            return View("~/Views/Home/ChooseTicketAndSeat.cshtml");
+        }
+
         public ActionResult BackToChooseTicket(string scheduleId)
         {
             ViewBag.scheduleId = scheduleId;
             return View("~/Views/Home/ChooseTicket.cshtml");
-        }
-
-        public ActionResult ChooseSeat(string scheduleId)
-        {
-            //scheduleId
-            ViewBag.scheduleId = scheduleId;
-            // sl ghe - loai ghe
-            // sl ve
-            return View();
         }
     }
 }

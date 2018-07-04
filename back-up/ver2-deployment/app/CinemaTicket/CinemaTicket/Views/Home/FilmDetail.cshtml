@@ -1,0 +1,429 @@
+﻿@{
+    ViewBag.Title = "FilmDetail";
+}
+
+<!DOCTYPE html>
+<html ng-app="detailFilmModule">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FilmDetail</title>
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/filmDetail.css">
+    <link rel="stylesheet" href="~/Content/css/common.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body ng-controller="filmController">
+    <!-- The Video Modal -->
+    <div class="modal" id="myModalTrailer">
+
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+            <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-body" style="padding:0;">
+                    <button type="button" class="close mynewclassclose" data-dismiss="modal" aria-hidden="true">
+                        <img src="http://expediaholiday.d.seven2.net/_images/modal_close.png" />
+                    </button>
+                    <div class="videoWrapper">
+                        <iframe id="myIframe" width="100%" height="100%" src=""></iframe>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- The Login Modal -->
+    <div class="modal" id="myModalLogin">
+
+        <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
+
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header d-block" style="background-color:#e8e8e8">
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title font-weight-bold text-center">Đăng nhập</h4>
+                    <div class="text-center">
+                        <span class="text-center">Cần tạo tài khoản? </span><a href="#"><span ng-click="showRegister()" class="text-center text-success">Đăng ký</span></a>
+                    </div>
+
+
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="email" id="login_username" class="form-control" placeholder="Tên đăng nhập">
+                                    <input type="password" id="login_password" class="form-control" placeholder="Mật khẩu">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 float-left">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Ghi nhớ
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 float-right">
+                                    <a href="#" class="float-right">Quên mật khẩu?</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="button" ng-click="login()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Đăng nhập</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+
+
+            </div>
+        </div>
+    </div>
+    <!--register modal-->
+    <div class="modal" id="myModalRegister">
+
+        <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
+
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header d-block" style="background-color:#e8e8e8">
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title font-weight-bold text-center">Đăng ký</h4>
+                    <div class="text-center">
+                        <span class="text-center">Bạn đã có tài khoản? </span><a href="#"><span class="text-center text-success" ng-click="showLogin()">Đăng nhập</span></a>
+                    </div>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-7 float-left" style="padding-left:0px; padding-right:0px">
+                                        <input id="register_email" type="text" class="form-control" placeholder="eMail">
+                                    </div>
+                                    <div class="col-sm-5 float-right" style="padding-left:0px; padding-right:0px">
+                                        <input id="register_phone" type="text" class="form-control" placeholder="Số điện thoại">
+                                    </div>
+                                    <input id="register_username" type="text" class="form-control" placeholder="Tên đăng nhập">
+                                    <input id="register_password" type="password" class="form-control" placeholder="Mật khẩu">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="text-center">
+                                    <span class="text-center" style="color: gray">Bằng vào việc đăng ký và sử dụng trang web, bạn đã đồng ý với các </span><a href="#"><span>Điều khoản & Quy chế</span></a>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="button" ng-click="register()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Hoàn tất</button>
+                            </div>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+
+
+            </div>
+        </div>
+    </div>
+    <!-- validate Modal -->
+    <div class="modal fade" id="validateModal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                    <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                </div>
+                <div class="modal-body justify-content-center align-self-center ">
+                    <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button id="dismissBtn" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <form method="post" target="_blank" action="/home/ChooseTicket" id="goToChooseTicketForm" style="display:none"></form>
+    <form method="post" target="_blank" action="/home/ChooseTicketAndSeat" id="goToChooseTicketAndTicketForm" style="display:none"></form>
+    <input id="filmId" type="hidden" value=@ViewBag.filmId />
+    <div class="mainMaxWidth2 contentMain">
+        <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top shadow p-3 mb-5 bg-white rounded">
+            <div class="left">
+                <a href="#">
+                    <img src="~/Content/img/repository/booking-cinema-logo.PNG" class="ex1" alt="Cinque Terre" style="height:30%">
+                </a>
+            </div>
+            <ul class="navbar-nav navbar-center">
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Lịch chiếu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Cụm rạp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Tin tức</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="#">Ứng dụng</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <span class="nav-link" ng-if="userData == ''" ng-click="showLogin()"><i class="fa fa-user"></i> Đăng nhập</span>
+                    <div class="original-box">
+                        <span class="nav-link" ng-if="userData != ''"><i class="fa fa-user"></i> {{userData.username}}</span>
+                        <div class="popup-box popup-box-left border" style="height:35px; width: 100px">
+                            <a ng-click="logout()" href="#">Đăng xuất</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <span ng-click="showRegister()" class="nav-link dropdown-toggle" data-toggle="dropdown" id="myBtn2">
+                        Đăng ký
+                    </span>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="row col-sm-12" style="padding-top: 100px;">
+            <div class="col-sm-4">
+                <div class="myContainer" style="margin: 0 25px 0 25px">
+                    <img ng-click="gotoFilmDetail(aFilm.id)" width="255"
+                         height="370" class="img-movie rounded" ng-src="{{filmData.img}}" alt="Film image">
+                    <div class="middle">
+                        <div class="text">
+                            <img ng-click="openTrailerDialog(filmData.trailerUrl)" src="~/Content/img/repository/play-video.png" width="50" height="50" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8" style="padding-top:10px">
+                <h3 class="text-primary"><mark class="ex1">C18</mark>{{filmData.name}}</h3>
+                <div class="row col-sm-12" style="padding-top:15px">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Ngày phát hành</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.dateRelease}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Đạo diễn</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.author}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Diễn viên</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.actorList}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Thể Loại</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.movieGenre}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Định dạng</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">2D/Digital</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="font-weight-bold">Quốc Gia SX</p>
+                                <a href="#muave"><button type="button" class="btn btn-danger">Mua vé</button></a>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
+                                <p class="">{{filmData.countries}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
+                            <p class="font-weight-bold">Nội dung</p>
+                        </div>
+                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
+                            <p class="">
+                                {{filmData.content}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tab panes -->
+    <div class="tab-content" style="font-size:14px;">
+        <a name="muave"></a>
+        <div id="home" class="container tab-pane active">
+            <br>
+            <div class="row" style="padding-top: 60px;">
+
+                <div class="row col-sm-12 h-100">
+                    <div class="col-sm-3 h-100 border " style="padding-left:0px; padding-right:0px;">
+                        <div class="list-group list-group-flush">
+                            <a ng-click="groupClickHandler($index)" ng-repeat="group in groupCinemaList" class="list-group-item list-group-item-action font-weight-bold"
+                               style="padding-bottom:20px; padding-top:20px">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img ng-src="{{group.img}}" class="ex1">
+                                    </div>
+                                    <div id="{{'groupcinema' + $index}}" class="col-sm-9" style="padding-top:10px">
+                                        {{group.name}}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-9  no-gutters" style="padding-left:0px; padding-right:0px">
+                        <div class=" col-sm-12 border border-bottom-0" style="padding-top:6px">
+                            <div  class="list-group list-group-flush" style="flex-direction: row;">
+                                <a id="{{'dateofweek' + $index}}"  ng-click="dateClickHandler($index)" ng-repeat="d in dateList" class="list-group-item list-group-item-action border-top-0" href="#tuesday">
+                                    <div class="row text-center font-weight-bold" style="justify-content:center;">Thứ {{ d.dateOfWeek + 1 }}</div>
+                                    <div class="text-center font-weight-bold">{{ d.date }}</div>
+                                </a>
+                                <button type="button" style="center;" class=" btn-primary border-top-0">Share</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 border border-top" style="overflow-y: auto; max-height:728px">
+                            <ul class="list-group list-group-flush">
+                                <li ng-repeat="item in currentData" class="list-group-item">
+                                    <button type="button" class="list-group-item list-group-item-action border-bottom-0 btn" href="#demo" style="padding-left:0px;">
+                                        <div class="row col-sm-12">
+                                            <div class="col-sm-1" style="padding-left:0px; padding-right:0px">
+                                                <img ng-src="{{item.img}}" class="ex1">
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <span class="text-danger font-weight-bold">CNS</span>- <span class="font-weight-bold">{{item.name}}</span><br> <span class="gray">{{item.address}}</span> <span class="red">[Bản đồ]</span>
+                                            </div>
+                                        </div>
+
+
+                                    </button>
+                                    <div ng-repeat="digType in item.digTypeList" class="row" style="padding-top:4px;">
+                                        <div class="col-sm-1">
+                                            <img ng-if="digType.type == 1" src="https://www.123phim.vn/app/assets/img/icons/typeSession/2_0.png" class="ex2">
+                                        </div>
+                                        <div class="row col-sm-11">
+                                            <a href="#" style="margin-left:3%" ng-repeat="time in digType.times"
+                                               ng-click="gotoChooseTicket(filmData.id,time.timeId,item.id,time.startTime)">
+                                                <p class="text-success font-weight-bold" style="font-size:25px;">{{time.startTime}}</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <p style="padding-bottom:10%"></p>
+    <footer class="footer" style="background: #222;">
+        <br /><br />
+        <div class="container center">
+            <div class="row col-sm-12">
+                <div class="col-2">
+                    <p class="text-white">123PHIM</p>
+                    <a href="#">FAQ</a><br>
+                    <a href="#">Brand Guidelines</a>
+                </div>
+                <div style="padding-top:40px;" class="col-2">
+                    <a href="#">Thỏa thuận sử dụng</a><br>
+                    <a href="#">Quy chế hoạt động</a><br>
+                    <a href="#">Chính sách bảo mật</a><br>
+                    <a href="#">Quyền lợi thành viên</a><br>
+                </div>
+                <div style=" padding-left: 40px;float:left" class="col-3">
+                    <p class="text-white">ĐỐI TÁC</p><br>
+                    <div class="row">
+                        <div ng-repeat="group in groupCinemaList" style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img ng-src="{{ group.img }}" alt="{{ group.name }}" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+                <div style=" padding-left:40px" class="col-2">
+                    <p class="text-white">MOBILE APP</p><br>
+                    <div class="row">
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/apple-logo.png" class="ex4"></a>
+                        </div>
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/android-logo.png" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+                <div style=" padding-left:40px" class="col-3">
+                    <p class="text-white">SOCIAL</p><br>
+                    <div class="row">
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/facebook-logo.png" class="ex4"></a>
+                        </div>
+                        <div style="padding-top:10px; padding-left:10px">
+                            <a href="#"><img src="~/Content/img/repository/zalo-logo.png" class="ex4"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="width:80%; border:0; height:2px; background:white;">
+        <div class="col-sm-12" style="padding-top:10px;">
+            <div class="container center">
+                <div class="row">
+                    <div style="padding-top:10px; padding-left:10px">
+                        <a href="#"><img width="100" height="100" src="~/Content/img/repository/booking-cinema-logo.jpg" class=""></a>
+                    </div>
+                    <div style="padding-top:10px; padding-left:40px">
+                        <p class="text-white">BookingTicket - CAPSTONE PROJECT FPT<p>
+                        <p class="text-white">Địa chỉ: 18 Tô Ký, Phường 14, Quận 12, Tp Hồ Chí Minh</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/Content/js/angular.min.js"></script>
+    <script src="~/Content/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/filmDetail.js"></script>
+
+</body>
+</html>

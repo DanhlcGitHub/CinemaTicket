@@ -11,6 +11,10 @@ var filmController = function ($scope, $http) {
     $scope.currentData; // use to show cinema and time and digtyp information
     $scope.userKey = "userKey";
     $scope.userData = LocalStorageManager.loadDataFromStorage($scope.userKey);
+    $scope.isBackgroundLoadDone = false;
+    $scope.isDateLoadDone = false;
+    $scope.isGroupLoadDone = false;
+
     if ($scope.userData == undefined) {
         $scope.userData = "";
     }
@@ -35,7 +39,7 @@ var filmController = function ($scope, $http) {
         })
         .then(function (response) {
             $scope.groupCinemaList = response.data;
-
+            $scope.isGroupLoadDone = true;
         });
 
         $http({
@@ -44,6 +48,7 @@ var filmController = function ($scope, $http) {
         })
         .then(function (response) {
             $scope.dateList = response.data;
+            $scope.isDateLoadDone = true;
         });
 
         $http({
@@ -53,8 +58,39 @@ var filmController = function ($scope, $http) {
         })
         .then(function (response) {
             $scope.data = response.data;
+            //$scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
+            // load small part GetSubScheduleFilmDetail
+            
+            var timer = setInterval(function () {
+                if ($scope.isDateLoadDone == true && $scope.isGroupLoadDone == true) {
+                    //auto change seat status from buying to available
+                    $http({
+                        method: "POST",
+                        url: "/Schedule/GetSubScheduleFilmDetail",
+                        params: {
+                            filmIdStr: $("#filmId").val(), selectDateStr: $scope.dateList[$scope.dateIndex].fullDate,
+                            groupIdStr: $scope.groupCinemaList[$scope.groupIndex].id,
+                        }
+                    })
+                    .then(function (response) {
+                        $scope.currentData = response.data;
+                    });
+                    clearInterval(timer);
+                }
+                console.log("still alive");
+            }, 1000);
+        });
+
+        $http({
+            method: "POST",
+            url: "/Schedule/LoadScheduleGroupByCinemaForFilmDetailBackGround",
+            params: { filmId: $("#filmId").val() }
+        })
+        .then(function (response) {
+            $scope.isBackgroundLoadDone = true;
+            $scope.data = response.data;
             $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
-            console.log($scope.data);
+            console.log("load background done");
         });
     });
 
@@ -67,9 +103,23 @@ var filmController = function ($scope, $http) {
         document.getElementById(elementId).style.color = "red";
 
         $scope.groupIndex = index;
-        $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
-        console.log("current data");
-        console.log($scope.currentData);
+        if ($scope.isBackgroundLoadDone == true) {
+            $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
+        } else {
+            if ($scope.isDateLoadDone == true && $scope.isGroupLoadDone == true) {
+                $http({
+                    method: "POST",
+                    url: "/Schedule/GetSubScheduleFilmDetail",
+                    params: {
+                        filmIdStr: $("#filmId").val(), selectDateStr: $scope.dateList[$scope.dateIndex].fullDate,
+                        groupIdStr: $scope.groupCinemaList[$scope.groupIndex].id,
+                    }
+                })
+                .then(function (response) {
+                    $scope.currentData = response.data;
+                });
+            }
+        }
     };
     $scope.dateClickHandler = function (index) {
         for (var i = 0 ; i < $scope.groupCinemaList.length; i++) {
@@ -80,9 +130,24 @@ var filmController = function ($scope, $http) {
         document.getElementById(elementId).style.color = "red";
 
         $scope.dateIndex = index;
-        $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
-        console.log("current data");
-        console.log($scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas);
+
+        if ($scope.isBackgroundLoadDone == true) {
+            $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
+        } else {
+            if ($scope.isDateLoadDone == true && $scope.isGroupLoadDone == true) {
+                $http({
+                    method: "POST",
+                    url: "/Schedule/GetSubScheduleFilmDetail",
+                    params: {
+                        filmIdStr: $("#filmId").val(), selectDateStr: $scope.dateList[$scope.dateIndex].fullDate,
+                        groupIdStr: $scope.groupCinemaList[$scope.groupIndex].id,
+                    }
+                })
+                .then(function (response) {
+                    $scope.currentData = response.data;
+                });
+            }
+        }
     };
     $scope.openTrailerDialog = function (url) {
         console.log(url);

@@ -14,6 +14,8 @@ var filmController = function ($scope, $http) {
     $scope.resellData;
     $scope.userKey = "userKey";
     $scope.userData = LocalStorageManager.loadDataFromStorage($scope.userKey);
+    $scope.isBackgroundLoadDone = false;
+
     if ($scope.userData == undefined) {
         $scope.userData = "";
     }
@@ -23,14 +25,32 @@ var filmController = function ($scope, $http) {
 
     $http({
         method: "POST",
-        url: "Schedule/LoadScheduleGroupByCinema"
+        url: "Schedule/LoadCinemaBelongToGroup"
     })
     .then(function (response) {
         $scope.scheduleList = response.data;
         $scope.currentCinemaList = response.data[$scope.currentGroupCinemaIndex].cinemas;
-        $scope.currentFilmInScheduleList = $scope.currentCinemaList[$scope.currentCinemaIndex].films;
-        console.log("currentCinemaList");
-        console.log($scope.currentCinemaList);
+        //$scope.currentFilmInScheduleList = $scope.currentCinemaList[$scope.currentCinemaIndex].films;
+        $http({
+            method: "POST",
+            url: "Schedule/GetFilmByCinemaAndDate",
+            params: { cinemaId: $scope.currentCinemaList[0].id }
+        })
+        .then(function (response) {
+            $scope.currentFilmInScheduleList = response.data;
+        });
+    });
+
+    // background load
+    $http({
+        method: "POST",
+        url: "Schedule/LoadScheduleGroupByCinema"
+    })
+    .then(function (response) {
+        console.log("Background load done");
+        $scope.scheduleList = response.data;
+        $scope.currentCinemaList = response.data[$scope.currentGroupCinemaIndex].cinemas;
+        $scope.isBackgroundLoadDone = true;
     });
 
     $http({
@@ -57,13 +77,20 @@ var filmController = function ($scope, $http) {
         $scope.currentGroupCinemaIndex = index;
         $scope.currentCinemaIndex = 0;
         $scope.currentCinemaList = $scope.scheduleList[$scope.currentGroupCinemaIndex].cinemas;
-        $scope.currentFilmInScheduleList = $scope.currentCinemaList[$scope.currentCinemaIndex].films;
-        console.log("group click");
-        console.log($scope.currentCinemaList);
-        console.log("------------------------------------");
-        console.log($scope.currentFilmInScheduleList);
-        console.log("currentGroupCinemaIndex: " + $scope.currentGroupCinemaIndex);
-        console.log("currentCinemaIndex: " + $scope.currentCinemaIndex);
+        if ($scope.currentCinemaIndex.length != 0) {
+            if ($scope.isBackgroundLoadDone == false) {
+                $http({
+                    method: "POST",
+                    url: "Schedule/GetFilmByCinemaAndDate",
+                    params: { cinemaId: $scope.currentCinemaList[0].id }
+                })
+                .then(function (response) {
+                    $scope.currentFilmInScheduleList = response.data;
+                });
+            } else {
+                $scope.currentFilmInScheduleList = $scope.currentCinemaList[0].films;
+            }
+        }
     };
     $scope.onclickCinema = function (index) {
         for (var i = 0 ; i < $scope.currentCinemaList.length; i++) {
@@ -74,7 +101,20 @@ var filmController = function ($scope, $http) {
         document.getElementById(elementId).style.border = "1px solid red";
 
         $scope.currentCinemaIndex = index;
-        $scope.currentFilmInScheduleList = $scope.currentCinemaList[$scope.currentCinemaIndex].films;
+
+        if ($scope.isBackgroundLoadDone == false) {
+            $http({
+                method: "POST",
+                url: "Schedule/GetFilmByCinemaAndDate",
+                params: { cinemaId: $scope.currentCinemaList[$scope.currentCinemaIndex].id }
+            })
+            .then(function (response) {
+                $scope.currentFilmInScheduleList = response.data;
+            });
+        } else {
+            $scope.currentFilmInScheduleList = $scope.currentCinemaList[$scope.currentCinemaIndex].films;
+        }
+        //$scope.currentFilmInScheduleList = $scope.currentCinemaList[$scope.currentCinemaIndex].films;
     };
     $scope.openTrailerDialog = function (url) {
         console.log(url);
@@ -89,7 +129,6 @@ var filmController = function ($scope, $http) {
             return v.filmStatus === 2;
         });
         $scope.CurrentFilmList = $scope.FilmData.slice($scope.pageIdex * $scope.maxItem, (($scope.pageIdex + 1) * $scope.maxItem));
-        event.preventdefault();
         return false;
     },
     $scope.loadShowingMovie = function () {
@@ -100,7 +139,6 @@ var filmController = function ($scope, $http) {
             return v.filmStatus === 1;
         });
         $scope.CurrentFilmList = $scope.FilmData.slice($scope.pageIdex * $scope.maxItem, (($scope.pageIdex + 1) * $scope.maxItem));
-        event.preventdefault();
         return false;
     },
     $scope.gotoFilmDetail = function (id) {
@@ -131,7 +169,8 @@ var filmController = function ($scope, $http) {
             });
         } else {
             document.getElementById("findResellTicketBtn").disabled = false;
-            alert("Wrong email format!");
+            $('#validateModal').modal();
+            $("#modalMessage").html("Sai định dạng email!");
         }
     };
     //checkResellConfirmCode
@@ -145,7 +184,8 @@ var filmController = function ($scope, $http) {
         })
         .then(function (response) {
             if (response.data.isWrong == "true") {
-                alert("Mã xác nhận không đúng.");
+                $('#validateModal').modal();
+                $("#modalMessage").html("Mã xác nhận không đúng.");
             } else {
                 document.getElementById("confirmResellEmailBlock").style.display = "none";
                 $("#resellTicketList").slideToggle("slow");
@@ -183,7 +223,8 @@ var filmController = function ($scope, $http) {
                 $scope.resellData[index].statusvn = response.data.statusvn;
             });
         } else {
-            alert("Email không hợp lệ.");
+            $('#validateModal').modal();
+            $("#modalMessage").html("Email không hợp lệ.");
         }
     };
     $scope.gotoChooseTicket = function (filmId, timeId, startTime) {
@@ -194,7 +235,8 @@ var filmController = function ($scope, $http) {
         })
         .then(function (response) {
             if (response.data.valid == "false") {
-                alert("Xuất chiếu đã hết hạn");
+                $('#validateModal').modal();
+                $("#modalMessage").html("Xuất chiếu đã hết hạn");
             } else {
                 var cinemaId = $scope.currentCinemaList[$scope.currentCinemaIndex].id;
                 console.log("go to choose seat");
@@ -206,8 +248,8 @@ var filmController = function ($scope, $http) {
                 var param2 = "<input type='hidden' name='timeId' value='" + timeId + "' />";
                 var param3 = "<input type='hidden' name='cinemaId' value='" + cinemaId + "' />";
 
-                document.getElementById('goToChooseTicketForm').innerHTML = param1 + param2 + param3;
-                document.getElementById('goToChooseTicketForm').submit();
+                document.getElementById('goToChooseTicketAndSeatForm').innerHTML = param1 + param2 + param3;
+                document.getElementById('goToChooseTicketAndSeatForm').submit();
             }
         });
     };

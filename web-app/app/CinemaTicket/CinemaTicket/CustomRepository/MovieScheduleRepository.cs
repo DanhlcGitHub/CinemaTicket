@@ -71,6 +71,7 @@ namespace CinemaTicket.CustomRepository
 
         public List<MovieSchedule> FindMovieSchedule(int filmId, int timeId, int cinemaId,DateTime scheduleDate)
         {
+        
             using (var db = new CinemaBookingDBEntities())
             {
                 List<MovieSchedule> list = db.MovieSchedules.Include("Room")

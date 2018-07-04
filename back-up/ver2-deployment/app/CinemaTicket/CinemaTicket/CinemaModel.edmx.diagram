@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="da5c95f6d6cf408589b873add8b6c336" Name="Diagram1">
+        <EntityTypeShape EntityType="CinemaBookingDBModel.AdminAccount" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.BookingTicket" Width="1.5" PointX="10.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.Cinema" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.CinemaManager" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.Customer" Width="1.5" PointX="8.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.DigitalType" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.Film" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.GroupCinema" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.MovieSchedule" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.News" Width="1.5" PointX="10.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.PartnerAccount" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.Promotion" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.Room" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.Seat" Width="1.5" PointX="10.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.ShowTime" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.Ticket" Width="1.5" PointX="12.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.TypeOfSeat" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBModel.UserAccount" Width="1.5" PointX="12.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKBookingTicketCustomer001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKTicketBookingTicket001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKCinemaGroupCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKCinemaManagerCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKPromotionCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKRoomCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKRoomDigitalType001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKMovieScheduleFilm001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKNewsFilm001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKPartnerAccountGroupCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKTypeOfSeatGroupCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKMovieScheduleRoom001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKMovieScheduleShowTime001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKTicketMovieSchedule001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKSeatRoom001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKSeatTypeOfSeat001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBModel.FKTicketSeat001" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

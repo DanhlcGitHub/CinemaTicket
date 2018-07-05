@@ -33,7 +33,12 @@ namespace CinemaTicket.Controllers
             int filmIdData = Convert.ToInt32(filmId);
             int timeIdData = Convert.ToInt32(timeId);
             int cinemaIdData = Convert.ToInt32(cinemaId);
-            DateTime scheduleDate = DateTime.Parse(selectDate);
+            string startTime = new ShowTimeService().FindByID(timeIdData).startTime;
+            //DateTime scheduleDate = DateTime.Parse(selectDate);
+            DateTime dateSelect = DateTime.Parse(selectDate);
+            string dateInput = dateSelect.Year + "-" + dateSelect.Month + "-" + dateSelect.Day + " " + startTime;//21:30
+            DateTime scheduleDate = DateTime.Parse(dateInput);
+
             MovieScheduleService msService = new MovieScheduleService();
             MovieSchedule schedule = msService.FindMovieSchedule(filmIdData, timeIdData, cinemaIdData, scheduleDate).First();
             ViewBag.scheduleId = schedule.scheduleId;
@@ -45,8 +50,11 @@ namespace CinemaTicket.Controllers
             int filmIdData = Convert.ToInt32(filmId);
             int timeIdData = Convert.ToInt32(timeId);
             int cinemaIdData = Convert.ToInt32(cinemaId);
-            //DateTime scheduleDate = DateTime.Parse("2018-06-08");
-            DateTime scheduleDate = DateTime.Today;
+            string startTime = new ShowTimeService().FindByID(timeIdData).startTime;
+
+            DateTime today = DateTime.Today; 
+            string dateInput = today.Year + "-" + today.Month + "-" + today.Day + " " + startTime;//21:30
+            DateTime scheduleDate = DateTime.Parse(dateInput);
             MovieScheduleService msService = new MovieScheduleService();
             MovieSchedule schedule = msService.FindMovieSchedule(filmIdData, timeIdData, cinemaIdData, scheduleDate).First();
             ViewBag.scheduleId = schedule.scheduleId;

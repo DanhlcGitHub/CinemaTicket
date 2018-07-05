@@ -44,7 +44,7 @@ var filmController = function ($scope, $http) {
     // background load
     $http({
         method: "POST",
-        url: "Schedule/LoadScheduleGroupByCinema"
+        url: "schedule/LoadScheduleGroupByCinema"
     })
     .then(function (response) {
         console.log("Background load done");

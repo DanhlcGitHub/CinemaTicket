@@ -19,6 +19,8 @@ namespace CinemaTicket.CustomRepository
 
         public List<Object> getMovieScheduleOfCinema(int cinemaId, DateTime currentDate)
         {
+            string endDateStr = currentDate.Year + "-" + currentDate.Month + "-" + currentDate.Day + " " + "23:59:59";
+            DateTime endDate = DateTime.Parse(endDateStr);
             List<Object> list = new List<Object>();
             using (SqlConnection con = DBUtility.GetConnection1())
             {
@@ -27,6 +29,7 @@ namespace CinemaTicket.CustomRepository
 
                 cmd.Parameters.AddWithValue("@cinemaId", cinemaId);
                 cmd.Parameters.AddWithValue("@currentDate", currentDate);
+                cmd.Parameters.AddWithValue("@endOfDay", endDate);
                 con.Open();
                 var rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -44,6 +47,8 @@ namespace CinemaTicket.CustomRepository
 
         public List<Object> GetMovieScheduleForDetailFilm(int cinemaId, DateTime currentDate, int digTypeId, int filmId)
         {
+            string endDateStr = currentDate.Year + "-" + currentDate.Month + "-" + currentDate.Day + " " + "23:59:59";
+            DateTime endDate = DateTime.Parse(endDateStr);
             List<Object> list = new List<Object>();
             using (SqlConnection con = DBUtility.GetConnection1())
             {
@@ -54,6 +59,7 @@ namespace CinemaTicket.CustomRepository
                 cmd.Parameters.AddWithValue("@filmId", filmId);
                 cmd.Parameters.AddWithValue("@digTypeId", digTypeId);
                 cmd.Parameters.AddWithValue("@currentDate", currentDate);
+                cmd.Parameters.AddWithValue("@endOfDay", endDate);
                 con.Open();
                 var rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -71,7 +77,6 @@ namespace CinemaTicket.CustomRepository
 
         public List<MovieSchedule> FindMovieSchedule(int filmId, int timeId, int cinemaId,DateTime scheduleDate)
         {
-        
             using (var db = new CinemaBookingDBEntities())
             {
                 List<MovieSchedule> list = db.MovieSchedules.Include("Room")

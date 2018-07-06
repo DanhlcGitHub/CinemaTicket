@@ -60,7 +60,7 @@ var filmController = function ($scope, $http) {
             $scope.data = response.data;
             //$scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
             // load small part GetSubScheduleFilmDetail
-            
+
             var timer = setInterval(function () {
                 if ($scope.isDateLoadDone == true && $scope.isGroupLoadDone == true) {
                     //auto change seat status from buying to available

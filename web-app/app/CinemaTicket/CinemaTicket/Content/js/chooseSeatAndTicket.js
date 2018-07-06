@@ -39,7 +39,7 @@ var chooseTicketController = function ($scope, $http) {
         .then(function (response) {
             $scope.chooseTicketData = response.data;
             console.log($scope.chooseTicketData);
-            
+
             document.getElementById("filmInforSidebar").style.backgroundImage = "url('" + $scope.chooseTicketData.img + "')";
             $scope.calculateTotalAmout();
 
@@ -106,8 +106,11 @@ var chooseTicketController = function ($scope, $http) {
         for (var i = 0; i < $scope.quantityData.length; i++) {
             $scope.totalTicket += $scope.quantityData[i].userChoose;
         }
+        $scope.calculateTotalAmout();
+        console.log("amount: " + $scope.totalAmount);
+        $scope.totalAmoutUSD = Math.round((parseFloat($scope.totalAmount) / $scope.exchangeRate) * 100) / 100;
     }
-    
+
     //================================================= choose Seat Part
     $scope.seatData;
     $scope.Math = window.Math;
@@ -136,10 +139,6 @@ var chooseTicketController = function ($scope, $http) {
     $scope.TicketStatusEnum = Object.freeze({ "available": "btn-seat", "buyed": "btn-seat-buyed", "buying": "btn-seat-buyed", "resell": "btn-seat-resell" });
     // init data
     
-    console.log("init");
-    console.log($scope.totalAmount);
-    $scope.totalAmoutUSD = Math.round((parseFloat($scope.totalAmount) / $scope.exchangeRate) * 100) / 100;
-    console.log($scope.quantityData);
     // beforeunload---------------------
     window.addEventListener('beforeunload', function (e) {
         //auto change seat status from buying to available
@@ -283,7 +282,6 @@ var chooseTicketController = function ($scope, $http) {
                 clearInterval(timer);
                 return;
             }
-            console.log($scope.countDown);
             $scope.countDown--;
             $scope.$apply()
         }, 1000);
@@ -363,15 +361,16 @@ var chooseTicketController = function ($scope, $http) {
         }
     };
     $scope.renderPaypalButton = function () {
+        //<insert production client id>//AXWr3Vji-q_UZFmrhTIxcSMBctnfsofDOxwsi3_llRLpDzwJ83NtZzt7wT5Sg_eB916xA5eC6c7O1APa
         paypal.Button.render({
 
             env: 'sandbox', // sandbox | production
 
             client: {
                 sandbox: 'AWT16aVyr2SNJR2uBG46HHvz-DIY98lIP3aPAO-sUs36sOvtN9Ay3H0z-4e8cj4qZyNR5Aj3qrsxw0W3',
-                production: 'AXWr3Vji-q_UZFmrhTIxcSMBctnfsofDOxwsi3_llRLpDzwJ83NtZzt7wT5Sg_eB916xA5eC6c7O1APa'
+                production: '<insert production client id>'
             },
-            commit: false, // Show a 'Pay Now' button
+            commit: true, // Show a 'Pay Now' button
             payment: function (data, actions) {
                 return actions.payment.create({
                     payment: {
@@ -385,6 +384,9 @@ var chooseTicketController = function ($scope, $http) {
             },
 
             onAuthorize: function (data, actions) {
+                return actions.payment.execute().then(function () {
+                    window.alert('Payment Complete!');
+                });
                 return actions.payment.get().then(function (data) {
                     if ($scope.countDown !== 0) { // !timeout
                         return actions.payment.execute().then(function () {
@@ -421,6 +423,7 @@ var chooseTicketController = function ($scope, $http) {
             },
             onError: function (err) {
                 console.log("some error occur");
+                console.log(err);
             }
         }, '#paypal-button-container');
     };
@@ -513,7 +516,7 @@ var LocalStorageManager = {
     removeDataFromStorage: function (dataKey) {
         localStorage.removeItem(dataKey);
     },
-    
+
 }
 
 function validateEmail(inputemail) {

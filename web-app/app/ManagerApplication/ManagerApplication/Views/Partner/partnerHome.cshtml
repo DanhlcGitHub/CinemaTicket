@@ -1,5 +1,297 @@
 ﻿@{
     ViewBag.Title = "partnerHome";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/partner.css">
+    <title>Page Title</title>
+    <link rel="stylesheet" href="css/circle.css">
+</head>
+<body style="overflow-x:hidden;">
 
-<h2>partnerHome</h2>
+    <div class="row" style="padding-right: 15px;">
+        <div class="col-lg-3">
+            <!-- Profile Image -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="float-center">
+                        <img class="profile-user-img img-responsive img-circle" src="https://openclipart.org/image/2400px/svg_to_png/277081/Male-Avatar.png" alt="User profile picture" style="width:100%">
+                    </div>
+                    <h3 class="profile-username text-center">Danh Le</h3>
+                    <p class="text-muted text-center">BHD Partner</p>
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Cinemas</b> <a class="pull-right">22</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Employees</b> <a class="pull-right">35</a>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn btn-primary btn-block">
+                        Manage Cinema
+                    </button>
+                    <button type="button" class="btn btn-success btn-block">
+                        Manage Cinema Employee
+                    </button>
+
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+            <!-- About Me Box -->
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="box-title">About Me</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="card-body">
+                    <strong><i class="fa fa-phone margin-r-5"></i> Phone</strong>
+                    <p class="text-muted">
+                        123456789
+                    </p>
+                    <hr>
+                    <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+                    <p class="text-muted">
+                        B.S. in Computer Science from the University of Tennessee at Knoxville
+                    </p>
+                    <hr>
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                    <p class="text-muted">Malibu, California</p>
+                    <hr>
+                    <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                    <p>
+                        <span class="label label-danger">UI Design</span>
+                        <span class="label label-success">Coding</span>
+                        <span class="label label-info">Javascript</span>
+                        <span class="label label-warning">PHP</span>
+                        <span class="label label-primary">Node.js</span>
+                    </p>
+                    <hr>
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="float-left"><h3>All Employee</h3></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="float-right">
+                                    <button type="button" class="btn btn-danger " style="width:100%">
+                                        Add Employee
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="card-body">
+                        <div class="row table-scrollable">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>No.</th>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>phone</th>
+                                            <th>Cinema</th>
+                                            <th>Detail</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr role="row" class="odd">
+                                            <td>CineStar</td>
+                                            <td>123456789</td>
+                                            <td>CineStar@gmail.com</td>
+                                            <td><a href="CineStar.png">Link</a></td>
+                                            <td>
+                                                <button type="button" class="btn btn-info">
+                                                    Detail
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr role="row" class="odd">
+                                            <td>Lotte Cinema</td>
+                                            <td>987654321</td>
+                                            <td>LotteCinema@gmail.com</td>
+                                            <td><a href="LotteCinema.png">Link</a></td>
+                                            <td>
+                                                <button type="button" class="btn btn-info">
+                                                    Detail
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr role="row" class="odd">
+                                            <td>BHD Star Cineplex</td>
+                                            <td>124334535</td>
+                                            <td>BHDStar@gmail.com</td>
+                                            <td><a href="BHDStar.png">Link</a></td>
+                                            <td>
+                                                <button type="button" class="btn btn-info">
+                                                    Detail
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr role="row" class="odd">
+                                            <td>Galaxy Cinema</td>
+                                            <td>123456789</td>
+                                            <td>GalaxyCinema@gmail.com</td>
+                                            <td><a href="GalaxyCinema.png">Link</a></td>
+                                            <td>
+                                                <button type="button" class="btn btn-info">
+                                                    Detail
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr role="row" class="odd">
+                                            <td>DDC - Đống Đa</td>
+                                            <td>123456789</td>
+                                            <td>DDC@gmail.com</td>
+                                            <td><a href="DongDaCinema.jpg">Link</a></td>
+                                            <td>
+                                                <button type="button" class="btn btn-info">
+                                                    Detail
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr role="row" class="odd">
+                                            <td>Beta Cineplex</td>
+                                            <td>123456789</td>
+                                            <td>BetaCineplex@gmail.com</td>
+                                            <td><a href="BetaCineplex.png">Link</a></td>
+                                            <td>
+                                                <button type="button" class="btn btn-info">
+                                                    Detail
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr role="row" class="odd">
+                                            <td>Mega GS</td>
+                                            <td>123456789</td>
+                                            <td>MegaGS@gmail.com</td>
+                                            <td><a href="MegaCinema.png">Link</a></td>
+                                            <td>
+                                                <button type="button" class="btn btn-info">
+                                                    Detail
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr role="row" class="odd">
+                                            <td>CGV Cinemas</td>
+                                            <td>123456789</td>
+                                            <td>CGVCinemas@gmail.com</td>
+                                            <td><a href="CGVCinema.png">Link</a></td>
+                                            <td>
+                                                <button type="button" class="btn btn-info">
+                                                    Detail
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr role="row">
+                                            <th>Partner's Name</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                            <th>Logo</th>
+                                            <th>Detail</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <ul class="pagination float-right">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="float-left"><h3>Add/Edit Partner</h3></div>
+                    </div>
+                </div>
+                <form class="form-horizontal">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Partner name</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-12">
+                                <div><input type="password" class="form-control" id="inputEmail3" placeholder=""></div>
+                                <div style="padding-top:10px"><input type="checkbox" style="margin-right:5px">Show password</div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="col-sm-2 control-label">Re-confirm Password</label>
+                            <div class="col-sm-12">
+                                <div><input type="password" class="form-control" id="inputEmail3" placeholder=""></div>
+                                <div style="padding-top:10px"><input type="checkbox" style="margin-right:5px">Show password</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Phone:</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Email:</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Logo:</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-info btn-block">Add/Save</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="modal fade " id="trailer">
+        <div class="modal-dialog float-left" style="padding-left:180px">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <iframe width="1280" height="720" src="https://www.youtube.com/embed/vn9mMeWcgoM?autoplay=1"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

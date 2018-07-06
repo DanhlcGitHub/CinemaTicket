@@ -434,7 +434,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\CinemaBookingTicket - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\CinemaBookingTicket - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\CinemaBookingTicket - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\CinemaBookingTicket - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\CinemaBookingTicket - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\CinemaBookingTicket - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>

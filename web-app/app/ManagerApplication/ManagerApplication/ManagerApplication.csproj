@@ -161,7 +161,6 @@
     <Compile Include="CustomRepository\FilmRepository.cs" />
     <Compile Include="CustomRepository\GroupCinemaRepository.cs" />
     <Compile Include="CustomRepository\MovieScheduleRepository.cs" />
-    <Compile Include="CustomRepository\NewsRepository.cs" />
     <Compile Include="CustomRepository\PartnerAccountRepository.cs" />
     <Compile Include="CustomRepository\PromotionRepository.cs" />
     <Compile Include="CustomRepository\RoomRepository.cs" />
@@ -183,9 +182,6 @@
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MovieSchedule.cs">
-      <DependentUpon>CinemaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="News.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PartnerAccount.cs">
@@ -210,7 +206,6 @@
     <Compile Include="Service\FilmService.cs" />
     <Compile Include="Service\GroupCinemaServcie.cs" />
     <Compile Include="Service\MovieScheduleService.cs" />
-    <Compile Include="Service\NewsService.cs" />
     <Compile Include="Service\PartnerAccountService.cs" />
     <Compile Include="Service\PromotionService.cs" />
     <Compile Include="Service\RoomService.cs" />
@@ -220,9 +215,6 @@
     <Compile Include="Service\TypeOfSeatService.cs" />
     <Compile Include="Service\UserAccountService.cs" />
     <Compile Include="ShowTime.cs">
-      <DependentUpon>CinemaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Ticket.cs">
@@ -245,6 +237,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\partner.css" />
     <Content Include="Content\css\common.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\w3.css" />
@@ -270,6 +263,18 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CinemaManager\CinemaManagerHome.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partner\partnerHome.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="CinemaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CinemaModel.Designer.cs</LastGenOutput>
@@ -289,18 +294,6 @@
       <DependentUpon>CinemaModel.edmx</DependentUpon>
       <LastGenOutput>CinemaModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\CinemaManager\CinemaManagerHome.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Partner\partnerHome.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

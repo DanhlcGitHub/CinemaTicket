@@ -18,6 +18,5 @@ namespace ManagerApplication
         public string userPassword { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
-        public Nullable<double> tix { get; set; }
     }
 }

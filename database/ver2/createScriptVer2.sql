@@ -42,11 +42,13 @@ CREATE TABLE GroupCinema (
 CREATE TABLE PartnerAccount (
     partnerId nvarchar(255) PRIMARY KEY,
 	partnerPassword nvarchar(255),
+	partnerName nvarchar(255),
 	phone nvarchar(255),
 	email nvarchar(255),
 	groupOfCinemaId int,
 	isAvailable bit,
 );
+
 
 CREATE TABLE Cinema (
     cinemaId int IDENTITY(1,1) PRIMARY KEY,
@@ -63,11 +65,14 @@ CREATE TABLE Cinema (
 CREATE TABLE CinemaManager (
     managerId nvarchar(255) PRIMARY KEY,
 	managerPassword nvarchar(255),
+	managerName nvarchar(255),
 	phone nvarchar(255),
 	email nvarchar(255),
 	cinemaId int,
 	isAvailable bit,
 );
+
+
 
 CREATE TABLE ShowTime (
     timeId int IDENTITY(1,1) PRIMARY KEY,

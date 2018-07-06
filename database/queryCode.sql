@@ -3,11 +3,12 @@ use [CinemaBookingDB];
 
 create proc spGetMovieScheduleOfCinema
 @cinemaId int,
-@currentDate datetime
+@currentDate datetime,
+@endOfDay datetime
 as
 begin
 	select ms.filmId as filmId,ms.timeId as timeId FROM MovieSchedule ms JOIN Room r ON ms.roomId = r.roomId
-	where r.cinemaId = @cinemaId and ms.scheduleDate > @currentDate
+	where r.cinemaId = @cinemaId and ms.scheduleDate > @currentDate and ms.scheduleDate < @endOfDay
 	group by ms.filmId , ms.timeId
 end
 
@@ -22,13 +23,14 @@ create proc spGetMovieScheduleForDetailFilm
 @cinemaId int,
 @filmId int,
 @digTypeId int,
-@currentDate datetime
+@currentDate datetime,
+@endOfDay datetime
 as
 begin
 	select ms.timeId FROM MovieSchedule ms JOIN Room r ON ms.roomId = r.roomId
 								JOIN Film f On f.filmId = ms.filmId
 	                             JOIN DigitalType dt ON dt.digTypeId = r.digTypeId 					     
-	where r.cinemaId = @cinemaId and ms.scheduleDate > @currentDate and f.filmId = @filmId and r.digTypeId = @digTypeId
+	where r.cinemaId = @cinemaId and ms.scheduleDate > @currentDate and ms.scheduleDate < @endOfDay and f.filmId = @filmId and r.digTypeId = @digTypeId
 	group by ms.timeId
 end
 
@@ -47,8 +49,6 @@ begin
 														group by c.cinemaId)
 end
 
-DROP PROCEDURE spGetCinemaHasScheduleInCurrentDate;  
-GO 
 
 select * from MovieSchedule ms JOIN Room r ON ms.roomId = r.roomId
 where ms.filmId = 3 and ms.timeId = 1 and ms.scheduleDate = '2018-06-08' and r.cinemaId = 1 
@@ -61,7 +61,7 @@ begin
 		where b.bookingId in (select customerId from Customer where email = @email)
 end
 
-DROP PROCEDURE spGetMovieScheduleForDetailFilm;  
+DROP PROCEDURE spGetMovieScheduleOfCinema;  
 GO 
 
 

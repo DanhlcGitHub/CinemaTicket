@@ -11,6 +11,7 @@ namespace CinemaTicket.Utility
         {
             List<DateTime> dates = new List<DateTime>();
             dates.Add(currentDate);
+            currentDate = DateTime.Today;
             for (int i = 1; i < 7; i++)
             {
                 DateTime date = currentDate.AddDays(i);

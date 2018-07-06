@@ -36,7 +36,7 @@ namespace CinemaTicket.Controllers
         {
             DateTime today = DateTime.Now;
             /*DateTime today = DateTime.Parse("2017-06-23");*/
-            string dateInput = selectDate + " " + startTime;
+            string dateInput = selectDate.Split(' ')[0] + " " + startTime;
             DateTime selectedDate = DateTime.Parse(dateInput);
             var obj = new
             {

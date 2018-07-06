@@ -12,6 +12,16 @@ namespace UploadImageApp
         protected void Page_Load(object sender, EventArgs e)
         {
             // path của cái hình lấy từ máy mình
+            string localPath = @"C:\Users\hi\Pictures\Screenshots\testPic1.png";
+            string uriString = @"ftp://waws-prod-dm1-039.ftp.azurewebsites.windows.net/site/wwwroot/Content/img/film/testPic1.jpg";
+
+            // hàm hỗ trợ upload
+            UploadUtility.Upload1(localPath, uriString);
+        }
+    }
+}
+/*
+ *  // path của cái hình lấy từ máy mình
             string localPath = @"C:\Users\hi\Pictures\Screenshots\pic1.png";
             
             // cái uri string phải cắt tên cái hình ra rồi + vào như bên dưới
@@ -24,6 +34,4 @@ namespace UploadImageApp
             
             ///https://fptstudent.000webhostapp.com/CinemaImage/pic1.png dòng này bị comment
             /// chuỗi ở trên là chuỗi lưu xuống db
-        }
-    }
-}
+*/

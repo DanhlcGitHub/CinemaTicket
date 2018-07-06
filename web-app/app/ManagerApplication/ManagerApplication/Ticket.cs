@@ -21,6 +21,7 @@ namespace ManagerApplication
         public string paymentCode { get; set; }
         public string qrCode { get; set; }
         public string ticketStatus { get; set; }
+        public string resellDescription { get; set; }
         public Nullable<double> price { get; set; }
     
         public virtual BookingTicket BookingTicket { get; set; }

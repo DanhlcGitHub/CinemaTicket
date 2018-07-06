@@ -1,0 +1,9 @@
+﻿@media only screen and (max-width: 991px) {
+    .calendar-film {
+        border-top: 1px solid #ccc;
+    }
+}
+
+.table-scrollable {
+    overflow-x: auto;
+}

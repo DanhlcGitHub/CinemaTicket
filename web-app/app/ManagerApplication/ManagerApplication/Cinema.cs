@@ -17,7 +17,6 @@ namespace ManagerApplication
         public Cinema()
         {
             this.CinemaManagers = new HashSet<CinemaManager>();
-            this.Promotions = new HashSet<Promotion>();
             this.Rooms = new HashSet<Room>();
         }
     
@@ -33,7 +32,6 @@ namespace ManagerApplication
     
         public virtual GroupCinema GroupCinema { get; set; }
         public virtual ICollection<CinemaManager> CinemaManagers { get; set; }
-        public virtual ICollection<Promotion> Promotions { get; set; }
         public virtual ICollection<Room> Rooms { get; set; }
     }
 }

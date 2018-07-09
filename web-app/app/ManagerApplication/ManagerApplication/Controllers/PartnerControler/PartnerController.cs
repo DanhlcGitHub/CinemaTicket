@@ -13,7 +13,7 @@ namespace ManagerApplication.Controllers.PartnerControler
 
         public ActionResult Home()
         {
-            return View();
+            return View("~/Views/Partner/partnerHome.cshtml");
         }
 
     }

@@ -1,0 +1,471 @@
+﻿.carousel-indicators li {
+    display: inline-block;
+    width: 13px;
+    height: 15px;
+    margin: 5px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #e8ddd0;
+    border-radius: 10px;
+}
+
+.carousel-indicators .active {
+    background-color: orangered;
+}
+
+.carousel {
+    margin-top: 50px;
+}
+
+.card m-2 {
+    max-width: 18rem;
+}
+
+.cinemas_icon {
+    margin: 10px 0px 10px 0px;
+    float: left;
+}
+
+.top-left {
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    background: orangered;
+    color: #ffffff;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.top-right {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    background: #808080;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.info_type {
+    background: orangered;
+    color: #ffffff;
+    border-radius: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    te;
+}
+
+.profile-image {
+    float: left;
+}
+
+.img-theater {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+}
+
+.nav-list {
+    max-height: 500px;
+    max-width: 300px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    overflow: hidden;
+}
+
+.img-2d {
+    width: 30px;
+    height: 26px;
+    margin: 10px;
+}
+
+.icon-common {
+    width: 25px;
+    height: 20px;
+}
+
+.img-movie {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.icon_star_rating {
+    width: 8px;
+    height: 8px;
+}
+
+.infoMovieCinema {
+    color: #949494;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.myContainer {
+    position: relative;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.myContainer:hover .img-movie {
+    opacity: 0.3;
+}
+
+.myContainer:hover .middle {
+    opacity: 1;
+}
+
+.text {
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
+    cursor: pointer;
+}
+
+img.ex4 {
+    width: 30px;
+    height: 30px;
+}
+
+.overflow-scroll {
+    overflow-y: auto;
+    height: 638px;
+    cursor: pointer;
+}
+
+a[ng-click] {
+    cursor: pointer;
+}
+
+img {
+    cursor: pointer;
+}
+/* --------------------nav------------------- */
+
+/* 2 cai nay moi them vao */
+.carousel {
+    margin-top: 75px;
+}
+
+.mynav {
+    background-color: rgba(255,255,255,.95);
+    -webkit-box-shadow: 0 7px 6px -6px #777;
+    -moz-box-shadow: 0 7px 6px -6px #777;
+    box-shadow: 0 7px 6px -6px #777;
+    font-size: 18px;
+}
+/* ------------for center---------------- */
+.for-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* ver1 update*/
+.body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.42857143;
+}
+
+.bg-light {
+    background-color: #ffffff !important;
+    background-color: rgba(245, 245, 245, 0.4) !important;
+}
+
+.circle {
+    position: relative;
+    top: 5px;
+    left: 5px;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-color: #E6F4F7;
+}
+
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
+
+ul.ex1 {
+    height: 586px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.navbar-nav .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+}
+
+/* change the color of active or hovered links */
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: #ff2300;
+}
+
+.fixedBottom {
+    position: fixed;
+    bottom: 0;
+}
+/*----------------- resell-----------*/
+.resell {
+    color: red;
+    font-weight: bold;
+}
+
+.buyed {
+    color: green;
+    font-weight: bold;
+}
+
+img.ex1 {
+    width: 50px;
+    height: 50px;
+}
+/*----------------------- update version 1 ----------------------*/
+
+mark.ex1 {
+    background-color: red;
+    color: white;
+}
+
+p.ex1 {
+    padding-top: 60px;
+}
+
+h1.ex1 {
+    padding-top: 60px;
+}
+
+h6.ex1 {
+    padding-top: 10px;
+}
+
+.pink {
+    font-weight: bold;
+    color: #ffc0cb;
+}
+
+.red {
+    color: #FF0000;
+}
+
+.gray {
+    color: #999999;
+}
+
+img.ex1 {
+    width: 50px;
+    height: 50px;
+}
+
+ime.ex2 {
+    width: 40px;
+    height: 40px;
+}
+
+img.ex4 {
+    width: 30px;
+    height: 30px;
+}
+
+.container.container-circle {
+    width: 110px;
+    height: 110px;
+    margin: 100px auto;
+}
+
+.checked {
+    color: orange;
+    padding-top: 20px;
+}
+
+.prec {
+    top: 30px;
+    position: relative;
+    font-size: 30px;
+}
+
+.circle {
+    position: relative;
+    top: 5px;
+    left: 5px;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-color: #E6F4F7;
+}
+
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
+
+ul.ex1 {
+    height: 586px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.navbar-nav .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+}
+
+/* change the color of active or hovered links */
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: #ff2300;
+}
+
+
+.card {
+    max-width: calc(106%);
+}
+
+.wrapper {
+    height: 100%;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.footer {
+    /* position: absolute; */
+    /* bottom: 0; */
+    width: 100%;
+    /* height: 42px; You can also remove this as height can now be dynamic */
+}
+
+
+.body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.42857143;
+}
+
+.bg-light {
+    background-color: #ffffff !important;
+    background-color: rgba(245, 245, 245, 0.4) !important;
+}
+
+span.b {
+    white-space: normal;
+}
+/* --------------------------------- Update ver 2 Hoang add ----------------------------*/
+.overme {
+    width: 200px;
+    height: 60px;
+    line-height: 30px;
+    overflow: hidden;
+    /*The problematic part is below*/
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.overme {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.showbutton {
+    display: none;
+}
+
+.hideinfo:hover .showbutton {
+    display: block;
+}
+
+.hideinfo:hover .info {
+    display: none;
+}
+
+p.ex1 {
+	color: gray;
+   width: 100%; 
+   text-align: center; 
+   border-bottom: 1px solid #000; 
+   line-height: 0.1em;
+   margin: 10px 0 20px; 
+   text-color:#999999;
+} 
+
+p.ex1 span { 
+    background:#fff; 
+    padding:0 10px; 
+}
+
+button.ex1 {
+    background-color: #FF0000; /* Green */
+    border: none;
+    width: 100px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.button1 {
+    border-radius: 30px;
+}
+/*----------------------popup box hover-------------------------*/
+.original-box {
+	position:relative;
+	float:left;
+	overflow:hidden;
+}
+.popup-box {
+	position:absolute;
+	top:0px;
+	width:230px;
+	height:230px;
+	padding:10px;
+	background-color:white;
+	color: black;
+	-moz-transition:all 0.4s;
+	-webkit-transition:all 0.4s;
+	-o-transition:all 0.4s;
+	transition:all 0.4s;
+	opacity:0;
+	filter:Alpha(opacity=0);
+    z-index: 999;
+}
+.original-box:hover {
+	overflow:visible;
+	cursor:pointer;
+}
+.original-box:hover .popup-box {
+	top:25px;
+	opacity:1;
+	filter:Alpha(opacity=100);
+}
+.popup-box-left {
+	left:0px;
+}
+.original-box:hover .popup-box-left {
+	left:25px;
+}
+/*-------------------------------------------------------------*/
+	

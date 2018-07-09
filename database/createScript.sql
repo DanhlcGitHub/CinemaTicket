@@ -109,8 +109,9 @@ CREATE TABLE MovieSchedule (
 	filmId int,
     timeId int,
     roomId int,
-	scheduleDate date,
+	scheduleDate datetime,
 );
+
 
 CREATE TABLE Ticket (
     ticketId int IDENTITY(1,1) PRIMARY KEY,

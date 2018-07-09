@@ -7,6 +7,7 @@
 
 <head>
     <title>Chọn vé và thanh toán</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="~/Content/css/w3.css">
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
@@ -94,12 +95,12 @@
                                 </td>
                                 <td style="width: 20%"><h4 class="text-success">{{seatType.price}}</h4></td>
                                 <td style="width: 20%">
-                                    <button type="button" class="btn btn-default btn-sm" style="margin-right: 9px;">
-                                        <span ng-click="clickMinusButton($index)" class="fa fa-minus"></span>
+                                    <button ng-click="clickMinusButton($index)" type="button" class="btn btn-default btn-sm" style="margin-right: 9px;">
+                                        <span class="fa fa-minus"></span>
                                     </button>
                                     <span>{{seatType.userChoose}}</span>
-                                    <button type="button" class="btn btn-default btn-sm" style="margin-left: 9px;">
-                                        <span ng-click="clickPlusButton($index)" class="fa fa-plus"></span>
+                                    <button ng-click="clickPlusButton($index)" type="button" class="btn btn-default btn-sm" style="margin-left: 9px;">
+                                        <span class="fa fa-plus"></span>
                                     </button>
                                 </td>
                                 <td style="width: 10%"></td>
@@ -447,9 +448,8 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="draw">
-                            <p id="paypal-button-container" style="text-align: center; font-weight: bold">Thanh Toan Paypal</p>
-                        </div>
+
+                            <div id="paypal-button-container" style="text-align: center; font-weight: bold">Thanh Toan Paypal</div>
                         
                     </div>
                 </div>

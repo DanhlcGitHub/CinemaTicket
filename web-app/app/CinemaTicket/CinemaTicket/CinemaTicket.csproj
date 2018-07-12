@@ -170,9 +170,7 @@
     <Compile Include="CustomRepository\DigitalTypeRepository.cs" />
     <Compile Include="CustomRepository\GroupCinemaRepository.cs" />
     <Compile Include="CustomRepository\MovieScheduleRepository.cs" />
-    <Compile Include="CustomRepository\NewsRepository.cs" />
     <Compile Include="CustomRepository\PartnerAccountRepository.cs" />
-    <Compile Include="CustomRepository\PromotionRepository.cs" />
     <Compile Include="CustomRepository\RoomRepository.cs" />
     <Compile Include="CustomRepository\SeatRepository.cs" />
     <Compile Include="CustomRepository\ShowTimeRepository.cs" />
@@ -192,9 +190,6 @@
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MovieSchedule.cs">
-      <DependentUpon>CinemaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="News.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PartnerAccount.cs">
@@ -220,9 +215,7 @@
     <Compile Include="Service\FilmService.cs" />
     <Compile Include="Service\GroupCinemaServcie.cs" />
     <Compile Include="Service\MovieScheduleService.cs" />
-    <Compile Include="Service\NewsService.cs" />
     <Compile Include="Service\PartnerAccountService.cs" />
-    <Compile Include="Service\PromotionService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\SeatService.cs" />
     <Compile Include="Service\ShowTimeService.cs" />
@@ -230,9 +223,6 @@
     <Compile Include="Service\TypeOfSeatService.cs" />
     <Compile Include="Service\UserAccountService.cs" />
     <Compile Include="ShowTime.cs">
-      <DependentUpon>CinemaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Ticket.cs">
@@ -417,8 +407,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CinemaModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="CinemaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CinemaModel.edmx</DependentUpon>
@@ -432,8 +420,6 @@
       <DependentUpon>CinemaModel.edmx</DependentUpon>
       <LastGenOutput>CinemaModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\PublishProfiles\CinemaBookingTicket - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\CinemaBookingTicket - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\CinemaBookingTicket - FTP.pubxml" />

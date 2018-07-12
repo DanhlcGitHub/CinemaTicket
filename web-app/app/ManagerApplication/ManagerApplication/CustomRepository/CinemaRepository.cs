@@ -42,5 +42,7 @@ namespace ManagerApplication.CustomRepository
             }
             return list;
         }
+
+
     }
 }

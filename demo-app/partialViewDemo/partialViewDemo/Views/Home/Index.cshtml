@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<body >
+    <div>{{myData}}</div>
+    <button onclick="addView()">change to view2</button>
+    <button onclick="addView3()">change to view3</button>
+
+    <button data-url='@Url.Action("view2","home")} )'>
+        view 2
+    </button>
+    <div id="mainDiv" ng-app="myModule1" ng-controller="myController1">
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="~/Js/angular.min.js"></script>
+    <script src="~/Js/app.js"></script>
+    <script src="~/Js/app1.js"></script>
+</body>

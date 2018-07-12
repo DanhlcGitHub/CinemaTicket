@@ -34,13 +34,11 @@ namespace CinemaTicket
         public virtual DbSet<Film> Films { get; set; }
         public virtual DbSet<GroupCinema> GroupCinemas { get; set; }
         public virtual DbSet<MovieSchedule> MovieSchedules { get; set; }
-        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<PartnerAccount> PartnerAccounts { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Seat> Seats { get; set; }
         public virtual DbSet<ShowTime> ShowTimes { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<TypeOfSeat> TypeOfSeats { get; set; }
         public virtual DbSet<UserAccount> UserAccounts { get; set; }

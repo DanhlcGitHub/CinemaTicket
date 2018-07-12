@@ -17,7 +17,5 @@ namespace CinemaTicket
         public int promotionId { get; set; }
         public Nullable<int> cinemaId { get; set; }
         public string urlDocument { get; set; }
-    
-        public virtual Cinema Cinema { get; set; }
     }
 }

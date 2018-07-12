@@ -9,6 +9,7 @@ namespace ManagerApplication.Service
 {
     interface IRoomService
     {
+        int CreateRoom(Room entity);
     }
     public class RoomService : IRoomService
     {
@@ -36,6 +37,11 @@ namespace ManagerApplication.Service
         public List<Room> FindBy(Expression<Func<Room, bool>> predicate)
         {
             return roomRepository.FindBy(predicate);
+        }
+
+        public int CreateRoom(Room entity)
+        {
+            return roomRepository.CreateRoom(entity);
         }
     }
 }

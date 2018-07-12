@@ -253,11 +253,11 @@ VALUES (2,N'Content/img/cinemaLogo/lottecinema-diamond.jpg',N'Lotte Cinema Diamo
 INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
 VALUES (2,N'Content/img/cinemaLogo/lottecinema-govap.jpg',N'Lotte Cinema Gò vấp',N'L3-Lotte Mart, 242 Nguyễn Văn Lượng, Gò Vấp',N'028 3620 2151',N'',N'8:00 - 24:00',N'Với tổng vốn đầu tư lên tới 5 triệu USD, cao nhất trong toàn hệ thống Lotte Cinema, được xây dựng trên mặt sàn có diện tích tới 4,000 mét vuông, 7 phòng chiếu phim hiện đại bậc nhất cùng sức chứa hơn 1,400 chỗ ngồi, Lotte Cinema Gò Vấp xứng đáng được mệnh danh là ‘siêu cụm rạp’ với nhiều điểm nổi bật lần đầu tiên có mặt tại Việt Nam.')
 
-INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
+/*INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
 VALUES (2,N'Content/img/cinemaLogo/lottecinema-phutho.jpg',N'Lotte Cinema Phú Thọ',N'L4-Lotte Mart Phú Thọ, Q.11',N'028 6264 2603',N'',N'8:00 - 24:00',N'Lotte Cinema Phú Thọ là cụm rạp thứ 12 của Lotte Cinema Việt Nam. Lotte Cinema Phú Thọ có 4 phòng chiếu 2D và 3D hiện đại, hình ảnh sống động, sắc nét với hệ thống âm thanh Dobby Surround tạo hiệu ứng điện ảnh tuyệt vời.')
 
 INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
-VALUES (2,N'Content/img/cinemaLogo/lottecinema-namsaigon.jpg',N'Lotte Cinema Nam Sài Gòn',N'L3-Lotte Mart NSG, 469 Nguyễn Hữu Thọ, Q.7',N'028 3775 2527',N'',N'8:00 - 24:00',N'Công nghệ phim 3D RealD ở Lotte cũng thuộc hàng top về mức độ hiện đại. Lotte Nam Sài Gòn còn có phòng chiếu VIP Charlotte, y như ngồi ghế thương gia hạng sang trên máy bay, với sức chứa chỉ hơn 30 khách.')
+VALUES (2,N'Content/img/cinemaLogo/lottecinema-namsaigon.jpg',N'Lotte Cinema Nam Sài Gòn',N'L3-Lotte Mart NSG, 469 Nguyễn Hữu Thọ, Q.7',N'028 3775 2527',N'',N'8:00 - 24:00',N'Công nghệ phim 3D RealD ở Lotte cũng thuộc hàng top về mức độ hiện đại. Lotte Nam Sài Gòn còn có phòng chiếu VIP Charlotte, y như ngồi ghế thương gia hạng sang trên máy bay, với sức chứa chỉ hơn 30 khách.')*/
 
 
 /*------BHD------*/
@@ -268,11 +268,11 @@ VALUES (3,N'Content/img/cinemaLogo/bhdstarcineplex-bitexco.jpg',N'BHD Star Bitex
 INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
 VALUES (3,N'Content/img/cinemaLogo/bhdstarcineplex-levanviet.jpg',N'BHD Star Lê Văn Việt',N'L5-Megamall, 159 XL Hà Nội, Q.2',N'028 3744 6969',N'info@bhdstar.vn',N'8:30 - 23:30',N'Cụm rạp mới BHD Star Mega Mall Thảo Điền toạ lạc tại lầu 5 của TTTM Vincom. Với tầm vóc thương mại và thương hiệu có tiếng của các TTTM Vincom cũng như quy mô đầu tư chất lượng quốc tế của tập đoàn BHD, thì rõ ràng đây lại là một sự kết hợp tuyệt vời nữa giữa giải trí và mua sắm, thiên đường cho các gia đình và các bạn trẻ hội tụ.')
 
-INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
+/*INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
 VALUES (3,N'Content/img/cinemaLogo/bhdstarcineplex-phamhung.jpg',N'BHD Star Phạm Hùng',N'L5-Vincom 3/2, 3C Đường 3/2, Q.10',N'028 62645820',N'info@bhdstar.vn',N'8:30 - 23:30',N'Tọa lạc tại tầng 4 của Trung tâm mua sắm Vincom (3C, đường 3 Tháng 2, P.12, Q.10 – TP.HCM), BHD Star Cinema có 5 phòng chiếu 2D và 3D được trang bị hệ thống âm thanh, trang thiết bị nội thất hiện đại, với tổng số ghế là 666.')
 
 INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
-VALUES (3,N'Content/img/cinemaLogo/bhdstarcineplex-vincomquangtrung.jpg',N'BHD Star Vincom Quang Trung',N'B1-Vincom QT, 190 Quang Trung, Gò Vấp',N'028 39892468',N'info@bhdstar.vn',N'8:30 - 23:30',N'Cụm rạp BHD Star Quang Trung toạ lạc tại tầng B1, TTTM Vincom Quang Trung, 190 Quang Trung, P.10, Gò Vấp là sự kết hợp tuyệt vời giữa mô hình TTTM và giải trí. Tại đây khán giả có thể vừa thoả sức mua sắm với hệ thống siêu thị Vinmart, các gian hàng hoá/ mỹ phẩm, khu thời trang cao cấp, ẩm thực thuộc TTTM Vincom; vừa có thể tận hưởng không gian giải trí mang đậm phong cách Việt Nam nhưng lại hiện đại không kém so với quốc tế.')
+VALUES (3,N'Content/img/cinemaLogo/bhdstarcineplex-vincomquangtrung.jpg',N'BHD Star Vincom Quang Trung',N'B1-Vincom QT, 190 Quang Trung, Gò Vấp',N'028 39892468',N'info@bhdstar.vn',N'8:30 - 23:30',N'Cụm rạp BHD Star Quang Trung toạ lạc tại tầng B1, TTTM Vincom Quang Trung, 190 Quang Trung, P.10, Gò Vấp là sự kết hợp tuyệt vời giữa mô hình TTTM và giải trí. Tại đây khán giả có thể vừa thoả sức mua sắm với hệ thống siêu thị Vinmart, các gian hàng hoá/ mỹ phẩm, khu thời trang cao cấp, ẩm thực thuộc TTTM Vincom; vừa có thể tận hưởng không gian giải trí mang đậm phong cách Việt Nam nhưng lại hiện đại không kém so với quốc tế.')*/
 
 /*-------Galaxycine------*/
 
@@ -282,11 +282,11 @@ VALUES (4,N'Content/img/cinemaLogo/galaxy-nguyendu.jpg',N'Galaxy Nguyễn Du',N'
 INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
 VALUES (4,N'Content/img/cinemaLogo/galaxy-quangtrung.jpg',N'Galaxy Quang Trung',N'L3-Co.opmart Foodcosa, 304A Quang Trung, Gò Vấp',N'(028)35.897.899',N'',N'9:00 - 23:00',N'Galaxy Quang Trung nằm trọn lầu 3 của khu phức hợp với diện tích gần 2.500m2, có 7 phòng chiếu với 1.200 chỗ ngồi. Toàn bộ cụm rạp sử dụng các thiết bị và công nghệ tân tiến nhất trên thế giới hiện nay như công nghệ âm thanh Dolby 7.1, công nghệ hình ảnh Digital, chiếu cả phim 2D và 3D.')
 
-INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
+/*INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
 VALUES (4,N'Content/img/cinemaLogo/galaxy-kinhduongvuong.jpg',N'Galaxy Kinh Dương Vương',N'718bis Kinh Dương Vương, Q.6',N'(028) 3817 2408',N'',N'9:00 - 23:00',N'Với quy mô 7 phòng chiếu được thiết kế theo đúng chuẩn quốc tế, ghế ngồi được các nhà thiết kế rạp đầy kinh nghiệm thiết kế với khoảng cách rộng rãi, có độ nhún tạo cảm giác thư giãn như ở nhà. Điều đặc biệt mà Galaxy Cinema đem đến cho khán giả là tất cả các phòng chiếu đều được trang bị những thiết bị hiện đại nhất hiện nay: âm thanh Dolby 7.1, màn hình chiếu kỹ thuật 3D và Digital vô cùng mịn, sắc nét đến từng phút giây.')
 
 INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
-VALUES (4,N'Content/img/cinemaLogo/galaxy-huynhtanphat.jpg',N'Galaxy Huỳnh Tấn Phát',N'80/4A Huỳnh Tấn Phát, Phú Mỹ, Q. 7',N'19002224',N'',N'9:00 - 23:00',N'Với trang thiết bị hiện đại, màn hình rộng sắc nét và hệ thống âm thanh vòm Dolby 7.1, Galaxy Huỳnh Tấn Phát sẽ mang đến cho khán giả những trải nghiệm sống động, đáp ứng tối đa nhu cầu thưởng thức phim ảnh. Ngoài ra không gian rạp trẻ trung, đội ngũ nhân viên thân thiện cũng là một điểm cộng nữa cho Galaxy Huỳnh Tấn Phát.')
+VALUES (4,N'Content/img/cinemaLogo/galaxy-huynhtanphat.jpg',N'Galaxy Huỳnh Tấn Phát',N'80/4A Huỳnh Tấn Phát, Phú Mỹ, Q. 7',N'19002224',N'',N'9:00 - 23:00',N'Với trang thiết bị hiện đại, màn hình rộng sắc nét và hệ thống âm thanh vòm Dolby 7.1, Galaxy Huỳnh Tấn Phát sẽ mang đến cho khán giả những trải nghiệm sống động, đáp ứng tối đa nhu cầu thưởng thức phim ảnh. Ngoài ra không gian rạp trẻ trung, đội ngũ nhân viên thân thiện cũng là một điểm cộng nữa cho Galaxy Huỳnh Tấn Phát.')*/
 
 /*--------------CGV----------------*/
 
@@ -296,11 +296,11 @@ VALUES (5,N'Content/img/cinemaLogo/cgv-goldenplaza.jpg',N'CGV Golden Plaza',N'T�
 INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
 VALUES (5,N'Content/img/cinemaLogo/cgv-lethanhton.jpg',N'CGV Vincom Đồng Khởi',N'Tầng 3, TTTM Vincom Center B, 72 Lê Thánh Tôn, Bến Nghé, Q. 1',N'19006017',N'',N'8:30 - 23:30',N'CGV Vincom Đồng Khởi đi vào hoạt động với 8 phòng chiếu được trang bị hệ thống hiện đại. Đây là một trong những hệ thống rạp chiếu nằm ở vị trí trung tâm của CGV, hứa hẹn là điểm đến thường xuyên của các tín đồ điện ảnh, cũng như là địa điểm lý tưởng để tổ chức các sự kiện sang trọng.')
 
-INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
+/*INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
 VALUES (5,N'Content/img/cinemaLogo/cgv-aeonbinhtan.jpg',N'CGV Aeon Bình Tân',N'Tầng 3, TTTM Aeon Mall Bình Tân, Số 1 đường số 17A, khu phố 11, Bình Trị Đông B, Bình Tân',N'(083) 620 2299',N'',N'8:00 - 23:30',N'CGV Aeon Mall Bình Tân hoạt động tại tầng 3, nằm trong khu vực TTTM Aeon Mall Bình Tân (tổng diện tích sàn 114.000m2, Lô PT1, Hi-tech Healthcare Park, 532A Kinh Dương Vương, phường Bình Trị Đông B, Quận Bình Tân, TP.Hồ Chí Minh). Được trang bị 7 phòng chiếu hiện đại, đặc biệt là phòng chiếu STARIUM LASER, CGV Aeon Mall Bình Tân là một trong những cụm rạp lớn nhất của CJ CGV tại Việt Nam với tổng số hơn 1.200 ghế ngồi. Đây cũng hứa hẹn sẽ là một điểm sáng giải trí của người dân khu vực Bình Tân và lân cận.')
 
 INSERT INTO Cinema (groupId,profilePicture,cinemaName,cinemaAddress,phone,email,openTime,introduction)
-VALUES (5,N'Content/img/cinemaLogo/cgv-hoangvanthu.jpg',N'CGV Hoàng Văn Thụ',N'Tầng 1 và 2 Gala Center, 415 Hoàng Văn Thụ, P. 2, Tân Bình',N'(083) 811 0808',N'',N'8:00 - 23:30',N'CGV Hoàng Văn Thụ, cụm rạp CGV đầu tiên có loại giường nằm Lamour đẳng cấp nhất Việt Nam. CGV Hoàng Văn Thụ là địa điểm đặc biệt sang chảnh để trải nghiệm điện ảnh đó nhé. Ngoài ra, CGV Hoàng Văn Thụ còn có công nghệ Imax và phòng vip Gold Class thượng hạng.')
+VALUES (5,N'Content/img/cinemaLogo/cgv-hoangvanthu.jpg',N'CGV Hoàng Văn Thụ',N'Tầng 1 và 2 Gala Center, 415 Hoàng Văn Thụ, P. 2, Tân Bình',N'(083) 811 0808',N'',N'8:00 - 23:30',N'CGV Hoàng Văn Thụ, cụm rạp CGV đầu tiên có loại giường nằm Lamour đẳng cấp nhất Việt Nam. CGV Hoàng Văn Thụ là địa điểm đặc biệt sang chảnh để trải nghiệm điện ảnh đó nhé. Ngoài ra, CGV Hoàng Văn Thụ còn có công nghệ Imax và phòng vip Gold Class thượng hạng.')*/
 
 /*-----------DDC-------*/
 
@@ -392,6 +392,24 @@ INSERT INTO ShowTime (startTime,endTime) VALUES (N'19:00',N'21:00')
 INSERT INTO ShowTime (startTime,endTime) VALUES (N'20:00',N'22:00')
 INSERT INTO ShowTime (startTime,endTime) VALUES (N'21:00',N'23:00')
 INSERT INTO ShowTime (startTime,endTime) VALUES (N'22:00',N'24:00')
+/*------------------------------------------- insert cinema manager --------------- */
+INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
+VALUES (N'manager1',N'123456', N'Danh le',N'0934526123',N'Danhle@gmail.com',3,1)
+
+INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
+VALUES (N'manager2',N'123456', N'Duy hung',N'0934526888',N'Duyhung@gmail.com',3,1)
+
+INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
+VALUES (N'manager3',N'123456', N'Huy Hoang',N'0934426123',N'huyhoang@gmail.com',4,1)
+
+INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
+VALUES (N'manager4',N'123456', N'Trong Duc',N'0911526123',N'trongduc@gmail.com',4,1)
+
+INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
+VALUES (N'manager5',N'123456', N'Minh Hoa',N'0934529923',N'Minhhoa@gmail.com',5,1)
+
+INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
+VALUES (N'manager6',N'123456', N'Duc Manh',N'0934526123',N'Ducmanh@gmail.com',6,1)
 
 
 

@@ -16,6 +16,7 @@ namespace CinemaTicket
     {
         public string partnerId { get; set; }
         public string partnerPassword { get; set; }
+        public string partnerName { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
         public Nullable<int> groupOfCinemaId { get; set; }

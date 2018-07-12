@@ -9,6 +9,7 @@ namespace ManagerApplication.Service
 {
     interface ICinemaManagerService
     {
+        List<CinemaManager> FindCinemaManagerByGroupId(int groupId);
     }
     public class CinemaManagerService : ICinemaManagerService
     {
@@ -36,6 +37,11 @@ namespace ManagerApplication.Service
         public List<CinemaManager> FindBy(Expression<Func<CinemaManager, bool>> predicate)
         {
             return CinemaManagerRepository.FindBy(predicate);
+        }
+
+        public List<CinemaManager> FindCinemaManagerByGroupId(int groupId)
+        {
+            return CinemaManagerRepository.FindCinemaManagerByGroupId(groupId);
         }
     }
 }

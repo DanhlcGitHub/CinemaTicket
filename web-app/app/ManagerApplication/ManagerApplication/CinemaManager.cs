@@ -20,6 +20,7 @@ namespace ManagerApplication
         public string email { get; set; }
         public Nullable<int> cinemaId { get; set; }
         public Nullable<bool> isAvailable { get; set; }
+        public string managerName { get; set; }
     
         public virtual Cinema Cinema { get; set; }
     }

@@ -317,64 +317,64 @@ VALUES (7,N'Content/img/cinemaLogo/megags-caothang.jpg',N'Mega-gs Cao Thắng',N
 INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'normal seat',1,1,45000)
 
-INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'VIP',1,1,50000)
 
-/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'couple',2,2,70000)*/
 /*---------*/
 INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'normal seat',1,2,60000)
 
-INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'VIP',1,2,65000)
 
-/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'couple',2,2,60000)*/
 /*---------*/
 INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'normal seat',1,3,80000)
 
-INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'VIP',1,3,85000)
 
-/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'couple',2,3,80000)*/
 /*---------*/
 INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'normal seat',1,4,55000)
 
-INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'VIP',1,4,60000)
 
-/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'couple',2,4,55000)*/
 /*---------*/
 INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'normal seat',1,5,75000)
 
-INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'VIP',1,5,80000)
 
-/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'couple',2,5,75000)*/
 /*---------*/
 INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'normal seat',1,6,45000)
 
-INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'VIP',1,6,50000)
 
-/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'couple',2,6,45000)*/
 /*---------*/
 INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'normal seat',1,7,55000)
 
-INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'VIP',1,7,60000)
 
-/*INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
+INSERT INTO TypeOfSeat (typeName,capacity,groupId,price)
 VALUES (N'couple',2,7,60000)*/
 
 /* ----------------------- Insert showtime -----id run 1->14 ------------------*/

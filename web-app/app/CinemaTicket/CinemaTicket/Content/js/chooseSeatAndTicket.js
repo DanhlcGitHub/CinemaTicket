@@ -56,18 +56,18 @@ var chooseTicketController = function ($scope, $http) {
             $scope.chooseTicketData.typeOfSeats[index].userChoose++;
             $scope.calculateTotalAmout();
         }
-        document.getElementById("chooseSeatButtonId").disabled = false;
+        //$("#chooseSeatButtonId").attr("disabled", "");
         console.log("index " + index + ";plus: " + $scope.chooseTicketData.typeOfSeats[index].userChoose);
     };
 
     $scope.clickMinusButton = function (index) {
         if ($scope.chooseTicketData.typeOfSeats[index].userChoose > 0) {
             $scope.chooseTicketData.typeOfSeats[index].userChoose--;
-            document.getElementById("chooseSeatButtonId").disabled = false;
+            //$("#chooseSeatButtonId").attr("disabled", "");
             var sum = $scope.calculateSum();
             if (sum <= 0) {
                 console.log("go here");
-                document.getElementById("chooseSeatButtonId").disabled = true;
+                //$("#chooseSeatButtonId").attr("disabled","disabled");
             }
             $scope.calculateTotalAmout();
         }
@@ -88,27 +88,32 @@ var chooseTicketController = function ($scope, $http) {
         }
     };
     $scope.gotoChooseSeat = function () {
-        // animation
-        document.getElementById("filmInforSidebar").style.display = "none";
-        document.getElementById("chooseSeatAreaContent").style.display = "block";
-        document.getElementById("chooseTicketContent").style.display = "none";
-        document.getElementById("checkoutSidebar").style.display = "block";
-        document.getElementById("chooseSeatAreaContent").style.marginRight = "25%";
-        document.getElementById("topbar").style.marginRight = "25%";
-        document.getElementById("checkoutSidebar").style.width = "25%";
-        document.getElementById("chooseSeatAreaContent").style.marginLeft = "0%";
-        document.getElementById("topbar").style.marginLeft = "0%";
-        $("#chooseTicketStep").css({ 'color': 'black' });
-        $("#chooseSeatStep").css({ 'color': 'red' });
-        // data handler
-        $scope.totalTicket = 0;
-        $scope.quantityData = $scope.chooseTicketData.typeOfSeats;
-        for (var i = 0; i < $scope.quantityData.length; i++) {
-            $scope.totalTicket += $scope.quantityData[i].userChoose;
+        var sum = $scope.calculateSum();
+        if (sum > 0) {
+            // animation
+            document.getElementById("filmInforSidebar").style.display = "none";
+            document.getElementById("chooseSeatAreaContent").style.display = "block";
+            document.getElementById("chooseTicketContent").style.display = "none";
+            document.getElementById("checkoutSidebar").style.display = "block";
+            document.getElementById("chooseSeatAreaContent").style.marginRight = "25%";
+            document.getElementById("topbar").style.marginRight = "25%";
+            document.getElementById("checkoutSidebar").style.width = "25%";
+            document.getElementById("chooseSeatAreaContent").style.marginLeft = "0%";
+            document.getElementById("topbar").style.marginLeft = "0%";
+            $("#chooseTicketStep").css({ 'color': 'black' });
+            $("#chooseSeatStep").css({ 'color': 'red' });
+            // data handler
+            $scope.totalTicket = 0;
+            $scope.quantityData = $scope.chooseTicketData.typeOfSeats;
+            for (var i = 0; i < $scope.quantityData.length; i++) {
+                $scope.totalTicket += $scope.quantityData[i].userChoose;
+            }
+            $scope.calculateTotalAmout();
+            console.log("amount: " + $scope.totalAmount);
+            $scope.totalAmoutUSD = Math.round((parseFloat($scope.totalAmount) / $scope.exchangeRate) * 100) / 100;
+        } else {
+            alert("Bạn chưa chọn ghế nào!");
         }
-        $scope.calculateTotalAmout();
-        console.log("amount: " + $scope.totalAmount);
-        $scope.totalAmoutUSD = Math.round((parseFloat($scope.totalAmount) / $scope.exchangeRate) * 100) / 100;
     }
 
     //================================================= choose Seat Part

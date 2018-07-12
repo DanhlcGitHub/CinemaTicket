@@ -343,6 +343,7 @@
                                                ng-click="gotoChooseTicket(filmData.id,time.timeId,item.id,time.startTime)">
                                                 <p class="text-success font-weight-bold" style="font-size:25px;">{{time.startTime}}</p>
                                             </a>
+                                            <a ng-if="digType.times.length == 0">Hết suất chiếu trong ngày</a>
                                         </div>
                                     </div>
                                 </li>

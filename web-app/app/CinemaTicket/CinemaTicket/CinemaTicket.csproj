@@ -394,12 +394,6 @@
     <Content Include="Views\Home\FilmDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\ChooseTicket.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\ChooseSeat.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\ChooseTicketAndSeat.cshtml" />
   </ItemGroup>
   <ItemGroup>

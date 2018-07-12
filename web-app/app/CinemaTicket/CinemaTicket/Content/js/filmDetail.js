@@ -51,7 +51,7 @@ var filmController = function ($scope, $http) {
             $scope.isDateLoadDone = true;
         });
 
-        $http({
+        $http({//fast load
             method: "POST",
             url: "/Schedule/LoadScheduleGroupByCinemaForFilmDetail",
             params: { filmId: $("#filmId").val() }
@@ -79,19 +79,23 @@ var filmController = function ($scope, $http) {
                 }
                 console.log("still alive");
             }, 1000);
+
+            // load backgroup
+            $http({
+                method: "POST",
+                url: "/Schedule/LoadScheduleGroupByCinemaForFilmDetailBackGround",
+                params: { filmId: $("#filmId").val() }
+            })
+            .then(function (response) {
+                console.log(response.data);
+                $scope.isBackgroundLoadDone = true;
+                $scope.data = response.data;
+                $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
+                console.log("load background done");
+            });
         });
 
-        $http({
-            method: "POST",
-            url: "/Schedule/LoadScheduleGroupByCinemaForFilmDetailBackGround",
-            params: { filmId: $("#filmId").val() }
-        })
-        .then(function (response) {
-            $scope.isBackgroundLoadDone = true;
-            $scope.data = response.data;
-            $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
-            console.log("load background done");
-        });
+        
     });
 
     $scope.groupClickHandler = function (index) {
@@ -132,6 +136,10 @@ var filmController = function ($scope, $http) {
         $scope.dateIndex = index;
 
         if ($scope.isBackgroundLoadDone == true) {
+            console.log("here");
+            console.log($scope.data);
+            console.log($scope.data[$scope.groupIndex].dates);
+            console.log($scope.data[$scope.groupIndex].dates[$scope.dateIndex]);
             $scope.currentData = $scope.data[$scope.groupIndex].dates[$scope.dateIndex].cinemas;
         } else {
             if ($scope.isDateLoadDone == true && $scope.isGroupLoadDone == true) {

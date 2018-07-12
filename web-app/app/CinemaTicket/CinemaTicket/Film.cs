@@ -17,7 +17,6 @@ namespace CinemaTicket
         public Film()
         {
             this.MovieSchedules = new HashSet<MovieSchedule>();
-            this.News = new HashSet<News>();
         }
     
         public int filmId { get; set; }
@@ -38,6 +37,5 @@ namespace CinemaTicket
         public Nullable<int> filmStatus { get; set; }
     
         public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
-        public virtual ICollection<News> News { get; set; }
     }
 }

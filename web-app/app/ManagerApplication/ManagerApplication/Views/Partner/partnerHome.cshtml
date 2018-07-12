@@ -6,40 +6,39 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/Content/css/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/css/partner.css">
-    <title>Page Title</title>
+    <title>Partner Home</title>
     <link rel="stylesheet" href="css/circle.css">
 </head>
-<body style="overflow-x:hidden;">
-
+<body style="overflow-x:hidden;" ng-app="CombineModule" ng-controller="partnerController">
+    <input id="groupId" value="3" type="hidden" />
     <div class="row" style="padding-right: 15px;">
         <div class="col-lg-3">
             <!-- Profile Image -->
             <div class="card">
                 <div class="card-body">
                     <div class="float-center">
-                        <img class="profile-user-img img-responsive img-circle" src="https://openclipart.org/image/2400px/svg_to_png/277081/Male-Avatar.png" alt="User profile picture" style="width:100%">
+                        <img class="profile-user-img img-responsive img-circle" ng-src="{{groupCinemaInfor.logoImg}}" alt="User profile picture" style="display: block; width: 30%; margin-left: auto; margin-right: auto; ">
                     </div>
-                    <h3 class="profile-username text-center">Danh Le</h3>
-                    <p class="text-muted text-center">BHD Partner</p>
+                    <h6 class="text-muted text-center">{{groupCinemaInfor.name}} Partner</h6>
+                    <h3 class="text-muted text-center">Danh le</h3>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Cinemas</b> <a class="pull-right">22</a>
+                            <b>Cinemas</b> <a class="pull-right">{{allCinemaData.length}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Employees</b> <a class="pull-right">35</a>
+                            <b>Employees</b> <a class="pull-right">{{currentEmployeeList.length}}</a>
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-primary btn-block">
+                    <button type="button" ng-click="manageCinema()" class="btn btn-primary btn-block">
                         Manage Cinema
                     </button>
-                    <button type="button" class="btn btn-success btn-block">
+                    <button type="button" ng-click="manageEmployee()" class="btn btn-success btn-block">
                         Manage Cinema Employee
                     </button>
-
-
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -80,8 +79,8 @@
             </div>
             <!-- /.box -->
         </div>
-        <!-- /.col -->
-        <div class="col-lg-9">
+        <!-- /.Employee Management -->
+        <div class="col-lg-9" id="empManagement" ng-controller="partnerEmployeeController">
             <div class="card">
                 <div class="card">
                     <div class="card-header">
@@ -91,9 +90,10 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="float-right">
-                                    <button type="button" class="btn btn-danger " style="width:100%">
+                                    <button ng-click="showAddEmpForm()" onclick="location.href='#empForm';" type="button" class="btn btn-danger " style="width:100%">
                                         Add Employee
                                     </button>
+
                                 </div>
                             </div>
                         </div>
@@ -106,98 +106,165 @@
                                     <thead>
                                         <tr role="row">
                                             <th>No.</th>
-                                            <th>Username</th>
+                                            <th>Name</th>
                                             <th>Email</th>
                                             <th>phone</th>
                                             <th>Cinema</th>
-                                            <th>Detail</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr role="row" class="odd">
-                                            <td>CineStar</td>
-                                            <td>123456789</td>
-                                            <td>CineStar@gmail.com</td>
-                                            <td><a href="CineStar.png">Link</a></td>
+                                        <tr ng-repeat="emp in currentPageEmpData" role="row" class="odd">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{emp.name}}</td>
+                                            <td>{{emp.email}}</td>
+                                            <td>{{emp.phone}}</td>
+                                            <td>{{emp.cinemaName}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-info">
+                                                <button type="button" ng-click="employeeDetail($index)" onclick="location.href='#empForm';" class="btn btn-info" value="{{$index}}">
                                                     Detail
+                                                </button>
+                                                <button type="button" ng-click="deleteEmployee($index)" class="btn btn-danger" value="{{$index}}">
+                                                    Delete
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr role="row" class="odd">
-                                            <td>Lotte Cinema</td>
-                                            <td>987654321</td>
-                                            <td>LotteCinema@gmail.com</td>
-                                            <td><a href="LotteCinema.png">Link</a></td>
-                                            <td>
-                                                <button type="button" class="btn btn-info">
-                                                    Detail
-                                                </button>
-                                            </td>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr role="row">
+                                            <th>No.</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>phone</th>
+                                            <th>Cinema</th>
+                                            <th>Action</th>
                                         </tr>
-                                        <tr role="row" class="odd">
-                                            <td>BHD Star Cineplex</td>
-                                            <td>124334535</td>
-                                            <td>BHDStar@gmail.com</td>
-                                            <td><a href="BHDStar.png">Link</a></td>
-                                            <td>
-                                                <button type="button" class="btn btn-info">
-                                                    Detail
-                                                </button>
-                                            </td>
+                                    </tfoot>
+                                </table>
+                                <ul class="pagination float-right">
+                                    <li ng-click="empPreviousClick()" class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li ng-click="empPageClick($index)" ng-repeat="t in empPagingArray track by $index" ng-class="t"><a class="page-link" href="#">{{$index + 1}}</a></li>
+                                    <li ng-click="empNextClick()" class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="card">
+                <a name="edit" style="display:none"></a>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="float-left">
+                            <h3 ng-if="isAddnewEmp == false" id="editEmployeeTitle">Edit Partner</h3>
+                            <h3 ng-if="isAddnewEmp == true" id="editEmployeeTitle">Add Partner</h3>
+                        </div>
+                    </div>
+                </div>
+                <form id="empForm" class="form-horizontal">
+                    <div class="card-body">
+                        <div ng-if="isAddnewEmp == true" class="form-group">
+                            <b class="col-sm-6 control-label">Employee username</b>
+                            <div class="col-sm-12">
+                                <input name="inputEmpUsername" type="text" class="form-control" id="inputEmpUsername" placeholder="">
+                            </div>
+                        </div>
+                        <div ng-if="isAddnewEmp == true" class="form-group">
+                            <b class="col-sm-2 control-label">Password</b>
+                            <div class="col-sm-12">
+                                <div><input name="inputEmpPassword" id="inputEmpPassword" type="password" class="form-control" placeholder=""></div>
+                            </div>
+                        </div>
+                        <div ng-if="isAddnewEmp == true" class="form-group">
+                            <b class="col-sm-6 control-label">Re-confirm Password</b>
+                            <div class="col-sm-12">
+                                <div><input name="inputEmpConfirmPassword" type="password" class="form-control" id="inputEmpConfirmPassword" placeholder=""></div>
+                            </div>
+                        </div>
+                        <div ng-if="isAddnewEmp == true" class="form-group">
+                            <b class="col-sm-2 control-label">Select Cinema (select one):</b>
+                            <div class="col-sm-12">
+                                <select class="form-control" name="inputEmpSelectCinema" id="inputEmpSelectCinema">
+                                    <option disabled selected value> -- select an option -- </option>
+                                    <option ng-repeat="cinema in allCinemaData" value="{{cinema.cinemaId}}">{{cinema.cinemaName}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <b class="col-sm-2 control-label">Employee name</b>
+                            <div class="col-sm-12">
+                                <input name="inputEmpName" type="text" class="form-control" id="inputEmpName" placeholder="" value="{{currentEmployee.name}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <b class="col-sm-2 control-label">Phone:</b>
+                            <div class="col-sm-12">
+                                <input name="inputEmpPhone" type="text" class="form-control" id="inputEmpPhone" placeholder="" value="{{currentEmployee.phone}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <b class="col-sm-2 control-label">Email:</b>
+                            <div class="col-sm-12">
+                                <input name="inputEmpEmail" type="text" class="form-control" id="inputEmpEmail" placeholder="" value="{{currentEmployee.email}}">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="card-footer">
+                        <button ng-if="isAddnewEmp == false" type="submit" id="empAction" class="btn btn-info btn-block">Save</button>
+                        <button ng-if="isAddnewEmp == true" type="submit" id="empAction" class="btn btn-info btn-block">Add</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+
+        <!-- /.Cinemas Management *******************************************************************-->
+        <div class="col-lg-9" id="cinemaManagement" ng-controller="partnerCinemaController">
+            <div class="card">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="float-left"><h3>All Cinemas</h3></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="float-right">
+                                    <button ng-click="showAddCinemaForm()" onclick="location.href='#cinemaForm';" type="button" class="btn btn-danger " style="width:100%">
+                                        Add Cinema
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="card-body">
+                        <div class="row table-scrollable">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>No.</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>phone</th>
+                                            <th>Open time</th>
+                                            <th>Action</th>
                                         </tr>
-                                        <tr role="row" class="odd">
-                                            <td>Galaxy Cinema</td>
-                                            <td>123456789</td>
-                                            <td>GalaxyCinema@gmail.com</td>
-                                            <td><a href="GalaxyCinema.png">Link</a></td>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="cine in currentPageCinemaData" role="row" class="odd">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{cine.cinemaName}}</td>
+                                            <td>{{cine.email}}</td>
+                                            <td>{{cine.phone}}</td>
+                                            <td>{{cine.openTime}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-info">
-                                                    Detail
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td>DDC - Đống Đa</td>
-                                            <td>123456789</td>
-                                            <td>DDC@gmail.com</td>
-                                            <td><a href="DongDaCinema.jpg">Link</a></td>
-                                            <td>
-                                                <button type="button" class="btn btn-info">
-                                                    Detail
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td>Beta Cineplex</td>
-                                            <td>123456789</td>
-                                            <td>BetaCineplex@gmail.com</td>
-                                            <td><a href="BetaCineplex.png">Link</a></td>
-                                            <td>
-                                                <button type="button" class="btn btn-info">
-                                                    Detail
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td>Mega GS</td>
-                                            <td>123456789</td>
-                                            <td>MegaGS@gmail.com</td>
-                                            <td><a href="MegaCinema.png">Link</a></td>
-                                            <td>
-                                                <button type="button" class="btn btn-info">
-                                                    Detail
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr role="row" class="odd">
-                                            <td>CGV Cinemas</td>
-                                            <td>123456789</td>
-                                            <td>CGVCinemas@gmail.com</td>
-                                            <td><a href="CGVCinema.png">Link</a></td>
-                                            <td>
-                                                <button type="button" class="btn btn-info">
+                                                <button type="button" ng-click="cinemaDetail($index)" onclick="location.href='#cinemaForm';" class="btn btn-info" value="{{$index}}">
                                                     Detail
                                                 </button>
                                             </td>
@@ -205,20 +272,19 @@
                                     </tbody>
                                     <tfoot>
                                         <tr role="row">
-                                            <th>Partner's Name</th>
-                                            <th>Phone</th>
+                                            <th>No.</th>
+                                            <th>Name</th>
                                             <th>Email</th>
-                                            <th>Logo</th>
-                                            <th>Detail</th>
+                                            <th>phone</th>
+                                            <th>Open time</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                 </table>
                                 <ul class="pagination float-right">
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    <li ng-click="cinemaPreviousClick()" class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li ng-click="cinemaPageClick($index)" ng-repeat="t in cinemaPagingArray track by $index" ng-class="t"><a class="page-link" href="#">{{$index + 1}}</a></li>
+                                    <li ng-click="cinemaNextClick()" class="page-item"><a class="page-link" href="#">Next</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -230,68 +296,196 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="float-left"><h3>Add/Edit Partner</h3></div>
+                        <div class="float-left">
+                            <h3 ng-if="!isAddnewCinema" id="CinemaTitle">Edit Cinema</h3>
+                            <h3 ng-if="isAddnewCinema" id="CinemaTitle">Add Cinema</h3>
+                        </div>
                     </div>
                 </div>
-                <form class="form-horizontal">
+                <form id="cinemaForm" class="form-horizontal">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Partner name</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <b class="col-sm-6 control-label">Cinema Name</b>
+                                    <div class="col-sm-12">
+                                        <input name="inputCinemaName" type="text" class="form-control" value="{{currentCinema.cinemaName}}" id="inputCinemaName" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <b class="col-sm-2 control-label">Address: </b>
+                                    <div class="col-sm-12">
+                                        <input name="inputCinemaAddress" type="text" class="form-control" id="inputCinemaAddress" placeholder="" value="{{currentCinema.address}}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <b class="col-sm-2 control-label">Email:</b>
+                                            <div class="col-sm-12">
+                                                <input name="inputCinemaEmail" type="text" class="form-control" id="inputCinemaEmail" placeholder="" value="{{currentCinema.email}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <b class="col-sm-2 control-label">Phone:</b>
+                                            <div class="col-sm-12">
+                                                <input name="inputCinemaPhone" type="text" class="form-control" id="inputCinemaPhone" placeholder="" value="{{currentCinema.phone}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <b class="col-sm-2 control-label">Open time: </b>
+                                    <div class="col-sm-12">
+                                        <input name="inputCinemaOpenTime" type="text" class="form-control" id="inputCinemaOpenTime" placeholder="8:30 - 23:30" value="{{currentCinema.openTime}}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <b class="col-sm-2 control-label">Introduction: </b>
+                                    <div class="col-sm-12">
+                                        <textarea id="inputCinemaIntroduction" name="inputCinemaIntroduction" class="form-control" rows="5">{{currentCinema.introduction}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <img id="cinemaProfilePicture" ng-src="{{currentCinema.profilePicture}}" style="width: 200px;height:200px" />
+                                    <div class="col-sm-12">
+                                        <input id="cinemaChooseFile" class="btn btn-default" type="file">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="isAddnewCinema == false">
+                                    <h3>Room List</h3>
+                                    <button ng-click="showAddRoom()" type="button" class="btn btn-danger " style="width:100%">
+                                        Add Room
+                                    </button>
+                                    <table class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>No.</th>
+                                                <th>Name</th>
+                                                <th>Capacity</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="room in currentCinema.rooms track by $index" role="row" class="odd">
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{room.name}}</td>
+                                                <td>{{room.capacity}}</td>
+                                                <td>
+                                                    <button type="button" ng-click="viewRoom($index)" class="btn btn-info" value="{{$index}}">
+                                                        View
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Password</label>
-                            <div class="col-sm-12">
-                                <div><input type="password" class="form-control" id="inputEmail3" placeholder=""></div>
-                                <div style="padding-top:10px"><input type="checkbox" style="margin-right:5px">Show password</div>
-                            </div>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label class="col-sm-2 control-label">Re-confirm Password</label>
-                            <div class="col-sm-12">
-                                <div><input type="password" class="form-control" id="inputEmail3" placeholder=""></div>
-                                <div style="padding-top:10px"><input type="checkbox" style="margin-right:5px">Show password</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Phone:</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Email:</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Logo:</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
-                            </div>
-                        </div>
+
+
                     </div>
                     <!-- /.box-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info btn-block">Add/Save</button>
+                        <button ng-if="isAddnewCinema == false" type="submit" id="cinemaAction" class="btn btn-info btn-block">Save</button>
+                        <button ng-if="isAddnewCinema == true" type="submit" id="cinemaAction" class="btn btn-info btn-block">Add</button>
                     </div>
                     <!-- /.box-footer -->
                 </form>
             </div>
-
-
+        </div>
+        <!-- /.Report Management *******************************************************************-->
+        <div class="col-lg-9" id="reportManagement" ng-controller="reportController">
+            <table class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <thead>
+                    <tr role="row">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Capacity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr role="row" class="odd">
+                        <td>{{$index + 1}}</td>
+                        <td>{{room.name}}</td>
+                        <td>{{room.capacity}}</td>
+                        <td>
+                            <button type="button" ng-click="viewRoom($index)" class="btn btn-info" value="{{$index}}">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="modal fade " id="trailer">
-        <div class="modal-dialog float-left" style="padding-left:180px">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <iframe width="1280" height="720" src="https://www.youtube.com/embed/vn9mMeWcgoM?autoplay=1"></iframe>
+    <!-- Choose Seat Modal -->
+    <div class="modal fade" id="viewSeatModal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 70% !important">
+            <div class="modal-content" ng-controller="roomController">
+                <div id="chooseSeatAreaContent">
+                    <div class="w3-container w3-row">
+                        <h5>{{currentCinema.cinemaName}}</h5>
+                        <h6>{{currentRoom.name}}</h6>
+                        <form id="seatForm">
+                            capacity: <input name="inputCapacity" value="77" id="inputCapacity" />
+                            Room Name: <input name="inputRoomName" value="Rap new" id="inputRoomName" />
+                            <button type="submit">Add</button>
+                        </form>
+
+                        <br />
+                        <button ng-click="changeMode('multipleSelectMode')">select group</button>
+                        <button ng-click="changeMode('multipleDeleteMode')">delete group</button>
+                        <button ng-click="changeMode('singleSelectMode')">select</button>
+                        <br />
+                        <button ng-click="addRow()">(+) Row</button>
+                        <button ng-click="minusRow()">(-) Row</button>
+                        <button ng-click="minusColumn()">(-) Column</button>
+                        <button ng-click="addColumn()">(+) Column</button>
+                        <h4>current capacity {{seatData.length}}</h4>
+                    </div>
+                    <div class="w3-container w3-row w3-margin-top">
+                        <img src="~/Content/img/repository/screen.png" style="width:100%" />
+                        <div class="w3-container" id="seatAreaId">
+                            <div ng-repeat="row in matrix" class="center-div">
+                                <div class="w3-center w3-text-light-grey inlineContainer">
+                                    <div style="width: 30px">
+                                        <b style="margin-right: 25px; font-weight:500; color:black">{{row.alphaName}}</b>
+                                    </div>
+
+                                    <div ng-repeat="seat in row.seats">
+                                        <button ng-click="onclickSeat(seat.px,seat.py)" class="{{seat.className}}" type="button">{{seat.locationX}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w3-container w3-row">
+                        <h5> content goes here</h5>
+                        <button ng-click="reviewSeat()">review</button>
+                        <button ng-click="save()">save</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
+
+
+    <script src="~/Content/js/angular.min.js"></script>
+    <script src="~/Content/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/PartnerModule/partnerValidator.js"></script>
+    <script src="~/Content/js/PartnerModule/partnerMainModule.js"></script>
+    <script src="~/Content/js/PartnerModule/partnerCinemaModule.js"></script>
+    <script src="~/Content/js/PartnerModule/partnerRoomModule.js"></script>
+    <script src="~/Content/js/PartnerModule/partnerEmployeeModule.js"></script>
+    <script src="~/Content/js/PartnerModule/partnerReportModule.js"></script>
 </body>
 </html>

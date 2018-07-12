@@ -7,3 +7,76 @@
 .table-scrollable {
     overflow-x: auto;
 }
+
+label.error {
+		display: inline-block;
+		color:red;
+	}
+
+.btn-seat {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: #f5a623;;
+    color: white;
+    text-align: center;
+}
+
+ .btn-seat-disable {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: #f5a623;
+    color: white;
+    text-align: center;
+    cursor: not-allowed;
+}
+
+.btn-seat-hidden {
+     width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: white;
+    color: white;
+    text-align: center;
+    border-style: dotted;
+}
+
+.btn-seat-hidden-true {
+     width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: white;
+    color: white;
+    text-align: center;
+    border-style: dotted;
+    visibility: hidden;
+}
+
+.inlineContainer{
+
+}
+
+.inlineContainer div{
+     display: inline-block;
+}

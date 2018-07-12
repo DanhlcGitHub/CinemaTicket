@@ -16,6 +16,7 @@ namespace CinemaTicket
     {
         public string managerId { get; set; }
         public string managerPassword { get; set; }
+        public string managerName { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
         public Nullable<int> cinemaId { get; set; }

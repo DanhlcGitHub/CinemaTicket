@@ -10,7 +10,7 @@ namespace CinemaTicket.Utility
     {
         public static void SendEmail(string subject, string content, string toEmail)
         {
-            string systemEmail = System.Configuration.ConfigurationManager.AppSettings["mail_username"];
+            /*string systemEmail = System.Configuration.ConfigurationManager.AppSettings["mail_username"];
             string systemPassword = System.Configuration.ConfigurationManager.AppSettings["mail_password"];
             MailMessage mailMessage = new MailMessage(systemEmail, toEmail);
             mailMessage.Subject = subject;
@@ -23,7 +23,7 @@ namespace CinemaTicket.Utility
                 Password = systemPassword
             };
             smtpClient.EnableSsl = true;
-            smtpClient.Send(mailMessage);
+            smtpClient.Send(mailMessage);*/
         }
     }
 }

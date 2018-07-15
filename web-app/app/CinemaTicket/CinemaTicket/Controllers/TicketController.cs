@@ -22,7 +22,7 @@ namespace CinemaTicket.Controllers
             JArray seatList = JArray.Parse(choosedList);
             foreach (JObject item in seatList)
             {
-                int seatId = (int)item.GetValue("seatId");
+                int seatId = (int)item.GetValue("id");
                 List<Ticket> tickets = new TicketService()
                             .FindBy(tic => tic.scheduleId == scheduleId && tic.seatId == seatId);
                 Ticket ticket = null;

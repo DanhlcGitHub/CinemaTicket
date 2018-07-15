@@ -9,9 +9,9 @@
 }
 
 label.error {
-		display: inline-block;
-		color:red;
-	}
+    display: inline-block;
+    color: red;
+}
 
 .btn-seat {
     width: 30px;
@@ -22,12 +22,13 @@ label.error {
     border-radius: 4px;
     cursor: pointer;
     margin: 2px;
-    background-color: #f5a623;;
+    background-color: #f5a623;
+    ;
     color: white;
     text-align: center;
 }
 
- .btn-seat-disable {
+.btn-seat-disable {
     width: 30px;
     height: 30px;
     max-width: 30px;
@@ -43,7 +44,7 @@ label.error {
 }
 
 .btn-seat-hidden {
-     width: 30px;
+    width: 30px;
     height: 30px;
     max-width: 30px;
     max-height: 30px;
@@ -58,7 +59,7 @@ label.error {
 }
 
 .btn-seat-hidden-true {
-     width: 30px;
+    width: 30px;
     height: 30px;
     max-width: 30px;
     max-height: 30px;
@@ -73,10 +74,189 @@ label.error {
     visibility: hidden;
 }
 
-.inlineContainer{
-
+.inlineContainer {
 }
 
-.inlineContainer div{
-     display: inline-block;
+    .inlineContainer div {
+        display: inline-block;
+    }
+/* for add seat=============================================*/
+.table-scrollable {
+    overflow-x: auto;
+}
+
+div.ex1 {
+    height: 90px;
+    background-color: #463a3c;
+}
+
+div.ex2 {
+    min-height: 60px;
+    background-color: #463a3c;
+    color: white;
+}
+
+div::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+div::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+div::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+    /* Handle on hover */
+    div::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+button.ex1 {
+    background-color: #b9a5a6; /* Green */
+    border: none;
+    color: white;
+    padding: 10px;
+    width: 140px;
+    text-align: center;
+    ;
+}
+
+button.ex2 {
+    width: 30px;
+    height: 30px;
+}
+
+
+.buttonex2 {
+    border-radius: 30px;
+}
+
+.overme {
+    width: 250px;
+    height: 60px;
+    line-height: 30px;
+    overflow: hidden;
+    /*The problematic part is below*/
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.overme {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.buttonsetup {
+    width: 100% !important;
+    height: 80px;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #463a3c;
+    color: white;
+}
+
+.btn.buttonsetup.active.focus, .btn.buttonsetup.active:focus, .btn.buttonsetup.focus, .btn.buttonsetup:active.focus, .btn.buttonsetup:active:focus, .btn.buttonsetup:focus {
+    background-color: #2d2325;
+    outline: none !important;
+    box-shadow: none;
+}
+
+div::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+div::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+div::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+    /* Handle on hover */
+    div::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    /*=============================ver2 css =========================*/
+	.table-scrollable{
+    overflow-x:auto;
+	}
+	div.ex1{
+	height:90px;
+	background-color:#18453f;
+	}
+	div.ex2{
+	height:60px;
+	background-color:#23645c;
+	color:white;
+	}
+		div::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+div::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+div::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+div::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+	button.ex1 {
+    background-color: #0070ba; /* Green */
+    border: none;
+    color: white;
+    padding: 10px;
+	width: 140px;
+    text-align: center;
+    ;
+}
+
+.buttonround {
+	border-radius: 60%;
+	background-color: #7c7c7c;
+	color:white;
+}
+.buttonex2 {border-radius: 30px;}
+.overme {
+				width: 250px;
+				height: 60px;
+				line-height: 30px;
+				overflow:hidden;
+
+				/*The problematic part is below*/
+				white-space:nowrap; 
+				text-overflow: ellipsis;
+			}
+    
+			.overme {
+				white-space: normal;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+			}
+			w3-sidebar {
+			
+			}
+			html { 
+    height:100%;
+}
+body { 
+    min-height:100%;
 }

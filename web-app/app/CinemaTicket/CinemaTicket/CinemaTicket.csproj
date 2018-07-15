@@ -236,6 +236,7 @@
     </Compile>
     <Compile Include="Utility\CinemaUtility.cs" />
     <Compile Include="Utility\ConstantUtility.cs" />
+    <Compile Include="Utility\EncryptUtility.cs" />
     <Compile Include="Utility\MailUtility.cs" />
     <Compile Include="Utility\RandomUtility.cs" />
     <Compile Include="Utility\ScheduleUtility.cs" />
@@ -246,13 +247,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\css\adminlte.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\chooseSeatAndTicket.css" />
     <Content Include="Content\css\common.css" />
     <Content Include="Content\css\filmDetail.css" />
-    <Content Include="Content\css\chooseTicket.css" />
     <Content Include="Content\css\font-awesome.min.css" />
-    <Content Include="Content\css\chooseSeat.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\w3.css" />
     <Content Include="Content\img\cinemaLogo\betacineplex-caothang.jpg" />
@@ -353,6 +353,7 @@
     <Content Include="Content\img\repository\next.png" />
     <Content Include="Content\img\repository\paypal.png" />
     <Content Include="Content\img\repository\paypal.svg" />
+    <Content Include="Content\img\repository\paypal2.png" />
     <Content Include="Content\img\repository\play-video.png" />
     <Content Include="Content\img\repository\Post-notification.png" />
     <Content Include="Content\img\repository\pre.png" />
@@ -420,6 +421,7 @@
     <None Include="Properties\PublishProfiles\CinemaBookingTicket - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\CinemaBookingTicket - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\CinemaBookingTicket - Web Deploy.pubxml" />
+    <Content Include="Views\Home\Error404.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

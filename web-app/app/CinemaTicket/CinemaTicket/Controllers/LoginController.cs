@@ -1,4 +1,5 @@
 ﻿using CinemaTicket.Service;
+using CinemaTicket.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,9 @@ namespace CinemaTicket.Controllers
                 phone = "",
                 status = "notValid"
             };
+            string encryptedPassword = EncryptUtility.EncryptString(password);
             UserAccount user;
-            List<UserAccount> userList = new UserAccountService().FindBy(u => u.userId == username && u.userPassword == password);
+            List<UserAccount> userList = new UserAccountService().FindBy(u => u.userId == username && u.userPassword == encryptedPassword);
             if (userList.Count != 0)
             {
                 user = userList.First();
@@ -56,7 +58,7 @@ namespace CinemaTicket.Controllers
             {
                 user = new UserAccount();
                 user.userId = username;
-                user.userPassword = password;
+                user.userPassword = EncryptUtility.EncryptString(password);
                 user.email = email;
                 user.phone = phone;
                 new UserAccountService().Create(user);
@@ -71,5 +73,15 @@ namespace CinemaTicket.Controllers
             return Json(obj);
         }
 
+        public JsonResult Logout()
+        {
+            var obj = new
+            {
+                status = "ok"
+            };
+            Session.Clear();
+            return Json(obj);
+        }
+        
     }
 }

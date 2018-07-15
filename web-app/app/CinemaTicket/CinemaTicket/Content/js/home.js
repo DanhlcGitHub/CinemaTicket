@@ -23,6 +23,18 @@ var filmController = function ($scope, $http) {
         $('#myIframe').prop('src', "");
     });
 
+    $('#validateModal').on("hidden.bs.modal", function () {
+        $('body').addClass('modal-open');
+    });
+
+    $('#myModalRegister').on("hidden.bs.modal", function () {
+        $('body').addClass('modal-open');
+    });
+
+    $('#myModalLogin').on("hidden.bs.modal", function () {
+        $('body').addClass('modal-open');
+    });
+
     $http({
         method: "POST",
         url: "Schedule/LoadCinemaBelongToGroup"
@@ -257,6 +269,7 @@ var filmController = function ($scope, $http) {
     $scope.showLogin = function () {
         $("#myModalRegister").modal('hide');
         $("#myModalLogin").modal();
+        $('body').addClass('modal-open');
     };
     $scope.showRegister = function () {
         $("#myModalLogin").modal('hide');
@@ -282,6 +295,8 @@ var filmController = function ($scope, $http) {
                     $('#validateModal').modal();
                     $("#myModalLogin").modal('hide');
                     $("#modalMessage").html("Đăng nhập thành công!");
+                    $('#loginForm')[0].reset();
+                    
                     $scope.userData = response.data;
                     LocalStorageManager.saveToLocalStorage(response.data, $scope.userKey);
                 } else if (status == "notValid") {
@@ -321,6 +336,7 @@ var filmController = function ($scope, $http) {
                     $('#validateModal').modal();
                     $("#myModalRegister").modal('hide');
                     $("#modalMessage").html("Tạo tài khoản thành công!");
+                    $('#registerForm')[0].reset();
                     $scope.userData = response.data;
                     LocalStorageManager.saveToLocalStorage(response.data, $scope.userKey);
                 } else if (status == "notValid") {
@@ -333,6 +349,17 @@ var filmController = function ($scope, $http) {
     $scope.logout = function () {
         LocalStorageManager.removeDataFromStorage($scope.userKey);
         $scope.userData = "";
+        $http({
+            method: "POST",
+            url: "/Login/Logout"
+        })
+        .then(function (response) {
+            console.log(response);
+            if (response.data.status == "ok") {
+                $('#validateModal').modal();
+                $("#modalMessage").html("Bạn đã đăng xuất!");
+            }
+        });
     }
 }
 

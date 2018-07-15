@@ -227,6 +227,7 @@
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\CinemaUtility.cs" />
+    <Compile Include="Utility\EncryptUtility.cs" />
     <Compile Include="Utility\UploadUtility.cs" />
     <Compile Include="Utility\DateUtility.cs" />
     <Compile Include="Utility\DBUtility.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\css\AdminLTE.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\partner.css" />
     <Content Include="Content\css\common.css" />
@@ -338,6 +340,8 @@
     <Content Include="Content\img\repository\booking-cinema-logo.PNG" />
     <Content Include="Content\img\repository\facebook-logo.png" />
     <Content Include="Content\img\repository\icon_location.png" />
+    <Content Include="Content\img\repository\logo.png" />
+    <Content Include="Content\img\repository\multipleselect.png" />
     <Content Include="Content\img\repository\next.png" />
     <Content Include="Content\img\repository\paypal.png" />
     <Content Include="Content\img\repository\paypal.svg" />
@@ -356,6 +360,7 @@
     <Content Include="Content\js\PartnerModule\partnerMainModule.js" />
     <Content Include="Content\js\PartnerModule\partnerValidator.js" />
     <Content Include="Content\js\jquery-3.3.1.min.js" />
+    <Content Include="Content\js\LoginModule.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

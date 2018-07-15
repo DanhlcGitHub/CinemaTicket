@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CinemaTicket.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -51,5 +52,25 @@ namespace CinemaTicket.Controllers
             }
             return Json(obj);
         }
+
+            [HttpPost]
+            public JsonResult CheckAvailableSchedule(string scheduleIdStr)
+            {
+                DateTime today = DateTime.Now;
+                int scheduleId = Convert.ToInt32(scheduleIdStr);
+                MovieSchedule schedule = new MovieScheduleService().FindByID(scheduleId);
+                var obj = new
+                {
+                    valid = "true"
+                };
+                if (schedule.scheduleDate < today)
+                {
+                    obj = new
+                    {
+                        valid = "false"
+                    };
+                }
+                return Json(obj);
+            }
     }
 }

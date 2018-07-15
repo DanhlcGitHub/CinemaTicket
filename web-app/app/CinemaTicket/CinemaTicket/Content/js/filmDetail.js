@@ -4,6 +4,7 @@ $(function () {
 
 var myApp = angular.module("detailFilmModule", []);
 var filmController = function ($scope, $http) {
+    $scope.transferTicketData;
     $scope.groupIndex = 0;
     $scope.dateIndex = 0;
     $scope.groupCinemaList;
@@ -173,7 +174,22 @@ var filmController = function ($scope, $http) {
             if (response.data.valid == "false") {
                 alert("Xuất chiếu đã hết hạn");
             } else {
-                console.log("filmId " + filmId);
+                $http({
+                    method: "POST",
+                    url: "/home/CheckDupplicateRoom",
+                    params: { filmId: filmId, timeId: timeId, cinemaId: cinemaId, selectDate: selectDate }
+                })
+                .then(function (response) {
+                    $scope.transferTicketData = response.data;
+                    console.log($scope.transferTicketData);
+                    if ($scope.transferTicketData.length == 1) {
+                        var scheduleId = $scope.transferTicketData[0].scheduleId;
+                        $scope.submitChooseTicketForm(scheduleId);
+                    } else {
+                        $("#myModalChooseRoom").modal();
+                    }
+                });
+                /*console.log("filmId " + filmId);
                 console.log("timeId " + timeId);
                 console.log("cinemaId " + cinemaId);
                 console.log("selectDate " + selectDate);
@@ -183,11 +199,16 @@ var filmController = function ($scope, $http) {
                 var param3 = "<input type='hidden' name='cinemaId' value='" + cinemaId + "' />";
                 var param4 = "<input type='hidden' name='selectDate' value='" + selectDate + "' />";
                 document.getElementById('goToChooseTicketAndTicketForm').innerHTML = param1 + param2 + param3 + param4;
-                document.getElementById('goToChooseTicketAndTicketForm').submit();
+                document.getElementById('goToChooseTicketAndTicketForm').submit();*/
             }
-        }
-    );
+        });
     };
+
+    $scope.submitChooseTicketForm = function (scheduleId) {
+        var param1 = "<input type='hidden' name='scheduleIdStr' value='" + scheduleId + "' />";
+        document.getElementById('goToChooseTicketAndTicketForm').innerHTML = param1;
+        document.getElementById('goToChooseTicketAndTicketForm').submit();
+    }
     /*================ Login & Register Part*/
     $scope.showLogin = function () {
         $("#myModalRegister").modal('hide');
@@ -267,6 +288,20 @@ var filmController = function ($scope, $http) {
     $scope.logout = function () {
         LocalStorageManager.removeDataFromStorage($scope.userKey);
         $scope.userData = "";
+        $http({
+            method: "POST",
+            url: "/Login/Logout"
+        })
+        .then(function (response) {
+            console.log(response);
+            if (response.data.status == "ok") {
+                $('#validateModal').modal();
+                $("#modalMessage").html("Bạn đã đăng xuất!");
+            }
+        });
+    }
+    $scope.test = function () {
+        document.getElementById('gotoHomeForm').submit();
     };
 }
 myApp.controller("filmController", filmController);

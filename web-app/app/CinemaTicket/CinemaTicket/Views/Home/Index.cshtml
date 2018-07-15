@@ -20,154 +20,8 @@
     <link rel="stylesheet" href="~/Content/css/common.css">
     <link rel="stylesheet" href="~/Content/css/index.css">
 </head>
-<body ng-controller="filmController">
-    <!-- The Video Modal -->
-    <div class="modal" id="myModalTrailer">
+<body ng-controller="filmController" style="padding-right: 0 !important">
 
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-
-            <div class="modal-content">
-                <!-- Modal body -->
-                <div class="modal-body" style="padding:0;">
-                    <button type="button" class="close mynewclassclose" data-dismiss="modal" aria-hidden="true">
-                        <img src="http://expediaholiday.d.seven2.net/_images/modal_close.png" />
-                    </button>
-                    <div class="videoWrapper">
-                        <iframe id="myIframe" width="100%" height="100%" src=""></iframe>
-                    </div>
-                </div>
-                <!-- Modal footer -->
-            </div>
-        </div>
-    </div>
-    <!-- The Login Modal -->
-    <div class="modal" id="myModalLogin">
-
-        <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
-
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header d-block" style="background-color:#e8e8e8">
-                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title font-weight-bold text-center">Đăng nhập</h4>
-                    <div class="text-center">
-                        <span class="text-center">Cần tạo tài khoản? </span><a href="#"><span ng-click="showRegister()" class="text-center text-success">Đăng ký</span></a>
-                    </div>
-
-
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="form-horizontal">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <input type="email" id="login_username" class="form-control" placeholder="Tên đăng nhập">
-                                    <input type="password" id="login_password" class="form-control" placeholder="Mật khẩu">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 float-left">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Ghi nhớ
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 float-right">
-                                    <a href="#" class="float-right">Quên mật khẩu?</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <button type="button" ng-click="login()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Đăng nhập</button>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
-                </div>
-
-                <!-- Modal footer -->
-
-
-            </div>
-        </div>
-    </div>
-    <!--register modal-->
-    <div class="modal" id="myModalRegister">
-
-        <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
-
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header d-block" style="background-color:#e8e8e8">
-                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title font-weight-bold text-center">Đăng ký</h4>
-                    <div class="text-center">
-                        <span class="text-center">Bạn đã có tài khoản? </span><a href="#"><span class="text-center text-success" ng-click="showLogin()">Đăng nhập</span></a>
-                    </div>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <form class="form-horizontal">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <div class="col-sm-7 float-left" style="padding-left:0px; padding-right:0px">
-                                        <input id="register_email" type="text" class="form-control" placeholder="eMail">
-                                    </div>
-                                    <div class="col-sm-5 float-right" style="padding-left:0px; padding-right:0px">
-                                        <input id="register_phone" type="text" class="form-control" placeholder="Số điện thoại">
-                                    </div>
-                                    <input id="register_username" type="text" class="form-control" placeholder="Tên đăng nhập">
-                                    <input id="register_password" type="password" class="form-control" placeholder="Mật khẩu">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="text-center">
-                                    <span class="text-center" style="color: gray">Bằng vào việc đăng ký và sử dụng trang web, bạn đã đồng ý với các </span><a href="#"><span>Điều khoản & Quy chế</span></a>
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <button type="button" ng-click="register()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Hoàn tất</button>
-                            </div>
-                        </div>
-                        <!-- /.box-footer -->
-                    </form>
-                </div>
-
-                <!-- Modal footer -->
-
-
-            </div>
-        </div>
-    </div>
-    <!-- validate Modal -->
-    <div class="modal fade" id="validateModal" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center align-self-center border-bottom-0">
-                    <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
-                </div>
-                <div class="modal-body justify-content-center align-self-center ">
-                    <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button id="dismissBtn" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     <form method="post" target="_blank" action="/home/ChooseTicketAndSeatToday" id="goToChooseTicketAndSeatForm" style="display:none"></form>
 
@@ -189,7 +43,7 @@
                     <a class="nav-link font-weight-bold" href="#banlaive">Bán lại vé</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold" href="#">Ứng dụng</a>
+                    <a class="nav-link font-weight-bold">Ứng dụng</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -201,7 +55,7 @@
                             <a ng-click="logout()" href="#">Đăng xuất</a>
                         </div>
                     </div>
-                    
+
                 </li>
                 <li class="nav-item dropdown">
                     <span ng-click="showRegister()" class="nav-link dropdown-toggle" data-toggle="dropdown" id="myBtn2">
@@ -498,6 +352,158 @@
             </div>
         </div>
     </footer>
+    <!--Modal part-->
+    <div>
+
+
+        <!-- The Video Modal -->
+        <div class="modal" id="myModalTrailer">
+
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                <div class="modal-content">
+                    <!-- Modal body -->
+                    <div class="modal-body" style="padding:0;">
+                        <button type="button" class="close mynewclassclose" data-dismiss="modal" aria-hidden="true">
+                            <img src="http://expediaholiday.d.seven2.net/_images/modal_close.png" />
+                        </button>
+                        <div class="videoWrapper">
+                            <iframe id="myIframe" width="100%" height="100%" src=""></iframe>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                </div>
+            </div>
+        </div>
+        <!-- The Login Modal -->
+        <div class="modal" id="myModalLogin">
+
+            <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
+
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header d-block" style="background-color:#e8e8e8">
+                        <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title font-weight-bold text-center">Đăng nhập</h4>
+                        <div class="text-center">
+                            <span class="text-center">Cần tạo tài khoản? </span><a href="#"><span ng-click="showRegister()" class="text-center text-success">Đăng ký</span></a>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form id="loginForm" class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input type="email" id="login_username" class="form-control" placeholder="Tên đăng nhập">
+                                        <input type="password" id="login_password" class="form-control" placeholder="Mật khẩu">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 float-left">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> Ghi nhớ
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 float-right">
+                                        <a href="#" class="float-right">Quên mật khẩu?</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="button" ng-click="login()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Đăng nhập</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+
+
+                </div>
+            </div>
+        </div>
+        <!--register modal-->
+        <div class="modal" id="myModalRegister">
+
+            <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
+
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header d-block" style="background-color:#e8e8e8">
+                        <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title font-weight-bold text-center">Đăng ký</h4>
+                        <div class="text-center">
+                            <span class="text-center">Bạn đã có tài khoản? </span><a href="#"><span class="text-center text-success" ng-click="showLogin()">Đăng nhập</span></a>
+                        </div>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="registerForm">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-7 float-left" style="padding-left:0px; padding-right:0px">
+                                            <input id="register_email" type="text" class="form-control" placeholder="eMail">
+                                        </div>
+                                        <div class="col-sm-5 float-right" style="padding-left:0px; padding-right:0px">
+                                            <input id="register_phone" type="text" class="form-control" placeholder="Số điện thoại">
+                                        </div>
+                                        <input id="register_username" type="text" class="form-control" placeholder="Tên đăng nhập">
+                                        <input id="register_password" type="password" class="form-control" placeholder="Mật khẩu">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="text-center">
+                                        <span class="text-center" style="color: gray">Bằng vào việc đăng ký và sử dụng trang web, bạn đã đồng ý với các </span><a href="#"><span>Điều khoản & Quy chế</span></a>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="button" ng-click="register()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Hoàn tất</button>
+                                </div>
+                            </div>
+                            <!-- /.box-footer -->
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+
+
+                </div>
+            </div>
+        </div>
+        <!-- validate Modal -->
+        <div class="modal fade" id="validateModal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                        <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                    </div>
+                    <div class="modal-body justify-content-center align-self-center ">
+                        <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button id="dismissBtn" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="~/Content/js/angular.min.js"></script>
     <script src="~/Content/js/jquery-3.3.1.min.js"></script>
     <script src="~/Content/js/bootstrap.min.js"></script>

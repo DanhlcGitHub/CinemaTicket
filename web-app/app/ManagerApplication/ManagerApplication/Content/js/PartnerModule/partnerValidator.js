@@ -2,7 +2,8 @@
     validationManager.employeeValidation();
     validationManager.cinemaValidation();
     validationManager.addRoomValidation();
-
+    seat_open();
+    partner_open();
     $("#cinemaChooseFile").change(function () {
         readURL(this);
     });
@@ -155,4 +156,45 @@ var validationManager = {
         });
     }
 
+}
+
+function seat_open() {
+    document.getElementById("chooseSeatMain").style.marginRight = "17%";
+    document.getElementById("seat_topbar").style.marginRight = "17%";
+    document.getElementById("seat_sidebar").style.width = "17%";
+    document.getElementById("seat_sidebar").style.display = "block";
+    document.getElementById("seat_openNav").style.display = 'none';
+    document.getElementById("seat_closeNav").style.display = 'inline-block';
+}
+function seat_close() {
+    document.getElementById("chooseSeatMain").style.marginRight = "0%";
+    document.getElementById("seat_rightarrowdiv").style.paddingRight = "0px";
+    document.getElementById("seat_rightarrowdiv").style.display = "inline-block";
+    document.getElementById("seat_topbar").style.marginRight = "0%";
+    document.getElementById("seat_sidebar").style.display = "none";
+    document.getElementById("seat_openNav").style.display = "inline-block";
+    document.getElementById("seat_closeNav").style.display = 'none';
+}
+
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+function partner_open() {
+    document.getElementById("partner_main").style.marginLeft = "15%";
+    document.getElementById("partner_sidebar").style.width = "15%";
+    document.getElementById("partner_sidebar").style.display = "block";
+    document.getElementById("partner_openNav").style.display = 'none';
+    document.getElementById("partner_closeNav").style.display = 'inline-block';
+    document.getElementById("partner_menubar").style.display = 'inline-block';
+}
+function partner_close() {
+    document.getElementById("partner_main").style.marginLeft = "5%";
+    document.getElementById("partner_rightarrowdiv").style.paddingRight = "0px";
+    document.getElementById("partner_rightarrowdiv").style.display = "inline-block";
+    document.getElementById("partner_sidebar").style.width = "5%";
+    document.getElementById("partner_openNav").style.display = "inline-block";
+    document.getElementById("partner_closeNav").style.display = 'none';
+    document.getElementById("partner_menubar").style.display = 'none';
 }

@@ -6,13 +6,45 @@
 <html ng-app="detailFilmModule">
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>FilmDetail</title>
+    <title>Film Detail</title>
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/adminlte.min.css">
     <link rel="stylesheet" href="~/Content/css/filmDetail.css">
     <link rel="stylesheet" href="~/Content/css/common.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body ng-controller="filmController">
+
+    <!-- The Room Modal -->
+    <div class="modal" id="myModalChooseRoom">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div ng-repeat="schedule in transferTicketData" ng-click="submitChooseTicketForm(schedule.scheduleId)" style="cursor:pointer" class="col-sm-6 col-12">
+                            <div class="info-box bg-danger">
+                                <span class="info-box-icon"><i class="fa fa-film"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{schedule.cinemaName}}</span>
+                                    <span class="info-box-number">{{schedule.roomName}} - {{schedule.startTime}}</span>
+
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 100%"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                        {{schedule.availableSeat}} Ghe con trong
+                                    </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- The Video Modal -->
     <div class="modal" id="myModalTrailer">
 
@@ -34,7 +66,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- The Login Modal -->
     <div class="modal" id="myModalLogin">
 
@@ -184,7 +216,7 @@
                     <a class="nav-link font-weight-bold" href="#">Tin tức</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold" href="#">Ứng dụng</a>
+                    <a class="nav-link font-weight-bold">Ứng dụng</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -311,8 +343,8 @@
                     </div>
                     <div class="col-sm-9  no-gutters" style="padding-left:0px; padding-right:0px">
                         <div class=" col-sm-12 border border-bottom-0" style="padding-top:6px">
-                            <div  class="list-group list-group-flush" style="flex-direction: row;">
-                                <a id="{{'dateofweek' + $index}}"  ng-click="dateClickHandler($index)" ng-repeat="d in dateList" class="list-group-item list-group-item-action border-top-0" href="#tuesday">
+                            <div class="list-group list-group-flush" style="flex-direction: row;">
+                                <a id="{{'dateofweek' + $index}}" ng-click="dateClickHandler($index)" ng-repeat="d in dateList" class="list-group-item list-group-item-action border-top-0" href="#tuesday">
                                     <div class="row text-center font-weight-bold" style="justify-content:center;">Thứ {{ d.dateOfWeek + 1 }}</div>
                                     <div class="text-center font-weight-bold">{{ d.date }}</div>
                                 </a>

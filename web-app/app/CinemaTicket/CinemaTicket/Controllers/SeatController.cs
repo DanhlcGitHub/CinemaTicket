@@ -39,6 +39,8 @@ namespace CinemaTicket.Controllers
                     type = item.typeSeatId,
                     px = item.px,
                     py = item.py,
+                    locationX = item.locationX,
+                    locationY = item.locationY,
                     resellDescription = ticket == null ? "" : ticket.resellDescription,
                     emailOwner = emailOwner,
                 };

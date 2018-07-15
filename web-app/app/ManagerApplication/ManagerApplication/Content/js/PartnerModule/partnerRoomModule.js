@@ -70,9 +70,10 @@ var roomController = function ($scope, $http) {
             $scope.matrixX = $scope.currentRoom.matrixSizeX;
             $scope.matrixY = $scope.currentRoom.matrixSizeY;
             $scope.showRoomData($scope.matrixX, $scope.matrixY);
+            $('#viewSeatModal').modal();
         });
 
-        $('#viewSeatModal').modal();
+        
     };
 
     $scope.showRoomData = function (matrixX, matrixY) {

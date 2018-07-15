@@ -17,474 +17,380 @@
 </head>
 
 <body ng-app="chooseTicketModule" ng-controller="chooseTicketController">
-    <!-- hidden are-->
-    <div style="display:none">
-        <input id="scheduleId" type="hidden" value=@ViewBag.scheduleId />
+    <div id="overlay" >
+        <div class="loader"></div>
     </div>
-    <!-- fix header -->
-    <div id="topbar">
-        <nav class="navbar navbar-expand-sm bg-light navbar-light shadow p-3 mb-5 bg-white rounded" style="width: 100%;top:0">
-            <div class="navbar-nav col-sm-12">
-                <div class="row col-sm-12">
-                    <div class="col-sm-2" style="padding-left:0px; padding-right:0px">
-                        <div class="nav-item active">
-                            <a id="chooseTicketStep" class="nav-link font-weight-bold" href="#" style="padding-left:0px; padding-right:0px;" ng-click="openChooseTicket()">01 CHỌN LOẠI VÉ</a>
+    <div id="chooseTicketAndSeatMainContainer" style="display:none">
+        <form action="/" id="gotoHomeForm"></form>
+        <!-- hidden are-->
+        <div style="display:none">
+            <input id="scheduleId" type="hidden" value=@ViewBag.scheduleId />
+        </div>
+        <!-- fix header -->
+        <div id="topbar">
+            <nav class="navbar navbar-expand-sm bg-light navbar-light shadow p-3 mb-5 bg-white rounded" style="width: 100%;top:0">
+                <div class="navbar-nav col-sm-12">
+                    <div class="row col-sm-12">
+                        <div class="col-sm-2" style="padding-left:0px; padding-right:0px">
+                            <div class="nav-item active">
+                                <a id="chooseTicketStep" class="nav-link font-weight-bold" href="#" style="padding-left:0px; padding-right:0px;" ng-click="openChooseTicket()">01 CHỌN LOẠI VÉ</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
-                        <div class="nav-item">
-                            <a id="chooseSeatStep" class="nav-link font-weight-bold" href="#" style="padding-left:0px; padding-right:0px">02 CHỌN GHẾ & THANH TOÁN</a>
+                        <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
+                            <div class="nav-item">
+                                <a id="chooseSeatStep" class="nav-link font-weight-bold" href="#" style="padding-left:0px; padding-right:0px">02 CHỌN GHẾ & THANH TOÁN</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-2" style="padding-left:0px; padding-right:0px">
-                        <div class="nav-item">
-                            <a class="nav-link font-weight-bold" href="#" style="padding-left:0px; padding-right:0px">03 KẾT QUẢ ĐẶT VÉ</a>
+                        <div class="col-sm-2" style="padding-left:0px; padding-right:0px">
+                            <div class="nav-item">
+                                <a class="nav-link font-weight-bold" href="#" style="padding-left:0px; padding-right:0px">03 KẾT QUẢ ĐẶT VÉ</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-5 float-right" style="padding-left:0px; padding-right:0px">
-                        <div class="nav-item float-right">
-                            <a class="nav-link" ng-if="userData == ''" href="#" ng-click="showLogin()"><i class="fa fa-user"></i> Đăng nhập</a>
-                            <div class="original-box">
-                                <span class="nav-link" ng-if="userData != ''"><i class="fa fa-user"></i> {{userData.username}}</span>
-                                <div class="popup-box popup-box-left border" style="height:35px; width: 100px">
-                                    <a ng-click="logout()" href="#">Đăng xuất</a>
+                        <div class="col-sm-5 float-right" style="padding-left:0px; padding-right:0px">
+                            <div class="nav-item float-right">
+                                <a class="nav-link" ng-if="userData == ''" href="#" ng-click="showLogin()"><i class="fa fa-user"></i> Đăng nhập</a>
+                                <div class="original-box">
+                                    <span class="nav-link" ng-if="userData != ''"><i class="fa fa-user"></i> {{userData.username}}</span>
+                                    <div class="popup-box popup-box-left border" style="height:35px; width: 100px">
+                                        <a ng-click="logout()" href="#">Đăng xuất</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
-        </nav>
-    </div>
+            </nav>
+        </div>
 
-    <!--Choose Ticket area-->
-    <div>
-        <!-- area film information sidebar  -->
-        <div class="w3-sidebar w3-bar-block w3-card w3-animate-left ex1" id="filmInforSidebar" style=" background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) );background-repeat: no-repeat;
+        <!--Choose Ticket area-->
+        <div>
+            <!-- area film information sidebar  -->
+            <div class="w3-sidebar w3-bar-block w3-card w3-animate-left ex1" id="filmInforSidebar" style=" background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) );background-repeat: no-repeat;
 	background-size: 100% 100%; top:0">
-            <div class="w3-container w3-collapse" style="opacity:1.0 !important;">
+                <div class="w3-container w3-collapse" style="opacity:1.0 !important;">
 
-                <div class="centered" style="width:20%">
-                    <p class="text-white">Hôm nay</p>
-                    <p class="text-white" style="word-break: break-all;"><mark ng-if="chooseTicketData.restricted != 0" class="ex1">C{{chooseTicketData.restricted}}</mark> {{ chooseTicketData.filmName }}</p>
-                    <p class="text-white"> {{chooseTicketData.length}} phút - IMDb {{chooseTicketData.imdb}} - {{chooseTicketData.digitalType}}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- area choose quantity -->
-        <div id="chooseTicketContent">
-            <div class="col-sm-12">
-                <div class="row" style="padding-top: 7%; padding-left: 25%">
-                    <img ng-src="{{chooseTicketData.groupCinemaImg}}" class="ex1 ex2 pull-left">
-                    <div style="padding-top: 10px; padding-left: 20px">
-                        <p class="ex2" style="margin-bottom: 0;">{{chooseTicketData.cinemaName}}</p><br>
-                        <p>{{chooseTicketData.date}} - {{chooseTicketData.startTime}}- {{chooseTicketData.roomName}}</p>
-                    </div>
-
-                </div>
-
-                <div class="table-responsive borderless" style="padding-top: 7%; padding-left:25%">
-                    <table class="table">
-                        <tbody>
-                            <tr ng-repeat="seatType in chooseTicketData.typeOfSeats" class="" style="border-top: hidden;">
-                                <td style="width: 50%">
-
-                                    <h5 style="display:inline;">Vé {{seatType.typeName}}</h5><br><p style="display:inline;">Áp dụng mọi suất chiếu từ Thứ 2 đến Chủ Nhật</p>
-                                </td>
-                                <td style="width: 20%"><h4 class="text-success">{{seatType.price}}</h4></td>
-                                <td style="width: 20%">
-                                    <button ng-click="clickMinusButton($index)" type="button" class="btn btn-default btn-sm" style="margin-right: 9px;">
-                                        <span class="fa fa-minus"></span>
-                                    </button>
-                                    <span>{{seatType.userChoose}}</span>
-                                    <button ng-click="clickPlusButton($index)" type="button" class="btn btn-default btn-sm" style="margin-left: 9px;">
-                                        <span class="fa fa-plus"></span>
-                                    </button>
-                                </td>
-                                <td style="width: 10%"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            <footer class="footer">
-                <div>
-                    <div class="row">
-
-                        <div class="">
-                            <div class="card" style="width:31rem; height:95px">
-                                <div class="card-body " style="padding-left: 0px; padding-right: 0px; padding-top: 0px;">
-                                    <div class="col-sm-8 float-left">
-                                        <h4>TỔNG TIỀN:{{totalAmount}} </h4>
-                                    </div>
-                                    <div id="chooseSeatButtonId" class="col-sm-4 float-right" style="background-color:green">
-                                        <h4 class="text-center text-white font-weight-bold" style="height:85px;padding-top:30px" ng-click="gotoChooseSeat()">Chọn Ghế </h4>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
-
-    <!-- Choose Seat Area-->
-    <div>
-        <!-- area checkout -->
-        <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;top:0" id="checkoutSidebar">
-            <div class="w3-container w3-collapse">
-                <h2>{{totalAmount}} Đ</h2>
-                <hr style="border-top: dotted 1px;" />
-                <div class="" style="line-height:25px">
-                    <b>{{scheduleData.filmName}}</b><br />
-                    <span>{{scheduleData.cinemaName}}</span><br />
-                    <span>{{scheduleData.date}} - {{scheduleData.startTime}} - {{scheduleData.roomName}}</span>
-                </div><br /><hr style="border-top: dotted 1px;" />
-                <div class="">
-                    <span style="float:left;color:red;font-weight:600;font-size:15px">Ghế: <span ng-repeat="seat in choosedList">{{alpha[seat.py]}}{{seat.px+1}} ;</span></span>
-                    <span style="float: right; color: green; font-weight: 600; font-size: 15px">{{totalAmount}}</span>
-                </div><br /><br />
-                <p>
-                    <label>E-mail</label>
-                    <input id="emailId" class="w3-input" type="text" value="{{userData.email}}">
-                </p>
-                <p>
-                    <label>Phone</label>
-                    <input id="phoneId" class="w3-input" type="text" value="{{userData.phone}}">
-                </p>
-                <b>Hình thức thanh toán</b><br />
-                <div>
-                    <span><input id="male" class="w3-radio" type="radio" name="gender" value="male" checked=""></span>
-                    <span><img class="icon" src="~/Content/img/repository/paypal.svg" /></span>
-                    <span style="font-size:14px;font-weight:600">Thanh toán qua paypal</span>
-                </div>
-
-            </div>
-            <button id="checkoutButton" ng-click="checkout()" class="w3-btn w3-padding-large fixedBottom"
-                    style="height: 80px; background-color: #dc3545; color: white; font-weight: 900; ">
-                Đặt vé
-            </button>
-        </div>
-
-        <!-- area choose seat-->
-        <div id="chooseSeatAreaContent">
-            <div class="w3-container w3-row">
-                <div class="w3-half w3-container" style="float:left">
-                    <div class="w3-cell-row">
-                        <div class="w3-cell w3-cell-middle">
-                            <img width="50" height="50" ng-src="{{scheduleData.groupCinemaImg}}" />
-                        </div>
-                        <div class="w3-cell w3-cell-middle">
-                            <span style="line-height: 2px; font-size: 14px;font-weight : 600">{{scheduleData.cinemaName}}</span><br /><br />
-                            <span style="line-height: 2px; font-size: 14px; color: #9b9b9b">{{scheduleData.date}} - {{scheduleData.startTime}} - {{scheduleData.roomName}}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w3-half w3-container">
-                    <div style="float:right">
-
+                    <div class="centered" style="width:20%">
+                        <p class="text-white">Hôm nay</p>
+                        <p class="text-white" style="word-break: break-all;"><mark ng-if="chooseTicketData.restricted != 0" class="ex1">C{{chooseTicketData.restricted}}</mark> {{ chooseTicketData.filmName }}</p>
+                        <p class="text-white"> {{chooseTicketData.length}} phút - IMDb {{chooseTicketData.imdb}} - {{chooseTicketData.digitalType}}</p>
                     </div>
                 </div>
             </div>
-            <div class="w3-container w3-row w3-margin-top">
-                <img src="~/Content/img/repository/screen.png" style="width:100%" />
-                <div class="w3-container">
-                    <div ng-repeat="row in matrix" class="center-div">
-                        <div class="w3-col w3-center " style="width: 50px; ">
-                            <b>{{row.alphaName}}</b>
+
+            <!-- area choose quantity -->
+            <div id="chooseTicketContent">
+                <div class="col-sm-12">
+                    <div class="row" style="padding-top: 7%; padding-left: 25%">
+                        <img ng-src="{{chooseTicketData.groupCinemaImg}}" class="ex1 ex2 pull-left" width="100" height="100">
+                        <div style="padding-top: 10px; padding-left: 20px">
+                            <span class="ex2" style="margin-bottom: 0;">{{chooseTicketData.cinemaName}}</span><br />
+                            <span>{{chooseTicketData.date}} - {{chooseTicketData.startTime}}- {{chooseTicketData.roomName}}</span><br />
+                            <b>Còn {{availableSeat}} ghế trống</b>
                         </div>
-                        <div class="w3-center w3-text-light-grey inlineContainer">
-                            <div ng-repeat="seat in row.seats">
-                                <div ng-if="seat.seatStatus != 'resell'" class="original-box">
-                                    <button ng-click="onclickSeat(seat.seatId,seat.px,seat.py,seat.seatStatus)" class="{{seat.className}}" type="button">{{seat.px + 1}}</button>
-                                </div>
-                                <div ng-if="seat.seatStatus == 'resell'" class="original-box">
-                                    <button class="{{seat.className}}" type="button">{{seat.px + 1}}</button>
-                                    <div class="popup-box popup-box-left" style="height:70px;width:250px;text-align:left">
-                                        <b>{{seat.emailOwner}}</b><br />
-                                        <b style="color:red">Mô tả: {{seat.resellDescription}}</b>
+
+                    </div>
+
+                    <div class="table-responsive borderless" style="padding-top: 7%; padding-left:25%">
+                        <table class="table">
+                            <tbody>
+                                <tr ng-repeat="seatType in chooseTicketData.typeOfSeats" class="" style="border-top: hidden;">
+                                    <td style="width: 50%">
+
+                                        <h5 style="display:inline;">Vé {{seatType.typeName}}</h5><br><p style="display:inline;">Áp dụng mọi suất chiếu từ Thứ 2 đến Chủ Nhật</p>
+                                    </td>
+                                    <td style="width: 20%"><h4 class="text-success">{{seatType.price}}</h4></td>
+                                    <td style="width: 20%">
+                                        <button ng-click="clickMinusButton($index)" type="button" class="btn btn-default btn-sm" style="margin-right: 9px;">
+                                            <span class="fa fa-minus"></span>
+                                        </button>
+                                        <span>{{seatType.userChoose}}</span>
+                                        <button ng-click="clickPlusButton($index)" type="button" class="btn btn-default btn-sm" style="margin-left: 9px;">
+                                            <span class="fa fa-plus"></span>
+                                        </button>
+                                    </td>
+                                    <td style="width: 10%"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <footer class="footer">
+                    <div>
+                        <div class="row">
+
+                            <div class="">
+                                <div class="card" style="width:31rem; height:95px">
+                                    <div class="card-body " style="padding-left: 0px; padding-right: 0px; padding-top: 0px;">
+                                        <div class="col-sm-8 float-left">
+                                            <h4>TỔNG TIỀN:{{totalAmount}} </h4>
+                                        </div>
+                                        <div id="chooseSeatButtonId" class="col-sm-4 float-right" style="background-color:green">
+                                            <h4 class="text-center text-white font-weight-bold" style="height:85px;padding-top:30px;cursor:pointer;opacity:0.8" ng-click="gotoChooseSeat()">Chọn Ghế </h4>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="w3-container w3-row w3-margin-top">
-                <div class="center-div">
-                    <button type="button" class="btn-seat"></button> Ghế trống
-                    <button type="button" class="btn-seat-choosing"></button> Ghế đang chọn
-                    <button type="button" class="btn-seat-buyed"></button> Ghế đã có người chọn
-                    <button type="button" class="btn-seat-resell"></button> Ghế đang bán lại
-                </div>
+                </footer>
             </div>
         </div>
-    </div>
 
-    <!-- The Modal Area ============================================================================-->
-    <!-- The Login Modal -->
-    <div class="modal" id="myModalLogin">
-
-        <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
-
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header d-block" style="background-color:#e8e8e8">
-                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title font-weight-bold text-center">Đăng nhập</h4>
-                    <div class="text-center">
-                        <span class="text-center">Cần tạo tài khoản? </span><a href="#"><span ng-click="showRegister()" class="text-center text-success">Đăng ký</span></a>
+        <!-- Choose Seat Area-->
+        <div>
+            <!-- area checkout -->
+            <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;top:0" id="checkoutSidebar">
+                <div class="w3-container w3-collapse">
+                    <h2>{{totalAmount}} Đ</h2>
+                    <hr style="border-top: dotted 1px;" />
+                    <div class="" style="line-height:25px">
+                        <b>{{scheduleData.filmName}}</b><br />
+                        <span>{{scheduleData.cinemaName}}</span><br />
+                        <span>{{scheduleData.date}} - {{scheduleData.startTime}} - {{scheduleData.roomName}}</span>
+                    </div><br /><hr style="border-top: dotted 1px;" />
+                    <div class="">
+                        <span style="float:left;color:red;font-weight:600;font-size:15px">Ghế: <span ng-repeat="seat in choosedList">{{alpha[seat.locationY-1]}}{{seat.locationX}} | </span></span>
+                        <span style="float: right; color: green; font-weight: 600; font-size: 15px">{{totalAmount}}</span>
+                    </div><br /><br />
+                    <p>
+                        <label>E-mail</label>
+                        <input id="emailId" class="w3-input" type="text" value="{{userData.email}}">
+                    </p>
+                    <p>
+                        <label>Phone</label>
+                        <input id="phoneId" class="w3-input" type="text" value="{{userData.phone}}">
+                    </p>
+                    <b>Hình thức thanh toán</b><br />
+                    <div>
+                        <span><input id="male" class="w3-radio" type="radio" name="gender" value="male" checked=""></span>
+                        <span><img class="icon" src="~/Content/img/repository/paypal2.png" /></span>
+                        <span style="font-size:14px;font-weight:600">Thanh toán qua paypal</span>
                     </div>
 
-
                 </div>
+                <button id="checkoutButton" ng-click="checkout()" class="w3-btn w3-padding-large fixedBottom"
+                        style="height: 80px; background-color: #dc3545; color: white; font-weight: 900; ">
+                    Đặt vé
+                </button>
+            </div>
 
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="form-horizontal">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <input type="email" id="login_username" class="form-control" placeholder="Tên đăng nhập">
-                                    <input type="password" id="login_password" class="form-control" placeholder="Mật khẩu">
-                                </div>
+            <!-- area choose seat-->
+            <div id="chooseSeatAreaContent">
+                <div class="w3-container w3-row">
+                    <div class="w3-half w3-container" style="float:left">
+                        <div class="w3-cell-row">
+                            <div class="w3-cell w3-cell-middle">
+                                <img width="50" height="50" ng-src="{{scheduleData.groupCinemaImg}}" />
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 float-left">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Ghi nhớ
-                                        </label>
+                            <div class="w3-cell w3-cell-middle">
+                                <span style="line-height: 2px; font-size: 14px;font-weight : 600">{{scheduleData.cinemaName}}</span><br /><br />
+                                <span style="line-height: 2px; font-size: 14px; color: #9b9b9b">{{scheduleData.date}} - {{scheduleData.startTime}} - {{scheduleData.roomName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w3-half w3-container">
+                        <div style="float:right">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-container w3-row w3-margin-top">
+                    <img src="~/Content/img/repository/screen.png" style="width:100%" />
+                    <div class="w3-container">
+                        <div ng-repeat="row in matrix" class="center-div">
+                            <div class="w3-col w3-center " style="width: 50px; ">
+                                <b>{{row.alphaName}}</b>
+                            </div>
+                            <div class="w3-center w3-text-light-grey inlineContainer">
+                                <div ng-repeat="seat in row.seats">
+                                    <div ng-if="seat.seatStatus != 'resell'" class="original-box">
+                                        <button ng-click="onclickSeat(seat.seatId,seat.px,seat.py,seat.seatStatus)" class="{{seat.className}}" type="button">{{seat.locationX}}</button>
+                                    </div>
+                                    <div ng-if="seat.seatStatus == 'resell'" class="original-box">
+                                        <button class="{{seat.className}}" type="button">{{seat.locationX}}</button>
+                                        <div class="popup-box popup-box-left" style="height:70px;width:250px;text-align:left">
+                                            <b>{{seat.emailOwner}}</b><br />
+                                            <b style="color:red">Mô tả: {{seat.resellDescription}}</b>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 float-right">
-                                    <a href="#" class="float-right">Quên mật khẩu?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-container w3-row w3-margin-top">
+                    <div class="center-div">
+                        <button type="button" class="btn-seat"></button> Ghế trống
+                        <button type="button" class="btn-seat-choosing"></button> Ghế đang chọn
+                        <button type="button" class="btn-seat-buyed"></button> Ghế đã có người chọn
+                        <button type="button" class="btn-seat-resell"></button> Ghế đang bán lại
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Modal Area ============================================================================-->
+        <!-- The Login Modal -->
+        <div class="modal" id="myModalLogin">
+
+            <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
+
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header d-block" style="background-color:#e8e8e8">
+                        <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title font-weight-bold text-center">Đăng nhập</h4>
+                        <div class="text-center">
+                            <span class="text-center">Cần tạo tài khoản? </span><a href="#"><span ng-click="showRegister()" class="text-center text-success">Đăng ký</span></a>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input type="email" id="login_username" class="form-control" placeholder="Tên đăng nhập">
+                                        <input type="password" id="login_password" class="form-control" placeholder="Mật khẩu">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 float-left">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> Ghi nhớ
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 float-right">
+                                        <a href="#" class="float-right">Quên mật khẩu?</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <button type="button" ng-click="login()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Đăng nhập</button>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
-                </div>
-
-                <!-- Modal footer -->
-
-
-            </div>
-        </div>
-    </div>
-
-
-    <!-- backdropModal -->
-    <div class="modal fade" id="backdropModal" data-backdrop="static" data-keyboard="false" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center align-self-center border-bottom-0">
-                    <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
-                </div>
-                <div class="modal-body justify-content-center align-self-center ">
-                    <h6 id="backdropMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button id="goHomeBtn" type="button" class="ex1 button1">OK home</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- confirm ticket modal  -->
-    <div class="modal fade" id="confirmTicketModal" data-backdrop="static" data-keyboard="false" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 60% !important;">
-            <!--<div class="modal-content">
-      
-                <div class="modal-body">
-                    <div class="container">
-                        <button type="button" class="close" data-dismiss="modal" style="right:0px"><img src="close_black.png" class="img-rounded" alt="Cinque Terre" "></button>
-                        <div class="row col-sm-12">
-
-                            <div class="col-sm-4">
-                                <img src="https://s3img.vcdn.vn/mobile/123phim/2018/04/thuong-men-simon-15226451346899_220x310.jpg" class="img-rounded" alt="Cinque Terre" style="height:300px">
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="button" ng-click="login()" class="btn btn-success font-weight-bold btn-block" style="background-color:#7CA629">Đăng nhập</button>
                             </div>
-                            <div class="col-sm-8">
-                                <div class="row col-sm-12">
+                            <!-- /.box-footer -->
+                        </div>
+                    </div>
 
-                                    <div class="row col-sm-12">
-                                        <div class="col-sm-12">
-                                            <span class="text-warning font-weight-bold " style="font-size:25px">GLX</span><span class="font-weight-bold" style="font-size:25px"> - Nguyễn Du</span>
-                                        </div>
-                                    </div>
+                    <!-- Modal footer -->
 
-                                    <div class="col-sm-6">
-                                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
-                                            <p class="font-weight-bold">Thông tin vé</p>
-                                        </div>
-                                        <hr>
-     
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <p class="font-weight-bold">Suất chiếu</p>
-                                            </div>
-                                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
-                                                <p class="">12:50 27/06</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <p class="font-weight-bold">Phòng</p>
-                                            </div>
-                                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
-                                                <p class="">Rạp 1</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <p class="font-weight-bold">Ghế</p>
-                                            </div>
-                                            <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
-                                                <p class="">C06, C07, C08, C09</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
-                                            <p class="font-weight-bold">Thông tin người đặt vé</p>
-                                        </div>
-                                        <hr>
-                                        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <p class="font-weight-bold">Điện thoại:</p>
-                                                </div>
-                                                <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
-                                                    <p class="">123456789</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <p class="font-weight-bold">Email:</p>
-                                                </div>
-                                                <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
-                                                    <p class="">danlc@gmail.com</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <p class="font-weight-bold">Tổng tiền</p>
-                                                </div>
-                                                <div class="col-sm-6" style="padding-left:0px; padding-right:0px">
-                                                    <p class="">260.000 đ</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="button-glow col-sm-12" style="padding-left:0px; padding-right: 0px">
-                                        <button type="button" class="btn btn-danger btn-block">Mua vé</button>
-                                    </div>
 
+                </div>
+            </div>
+        </div>
+
+
+        <!-- backdropModal -->
+        <div class="modal fade" id="backdropModal" data-backdrop="static" data-keyboard="false" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                        <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                    </div>
+                    <div class="modal-body justify-content-center align-self-center ">
+                        <h6 id="backdropMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button id="goHomeBtn" type="button" ng-click="endTransaction()" class="ex1 button1">OK home</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- confirm ticket modal  -->
+        <div class="modal fade" id="confirmTicketModal" data-backdrop="static" data-keyboard="false" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 60% !important;">
+                <div class="modal-content">
+                    <div class="float-right" ng-click="closeClick()"><span id="btnCloseConfirmDialog" class="close float-right">&times;</span></div>
+
+                    <div class="content">
+                        <div class="box-a row container" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+                            <div class="img-film column">
+                                <img style="width: 200px; height: 100%" ng-src="{{scheduleData.img}}">
+                            </div>
+                            <div class="info column" style="margin-left: 40px;">
+                                <p><i class="far fa-circle"></i>Giao dịch sẽ hết hạn trong vòng: <span ng-model="countDown" style="color: red; font-weight: bold;">{{Math.floor(countDown/60)}}:{{countDown%60}}</span> s</p>
+                                <div class="content-info">
+                                    <h2>{{scheduleData.cinemaName}}</h2>
+                                    <p>{{scheduleData.cinemaAddress}}</p>
+                                    <div class="info-sticket">
+                                        <table style="width:100%">
+                                            <tr>
+                                                <th>Suất chiếu:</th>
+                                                <td>{{scheduleData.startTime}} {{scheduleData.date}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Phòng:</th>
+                                                <td>{{scheduleData.cinemaName}} - {{scheduleData.roomName}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Ghế: </th>
+                                                <td><span ng-repeat="seat in choosedList">{{alpha[seat.locationY-1]}}{{seat.locationX}} | </span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
+                                <hr>
+                                <div class="content-info">
+                                    <div class="info-sticket">
+                                        <table style="width:100%">
+                                            <tr>
+                                                <th>Điện thoại:</th>
+                                                <td>{{phone}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Email:</th>
+                                                <td>{{email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tổng tiền:</th>
+                                                <td>{{totalAmount}}đ</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div id="paypal-button-container" style="text-align: center; font-weight: bold">Thanh Toan Paypal</div>
+
                             </div>
                         </div>
                     </div>
+
                 </div>
-            </div>-->
-            <div class="modal-content">
-                <div class="float-right"><span id="btnCloseConfirmDialog" class="close float-right">&times;</span></div>
-            
-            <div class="content">
-                <div class="box-a row container" style="width: 80%; margin-left: 10%; margin-right: 10%;">
-                    <div class="img-film column">
-                        <img style="width: 200px; height: 100%" ng-src="{{scheduleData.img}}">
-                    </div>
-                    <div class="info column" style="margin-left: 40px;">
-                        <p><i class="far fa-circle"></i>Giao dịch sẽ hết hạn trong vòng: <span ng-model="countDown" style="color: red; font-weight: bold;">{{Math.floor(countDown/60)}}:{{countDown%60}}</span> s</p>
-                        <div class="content-info">
-                            <h2>{{scheduleData.cinemaName}}</h2>
-                            <p>{{scheduleData.cinemaAddress}}</p>
-                            <div class="info-sticket">
-                                <table style="width:100%">
-                                    <tr>
-                                        <th>Suất chiếu:</th>
-                                        <td>{{scheduleData.startTime}} {{scheduleData.date}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Phòng:</th>
-                                        <td>{{scheduleData.cinemaName}} - {{scheduleData.roomName}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Ghế: </th>
-                                        <td><span ng-repeat="seat in choosedList">{{alpha[seat.py]}}{{seat.px+1}}</span></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="content-info">
-                            <div class="info-sticket">
-                                <table style="width:100%">
-                                    <tr>
-                                        <th>Điện thoại:</th>
-                                        <td>{{phone}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Email:</th>
-                                        <td>{{email}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tổng tiền:</th>
-                                        <td>{{totalAmount}}đ</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-
-                            <div id="paypal-button-container" style="text-align: center; font-weight: bold">Thanh Toan Paypal</div>
-                        
-                    </div>
-                </div>
-               
-
-                <!--<p id="paypal-button-container" style="text-align: center; font-size: 50px; font-weight: bold">Thanh Toan Paypal</p>
-                <div style="width: 80%; margin-left: 10%; margin-right: 10%; margin-top: 30px;">
-                    <p><i class="far fa-circle"></i>Vui lòng bấm nút bên trên để hoàn tất thanh toán</p>
-                    <p><i class="far fa-circle"></i>Mã vé sẽ được gửi qua số điện thoại và email của bạn</p>
-
-                </div>-->
             </div>
-
         </div>
-        </div>
-    </div>
-    <!-- validate Modal -->
-    <div class="modal fade" id="validateModal" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center align-self-center border-bottom-0">
-                    <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
-                </div>
-                <div class="modal-body justify-content-center align-self-center ">
-                    <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button id="dismissBtn" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
+        <!-- validate Modal -->
+        <div class="modal fade" id="validateModal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                        <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                    </div>
+                    <div class="modal-body justify-content-center align-self-center ">
+                        <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button id="dismissBtn" style="cursor:pointer" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
+
+                    </div>
 
                 </div>
-
             </div>
         </div>
     </div>
-
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script src="~/Content/js/angular.min.js"></script>
     <script src="~/Content/js/jquery-3.3.1.min.js"></script>

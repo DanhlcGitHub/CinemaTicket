@@ -9,78 +9,67 @@
     <link rel="stylesheet" href="~/Content/css/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href="~/Content/css/partner.css">
     <title>Partner Home</title>
     <link rel="stylesheet" href="css/circle.css">
 </head>
 <body style="overflow-x:hidden;" ng-app="CombineModule" ng-controller="partnerController">
-    <input id="groupId" value="3" type="hidden" />
-    <div class="row" style="padding-right: 15px;">
-        <div class="col-lg-3">
-            <!-- Profile Image -->
-            <div class="card">
-                <div class="card-body">
-                    <div class="float-center">
-                        <img class="profile-user-img img-responsive img-circle" ng-src="{{groupCinemaInfor.logoImg}}" alt="User profile picture" style="display: block; width: 30%; margin-left: auto; margin-right: auto; ">
+    <!--========================================== new part =================================================-->
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" id="partner_sidebar" style="z-index:0; position: fixed! important; top:0px; height:100%; border-radius: 0px 0px;display: none; background-color:#18453f">
+        <div class="w3-container w3-collapse" style="padding:0">
+
+            <div class="col-lg-12" style="padding:0">
+                <div class="card border-left-0" style="border-right:0px;border-top:0px">
+                    <div class="card-header w3-container border ex2 border-right-0 border-left-0 border-top-0" style="padding:0">
+                        <div class="w3-container  ex2 border-right-0 border-top-0 border-left-0" style="padding:0">
+                            <button class="w3-bar-item w3-button w3-large border-top-0" onclick="topFunction()" style="border-top-0;padding:0;height:60px; text-align:center; vertical-align:middle"><i class="fa fa-arrow-up" style="padding-left:15px; padding-right:10px"></i>Top</button>
+                        </div>
+                        <div class="w3-container border ex2 border-right-0 ex2 border-left-0 " style="padding:0">
+                            <div id="partner_rightarrowdiv" style="display: none; width:100%; position: absolute"><button id="partner_openNav" class="w3-bar-item w3-button w3-large" onclick="partner_open()" style="padding:0;height:60px; text-align:center; vertical-align:middle"><i class="fa fa-navicon" style=""></i></button></div>
+                            <div style="width:100%; "><button id="partner_closeNav" class="w3-bar-item w3-button w3-large" style="padding:0;height:60px; text-align:center; vertical-align:middle" onclick="partner_close()"><i class="fa fa-navicon" style=""></i></button></div>
+                        </div>
+
                     </div>
-                    <h6 class="text-muted text-center">{{groupCinemaInfor.name}} Partner</h6>
-                    <h3 class="text-muted text-center">Danh le</h3>
-                    <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>Cinemas</b> <a class="pull-right">{{allCinemaData.length}}</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Employees</b> <a class="pull-right">{{currentEmployeeList.length}}</a>
-                        </li>
-                    </ul>
-                    <button type="button" ng-click="manageCinema()" class="btn btn-primary btn-block">
-                        Manage Cinema
-                    </button>
-                    <button type="button" ng-click="manageEmployee()" class="btn btn-success btn-block">
-                        Manage Cinema Employee
-                    </button>
+                    <!-- /.box-header -->
+                    <div class="card-body border-left-0" style="padding:0;padding-top:60px" id="partner_menubar">
+                        <div ng-click="manageCinema()" class="w3-container border ex2 border-right-0 border-left-0" style="padding:0">
+                            <button class="w3-bar-item w3-button w3-large" style="padding:0;height:60px"><i class="fa fa-film" style="padding-left:15px; padding-right:10px"></i>Manage Cinema {{allCinemaData.length}}</button>
+                        </div>
+                        <div ng-click="manageEmployee()" class="w3-container border ex2 border-right-0 border-left-0" style="padding:0">
+                            <button class="w3-bar-item w3-button w3-large border-bottom" style="padding:0;height:60px"><i class="fa fa-users" style="padding-left:15px; padding-right:10px"></i>Manage Employee {{currentEmployeeList.length}}</button>
+                        </div>
+                    </div>
+
                 </div>
-                <!-- /.box-body -->
             </div>
-            <!-- /.box -->
-            <!-- About Me Box -->
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="box-title">About Me</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="card-body">
-                    <strong><i class="fa fa-phone margin-r-5"></i> Phone</strong>
-                    <p class="text-muted">
-                        123456789
-                    </p>
-                    <hr>
-                    <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-                    <p class="text-muted">
-                        B.S. in Computer Science from the University of Tennessee at Knoxville
-                    </p>
-                    <hr>
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-                    <p class="text-muted">Malibu, California</p>
-                    <hr>
-                    <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-                    <p>
-                        <span class="label label-danger">UI Design</span>
-                        <span class="label label-success">Coding</span>
-                        <span class="label label-info">Javascript</span>
-                        <span class="label label-warning">PHP</span>
-                        <span class="label label-primary">Node.js</span>
-                    </p>
-                    <hr>
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-                </div>
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
         </div>
-        <!-- /.Employee Management -->
-        <div class="col-lg-9" id="empManagement" ng-controller="partnerEmployeeController">
+    </div>
+    <nav class="navbar navbar-light navbar-expand-md col-lg-12" style="height:60px; background-color:#18453f" id="seat_topbar">
+        <a href="#"><img src="~/Content/img/repository/logo.png" style="width:40px; height:40px;padding:0" /></a>
+        <div class="navbar-collapse collapse" id="collapsingNavbar">
+            <h3 style="color:white;padding-left:15px">Việt Cinê</h3>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <button class="btn   font-weight-bold" style="background-color:#18453f;color:white">EN</button>
+                </li>
+                <li class="nav-item dropdown">
+                    <button class="btn font-weight-bold" style="background-color:#18453f;color:white"><i class="fa fa-bell" style="padding-right:10px"></i></button>
+                </li>
+                <li class="nav-item dropdown">
+                    <button class="btn font-weight-bold" style="background-color:#18453f;color:white">John Smith</button>
+                </li>
+                <li class="nav-item dropdown">
+                    <button class="btn font-weight-bold buttonround">JS</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row" style="
+    padding-right: 15px; padding-top: 50px" id="partner_main">
+        <!-- Employee Management -->
+        <div class="col-lg-12" id="empManagement" ng-controller="partnerEmployeeController">
             <div class="card">
                 <div class="card">
                     <div class="card-header">
@@ -222,8 +211,8 @@
             </div>
         </div>
 
-        <!-- /.Cinemas Management *******************************************************************-->
-        <div class="col-lg-9" id="cinemaManagement" ng-controller="partnerCinemaController">
+        <!-- cinemas management-->
+        <div class="col-lg-12" id="cinemaManagement" ng-controller="partnerCinemaController">
             <div class="card">
                 <div class="card">
                     <div class="card-header">
@@ -397,8 +386,9 @@
                 </form>
             </div>
         </div>
+
         <!-- /.Report Management *******************************************************************-->
-        <div class="col-lg-9" id="reportManagement" ng-controller="reportController">
+        <div class="col-lg-12" id="reportManagement" ng-controller="reportController">
             <table class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                 <thead>
                     <tr role="row">
@@ -423,60 +413,158 @@
             </table>
         </div>
     </div>
-    <!-- Choose Seat Modal -->
+    <!-- choose Seat Modal-->
     <div class="modal fade" id="viewSeatModal" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 70% !important">
-            <div class="modal-content" ng-controller="roomController">
-                <div id="chooseSeatAreaContent">
-                    <div class="w3-container w3-row">
-                        <h5>{{currentCinema.cinemaName}}</h5>
-                        <h6>{{currentRoom.name}}</h6>
-                        <form id="seatForm">
-                            capacity: <input name="inputCapacity" value="77" id="inputCapacity" />
-                            Room Name: <input name="inputRoomName" value="Rap new" id="inputRoomName" />
-                            <button type="submit">Add</button>
-                        </form>
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 90% !important">
+            <div class="modal-content" ng-controller="roomController" style="height:95vh">
+                <div class="modal-body" style="padding:0" id="chooseSeatAreaContent">
+                    <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" id="seat_sidebar" style="overflow-x:hidden; right:0; border-radius: 0px 0px;display: none; background-color:#463a3c">
 
-                        <br />
-                        <button ng-click="changeMode('multipleSelectMode')">select group</button>
-                        <button ng-click="changeMode('multipleDeleteMode')">delete group</button>
-                        <button ng-click="changeMode('singleSelectMode')">select</button>
-                        <br />
-                        <button ng-click="addRow()">(+) Row</button>
-                        <button ng-click="minusRow()">(-) Row</button>
-                        <button ng-click="minusColumn()">(-) Column</button>
-                        <button ng-click="addColumn()">(+) Column</button>
-                        <h4>current capacity {{seatData.length}}</h4>
-                    </div>
-                    <div class="w3-container w3-row w3-margin-top">
-                        <img src="~/Content/img/repository/screen.png" style="width:100%" />
-                        <div class="w3-container" id="seatAreaId">
-                            <div ng-repeat="row in matrix" class="center-div">
-                                <div class="w3-center w3-text-light-grey inlineContainer">
-                                    <div style="width: 30px">
-                                        <b style="margin-right: 25px; font-weight:500; color:black">{{row.alphaName}}</b>
+
+                        <div class="w3-container w3-collapse" style="padding:0">
+
+                            <div class="col-lg-12" style="padding:0">
+                                <div class="card" style="border-right:0px;border-top:0px">
+                                    <div class="card-header ex1 text-white" style="border-radius: 0 0;">
+                                        <div class="row">
+                                            <div class="col-sm-12 w3-center">
+                                                <h2 class="" style="padding-top:10px">Menu Panel</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="card-body" style="padding:0">
+                                        <div class="w3-container border ex2 border-right-0" style="padding:0">
+                                            <button class="w3-bar-item w3-button w3-large border-right-0" data-toggle="collapse" data-target="#demo" style="padding:0;height:60px; background-color: #2d2325"><i class="fas fa-check-double" style="padding-left:15px; padding-right:10px"></i>Select mode</button>
+                                            <div id="demo" class="collapse show" style="background-color">
+                                                <div class="row">
+                                                    <div class="col-sm-6" ng-click="changeMode('multipleSelectMode')">
+                                                        <button class="w3-bar-item btn border buttonsetup" type="button" style="text-align:center; font-size:12px"><img src="~/Content/img/repository/multipleselect.png" style="width:30px; height:35px;" /><br>Multiple Select</button>
+                                                    </div>
+                                                    <div class="col-sm-6" ng-click="changeMode('singleSelectMode')">
+                                                        <button class="w3-bar-item btn border buttonsetup" type="button" style="text-align:center; font-size:12px"><i class="fas fa-check-square fa-2x"></i><br>Single Select</button>
+                                                    </div>
+                                                    <div class="col-sm-6" ng-click="changeMode('multipleDeleteMode')">
+                                                        <button class="w3-bar-item btn border buttonsetup" type="button" style="text-align:center; font-size:12px"><i class="fas fa-window-close fa-2x" style=""></i><br>Delete </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w3-container border ex2 border-right-0" style="padding:0">
+                                            <button class="w3-bar-item w3-button w3-large border-right-0" data-toggle="collapse" data-target="#extraspace" style="padding:0;height:60px; background-color: #2d2325; "><i class="fas fa-check-double" style="padding-left:15px; padding-right:10px"></i>Extra space</button>
+                                            <div id="extraspace" class="collapse" style="background-color">
+                                                <div class="row">
+                                                    <div class="col-sm-6" ng-click="addColumn()">
+                                                        <button class="w3-bar-item btn border buttonsetup" style="text-align:center; font-size:12px"><i class="fas  fa-plus fa-2x"></i><br>Add Column</button>
+                                                    </div>
+                                                    <div class="col-sm-6" ng-click="minusColumn()">
+                                                        <button class="w3-bar-item btn border buttonsetup" style="text-align:center; font-size:12px"><i class="fas  fa-minus fa-2x"></i></i><br>Minus Column</button>
+                                                    </div>
+                                                    <div class="col-sm-6" ng-click="addRow()">
+                                                        <button class="w3-bar-item btn border buttonsetup" style="text-align:center; font-size:12px"><i class="fas  fa-plus fa-2x"></i><br>Add Row</button>
+                                                    </div>
+                                                    <div class="col-sm-6" ng-click="minusRow()">
+                                                        <button class="w3-bar-item btn border buttonsetup" style="text-align:center; font-size:12px"><i class="fas  fa-minus fa-2x"></i><br>Minus Row</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div ng-repeat="seat in row.seats">
-                                        <button ng-click="onclickSeat(seat.px,seat.py)" class="{{seat.className}}" type="button">{{seat.locationX}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="navbar navbar-light navbar-expand-md border-bottom" style="height:90px; background-color:#ffffff; box-shadow: 5px 10px 8px  #888888;" id="topbar">
+
+                        <a href="#"><img src="~/Content/img/repository/logo.png" style="width:40px; height:40px;padding:0" /></a>
+                        <div class="navbar-collapse collapse" id="collapsingNavbar">
+
+                            <div class="row col-sm-4" style="padding-left:20px">
+                                <label class="col-sm-12 control-label font-weight-bold" style="">{{currentCinema.cinemaName}}</label>
+                                <input type="text" name="inputRoomName" value="{{currentRoom.name}}" id="inputRoomName" style="margin-left:14px">
+                            </div>
+
+                            <form id="seatForm" class="row col-sm-6" style="padding-left:20px; vertical-align: middle;">
+                                <input type="text" name="inputCapacity" value="77" id="inputCapacity" class="form-control col-sm-6" id="InputChair" style="margin-right:15px" placeholder="Nhập số ghế">
+                                <button type="submit" class="col-sm-3 btn btn-danger btn-block">Suggest</button>
+                            </form>
+
+                            <div class="col-sm-2 float-right" style="padding-right:0px;margin-left:auto">
+                                <div id="seat_rightarrowdiv" class="float-right" style="display: none"><button id="seat_openNav" class="float-right btn btn-dark w3-xlarge" onclick="seat_open()"><i class="fas fa-bars"></i></button></div>
+                                <div style="" class="float-right"><button id="seat_closeNav" class="float-right btn btn-dark w3-xlarge" onclick="seat_close()"><i class="fas fa-bars"></i></button></div>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div class="row" style="padding-top: 10px;max-height:83vh; overflow-y:auto;overflow-x:hidden" id="chooseSeatMain">
+                        <div class="col-sm-12" style="padding-right:0px">
+                            <div class="row">
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block border-right" style="text-align:center">
+                                        <span class="description-text  font-weight-bold">Tổng số ghế</span>
+
+                                        <h5 class="description-header font-weight-bold">256</h5>
+                                        <span class="description-percentage  font-weight-bold"> 100%</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block border-right" style="text-align:center">
+                                        <span class="description-text  font-weight-bold">Số ghế đã sắp xếp</span>
+
+                                        <h5 class="description-header font-weight-bold">{{seatData.length}}</h5>
+                                        <span class="description-percentage  font-weight-bold"> 56.25%</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block border-right " style="text-align:center">
+                                        <span class="description-text  font-weight-bold">Số ghế chưa sắp xếp</span>
+
+                                        <h5 class="description-header font-weight-bold">112</h5>
+                                        <span class="description-percentage  font-weight-bold">43.75%</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block  " style="text-align:center">
+                                        <span class="description-text  font-weight-bold">Số ghế chưa sắp xếp</span>
+
+                                        <h5 class="description-header font-weight-bold">112</h5>
+                                        <span class="description-percentage  font-weight-bold">43.75%</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                            </div>
+                            <div class="col-sm-12" style="padding-right:0px;padding-left:0px">
+                                <img src="~/Content/img/repository/screen.png" style="width:100%" />
+                                <div class="w3-container" id="seatAreaId">
+                                    <div ng-repeat="row in matrix" class="center-div">
+                                        <div class="w3-center w3-text-light-grey inlineContainer">
+                                            <div style="width: 30px">
+                                                <b style="margin-right: 25px; font-weight:500; color:black">{{row.alphaName}}</b>
+                                            </div>
+
+                                            <div ng-repeat="seat in row.seats">
+                                                <button ng-click="onclickSeat(seat.px,seat.py)" class="{{seat.className}}" type="button">{{seat.locationX}}</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="w3-container w3-row">
-                        <h5> content goes here</h5>
-                        <button ng-click="reviewSeat()">review</button>
-                        <button ng-click="save()">save</button>
-                    </div>
+
+                    <!-- Modal footer -->
+
+
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
     <script src="~/Content/js/angular.min.js"></script>
     <script src="~/Content/js/jquery-3.3.1.min.js"></script>
     <script src="~/Content/js/jquery.validate.min.js"></script>

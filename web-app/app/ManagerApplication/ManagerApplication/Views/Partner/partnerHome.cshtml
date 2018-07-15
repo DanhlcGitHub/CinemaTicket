@@ -17,6 +17,7 @@
 </head>
 <body style="overflow-x:hidden;" ng-app="CombineModule" ng-controller="partnerController">
     <!--========================================== new part =================================================-->
+    <form action="/" id="gohomeForm" ></form>
     <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" id="partner_sidebar" style="z-index:0; position: fixed! important; top:0px; height:100%; border-radius: 0px 0px;display: none; background-color:#18453f">
         <div class="w3-container w3-collapse" style="padding:0">
 
@@ -61,7 +62,7 @@
                     <button class="btn font-weight-bold" style="background-color:#18453f;color:white">John Smith</button>
                 </li>
                 <li class="nav-item dropdown">
-                    <button class="btn font-weight-bold buttonround">JS</button>
+                    <button class="btn font-weight-bold buttonround" ng-click="logout()">JS</button>
                 </li>
             </ul>
         </div>
@@ -562,6 +563,25 @@
 
 
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- validate Modal -->
+    <div class="modal fade" id="validateModal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                    <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                </div>
+                <div class="modal-body justify-content-center align-self-center ">
+                    <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button id="dismissBtn" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
+
+                </div>
+
             </div>
         </div>
     </div>

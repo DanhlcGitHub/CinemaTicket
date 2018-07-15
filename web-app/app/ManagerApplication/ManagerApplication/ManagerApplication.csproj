@@ -149,6 +149,7 @@
     <Compile Include="Controllers\CinemaManagerController\CinemaManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartnerControler\PartnerController.cs" />
+    <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>

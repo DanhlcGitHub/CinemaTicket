@@ -10,7 +10,7 @@
 
 label.error {
     display: inline-block;
-    color: red;
+    color: #f44336;
 }
 
 .btn-seat {

@@ -1,4 +1,5 @@
-﻿using ManagerApplication.Service;
+﻿using ManagerApplication.Constant;
+using ManagerApplication.Service;
 using ManagerApplication.Utility;
 using System;
 using System.Collections.Generic;
@@ -16,35 +17,22 @@ namespace ManagerApplication.Controllers
 
         public ActionResult Index()
         {
+            var obj = Session[AppSession.User];
+            if (obj != null)
+            {
+                string role = Session[AppSession.UserRole].ToString();
+                if (role.Equals(Role.CinemaManager))
+                {
+                    return View("~/Views/Partner/partnerHome.cshtml");
+                }
+                else if (role.Equals(Role.Partner))
+                {
+                    return View("~/Views/Partner/partnerHome.cshtml");
+                }
+            }
             return View();
         }
 
-        public JsonResult CheckLogin(string username, string password, string role)
-        {
-            string encryptedPassword = EncryptUtility.EncryptString(password);
-            if (role == "partner")
-            {
-                List<PartnerAccount> partnerList = new PartnerAccountService().FindBy(u => u.partnerId == username 
-                    && u.partnerPassword == encryptedPassword);
-                if (partnerList.Count != 0)
-                {
-                    PartnerAccount p = partnerList.First();
-                    if (p != null)
-                    {
-                        Session["user"] = p;
-                        Session["user_role"] = role;
-                        //return view
-                    }
-                }
-            }
-            else if (role == "cinemaManager")
-            {
-
-            }
-            UserAccount user;
-            List<UserAccount> userList = new UserAccountService().FindBy(u => u.userId == username && u.userPassword == encryptedPassword);
-            
-            return Json(obj);
-        }
+       
     }
 }

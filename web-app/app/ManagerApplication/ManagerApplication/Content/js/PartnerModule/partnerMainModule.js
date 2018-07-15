@@ -36,6 +36,17 @@ var partnerController = function ($scope, $http) {
         $scope.$broadcast('reloadCinemaEvent');
     };
     
+    $scope.logout = function () {
+        $http({
+            method: "POST",
+            url: "/Utility/logout",
+        })
+       .then(function (response) {
+           if (response.data.status == "ok") {
+               document.getElementById("gohomeForm").submit();
+           }
+       });
+    };
 }
 
 partnerModule.controller("partnerController", partnerController);

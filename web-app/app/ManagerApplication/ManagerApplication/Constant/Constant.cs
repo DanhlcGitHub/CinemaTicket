@@ -35,4 +35,16 @@ namespace ManagerApplication.Constant
     {
         public static string[] Alphabet { get { return new string[] { "A", "B", "C", "D", "E", "F", "J", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U" }; } }
     }
+
+    public static class Role
+    {
+        public static String Partner { get { return "partner"; } }
+        public static String CinemaManager { get { return "cinemaManager"; } }
+    }
+
+    public static class AppSession
+    {
+        public static String User { get { return "User"; } }
+        public static String UserRole { get { return "UserRole"; } }
+    }
 }

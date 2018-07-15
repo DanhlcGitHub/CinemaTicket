@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f2a906f1d80448e6a8e7dc4dbcc5bb88" Name="Diagram1">
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.AdminAccount" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.BookingTicket" Width="1.5" PointX="10.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.Cinema" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.CinemaManager" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.Customer" Width="1.5" PointX="8.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.DigitalType" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.Film" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.GroupCinema" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.MovieSchedule" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.PartnerAccount" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.Promotion" Width="1.5" PointX="2.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.Room" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.Seat" Width="1.5" PointX="10.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.ShowTime" Width="1.5" PointX="8.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.sysdiagram" Width="1.5" PointX="10.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.Ticket" Width="1.5" PointX="12.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.TypeOfSeat" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaBookingDBTestModel.UserAccount" Width="1.5" PointX="12.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKBookingTicketCustomer001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKTicketBookingTicket001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKCinemaGroupCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKCinemaManagerCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKRoomCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKRoomDigitalType001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKMovieScheduleFilm001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKPartnerAccountGroupCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKTypeOfSeatGroupCinema001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKMovieScheduleRoom001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKMovieScheduleShowTime001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKTicketMovieSchedule001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKSeatRoom001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKSeatTypeOfSeat001" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaBookingDBTestModel.FKTicketSeat001" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

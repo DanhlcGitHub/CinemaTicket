@@ -59,18 +59,18 @@
                     </button>
                     <h4 class="modal-title">Film Modal</h4>
                 </div>
-                <form class="form-row">
+                <form class="form-row" id="form-film">
                     <div class="modal-body">
                         <div class="box box-primary">
                             <div class="box-body">
-                                <input type="hidden" class="form-control" id="filmId" name="filmId" value="">
+                                <input type="hidden" class="form-control" id="filmId" name="filmId" value="0">
 
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="filmName">Film Name</label>
                                     <input type="text" class="form-control" id="filmName" name="filmName" value="">
                                 </div>
 
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label>Date:</label>
                                     <div class="input-group date">
                                         <div class="input-group-addon">
@@ -84,19 +84,19 @@
                                     <label>Film Restricted</label>
                                     <div class="radio-inline">
                                         <label>
-                                            <input type="radio" name="restricted" id="restricted" value="res13" checked>
+                                            <input type="radio" name="restricted" id="restricted" value="13" checked>
                                             13
                                         </label>
                                     </div>
                                     <div class="radio-inline">
                                         <label>
-                                            <input type="radio" name="restricted" id="restricted" value="res16">
+                                            <input type="radio" name="restricted" id="restricted" value="16">
                                             16
                                         </label>
                                     </div>
                                     <div class="radio-inline">
                                         <label>
-                                            <input type="radio" name="restricted" id="restricted" value="res18">
+                                            <input type="radio" name="restricted" id="restricted" value="18">
                                             18
                                         </label>
                                     </div>
@@ -107,10 +107,6 @@
                                     <input type="text" class="form-control" id="filmLength" name="filmLength" value="">
                                 </div>
 
-                                <div class="form-group col-md-6">
-                                    <label for="digType">Digital Type</label>
-                                    <input type="text" class="form-control" id="digTypeId" name="digTypeId" value="">
-                                </div>
                                 <div class="form-group col-md-6">
                                     <label for="author">Author</label>
                                     <input type="text" class="form-control" id="author" name="author" value="">

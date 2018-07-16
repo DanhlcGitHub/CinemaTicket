@@ -103,7 +103,6 @@ namespace AdminWebApplication_V2.Controllers
                 }
                 film.restricted = restricted;
                 film.filmLength = filmLength;
-                film.digTypeId = digTypeId;
                 film.author = author;
                 film.movieGenre = movieGenre;
                 film.filmContent = filmContent;
@@ -124,7 +123,7 @@ namespace AdminWebApplication_V2.Controllers
                     dateRelease = dateRelease,
                     restricted = restricted,
                     filmLength = filmLength,
-                    digTypeId = digTypeId,
+                    digTypeId = "2D",
                     imdb = 0,
                     author = author,
                     movieGenre = movieGenre,

@@ -20,6 +20,7 @@ public class ScheduleDateAdapter extends RecyclerView.Adapter<ScheduleDateAdapte
 
     private Context context;
     private List<FilmScheduleModel> filmScheduleModels;
+    private int currentPosition;
 
     public List<FilmScheduleModel> getFilmScheduleModels() {
         return filmScheduleModels;
@@ -29,9 +30,10 @@ public class ScheduleDateAdapter extends RecyclerView.Adapter<ScheduleDateAdapte
         this.filmScheduleModels = filmScheduleModels;
     }
 
-    public ScheduleDateAdapter(Context context, List<FilmScheduleModel> filmScheduleModels) {
+    public ScheduleDateAdapter(Context context, List<FilmScheduleModel> filmScheduleModels, int currentPosition) {
         this.context = context;
         this.filmScheduleModels = filmScheduleModels;
+        this.currentPosition = currentPosition;
     }
 
     @NonNull
@@ -48,20 +50,24 @@ public class ScheduleDateAdapter extends RecyclerView.Adapter<ScheduleDateAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ScheduleHolder holder, int position) {
-        if(position != 0){
-            holder.dateText.setWidth(90);
+
+        if(position == currentPosition){
+            holder.dateNumber.setBackgroundResource(R.drawable.text_view_schedule_date_border);
+            holder.dateNumber.setTextColor(Color.WHITE);
         }
 
-        holder.dateText.setText(filmScheduleModels.get(position).getDateOfWeek());
-        holder.dateNumber.setText(filmScheduleModels.get(position).getDay());
-        final TextView dayNumber = holder.dateNumber;
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dayNumber.setBackgroundColor(Color.BLUE);
-            }
-        });
+        int numberOfDate = Integer.parseInt(filmScheduleModels.get(position).getDay());
+        if(numberOfDate < 10){
+            holder.dateNumber.setText("0" + filmScheduleModels.get(position).getDay());
+        }else{
+            holder.dateNumber.setText(filmScheduleModels.get(position).getDay());
+        }
 
+        if(position == 0){
+            holder.dateText.setText("Hôm nay");
+        }else{
+            holder.dateText.setText(filmScheduleModels.get(position).getDateOfWeek());
+        }
     }
 
     @Override

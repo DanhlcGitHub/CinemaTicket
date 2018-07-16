@@ -13,7 +13,8 @@ namespace CinemaBookingCore.Data.Entities
         public int TimeId { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
-    
+        public double StartTimeDouble { get; set; }
+
         public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
     }
 }

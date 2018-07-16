@@ -15,9 +15,7 @@ namespace CinemaBookingCore.Data
         }
 
         public virtual DbSet<AdminAccount> AdminAccount { get; set; }
-        public virtual DbSet<BankAccount> BankAccount { get; set; }
-        public virtual DbSet<BankList> BankList { get; set; }
-        public virtual DbSet<BookingDetail> BookingDetail { get; set; }
+        
         public virtual DbSet<BookingTicket> BookingTicket { get; set; }
         public virtual DbSet<Cinema> Cinema { get; set; }
         public virtual DbSet<CinemaManager> CinemaManager { get; set; }
@@ -26,7 +24,6 @@ namespace CinemaBookingCore.Data
         public virtual DbSet<Film> Film { get; set; }
         public virtual DbSet<GroupCinema> GroupCinema { get; set; }
         public virtual DbSet<MovieSchedule> MovieSchedule { get; set; }
-        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<PartnerAccount> PartnerAccount { get; set; }
         public virtual DbSet<Promotion> Promotion { get; set; }
         public virtual DbSet<Room> Room { get; set; }
@@ -40,7 +37,7 @@ namespace CinemaBookingCore.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=DESKTOP-D8NCIMI\SQLEXPRESS;Database=CinemaBookingDB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(@"Server=DESKTOP-D8NCIMI\SQLEXPRESS;Database=CinemaBookingDBTest;Trusted_Connection=True;");
             }
         }
 
@@ -67,63 +64,7 @@ namespace CinemaBookingCore.Data
                     .HasColumnName("phone")
                     .HasMaxLength(255);
             });
-
-            modelBuilder.Entity<BankAccount>(entity =>
-            {
-                entity.HasKey(e => e.CardNumber);
-
-                entity.Property(e => e.CardNumber)
-                    .HasColumnName("cardNumber")
-                    .HasMaxLength(50)
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Email)
-                    .HasColumnName("email")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.ExpDate)
-                    .HasColumnName("expDate")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.OwnerName)
-                    .HasColumnName("ownerName")
-                    .HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<BankList>(entity =>
-            {
-                entity.HasKey(e => e.BankId);
-
-                entity.Property(e => e.BankId).HasColumnName("bankId");
-
-                entity.Property(e => e.BankName)
-                    .HasColumnName("bankName")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.ImgLogo)
-                    .HasColumnName("imgLogo")
-                    .HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<BookingDetail>(entity =>
-            {
-                entity.Property(e => e.BookingDetailId).HasColumnName("bookingDetailId");
-
-                entity.Property(e => e.BookingId).HasColumnName("bookingId");
-
-                entity.Property(e => e.TicketId).HasColumnName("ticketId");
-
-                entity.HasOne(d => d.BookingTicket)
-                    .WithMany(p => p.BookingDetails)
-                    .HasForeignKey(d => d.BookingId)
-                    .HasConstraintName("FKBookingDetailBookingTicket001");
-
-                entity.HasOne(d => d.Ticket)
-                    .WithMany(p => p.BookingDetails)
-                    .HasForeignKey(d => d.TicketId)
-                    .HasConstraintName("FKBookingDetailTicket001");
-            });
-
+            
             modelBuilder.Entity<BookingTicket>(entity =>
             {
                 entity.HasKey(e => e.BookingId);
@@ -337,22 +278,6 @@ namespace CinemaBookingCore.Data
                     .HasConstraintName("FKMovieScheduleShowTime001");
             });
 
-            modelBuilder.Entity<News>(entity =>
-            {
-                entity.Property(e => e.NewsId).HasColumnName("newsId");
-
-                entity.Property(e => e.FilmId).HasColumnName("filmId");
-
-                entity.Property(e => e.UrlDocument)
-                    .HasColumnName("urlDocument")
-                    .HasMaxLength(255);
-
-                entity.HasOne(d => d.Film)
-                    .WithMany(p => p.News)
-                    .HasForeignKey(d => d.FilmId)
-                    .HasConstraintName("FKNewsFilm001");
-            });
-
             modelBuilder.Entity<PartnerAccount>(entity =>
             {
                 entity.HasKey(e => e.PartnerId);
@@ -400,6 +325,8 @@ namespace CinemaBookingCore.Data
 
             modelBuilder.Entity<Room>(entity =>
             {
+                entity.HasKey(e => e.RoomId);
+
                 entity.Property(e => e.RoomId).HasColumnName("roomId");
 
                 entity.Property(e => e.Capacity).HasColumnName("capacity");
@@ -425,6 +352,8 @@ namespace CinemaBookingCore.Data
 
             modelBuilder.Entity<Seat>(entity =>
             {
+                entity.HasKey(e => e.SeatId);
+
                 entity.Property(e => e.SeatId).HasColumnName("seatId");
 
                 entity.Property(e => e.Px).HasColumnName("px");
@@ -448,6 +377,7 @@ namespace CinemaBookingCore.Data
                 entity.HasKey(e => e.TimeId);
 
                 entity.Property(e => e.TimeId).HasColumnName("timeId");
+                entity.Property(e => e.StartTimeDouble).HasColumnName("startTimeDouble");
 
                 entity.Property(e => e.EndTime)
                     .HasColumnName("endTime")
@@ -460,6 +390,8 @@ namespace CinemaBookingCore.Data
 
             modelBuilder.Entity<Ticket>(entity =>
             {
+                entity.HasKey(e => e.TicketId);
+
                 entity.Property(e => e.TicketId).HasColumnName("ticketId");
 
                 entity.Property(e => e.PaymentCode)
@@ -474,6 +406,8 @@ namespace CinemaBookingCore.Data
 
                 entity.Property(e => e.SeatId).HasColumnName("seatId");
 
+                entity.Property(e => e.BookingId).HasColumnName("bookingId");
+
                 entity.Property(e => e.TicketStatus)
                     .HasColumnName("ticketStatus")
                     .HasMaxLength(20);
@@ -487,6 +421,11 @@ namespace CinemaBookingCore.Data
                     .WithMany(p => p.Tickets)
                     .HasForeignKey(d => d.SeatId)
                     .HasConstraintName("FKTicketSeat001");
+
+                entity.HasOne(d => d.BookingTicket)
+                    .WithMany(p => p.Tickets)
+                    .HasForeignKey(d => d.BookingId)
+                    .HasConstraintName("FKTicketBookingTicket001");
             });
 
             modelBuilder.Entity<TypeOfSeat>(entity =>

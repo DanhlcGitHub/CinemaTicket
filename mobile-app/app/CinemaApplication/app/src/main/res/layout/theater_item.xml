@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/relative_layout_theater_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:text="CNS - Hai Bà Trưng"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
         android:textSize="14sp" />
 
     <TextView
@@ -17,9 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_theater_item_theater_name"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        android:text="123 Hai Bà Trưng, Bến Nghé, Q.1"
         android:textSize="10sp" />
 
 </RelativeLayout>

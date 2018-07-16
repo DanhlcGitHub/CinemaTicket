@@ -5,7 +5,7 @@ import java.util.List;
 public class HomeModel {
     private List<FilmModel> filmTopSix;
 
-    private List<NewsModel> newTopEight;
+   // private List<NewsModel> newTopEight;
 
     public HomeModel() {
     }
@@ -18,11 +18,11 @@ public class HomeModel {
         this.filmTopSix = films;
     }
 
-    public List<NewsModel> getNewsList() {
+  /*  public List<NewsModel> getNewsList() {
         return newTopEight;
     }
 
     public void setNewsList(List<NewsModel> newsList) {
         this.newTopEight = newsList;
-    }
+    }*/
 }

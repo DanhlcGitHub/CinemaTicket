@@ -1,6 +1,7 @@
 package com.example.luulac.cinemaapplication.fragments.dashboards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,9 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.luulac.cinemaapplication.R;
+import com.example.luulac.cinemaapplication.activities.FilmInfomationActivity;
 import com.example.luulac.cinemaapplication.adapters.FilmComingSoonAdapter;
 import com.example.luulac.cinemaapplication.adapters.FilmShowingAdapter;
 import com.example.luulac.cinemaapplication.data.models.FilmModel;
+import com.example.luulac.cinemaapplication.fragments.films.FilmInfomationFragment;
 import com.example.luulac.cinemaapplication.services.FilmService;
 import com.example.luulac.cinemaapplication.services.ServiceBuilder;
 
@@ -51,7 +54,6 @@ public class CommingSoonFragment extends Fragment {
         FilmService filmService = ServiceBuilder.buildService(FilmService.class);
         Call<List<FilmModel>> request = filmService.getFilms(false);
 
-
         request.enqueue(new Callback<List<FilmModel>>() {
             @Override
             public void onResponse(Call<List<FilmModel>> request, Response<List<FilmModel>> response) {
@@ -63,10 +65,14 @@ public class CommingSoonFragment extends Fragment {
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
 
-                adapter.setOnItemClickListener(new FilmComingSoonAdapter.OnItemClickListener() {
+                adapter.setOnItemClickedListener(new FilmComingSoonAdapter.OnItemClickedListener() {
                     @Override
-                    public void onItemClick(String filmName) {
-                        Toast.makeText(getContext(), "Film " + filmName +" clicked!", Toast.LENGTH_SHORT).show();
+                    public void onItemClick(int filmId) {
+                        Intent intent = new Intent(getContext(), FilmInfomationActivity.class);
+
+                        intent.putExtra("filmId", filmId);
+
+                        startActivity(intent);
                     }
                 });
             }

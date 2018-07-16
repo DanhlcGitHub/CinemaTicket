@@ -1,6 +1,7 @@
 package com.example.luulac.cinemaapplication.fragments.theaters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.luulac.cinemaapplication.R;
+import com.example.luulac.cinemaapplication.activities.CinemaActivity;
 import com.example.luulac.cinemaapplication.adapters.TheaterListAdapter;
 import com.example.luulac.cinemaapplication.data.models.CinemaModel;
 import com.example.luulac.cinemaapplication.data.models.Cinemas;
@@ -75,9 +78,24 @@ public class TheaterFragment extends Fragment {
 
             @Override
             public void renderChild(View view, CinemaModel model, int parentPosition, int childPosition) {
+
+                final int cinemaId = model.getCinemaId();
+                final String cinemaName = model.getCinemaName();
+
+                ((RelativeLayout) view.findViewById(R.id.relative_layout_theater_item)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //click to change to cinema activity
+                        Intent intent = new Intent(context, CinemaActivity.class);
+
+                        intent.putExtra("cinemaId",cinemaId);
+                        intent.putExtra("cinemaName",cinemaName);
+
+                        startActivity(intent);
+                    }
+                });
                 ((TextView) view.findViewById(R.id.tv_theater_item_theater_name)).setText(model.getCinemaName());
                 ((TextView) view.findViewById(R.id.tv_theater_item_theater_location)).setText(model.getCinemaAddress());
-
             }
         });
 
@@ -95,7 +113,7 @@ public class TheaterFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<GroupCinemaModel>> call, Throwable t) {
-                Log.d("HttpFail", t.getMessage());
+                Toast.makeText(getContext(), "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();
             }
         });
 

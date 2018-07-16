@@ -45,7 +45,6 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:lines="1"
-                        android:text="Lotte"
                         android:textColor="@android:color/holo_red_light"
                         android:textSize="16dp" />
 
@@ -64,7 +63,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_toEndOf="@+id/tv_order_ticket_space"
-                        android:text="Diamond"
                         android:textSize="16dp" />
 
                     <TextView
@@ -100,18 +98,16 @@
             <TextView
                 android:id="@+id/tv_payment_filmd_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Em Gái Mưa" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/tv_payment_restricted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_payment_filmd_name"
-                android:background="@drawable/text_view_order_border"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/text_view_order_border"
 
-                android:text="C13"
                 android:textColor="#ffffff"
                 android:textSize="12sp" />
 
@@ -119,11 +115,10 @@
                 android:id="@+id/tv_payment_film_sub_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
                 android:layout_below="@+id/tv_payment_filmd_name"
-                android:layout_toEndOf="@+id/tv_payment_restricted"
-                android:text="102 phút - 2D - Phụ đề" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/tv_payment_restricted" />
 
             <TextView
                 android:id="@+id/tv_payment_film_list_seat"
@@ -131,7 +126,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_payment_restricted"
                 android:layout_marginTop="10dp"
-                android:text="A1 B2"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.CardView
@@ -171,8 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_payment_email"
-                android:layout_marginTop="5dp"
-                android:text="luulac2008@gmail.com" />
+                android:layout_marginTop="5dp" />
 
             <TextView
                 android:id="@+id/tv_payment_phone"
@@ -188,8 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_payment_phone"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
-                android:text="01653333505" />
+                android:layout_marginTop="5dp" />
 
 
         </RelativeLayout>
@@ -271,7 +263,6 @@
                 android:layout_marginLeft="30dp"
                 android:gravity="center_vertical"
                 android:paddingBottom="5dp"
-                android:text="180.000"
                 android:textColor="@android:color/holo_green_light"
                 android:textSize="20sp"
                 android:textStyle="bold" />

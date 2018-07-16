@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.luulac.cinemaapplication.R;
 import com.example.luulac.cinemaapplication.activities.OrderTicketActivity;
+import com.example.luulac.cinemaapplication.adapters.RecyclerItemClickListener;
 import com.example.luulac.cinemaapplication.adapters.ScheduleDateAdapter;
 import com.example.luulac.cinemaapplication.data.models.showtimes.DateScheduleModel;
 import com.example.luulac.cinemaapplication.data.models.showtimes.FilmScheduleModel;
@@ -46,9 +47,11 @@ public class ScheduleShowFragment extends Fragment {
     private List<ShowTimeListModel> showTimes = new ArrayList<>();
     private List<Section<ShowTimeListModel, ShowTimeChildModel>> sections;
     private View view;
+    private TextView tvDoNotHaveSchedule;
 
     private String date;
     private int filmdId;
+    private ExpandableLayout expandableLayout;
 
     private static final int FIRST_DATE_INDEX = 0;
 
@@ -66,6 +69,9 @@ public class ScheduleShowFragment extends Fragment {
         context = view.getContext();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_schedule_show);
+        expandableLayout = (ExpandableLayout) view.findViewById(R.id.el_schedule_show);
+        tvDoNotHaveSchedule = view.findViewById(R.id.tv_schedule_do_not_have_schedule);
+
 
         //The value of movieId is derived from FilmFragment
         filmdId = this.getArguments().getInt("filmId");
@@ -81,18 +87,62 @@ public class ScheduleShowFragment extends Fragment {
             public void onResponse(Call<List<FilmScheduleModel>> request, Response<List<FilmScheduleModel>> response) {
 
                 //Get data from body
-                List<FilmScheduleModel> models = response.body();
+                final List<FilmScheduleModel> models = response.body();
 
-                ScheduleDateAdapter adapter = new ScheduleDateAdapter(context, models);
+                int currentPosition = 0;
+                ScheduleDateAdapter adapter = new ScheduleDateAdapter(context, models, currentPosition);
 
                 LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
 
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
 
-                date = models.get(FIRST_DATE_INDEX).date.toString();
+                recyclerView.addOnItemTouchListener(
+                        new RecyclerItemClickListener(context, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
 
-                ExpandableLayout expandableLayout = (ExpandableLayout) view.findViewById(R.id.el_schedule_show);
+                                ScheduleDateAdapter adapterSecond = new ScheduleDateAdapter(context, models, position);
+
+                                recyclerView.setAdapter(adapterSecond);
+
+                                date = models.get(position).date.toString();
+
+                                //get schedule of first day in data re
+                                List<DateScheduleModel> dateScheduleModels = models.get(position).getDateScheduleModels();
+
+                                expandableLayout.removeAllViews();
+                                expandableLayout.getSections().clear();
+
+                                if(dateScheduleModels.size()!=0){
+
+                                    tvDoNotHaveSchedule.setText("");
+
+                                    showTimes = new ArrayList<>();
+                                    for (int i = 0; i < dateScheduleModels.size(); i++) {
+                                        showTimes.add(dateScheduleModels.get(i).getShowTimeListModel());
+                                    }
+
+                                    //set list showtime for expanable layout
+                                    sections = setSection(showTimes);
+
+                                    for (Section<ShowTimeListModel, ShowTimeChildModel> section : sections) {
+                                        expandableLayout.addSection(section);
+                                    }
+                                }else{
+
+                                    tvDoNotHaveSchedule.setText("Chưa có lịch chiếu");
+                                }
+
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+                            }
+                        })
+                );
+
+                date = models.get(FIRST_DATE_INDEX).date.toString();
 
                 //set render expanable layout for group cinema and cinema
                 expandableLayout.setRenderer(new ExpandableLayout.Renderer<ShowTimeListModel, ShowTimeChildModel>() {
@@ -107,7 +157,7 @@ public class ScheduleShowFragment extends Fragment {
                                 .load(BaseService.BASE_URL + model.getGroupCinemaLogo())
                                 .into(imgLogo);
 
-                        ((TextView) view.findViewById(R.id.tv_showtime_cinema_name)).setText(model.getCinemaName());
+                        ((TextView) view.findViewById(R.id.tv_showtime_cinema_name)).setText(model.getCinemaName() + " (" + model.getShowTimeChildModels().size() + ")");
                         view.findViewById(R.id.icon_arrow_showtime_list).setBackgroundResource(isExpanded ? R.drawable.arrow_down : R.drawable.arrow_right);
                     }
 
@@ -145,16 +195,22 @@ public class ScheduleShowFragment extends Fragment {
 
                 //get schedule of first day in data re
                 List<DateScheduleModel> dateScheduleModels = models.get(FIRST_DATE_INDEX).getDateScheduleModels();
+                if(dateScheduleModels.size()!=0){
 
-                for (int i = 0; i < dateScheduleModels.size(); i++) {
-                    showTimes.add(dateScheduleModels.get(i).getShowTimeListModel());
-                }
+                    tvDoNotHaveSchedule.setText("");
 
-                //set list showtime for expanable layout
-                sections = setSection(showTimes);
+                    for (int i = 0; i < dateScheduleModels.size(); i++) {
+                        showTimes.add(dateScheduleModels.get(i).getShowTimeListModel());
+                    }
 
-                for (Section<ShowTimeListModel, ShowTimeChildModel> section : sections) {
-                    expandableLayout.addSection(section);
+                    //set list showtime for expanable layout
+                    sections = setSection(showTimes);
+
+                    for (Section<ShowTimeListModel, ShowTimeChildModel> section : sections) {
+                        expandableLayout.addSection(section);
+                    }
+                }else{
+                    tvDoNotHaveSchedule.setText("Chưa có lịch chiếu");
                 }
 
                 expandableLayout.setExpandListener(new ExpandCollapseListener.ExpandListener<ShowTimeListModel>() {
@@ -170,6 +226,8 @@ public class ScheduleShowFragment extends Fragment {
                         view.findViewById(R.id.icon_arrow_showtime_list).setBackgroundResource(R.drawable.arrow_right);
                     }
                 });
+
+
             }
 
             @Override

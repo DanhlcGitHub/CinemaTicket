@@ -5,18 +5,11 @@ import java.util.List;
 public class ShowTimeListModel {
 
     private String cinemaName;
+    private String filmName;
+    private String filmImg;
     private String cinemaGroupName;
     private String groupCinemaLogo;
     private List<ShowTimeChildModel> showTimeChildModels;
-
-    public ShowTimeListModel() {
-    }
-
-    public ShowTimeListModel(String cinemaName, List<ShowTimeChildModel> showTimeChildModels, String cinemaGroupName) {
-        this.cinemaName = cinemaName;
-        this.showTimeChildModels = showTimeChildModels;
-        this.cinemaGroupName = cinemaGroupName;
-    }
 
     public String getCinemaGroupName() {
         return cinemaGroupName;
@@ -48,5 +41,21 @@ public class ShowTimeListModel {
 
     public void setGroupCinemaLogo(String groupCinemaLogo) {
         this.groupCinemaLogo = groupCinemaLogo;
+    }
+
+    public String getFilmName() {
+        return filmName;
+    }
+
+    public void setFilmName(String filmName) {
+        this.filmName = filmName;
+    }
+
+    public String getFilmImg() {
+        return filmImg;
+    }
+
+    public void setFilmImg(String filmImg) {
+        this.filmImg = filmImg;
     }
 }

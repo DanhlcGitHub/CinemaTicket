@@ -35,8 +35,6 @@ public class FinishPaymentActivity extends AppCompatActivity{
         final String email = intent.getStringExtra("email");
         final String phone = intent.getStringExtra("phone");
 
-
-
         TextView tvFilmName = findViewById(R.id.tv_finish_payment_film_name);
         tvFilmName.setText(scheduleTranfer.getFilmName());
 
@@ -83,21 +81,11 @@ public class FinishPaymentActivity extends AppCompatActivity{
         TextView tvEmail = (TextView) findViewById(R.id.tv_finish_payment_email);
         tvEmail.setText(email);
 
-        //tv_payment_code
-        TextView tvPaymentCode = (TextView) findViewById(R.id.tv_payment_code);
-        tvPaymentCode.setText("84567322");
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        return true;
     }
 
 }

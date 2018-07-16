@@ -1,6 +1,7 @@
 package com.example.luulac.cinemaapplication.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +13,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.luulac.cinemaapplication.R;
+import com.example.luulac.cinemaapplication.activities.FilmInfomationActivity;
 import com.example.luulac.cinemaapplication.data.models.FilmModel;
 import com.example.luulac.cinemaapplication.services.BaseService;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class FilmComingSoonAdapter extends RecyclerView.Adapter<FilmComingSoonAdapter.FilmCommingSoonHolder> {
@@ -38,19 +44,30 @@ public class FilmComingSoonAdapter extends RecyclerView.Adapter<FilmComingSoonAd
 
     @Override
     public void onBindViewHolder(@NonNull FilmComingSoonAdapter.FilmCommingSoonHolder holder, final int position) {
-        Glide.with(context).load(BaseService.BASE_URL + films.get(position).getPosterPicture())
-                .thumbnail(0.5f)
+        Glide.with(context).load(BaseService.BASE_URL + films.get(position).getAdditionPicture())
                 .into(holder.imgCommingSoon);
-        holder.tvDate.setText("01/06");
+
+        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat outputFormat = new SimpleDateFormat("dd/MM ");
+        Date date = null;
+        try {
+            date = inputFormat.parse(films.get(position).getDateRelease());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String outputDateStr = outputFormat.format(date);
+
+        holder.tvDate.setText(outputDateStr);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(films.get(position).getName());
+                if (onItemClickedListener != null) {
+                    onItemClickedListener.onItemClick(films.get(position).getFilmId());
                 }
             }
         });
+
     }
 
     @Override
@@ -74,13 +91,13 @@ public class FilmComingSoonAdapter extends RecyclerView.Adapter<FilmComingSoonAd
         }
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(String filmName);
+    public interface OnItemClickedListener {
+        void onItemClick(int filmId);
     }
 
-    private OnItemClickListener onItemClickListener;
+    private FilmComingSoonAdapter.OnItemClickedListener onItemClickedListener;
 
-    public void setOnItemClickListener(OnItemClickListener itemClickListener) {
-        this.onItemClickListener = itemClickListener;
+    public void setOnItemClickedListener(FilmComingSoonAdapter.OnItemClickedListener onItemClickedListener) {
+        this.onItemClickedListener = onItemClickedListener;
     }
 }

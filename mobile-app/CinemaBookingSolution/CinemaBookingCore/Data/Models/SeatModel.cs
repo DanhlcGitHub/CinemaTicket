@@ -16,6 +16,9 @@ namespace CinemaBookingCore.Data.Models
         public int Py { get; set; }
         public double Price { get; set; }
         public Boolean isBooked { get; set; }
+        public String TicketStatus { get; set; }
+        public String Email { get; set; }
+        public String Phone { get; set; }
 
 
     }

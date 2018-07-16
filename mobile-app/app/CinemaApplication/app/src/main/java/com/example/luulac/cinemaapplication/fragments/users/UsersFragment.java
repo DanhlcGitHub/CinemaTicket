@@ -9,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.luulac.cinemaapplication.R;
-import com.example.luulac.cinemaapplication.fragments.dashboards.CommingSoonFragment;
-import com.example.luulac.cinemaapplication.fragments.dashboards.HomeFragment;
-import com.example.luulac.cinemaapplication.fragments.dashboards.ShowingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +31,7 @@ public class UsersFragment extends Fragment {
     public static List<Fragment> getFragments() {
         fragments = new ArrayList<>();
         fragments.add(new AccountFragment());
-        fragments.add(new PurchasedTicketsFragment());
+        fragments.add(new PurchaseOrderFragment());
         fragments.add(new NotificationsFragment());
 
         return fragments;

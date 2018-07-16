@@ -18,9 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:src="@drawable/avengers"/>
+            android:src="@drawable/incredibles2_imageplus" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -38,7 +36,6 @@
             android:layout_margin="12dip"
             android:ellipsize="end"
             android:lines="2"
-            android:text="Infinity War : Cuộc chiến vô cực"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#ffffffff" />
 
@@ -46,30 +43,28 @@
             android:id="@+id/tv_film_card_lager_film_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_above="@+id/tv_film_card_lager_title"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="400dp"
-            android:textColor="#ffffffff"
-            android:text="Đang Chiếu"
-            />
+            android:text="ĐANG CHIẾU"
+            android:textColor="#ffffffff" />
 
         <android.support.v7.widget.CardView
+            android:id="@+id/cardview_card"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            card_view:cardCornerRadius="7dp"
+            android:layout_alignParentTop="true"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            card_view:cardCornerRadius="7dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#bababa"
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:background="#bababa"
                 android:paddingTop="3dp">
 
                 <TextView
@@ -126,9 +121,9 @@
             android:id="@+id/tv_film_card_lager_booking_ticket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/tv_film_card_lager_title"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@+id/tv_film_card_lager_title"
             android:background="@drawable/text_view_order_border"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

@@ -12,15 +12,15 @@ public class BookingTicketModel implements Serializable {
     private String bookingDate;
 
     private CustomerModel customer;
-    private List<BookingDetailModel> bookingDetails;
+    private List<TicketModel> tickets;
 
     public BookingTicketModel() {
     }
 
-    public BookingTicketModel(int quantity, CustomerModel customer, List<BookingDetailModel> bookingDetails) {
+    public BookingTicketModel(int quantity, CustomerModel customer, List<TicketModel> tickets) {
         this.quantity = quantity;
         this.customer = customer;
-        this.bookingDetails = bookingDetails;
+        this.tickets = tickets;
     }
 
     public int getBookingId() {
@@ -71,11 +71,11 @@ public class BookingTicketModel implements Serializable {
         this.customer = customer;
     }
 
-    public List<BookingDetailModel> getBookingDetails() {
-        return bookingDetails;
+    public List<TicketModel> getTickets() {
+        return tickets;
     }
 
-    public void setBookingDetails(List<BookingDetailModel> bookingDetails) {
-        this.bookingDetails = bookingDetails;
+    public void setTickets(List<TicketModel> tickets) {
+        this.tickets = tickets;
     }
 }

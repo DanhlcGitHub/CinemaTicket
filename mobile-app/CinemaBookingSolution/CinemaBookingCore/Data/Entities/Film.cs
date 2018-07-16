@@ -9,7 +9,6 @@ namespace CinemaBookingCore.Data.Entities
         public Film()
         {
             this.MovieSchedules = new HashSet<MovieSchedule>();
-            this.News = new HashSet<News>();
         }
     
         public int FilmId { get; set; }
@@ -30,6 +29,6 @@ namespace CinemaBookingCore.Data.Entities
         public int FilmStatus { get; set; }
     
         public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
-        public virtual ICollection<News> News { get; set; }
+        
     }
 }

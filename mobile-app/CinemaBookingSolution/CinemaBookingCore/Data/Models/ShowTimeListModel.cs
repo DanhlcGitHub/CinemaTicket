@@ -10,7 +10,9 @@ namespace CinemaBookingCore.Data.Models
     {
         public String CinemaName { get; set; }
         public String CinemaGroupName { get; set; }
+        public String FilmName { get; set; }
         public List<ShowTimeChildModel> ShowTimeChildModels { get; set; }
         public String GroupCinemaLogo { get; set; }
+        public String FilmImg { get; set; }
     }
 }

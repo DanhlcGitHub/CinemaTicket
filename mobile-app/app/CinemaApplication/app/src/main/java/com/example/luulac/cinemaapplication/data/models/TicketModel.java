@@ -4,15 +4,20 @@ import java.io.Serializable;
 import java.util.List;
 
 public class TicketModel implements Serializable{
+    private int bookingId;
     private int ticketId;
     private int scheduleId;
     private int seatId;
-    private String paymentCode;
-    private int qrCode;
+    private String qrCode;
     private String ticketStatus;
     private double price;
+    private String seatPosition;
 
     public TicketModel() {
+    }
+
+    public TicketModel(int ticketId) {
+        this.ticketId = ticketId;
     }
 
     public TicketModel(int scheduleId, int seatId, double price) {
@@ -45,19 +50,11 @@ public class TicketModel implements Serializable{
         this.seatId = seatId;
     }
 
-    public String getPaymentCode() {
-        return paymentCode;
-    }
-
-    public void setPaymentCode(String paymentCode) {
-        this.paymentCode = paymentCode;
-    }
-
-    public int getQrCode() {
+    public String getQrCode() {
         return qrCode;
     }
 
-    public void setQrCode(int qrCode) {
+    public void setQrCode(String qrCode) {
         this.qrCode = qrCode;
     }
 
@@ -77,5 +74,19 @@ public class TicketModel implements Serializable{
         this.price = price;
     }
 
+    public String getSeatPosition() {
+        return seatPosition;
+    }
 
+    public void setSeatPosition(String seatPosition) {
+        this.seatPosition = seatPosition;
+    }
+
+    public int getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+    }
 }

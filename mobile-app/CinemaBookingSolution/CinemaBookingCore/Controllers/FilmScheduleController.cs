@@ -13,6 +13,7 @@ namespace CinemaBookingCore.Controllers
     [Route("[controller]")]
     public class FilmScheduleController : Controller
     {
+        private static int NUMBER_DATE_RETURN = 6;
         private readonly CinemaBookingDBContext context;
 
         public FilmScheduleController(CinemaBookingDBContext context)
@@ -20,48 +21,36 @@ namespace CinemaBookingCore.Controllers
             this.context = context;
         }
 
-
         [HttpGet]
         public IActionResult Get(int filmId)
         {
-            DateTime dateInput = DateTime.Parse("2018-06-08T00:00:00");
+            DateTime nowDate = DateTime.Now;
 
             List<FilmScheduleModel> schedule = new List<FilmScheduleModel>();
 
-            for (int j = 0; j < 6; j++)
+            for (int j = 0; j < NUMBER_DATE_RETURN; j++)
             {
                 var tmpDate = new DateTime();
-                switch (j)
+                var tmpNextDate = new DateTime();
+
+                tmpDate = nowDate.AddDays(j);
+                if (j != 0)
                 {
-                    case 0:
-                        tmpDate = dateInput;
-                        break;
-                    case 1:
-                        tmpDate = dateInput.AddDays(1);
-                        break;
-                    case 2:
-                        tmpDate = dateInput.AddDays(2);
-                        break;
-                    case 3:
-                        tmpDate = dateInput.AddDays(3);
-                        break;
-                    case 4:
-                        tmpDate = dateInput.AddDays(4);
-                        break;
-                    case 5:
-                        tmpDate = dateInput.AddDays(5);
-                        break;
+                    tmpDate = nowDate.Date.AddDays(j);
                 }
+                tmpNextDate = tmpDate.AddDays(j + 1).Date;
+
                 List<Cinema> cinemas = context.Cinema.Include(c => c.GroupCinema).ToList();
 
-                List<DateScheduleModel> result = new List<DateScheduleModel>();
+                List<DateScheduleModel> dateScheduleModels = new List<DateScheduleModel>();
 
                 for (int i = 0; i < cinemas.Count(); i++)
                 {
                     int index = i + 1;
                     var cinemaSchedules = context.MovieSchedule
                                                .Where(s => s.FilmId == filmId
-                                                            && s.ScheduleDate == tmpDate
+                                                            && s.ScheduleDate >= tmpDate
+                                                            && s.ScheduleDate < tmpNextDate
                                                             && s.Room.CinemaId == index)
                                                .Include(s => s.ShowTime)
                                                .ToList();
@@ -108,7 +97,7 @@ namespace CinemaBookingCore.Controllers
 
                             ShowTimeListModel = listChild
                         };
-                        result.Add(dateScheduleModel);
+                        dateScheduleModels.Add(dateScheduleModel);
                     }
                 }
 
@@ -143,12 +132,160 @@ namespace CinemaBookingCore.Controllers
                     Date = tmpDate.Date.ToString(),
                     Day = tmpDate.Day.ToString(),
                     DateOfWeek = dayofWeek,
-                    DateScheduleModels = result
-
+                    DateScheduleModels = dateScheduleModels
                 };
                 schedule.Add(filmInDay);
             }
 
+            return Ok(schedule);
+        }
+
+        [HttpGet("GetSchdeduleByCinemaId")]
+        public IActionResult GetSchdeduleByCinemaId(int cinemaId)
+        {
+            DateTime nowDate = DateTime.Now;
+
+            List<FilmScheduleModel> schedule = new List<FilmScheduleModel>();
+
+            Cinema cinema = context.Cinema.Where(c => c.CinemaId == cinemaId)
+                                                .Include(c => c.GroupCinema)
+                                                .ThenInclude(g => g.TypeOfSeats)
+                                                .FirstOrDefault();
+
+            int groupId = cinema.GroupCinema.GroupId;
+
+            String basePrice = cinema.GroupCinema.TypeOfSeats.FirstOrDefault().Price.ToString();
+
+            List<Room> rooms = context.Room.Where(r => r.CinemaId == cinema.CinemaId)
+                                            .Include(r => r.DigitalType)
+                                            .ToList();
+
+            for (int j = 0; j < NUMBER_DATE_RETURN; j++)
+            {
+                var tmpDate = new DateTime();
+                var tmpNextDate = new DateTime();
+
+                tmpDate = nowDate.AddDays(j);
+
+                if (j != 0)
+                {
+                    tmpDate = nowDate.Date.AddDays(j);
+                }
+                tmpNextDate = nowDate.AddDays(j + 1).Date;
+
+
+                List<MovieSchedule> movieSchedules = new List<MovieSchedule>();
+
+                foreach (var room in rooms)
+                {
+                    int roomId = room.RoomId;
+                    movieSchedules.AddRange(context.MovieSchedule
+                                                    .Where(
+                                                            ms => ms.RoomId == roomId
+                                                            && ms.ScheduleDate >= tmpDate
+                                                            && ms.ScheduleDate < tmpNextDate
+                                                          ).Include(s => s.ShowTime)
+                                                          .Include(ms => ms.Film)
+                                                    .ToList());
+                }
+
+                List<DateScheduleModel> dateScheduleModels = new List<DateScheduleModel>();
+
+                List<int> listFilmId = new List<int>();
+
+                foreach (var scheduleItem in movieSchedules)
+                {
+                    int tmpFilmId = scheduleItem.FilmId;
+
+                    if(listFilmId.Count() == 0)
+                    {
+                        listFilmId.Add(tmpFilmId);
+                    }
+                    else
+                    {
+                        bool alreadyExist = listFilmId.Contains(tmpFilmId);
+                        if (!alreadyExist)
+                        {
+                            listFilmId.Add(tmpFilmId);
+                        }
+                    }
+                }
+
+                foreach (var filmId in listFilmId)
+                {
+                    ShowTimeListModel listChild = new ShowTimeListModel();
+
+                    List<MovieSchedule> tmpSchedule = movieSchedules.Where(ms => ms.FilmId == filmId).ToList();
+                    listChild.CinemaGroupName = cinema.GroupCinema.Name;
+                    listChild.CinemaName = cinema.CinemaName;
+                    listChild.FilmImg = tmpSchedule.FirstOrDefault().Film.AdditionPicture;
+                    listChild.FilmName = tmpSchedule.FirstOrDefault().Film.Name;
+
+                    List<ShowTimeChildModel> showTimeChildModels = new List<ShowTimeChildModel>();
+                    foreach (var item in tmpSchedule)
+                    {
+                        ShowTimeChildModel showTimeChildModel = new ShowTimeChildModel
+                        {
+                            TimeId = item.ShowTime.TimeId,
+                            ScheduleId = item.ScheduleId,
+                            Type = item.Room.DigitalType.Name,
+                            Price = basePrice,
+                            TimeStart = item.ShowTime.StartTime,
+                            TimeEnd = item.ShowTime.EndTime,
+                            FilmId = item.FilmId,
+                            RoomId = item.RoomId,
+                            GroupId = groupId,
+                            Col = item.Room.MatrixSizeY,
+                            Row = item.Room.MatrixSizeX
+                        };
+                        showTimeChildModels.Add(showTimeChildModel);
+                    }
+
+                    listChild.ShowTimeChildModels = showTimeChildModels;
+
+                    DateScheduleModel dateScheduleModel = new DateScheduleModel
+                    {
+
+                        ShowTimeListModel = listChild
+                    };
+                    dateScheduleModels.Add(dateScheduleModel);
+                }
+
+                String dayofWeek = "";
+                switch (tmpDate.DayOfWeek)
+                {
+                    case DayOfWeek.Sunday:
+                        dayofWeek = "CN";
+                        break;
+                    case DayOfWeek.Monday:
+                        dayofWeek = "T2";
+                        break;
+                    case DayOfWeek.Tuesday:
+                        dayofWeek = "T3";
+                        break;
+                    case DayOfWeek.Wednesday:
+                        dayofWeek = "T4";
+                        break;
+                    case DayOfWeek.Thursday:
+                        dayofWeek = "T5";
+                        break;
+                    case DayOfWeek.Friday:
+                        dayofWeek = "T6";
+                        break;
+                    case DayOfWeek.Saturday:
+                        dayofWeek = "T7";
+                        break;
+                }
+
+                FilmScheduleModel schdeduleInDay = new FilmScheduleModel
+                {
+                    Date = tmpDate.Date.ToString(),
+                    Day = tmpDate.Day.ToString(),
+                    DateOfWeek = dayofWeek,
+                    DateScheduleModels = dateScheduleModels
+                };
+                schedule.Add(schdeduleInDay);
+            }
             return Ok(schedule);
         }
     }

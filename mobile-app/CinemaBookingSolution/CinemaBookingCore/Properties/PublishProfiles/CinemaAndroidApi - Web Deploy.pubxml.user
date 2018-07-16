@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAd3BYtSiM6keUU9dCZ0ZU/wAAAAACAAAAAAAQZgAAAAEAACAAAACGAv77p24ZRR9Pn5IacGZuZPpIyTJcYkb7M+axMUxxMwAAAAAOgAAAAAIAACAAAACMgGRkvoyPxMxKLuguS2YjUnd9wxlXOjA5xCUGdSomfYAAAADJWkAaowIUBK4nfmDhGzrI7pkW8Pqk7IpGpWrAWGUSYpFymbCo6QiGiZN3Wso3thHAbLR1clKORR5BjFlNHDCheCD52eZFtCegMc4T7Ry6AqDBM59Y4ijz2Kk7toSw3hmhEZRTduGwW2hhCslSv0ASRaCo6HSHpYbnQZrnhiDzE0AAAABGpOidHAb1r+I1ETcBcaOwtEATW0C4zrv3nwbmyA5AUmv4+eAx2A3mN+6hJhlWTsmVs3mBHY5Ui951n9N6XR9H</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="CinemaBookingConnectionString">
+      <Value>Data Source=CinemaBookingDB.database.windows.net;Initial Catalog=CinemaBookingDB;Persist Security Info=True;User ID=CinemaBookingDB;Password=Capstone@2018</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

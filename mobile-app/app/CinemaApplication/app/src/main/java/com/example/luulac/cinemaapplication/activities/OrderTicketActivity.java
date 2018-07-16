@@ -3,6 +3,7 @@ package com.example.luulac.cinemaapplication.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -42,7 +43,9 @@ public class OrderTicketActivity extends AppCompatActivity {
     private int numberTicketOrder = 0;
     private Double totalPrice = 0.0;
 
-    public static final int NUMBER_LAYOUT_CHOICE_ITEM_ORDER = 3;
+    private RelativeLayout rv;
+
+    public static final int NUMBER_LAYOUT_CHOICE_ITEM_ORDER = 2;
     public static final int NUMBER_MAX_TICKET = 8;
     public static final int NUMBER_MIN_TICKET = 0;
 
@@ -99,8 +102,12 @@ public class OrderTicketActivity extends AppCompatActivity {
                 tvCinemaName.setText(cinemaName);
                 tvFilmSubInfo.setText(showTime + " - " + cinemaName + " - " + roomName);
                 tvFilmName.setText(filmName);
-                tvRestricted.setText(restricted);
-                tvSubInfo.setText(fimlLength + " - " + digType);
+                if (restricted.equalsIgnoreCase("0")) {
+                    tvRestricted.setVisibility(View.INVISIBLE);
+                } else {
+                    tvRestricted.setText(restricted);
+                }
+                tvSubInfo.setText(fimlLength + " phút - " + digType + " cả tuần");
 
                 ImageView filmImage = (ImageView) findViewById(R.id.img_order_ticket_film);
                 Glide.with(getApplicationContext()).load(stringImageFilm).into(filmImage);
@@ -112,10 +119,8 @@ public class OrderTicketActivity extends AppCompatActivity {
                 for (int i = 0; i < NUMBER_LAYOUT_CHOICE_ITEM_ORDER; i++) {
                     if (i == 0) {
                         rlTypeOfSeatOne = findViewById(R.id.layout_choice_item_order_one);
-                    } else if (i == 1) {
-                        rlTypeOfSeatOne = findViewById(R.id.layout_choice_item_order_two);
                     } else {
-                        rlTypeOfSeatOne = findViewById(R.id.layout_choice_item_order_three);
+                        rlTypeOfSeatOne = findViewById(R.id.layout_choice_item_order_two);
                     }
 
                     final TextView quantityTicket = (TextView) rlTypeOfSeatOne.findViewById(R.id.edit_text_choice_item_order_number);
@@ -133,7 +138,7 @@ public class OrderTicketActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Integer quantityString = Integer.valueOf(quantityTicket.getText().toString()) - 1;
-                            if (quantityString > NUMBER_MIN_TICKET) {
+                            if (quantityString >= NUMBER_MIN_TICKET) {
 
                                 //update quantityTicket
                                 quantityTicket.setText(quantityString.toString());
@@ -147,6 +152,12 @@ public class OrderTicketActivity extends AppCompatActivity {
                                 //update tvTotalPrice to show total price
                                 tvTotalPrice.setText(totalPrice.toString());
                             }
+
+                            if(numberTicketOrder != 0){
+                                rv.setBackgroundColor(Color.GREEN);
+                            }else{
+                                rv.setBackgroundColor(Color.GRAY);
+                            }
                         }
                     });
 
@@ -155,9 +166,9 @@ public class OrderTicketActivity extends AppCompatActivity {
                     btnAdd.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Integer quantityString = Integer.valueOf(quantityTicket.getText().toString())+ 1;
+                            Integer quantityString = Integer.valueOf(quantityTicket.getText().toString()) + 1;
 
-                            if (quantityString < NUMBER_MAX_TICKET) {
+                            if (quantityString <= NUMBER_MAX_TICKET) {
 
                                 //update quantityTicket
                                 quantityTicket.setText(quantityString.toString());
@@ -171,25 +182,36 @@ public class OrderTicketActivity extends AppCompatActivity {
                                 //update tvTotalPrice to show total price
                                 tvTotalPrice.setText(totalPrice.toString());
                             }
+
+                            if(numberTicketOrder != 0){
+                                rv.setBackgroundColor(Color.GREEN);
+                            }else{
+                                rv.setBackgroundColor(Color.GRAY);
+                            }
                         }
                     });
                 }
 
                 //click to continus order ticket
-                RelativeLayout rv = (RelativeLayout) findViewById(R.id.rv_order_ticket_continues);
+                rv = (RelativeLayout) findViewById(R.id.rv_order_ticket_continues);
+
                 rv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (numberTicketOrder != 0) {
+                            Intent intentChoiceSeat = new Intent(getApplicationContext(), ChoiceSeatsActivity.class);
 
-                        Intent intentChoiceSeat = new Intent(getApplicationContext(), ChoiceSeatsActivity.class);
+                            ScheduleTranferModel scheduleTranfer = new ScheduleTranferModel(numberTicketOrder, totalPrice, groupCinemaName, showTime, cinemaName, roomName, filmName, restricted, fimlLength, digType, stringImageFilm);
 
-                        ScheduleTranferModel scheduleTranfer = new ScheduleTranferModel(numberTicketOrder, totalPrice, groupCinemaName, showTime, cinemaName, roomName, filmName, restricted, fimlLength, digType, stringImageFilm);
+                            intentChoiceSeat.putExtra("scheduleTranfer", scheduleTranfer);
+                            intentChoiceSeat.putExtra("filmTranfer", filmTranfer);
 
-                        intentChoiceSeat.putExtra("scheduleTranfer", scheduleTranfer);
-                        intentChoiceSeat.putExtra("filmTranfer", filmTranfer);
-
-                        startActivityForResult(intentChoiceSeat, REQUEST_CODE_ORDER);
+                            startActivityForResult(intentChoiceSeat, REQUEST_CODE_ORDER);
+                        }else{
+                            Toast.makeText(OrderTicketActivity.this, "Please pick more than one seat to continues!", Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                 });
             }
 
@@ -204,13 +226,12 @@ public class OrderTicketActivity extends AppCompatActivity {
         comfirmCancelOrder();
     }
 
-    public void comfirmCancelOrder(){
+    public void comfirmCancelOrder() {
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Hủy đặt vé")
                 .setMessage("Bạn có muốn hủy đơn hàng này?")
-                .setPositiveButton("Có", new DialogInterface.OnClickListener()
-                {
+                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -223,7 +244,7 @@ public class OrderTicketActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE_ORDER){
+        if (requestCode == REQUEST_CODE_ORDER) {
             finish();
         }
     }

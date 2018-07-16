@@ -1,15 +1,16 @@
 package com.example.luulac.cinemaapplication.activities;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
@@ -20,21 +21,28 @@ import com.example.luulac.cinemaapplication.fragments.news.NewsFragment;
 import com.example.luulac.cinemaapplication.fragments.theaters.TheatersFragment;
 import com.example.luulac.cinemaapplication.fragments.users.UsersFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Fragment fragment;
-    private Toolbar toolbar;
+    public Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private TabLayoutMainAdapter adapter;
     private List<Fragment> fragmentList;
     private List<String> titleList;
+    private boolean isFirstLoad = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        // Check whether we're recreating a previously destroyed instance
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            isFirstLoad = savedInstanceState.getBoolean(RECREATE);
+        }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
@@ -49,19 +57,29 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        toolbar.setTitle(R.string.title_dashboard);
-
         adapter = new TabLayoutMainAdapter(getSupportFragmentManager());
 
-        DashboardFragment dashboardFragment = new DashboardFragment();
+        if(isFirstLoad){
+            toolbar.setTitle(R.string.title_dashboard);
+            DashboardFragment dashboardFragment = new DashboardFragment(tabLayout);
 
-        fragmentList = dashboardFragment.getFragments();
-        titleList = dashboardFragment.getTitles();
+            fragmentList = dashboardFragment.getFragments();
+            titleList = dashboardFragment.getTitles();
 
+            fragment = dashboardFragment;
+        }else{
+            toolbar.setTitle(R.string.title_user);
+
+            UsersFragment usersFragment = new UsersFragment();
+
+            fragmentList = usersFragment.getFragments();
+            titleList = usersFragment.getTitles();
+            fragment = usersFragment;
+        }
+
+        loadFragment(fragment);
         setTabLayoutMain(fragmentList, titleList);
 
-        fragment = dashboardFragment;
-        loadFragment(fragment);
     }
 
     public void setTabLayoutMain(List<Fragment> fragments, List<String> titles) {
@@ -105,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                     adapter = new TabLayoutMainAdapter(getSupportFragmentManager());
 
-                    DashboardFragment dashboardFragment = new DashboardFragment();
+                    DashboardFragment dashboardFragment = new DashboardFragment(tabLayout);
 
                     fragmentList = dashboardFragment.getFragments();
                     titleList = dashboardFragment.getTitles();
@@ -173,10 +191,20 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private void loadFragment(Fragment fragment) {
+    private final String RECREATE = "recreate";
+
+    public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
+
+        transaction.detach(fragment);
+        transaction.attach(fragment);
         transaction.commit();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        outPersistentState.putBoolean(RECREATE, isFirstLoad);
     }
 }

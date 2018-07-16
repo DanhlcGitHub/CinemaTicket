@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/img_showtime_group_cinema_logo"
-        android:text="Diamond"
+        android:text=""
+        android:textColor="@android:color/black"
         android:textSize="14sp" />
 
     <ImageView

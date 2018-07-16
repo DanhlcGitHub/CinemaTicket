@@ -23,12 +23,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.FilmActivity"></activity>
-        <activity android:name=".activities.OrderTicketActivity"></activity>
-        <activity android:name=".activities.ChoiceSeatsActivity"></activity>
-        <activity android:name=".activities.PaymentApplicationActivity"></activity>
-        <activity android:name=".activities.FinishPaymentActivity"></activity>
-        <activity android:name=".activities.PaypalPaymentActivity"></activity>
+        <activity android:name=".activities.FilmActivity"/>
+        <activity android:name=".activities.OrderTicketActivity"/>
+        <activity android:name=".activities.ChoiceSeatsActivity"/>
+        <activity android:name=".activities.PaymentApplicationActivity"/>
+        <activity android:name=".activities.FinishPaymentActivity"/>
+        <activity android:name=".activities.PaypalPaymentActivity"/>
+        <activity android:name=".activities.LoginActivity"/>
+        <activity android:name=".activities.OrderDetailActivity"/>
+        <activity android:name=".activities.ResellTicketActivity"/>
+        <activity android:name=".activities.FilmInfomationActivity"/>
+        <activity android:name=".activities.CinemaActivity"/>
     </application>
 
 </manifest>

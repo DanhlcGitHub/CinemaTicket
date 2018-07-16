@@ -24,7 +24,6 @@
             android:text="Phim Nổi Bật"
             />
 
-
         <include
             android:id="@+id/card_1"
             layout="@layout/film_card_lager" />

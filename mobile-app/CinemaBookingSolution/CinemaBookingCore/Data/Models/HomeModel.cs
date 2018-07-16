@@ -7,11 +7,8 @@ using CinemaBookingCore.Data.Entities;
 namespace CinemaBookingCore.Data.Models
 {
     public class HomeModel{
-        // public IEnumerable<Film> filmTopSix { get; set; }
-
-        // public IEnumerable<News> newTopEight { get; set; }
+        
 
         public IEnumerable<Film> filmTopSix { get; set; }
-        public IEnumerable<News> newTopEight { get; set; }
     }
 }

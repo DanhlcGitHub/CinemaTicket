@@ -23,9 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/img_film_information"
             android:layout_marginTop="10dp"
-            android:ellipsize="end"
-            android:lines="1"
             android:text="Jurassic World: Fallen Kingdom"
+            android:textColor="@android:color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -43,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_film_sub_info"
             android:layout_marginTop="10dp"
-            android:text="Nội dung" />
+            android:text="Nội dung"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/tv_film_content"
@@ -52,7 +52,8 @@
             android:layout_below="@+id/tv_film_title_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp"
-            android:text="Tất cả những yếu tố kỳ diệu, phiêu lưu, hồi hợp cùng với một trong những thuognw hiệu nổi tiếng và thành công nhất lịch sử điện ảnh, sự kiện này là một bước chuyển mình về hình ảnh cho thấy sự trở lại của các nhân vật được yêu thích và các loại khủng long đầy cảm hứng và đáng sợ hơn bao giờ hết. Chào mừng đến với Thế Giới Khủng Long Vương Quốc Sụp Đổ." />
+            android:textSize="16sp"
+            android:text="" />
     </RelativeLayout>
 
 </ScrollView>

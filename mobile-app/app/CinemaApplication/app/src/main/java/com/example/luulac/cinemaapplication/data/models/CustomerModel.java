@@ -11,7 +11,7 @@ public class CustomerModel implements Serializable{
     private String email;
     private List<BookingTicketModel> bookingTicket;
 
-    public CustomerModel(String phone, String email) {
+    public CustomerModel(String email, String phone) {
         this.phone = phone;
         this.email = email;
     }

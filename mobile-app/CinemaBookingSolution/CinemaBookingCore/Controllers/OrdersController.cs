@@ -47,7 +47,7 @@ namespace CinemaBookingCore.Controllers
                 TimeShow = schedule.ShowTime.StartTime,
                 GroupCinemaName = groupCinema.Name,
                 TypeOfSeats = typeOfSeatModels,
-                FilmImage = film.PosterPicture
+                FilmImage = film.AdditionPicture
             };
 
             return Ok(result);
@@ -56,15 +56,6 @@ namespace CinemaBookingCore.Controllers
         [HttpGet("seats")]
         public IActionResult getSeatsInRoom(int roomId, int scheduleId)
         {
-
-            //var items = from s in context.Seat
-            //            join tos in context.TypeOfSeat on s.TypeSeatId equals tos.TypeSeatId
-            //            where s.RoomId == roomId
-            //            select new
-            //            {
-            //                Seat = s,
-            //                TypeOfSeat = tos
-            //            };
 
             var items = context.Seat.Include(s => s.TypeOfSeat).Include(s => s.Tickets).Where(s => s.RoomId == roomId).ToList();
 
@@ -80,14 +71,24 @@ namespace CinemaBookingCore.Controllers
                     SeatId = seat.SeatId,
                     Price = seat.TypeOfSeat.Price,
                     TypeSeatId = seat.TypeSeatId,
-                    isBooked = false
+                    isBooked = false,
+                    TicketStatus = "available"
                 };
 
                 foreach (var ticket in seat.Tickets)
                 {
-                    if (ticket.ScheduleId == scheduleId && ticket.TicketStatus == "Success")
+                    if (ticket.ScheduleId == scheduleId)
                     {
-                        seatModel.isBooked = true;
+                        seatModel.TicketStatus = ticket.TicketStatus;
+                        if (ticket.TicketStatus == "resell")
+                        {
+                            BookingTicket bookingTicket = context.BookingTicket.Where(b => b.BookingId == ticket.BookingId).FirstOrDefault();
+                            Customer customer = context.Customer.Where(c => c.CustomerId == bookingTicket.CustomerId).FirstOrDefault();
+
+                            seatModel.Email = customer.Email;
+                            seatModel.Phone = customer.Phone;
+                        }
+                        
                     }
                 }
                 seatModels.Add(seatModel);
@@ -97,7 +98,7 @@ namespace CinemaBookingCore.Controllers
         }
 
         [HttpPost("bookingTicket")]
-        public IActionResult BookingTicket([FromBody] SeatCollectionModel seatCollectionModel)
+        public IActionResult bookingTicket([FromBody] SeatCollectionModel seatCollectionModel)
         {
             try
             {
@@ -107,32 +108,39 @@ namespace CinemaBookingCore.Controllers
                     Ticket ticket = context.Ticket.Where(t => t.ScheduleId == item.ScheduleId && t.SeatId == item.SeatId).FirstOrDefault();
                     if (ticket == null)
                     {
-                        item.TicketStatus = "Buyding";
-                        item.TicketTimeout = DateTime.Now.AddMinutes(5);
+                        item.BookingId = null;
+                        item.TicketStatus = "buying";
                         context.Add(item);
                         context.SaveChanges();
-
                         seatCollectionModel.isSuccesBookingTicket = true;
                     }
                     else
                     {
                         switch (ticket.TicketStatus)
                         {
-                            case "Available":
-                                ticket.TicketStatus = "Buyding";
+                            case "available":
+                                ticket.TicketStatus = "buying";
                                 context.Update(ticket);
                                 context.SaveChanges();
-
                                 seatCollectionModel.isSuccesBookingTicket = true;
                                 break;
 
-                            case "Buyding":
+                            case "buying":
                                 seatCollectionModel.isSuccesBookingTicket = false;
                                 break;
 
-                            case "Success":
+                            case "buyed":
                                 seatCollectionModel.isSuccesBookingTicket = true;
                                 break;
+
+                            case "resell":
+                                seatCollectionModel.isSuccesBookingTicket = false;
+                                break;
+
+                            case "reselled":
+                                seatCollectionModel.isSuccesBookingTicket = true;
+                                break;
+
 
                         }
                     }
@@ -151,7 +159,7 @@ namespace CinemaBookingCore.Controllers
         public List<int> listTicketId = new List<int>();
 
         [HttpPost("finishPaypalPayment")]
-        public IActionResult FinishPaypalPayment([FromBody] BookingTicket bookingTicketModel)
+        public IActionResult finishPaypalPayment([FromBody] BookingTicket bookingTicketModel)
         {
             try
             {
@@ -177,18 +185,17 @@ namespace CinemaBookingCore.Controllers
                 context.Add(bookingTicket);
                 context.SaveChanges();
 
-                foreach (var item in bookingTicketModel.BookingDetails)
+                foreach (var item in bookingTicketModel.Tickets)
                 {
-                    item.BookingId = bookingTicket.BookingId;
                     listTicketId.Add(item.TicketId);
-                    context.Add(item);
                 }
-                context.SaveChanges();
 
                 foreach (var item in listTicketId)
                 {
                     Ticket ticket = context.Ticket.Where(t => t.TicketId == item).FirstOrDefault();
-                    ticket.TicketStatus = "Success";
+                    ticket.BookingId = bookingTicket.BookingId;
+                    ticket.QrCode = "Content/img/QRCode/qr.png";
+                    ticket.TicketStatus = "buyed";
                     context.Update(ticket);
                 }
                 context.SaveChanges();
@@ -209,11 +216,57 @@ namespace CinemaBookingCore.Controllers
             foreach (var item in tickets)
             {
                 ticket = context.Ticket.Where(t => t.TicketId == item.TicketId).FirstOrDefault();
-                ticket.TicketStatus = "Available";
+                ticket.TicketStatus = "available";
             }
             context.SaveChanges();
 
             return Ok(tickets);
+        }
+
+        [HttpGet("ordersByAccountId")]
+        public IActionResult ordersByAccountId(int accountId)
+        {
+            List<Ticket> tickets = context.Ticket.ToList();
+
+
+            return Ok();
+        }
+
+        [HttpGet("getOrderByAccountId")]
+        public IActionResult getTicketByAccountId(string username)
+        {
+            try
+            {
+                UserAccount user = context.UserAccount.Where(u => u.UserId == username).FirstOrDefault();
+                List<Customer> customers = new List<Customer>();
+                List<BookingTicket> bookingTickets = new List<BookingTicket>();
+
+                if (user != null)
+                {
+                    customers = context.Customer.Where(c => c.UserId == user.UserId).ToList();
+                    foreach (var customer in customers)
+                    {
+                        bookingTickets = context.BookingTicket.Where(b => b.CustomerId == customer.CustomerId).ToList();
+                        foreach (var bookingTicket in bookingTickets)
+                        {
+                            Ticket ticket = context.Ticket
+                                .Where(t => t.BookingId == bookingTicket.BookingId)
+                                .Include(t => t.MovieSchedule)
+                                .ThenInclude(s => s.ShowTime)
+                                .FirstOrDefault();
+
+                            Film film = context.Film.Where(f => f.FilmId == ticket.MovieSchedule.FilmId).FirstOrDefault();
+
+
+                        }
+                    }
+                }
+                return Ok(bookingTickets);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

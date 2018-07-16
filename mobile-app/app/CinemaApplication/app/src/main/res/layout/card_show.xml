@@ -24,14 +24,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phim Đang Chiếu"
-                android:textSize="16dp"/>
+                android:textColor="@android:color/black"
+                android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/tv_card_showing_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
-                android:text="Tất Cả" />
+                android:text="Tất Cả"
+                android:textColor="@android:color/holo_red_light" />
         </RelativeLayout>
 
         <LinearLayout

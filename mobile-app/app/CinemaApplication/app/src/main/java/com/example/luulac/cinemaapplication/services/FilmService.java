@@ -16,6 +16,6 @@ public interface FilmService {
     @GET("films")
     Call<List<FilmModel>> getFilms(@Query("isShowing") boolean isShow);
 
-    @GET("films/{id}")
-    Call<FilmModel> getFilm(@Path("id")int id);
+    @GET("films/{filmId}")
+    Call<FilmModel> getFilm(@Path("filmId")int filmId);
 }

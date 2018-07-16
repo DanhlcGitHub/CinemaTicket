@@ -44,7 +44,6 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:lines="1"
-                        android:text="Lotte"
                         android:textColor="@android:color/holo_red_light"
                         android:textSize="16dp" />
 
@@ -63,7 +62,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_toEndOf="@+id/tv_order_ticket_space"
-                        android:text="Diamond"
                         android:textSize="16dp" />
 
                     <TextView
@@ -71,7 +69,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_order_ticket_cinema_name"
-                        android:text="Hôm nay - 09:20 - Lotte - Diamon Room 1"
                         android:textSize="12sp" />
                 </RelativeLayout>
             </LinearLayout>
@@ -91,7 +88,6 @@
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:text="Thế Giới Khủng Long: Vương Quốc Sụp Đổ"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -108,7 +104,6 @@
                 android:background="@drawable/text_view_order_border"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="C13"
                 android:textColor="#ffffff"
                 android:textSize="12sp" />
 
@@ -117,7 +112,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="128 phút  - 2D - Phụ Đề"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -129,10 +123,11 @@
             card_view:cardCornerRadius="5dp"
             card_view:cardUseCompatPadding="true">
 
-            <ImageView android:id="@+id/img_order_ticket_film"
-                android:layout_width="100dp"
+            <ImageView
+                android:id="@+id/img_order_ticket_film"
+                android:layout_width="98dp"
                 android:layout_height="130dp"
-                android:layout_marginStart="0dp"
+
                 android:src="@drawable/avengers" />
         </android.support.v7.widget.CardView>
 
@@ -187,16 +182,6 @@
             android:layout_height="1dip"
             android:layout_below="@+id/tv_order_ticket_please_choice"
             android:background="#e5e0e0" />
-
-        <include
-            android:id="@+id/layout_choice_item_order_three"
-            layout="@layout/layout_choice_item_order" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dip"
-            android:layout_below="@+id/tv_order_ticket_please_choice"
-            android:background="#e5e0e0" />
     </LinearLayout>
 
     <View
@@ -227,7 +212,7 @@
                 android:layout_marginLeft="30dp"
                 android:gravity="center_vertical"
                 android:paddingBottom="5dp"
-                android:text="0000.0"
+                android:text="0.0"
                 android:textColor="@android:color/holo_green_light"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -251,7 +236,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:background="#25b408">
+            android:background="@android:color/darker_gray">
 
             <TextView
                 android:id="@+id/tv_next_order_ticket"

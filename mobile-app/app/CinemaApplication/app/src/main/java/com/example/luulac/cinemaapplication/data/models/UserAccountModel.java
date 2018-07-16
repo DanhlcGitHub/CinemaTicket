@@ -1,6 +1,8 @@
 package com.example.luulac.cinemaapplication.data.models;
 
-public class UserAccountModel {
+import java.io.Serializable;
+
+public class UserAccountModel implements Serializable{
     private String userId;
     private String userPassword;
     private String phone;

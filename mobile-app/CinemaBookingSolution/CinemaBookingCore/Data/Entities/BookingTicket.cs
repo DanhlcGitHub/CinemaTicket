@@ -8,7 +8,7 @@ namespace CinemaBookingCore.Data.Entities
     {
         public BookingTicket()
         {
-            this.BookingDetails = new HashSet<BookingDetail>();
+            this.Tickets = new HashSet<Ticket>();
         }
     
         public int BookingId { get; set; }
@@ -16,8 +16,8 @@ namespace CinemaBookingCore.Data.Entities
         public int PaymentMethodId { get; set; }
         public int Quantity { get; set; }
         public System.DateTime BookingDate { get; set; }
-    
-        public virtual ICollection<BookingDetail> BookingDetails { get; set; }
+
+        public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual Customer Customer { get; set; }
     }
 }

@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.luulac.cinemaapplication.R;
-import com.example.luulac.cinemaapplication.fragments.dashboards.HomeFragment;
-import com.example.luulac.cinemaapplication.fragments.dashboards.ShowingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +30,6 @@ public class FilmFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_film_about, null);
-
-        //The value of movieId is derived from FilmActivity
 
         return view;
     }

@@ -49,7 +49,7 @@ public class FilmShowingAdapter extends RecyclerView.Adapter<FilmShowingAdapter.
             @Override
             public void onClick(View v) {
                 if (onItemClickedListener != null) {
-                    onItemClickedListener.onItemClick(films.get(position).getName());
+                    onItemClickedListener.onItemClick(films.get(position).getName(), films.get(position).getFilmId());
                 }
             }
         });
@@ -80,7 +80,7 @@ public class FilmShowingAdapter extends RecyclerView.Adapter<FilmShowingAdapter.
     }
 
     public interface OnItemClickedListener {
-        void onItemClick(String filmName);
+        void onItemClick(String filmName, int filmId);
     }
 
     private OnItemClickedListener onItemClickedListener;

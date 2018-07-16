@@ -1,8 +1,10 @@
 package com.example.luulac.cinemaapplication.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -118,13 +120,24 @@ public class PaymentApplicationActivity extends AppCompatActivity {
         //tv_order_ticker_price
         TextView tvTotalPrice = (TextView) findViewById(R.id.tv_order_ticker_price);
         tvTotalPrice.setText(scheduleTranfer.getTotalPrice().toString());
-        amount = (scheduleTranfer.getTotalPrice()/22000) + "";
+        amount = (scheduleTranfer.getTotalPrice()/23000) + "";
 
         ImageView image = (ImageView) findViewById(R.id.img_payment_film_picture);
         Glide.with(getApplicationContext()).load(scheduleTranfer.getFilmImage()).into(image);
 
         edtEmail = (EditText) findViewById(R.id.edt_payment_email);
+
         edtPhone = (EditText) findViewById(R.id.edt_payment_phone);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("loginInformation", Context.MODE_PRIVATE);
+
+        boolean isLogin = sharedPreferences.getBoolean("isLogin", false);
+
+        if(isLogin){
+            edtEmail.setText(sharedPreferences.getString("email", ""));
+            edtPhone.setText(sharedPreferences.getString("phoneNumber", ""));
+
+        }
 
         //rl_finish_payment_next
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.rl_finish_payment_next);
@@ -182,24 +195,20 @@ public class PaymentApplicationActivity extends AppCompatActivity {
                     try {
                         String paymentDetail = confirmation.toJSONObject().toString(4);
 
-                        List<BookingDetailModel> bookingDetails = new ArrayList<>();
+                        List<TicketModel> ticketModels = new ArrayList<>();
 
                         for (int i = 0; i < scheduleTranfer.getQuantityTicket(); i++) {
 
                             int ticketId = seatCollectionModel.getTicketModels().get(i).getTicketId();
 
-                            //new booking detail object
-                            BookingDetailModel bookingTicketModel = new BookingDetailModel(ticketId);
-
-                            //add booking detail object to list booking detail
-                            bookingDetails.add(bookingTicketModel);
+                            ticketModels.add(new TicketModel(ticketId));
                         }
 
                         //new Customer
                         CustomerModel customer = new CustomerModel(edtEmail.getText().toString(), edtPhone.getText().toString());
 
                         //new Booking ticket model for send data to server
-                        BookingTicketModel bookingTicket = new BookingTicketModel(scheduleTranfer.getQuantityTicket(),customer,bookingDetails);
+                        BookingTicketModel bookingTicket = new BookingTicketModel(scheduleTranfer.getQuantityTicket(),customer, ticketModels);
 
                         //call service from server to make booking ticket and booking detail
                         OrderService orderService = ServiceBuilder.buildService(OrderService.class);

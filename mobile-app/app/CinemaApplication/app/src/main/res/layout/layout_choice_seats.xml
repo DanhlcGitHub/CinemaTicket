@@ -18,7 +18,6 @@
             android:id="@+id/toolbar_choice_seat"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll"
             app:popupTheme="@style/AppTheme.PopupOverlay">
@@ -32,7 +31,9 @@
                     android:id="@+id/icon_cancel_order"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
                     android:src="@drawable/icon_cancel" />
 
                 <RelativeLayout
@@ -46,7 +47,6 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:lines="1"
-                        android:text="Lotte"
                         android:textColor="@android:color/holo_red_light"
                         android:textSize="16dp" />
 
@@ -65,7 +65,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_toEndOf="@+id/tv_choice_seat_space"
-                        android:text="Diamond"
                         android:textSize="16dp" />
 
                     <TextView
@@ -73,7 +72,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_choice_seat_cinema_name"
-                        android:text="Hôm nay - 09:20 - Lotte - Diamon Room 1"
                         android:textSize="12sp" />
                 </RelativeLayout>
             </LinearLayout>
@@ -116,7 +114,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_cs_screen"
         android:gravity="center"
-        android:text="Thế Giới Khủng Long: Vương Quốc Sụp Đổ"
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 
@@ -220,7 +217,7 @@
                 android:layout_height="20dp"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="2dp"
-                android:background="@drawable/text_view_seat"
+                android:background="@drawable/text_view_seat_resell"
                 android:gravity="center" />
 
             <TextView
@@ -228,7 +225,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_seat_item_vip"
                 android:layout_centerHorizontal="true"
-                android:text="Ghế VIP"
+                android:text="Ghế Bán Lại"
                 android:textSize="12sp" />
         </RelativeLayout>
 

@@ -1,10 +1,14 @@
 package com.example.luulac.cinemaapplication.fragments.dashboards;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -26,6 +30,7 @@ import com.example.luulac.cinemaapplication.services.FilmService;
 import com.example.luulac.cinemaapplication.services.HomeService;
 import com.example.luulac.cinemaapplication.services.ServiceBuilder;
 
+import java.net.URL;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,12 +38,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+@SuppressLint("ValidFragment")
 public class HomeFragment extends Fragment {
 
     private static final int NUMBER_CARD_LANGER = 3;
     private static final int NUMBER_START_CARD_SMALL = 3;
     private static final int NUMBER_ALL_CARD= 6;
     private Context context;
+    private TabLayout tabLayout;
+
+    public HomeFragment(TabLayout tabLayout) {
+        this.tabLayout = tabLayout;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,7 +63,7 @@ public class HomeFragment extends Fragment {
 
         context = view.getContext();
 
-        //call service from servcer get data for home fragment
+        //call service from server get data for home fragment
         HomeService ideaService = ServiceBuilder.buildService(HomeService.class);
         Call<HomeModel> request = ideaService.getDataForHomeScreen();
 
@@ -67,6 +78,16 @@ public class HomeFragment extends Fragment {
 
                 CardView cardViewLager = null;
                 CardView cardShowing = view.findViewById(R.id.card_into_showing);
+
+                //tv_card_showing_all
+                TextView tvShowAll = view.findViewById(R.id.tv_card_showing_all);
+                tvShowAll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TabLayout.Tab tab = tabLayout.getTabAt(1);
+                        tab.select();
+                    }
+                });
 
                 LinearLayout linearLayout = null;
 
@@ -89,7 +110,7 @@ public class HomeFragment extends Fragment {
                     film = films.get(i);
 
                     ImageView imgFilm = (ImageView) cardViewLager.findViewById(R.id.img_film_card_lager);
-                    Glide.with(context).load(BaseService.BASE_URL + film.getPosterPicture()).into(imgFilm);
+                    Glide.with(context).load(BaseService.BASE_URL + film.getAdditionPicture()).into(imgFilm);
 
                     TextView filmTitle = (TextView) cardViewLager.findViewById(R.id.tv_film_card_lager_title);
                     filmTitle.setText(film.getName());
@@ -132,36 +153,32 @@ public class HomeFragment extends Fragment {
                     film = films.get(i);
 
                     ImageView imgFilm = (ImageView) linearLayout.findViewById(R.id.img_show);
-                    Glide.with(context).load(BaseService.BASE_URL + film.getPosterPicture()).into(imgFilm);
-
+                    Glide.with(context)
+                            .load(BaseService.BASE_URL + film.getAdditionPicture())
+                            .into(imgFilm);
                     TextView filmTitle = (TextView) linearLayout.findViewById(R.id.tv_show_movie_title);
                     filmTitle.setText(film.getName());
 
                     TextView filmShowTime = (TextView) linearLayout.findViewById(R.id.tv_show_time);
-                    filmShowTime.setText(film.getFilmLength() + "p - IMDb ");
+                    filmShowTime.setText(film.getFilmLength()+"");
 
-                    TextView filmImdb = (TextView) linearLayout.findViewById(R.id.tv_show_imdb);
+                    TextView filmImdb = (TextView) linearLayout.findViewById(R.id.tv_show_imdb_sub);
                     filmImdb.setText(film.getImdb() + "");
-
-                    final int filmId = film.getFilmId();
-                    final String filmName = film.getName();
+                    
+                    final int filmIdCardSmall = film.getFilmId();
+                    final String filmNameCardSmall = film.getName();
 
                     //set click when user click card small
-                    cardViewLager.setOnClickListener(new View.OnClickListener() {
+                    linearLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(context, FilmActivity.class);
-                            intent.putExtra("filmId", filmId);
-                            intent.putExtra("filmName", filmName);
+                            intent.putExtra("filmId", filmIdCardSmall);
+                            intent.putExtra("filmName", filmNameCardSmall);
                             startActivity(intent);
                         }
                     });
                 }
-
-                //Note: Not have data for News then can't show infomation of News
-                //Note: Not finish load News
-
-                //load News in this
             }
 
             //Fail to connect to server

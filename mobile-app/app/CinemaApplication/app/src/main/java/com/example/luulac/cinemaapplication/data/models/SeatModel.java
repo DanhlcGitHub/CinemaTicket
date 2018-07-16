@@ -12,6 +12,9 @@ public class SeatModel implements Serializable {
     private Double price;
     private boolean isBooked;
     private boolean isSelected;
+    private String ticketStatus;
+    private String email;
+    private String phone;
 
     public SeatModel() {
         isSelected = false;
@@ -79,5 +82,29 @@ public class SeatModel implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getTicketStatus() {
+        return ticketStatus;
+    }
+
+    public void setTicketStatus(String ticketStatus) {
+        this.ticketStatus = ticketStatus;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

@@ -23,10 +23,14 @@ namespace ManagerApplication.Controllers
                 string role = Session[AppSession.UserRole].ToString();
                 if (role.Equals(Role.CinemaManager))
                 {
-                    return View("~/Views/Partner/partnerHome.cshtml");
+                    CinemaManager cm = (CinemaManager)obj;
+                    ViewBag.cinemaId = cm.cinemaId;
+                    return View("~/Views/CinemaManager/CinemaManagerHome.cshtml");
                 }
                 else if (role.Equals(Role.Partner))
                 {
+                    PartnerAccount pa = (PartnerAccount)obj;
+                    ViewBag.groupId = pa.groupOfCinemaId;
                     return View("~/Views/Partner/partnerHome.cshtml");
                 }
             }

@@ -5,7 +5,7 @@
 var partnerModule = angular.module("partnerModule", []);
 var partnerController = function ($scope, $http) {
     $scope.groupCinemaInfor;
-    $scope.groupId = 3;
+    $scope.groupId = $("#groupId").val();
     $("#empManagement").hide();
     $("#cinemaManagement").show();
 
@@ -17,7 +17,7 @@ var partnerController = function ($scope, $http) {
     $http({
         method: "POST",
         url: "/Partner/GetGroupCinemaInfor",
-        params: { groupIdStr: $scope.groupId, }
+        params: { groupIdStr: $("#groupId").val(), }
     })
    .then(function (response) {
        $scope.groupCinemaInfor = response.data;

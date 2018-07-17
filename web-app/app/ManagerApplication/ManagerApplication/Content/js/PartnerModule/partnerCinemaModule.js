@@ -30,7 +30,7 @@ var partnerCinemaController = function ($scope, $http) {
         $http({
             method: "POST",
             url: "/Partner/GetAllCinemaInGroup",
-            params: { groupIdStr: $scope.groupId, }
+            params: { groupIdStr: $("#groupId").val(), }
         })
         .then(function (response) {
             $scope.cinemaPageIndex = 0;
@@ -133,7 +133,7 @@ var partnerCinemaController = function ($scope, $http) {
                  $http({
                      method: "POST",
                      url: "/Partner/GetAllCinemaInGroup",
-                     params: { groupIdStr: $scope.groupId, }
+                     params: { groupIdStr: $("#groupId").val() }
                  })
                 .then(function (response) {
                     $scope.allCinemaData = response.data;
@@ -174,7 +174,7 @@ var partnerCinemaController = function ($scope, $http) {
             cinemaObj.openTime = openTime;
             cinemaObj.introduction = introduction;
             cinemaObj.imagePath = path;
-            cinemaObj.groupId = $scope.groupId;
+            cinemaObj.groupId = $("#groupId").val();
             // upload file
             if (path != "") {
                 var f = document.getElementById('cinemaChooseFile').files[0];

@@ -2,8 +2,8 @@
     validationManager.employeeValidation();
     validationManager.cinemaValidation();
     validationManager.addRoomValidation();
-    seat_open();
-    partner_open();
+    //seat_open();
+    //partner_open();
     $("#cinemaChooseFile").change(function () {
         readURL(this);
     });
@@ -158,23 +158,7 @@ var validationManager = {
 
 }
 
-function seat_open() {
-    document.getElementById("chooseSeatMain").style.marginRight = "17%";
-    document.getElementById("seat_topbar").style.marginRight = "17%";
-    document.getElementById("seat_sidebar").style.width = "17%";
-    document.getElementById("seat_sidebar").style.display = "block";
-    document.getElementById("seat_openNav").style.display = 'none';
-    document.getElementById("seat_closeNav").style.display = 'inline-block';
-}
-function seat_close() {
-    document.getElementById("chooseSeatMain").style.marginRight = "0%";
-    document.getElementById("seat_rightarrowdiv").style.paddingRight = "0px";
-    document.getElementById("seat_rightarrowdiv").style.display = "inline-block";
-    document.getElementById("seat_topbar").style.marginRight = "0%";
-    document.getElementById("seat_sidebar").style.display = "none";
-    document.getElementById("seat_openNav").style.display = "inline-block";
-    document.getElementById("seat_closeNav").style.display = 'none';
-}
+
 
 function topFunction() {
     document.body.scrollTop = 0;

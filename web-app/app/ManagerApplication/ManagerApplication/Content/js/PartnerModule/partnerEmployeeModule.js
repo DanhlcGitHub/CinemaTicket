@@ -33,7 +33,7 @@ var partnerEmployeeController = function ($scope, $http) {
         $http({
             method: "POST",
             url: "/Partner/GetAllCinemaInGroup",
-            params: { groupIdStr: groupId, }
+            params: { groupIdStr: $("#groupId").val(), }
         })
         .then(function (response) {
             $scope.allCinemaData = response.data;
@@ -45,7 +45,7 @@ var partnerEmployeeController = function ($scope, $http) {
         $http({
             method: "POST",
             url: "/Partner/GetAllEmployee",
-            params: { groupIdStr: $scope.groupId, }
+            params: { groupIdStr: $("#groupId").val(), }
         })
        .then(function (response) {
            $scope.empPageIndex = 0;
@@ -117,7 +117,7 @@ var partnerEmployeeController = function ($scope, $http) {
                 $http({
                     method: "POST",
                     url: "/Partner/GetAllEmployee",
-                    params: { groupIdStr: $scope.groupId, }
+                    params: { groupIdStr: $("#groupId").val(), }
                 })
                .then(function (response) {
                    $('#empForm')[0].reset();

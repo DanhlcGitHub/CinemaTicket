@@ -1,5 +1,270 @@
 ﻿@{
-    ViewBag.Title = "CinemaManagerHome";
+    ViewBag.Title = "Cinema Manager";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="~/Content/css/w3.css">-->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
-<h2>CinemaManagerHome</h2>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+    <link rel="stylesheet" href="~/Content/css/partner.css">
+    <link rel="stylesheet" href="~/Content/css/AdminLTE.min.css">
+    <title>Viet Cine | Cinema Manager</title>
+</head>
+<body class="hold-transition sidebar-mini" ng-app="CombineModule" ng-controller="managerController">
+    <!--========================================== new part =================================================-->
+    <input type="hidden" id="cinemaId" value=@ViewBag.cinemaId />
+    <form action="/" method="post" id="gohomeForm"></form>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+            </ul>
+            <!-- SEARCH FORM -->
+            <form class="form-inline ml-3">
+                <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- Right navbar links -->
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="index3.html" class="brand-link">
+                <img src="~/Content/img/repository/logo.png" alt="cine viet Logo" class="brand-image img-circle elevation-3"
+                     style="opacity: .8">
+                <span class="brand-text font-weight-light">Viet Cine</span>
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img ng-src="{{cinemaInfor.logoImg}}" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">{{cinemaInfor.name}}</a>
+                    </div>
+                    <div class="image" style="cursor:pointer" ng-click="logout()">
+                        <img src="~/Content/img/repository/logout.png" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                </div>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li ng-click="manageEmployee()" class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-calendar"></i>
+                                <p>
+                                    Manage Schedule
+                                    <i class="fa fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Basic add</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Advantage add</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>View Schedule</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-click="manageCinema()" class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-book"></i>
+                                <p>
+                                    Report
+                                    <i class="fa fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Add Cinema</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Edit Cinema</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Add Room</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-plus-square-o"></i>
+                                <p>
+                                    Extras
+                                    <i class="fa fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Error 404</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Error 500</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Blank Page</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="starter.html" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Starter Page</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-header">MISCELLANEOUS</li>
+                        <li class="nav-item">
+                            <a href="https://adminlte.io/docs" class="nav-link">
+                                <i class="nav-icon fa fa-file"></i>
+                                <p>Documentation</p>
+                            </a>
+                        </li>
+                        <li class="nav-header">LABELS</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-danger"></i>
+                                <p class="text">Important</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-warning"></i>
+                                <p>Warning</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-info"></i>
+                                <p>Informational</p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <div class="col-lg-12" id="ScheduleManagement" ng-controller="scheduleController">
+
+                <div class="card card-danger col-lg-12">
+                    <div class="card-header">
+                        <h3 class="card-title" ng-click="test()">Filter Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group has-warning">
+                            <label class="control-label" for="inputWarning">
+                                <i class="fa fa-calendar"></i> Input date
+                            </label>
+                            <input type="date" class="form-control" id="inputWarning" placeholder="Enter ...">
+                        </div>
+                        <div class="form-group">
+                            <label>Select Film</label>
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>
+                            </select>
+                        </div>
+                        <button ng-click="test()" type="button" class="btn btn-block btn-success">Filter</button>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+            </div>
+            <!-- /.content-wrapper -->
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+
+        <!-- validate Modal -->
+        <div class="modal fade" id="validateModal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                        <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                    </div>
+                    <div class="modal-body justify-content-center align-self-center ">
+                        <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button id="dismissBtn" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script src="~/Content/js/angular.min.js"></script>
+        <script src="~/Content/js/jquery-3.3.1.min.js"></script>
+        <script src="~/Content/js/jquery-ui.min.js"></script>
+        <script src="~/Content/js/jquery.validate.min.js"></script>
+        <script src="~/Content/js/bootstrap.min.js"></script>
+        <script src="~/Content/js/adminlte.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script src="~/Content/js/ManagerModule/managerMainModule.js"></script>
+        <script src="~/Content/js/ManagerModule/manageSchedule.js"></script>
+</body>
+</html>

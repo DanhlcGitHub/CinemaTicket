@@ -3,11 +3,16 @@ var roomController = function ($scope, $http) {
     /*====================== receive event area ====================*/
     $scope.$on('viewRoomEvent', function (event, infor) {
         console.log(infor);
+        $("#seatForm").hide();
         $scope.currentCinema = infor.currentCinema;
+        $scope.seat_close();
         $scope.viewRoom(infor.currentRoom);
     });
 
     $scope.$on('addRoomEvent', function (event, infor) {
+        $("#seatForm").show();
+        $scope.isAddRoom = true;
+        $scope.seat_open();
         $scope.currentCinema = infor.currentCinema;
     });
 
@@ -421,6 +426,17 @@ var roomController = function ($scope, $http) {
             }
         });
     };
+
+    $scope.seat_open = function () {
+        document.getElementById("chooseSeatMain").style.marginRight = "17%";
+        document.getElementById("seat_sidebar").style.width = "17%";
+        document.getElementById("seat_sidebar").style.display = "block";
+    };
+
+    $scope.seat_close = function () {
+        document.getElementById("chooseSeatMain").style.marginRight = "0%";
+        document.getElementById("seat_sidebar").style.display = "none";
+    }
 }
 
 partnerRoomModule.controller("roomController", roomController);

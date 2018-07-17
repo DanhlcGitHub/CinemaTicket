@@ -1,5 +1,6 @@
 ﻿using ManagerApplication.Constant;
 using ManagerApplication.Service;
+using ManagerApplication.Utility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -151,9 +152,10 @@ namespace ManagerApplication.Controllers.PartnerControler
             string password = (string)emp.GetValue("password");
             int cinemaId = (int)emp.GetValue("cinemaId");
 
+            string encrytedPassword = EncryptUtility.EncryptString(password);
             CinemaManager cm = new CinemaManager();
             cm.managerId = username;
-            cm.managerPassword = password;
+            cm.managerPassword = encrytedPassword;
             cm.email = email;
             cm.phone = phone;
             cm.managerName = name;

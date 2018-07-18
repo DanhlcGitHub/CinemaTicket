@@ -23,7 +23,7 @@ var chooseTicketController = function ($scope, $http) {
     $scope.totalAmount = 0;
     $scope.userKey = "userKey";
     $scope.userData = LocalStorageManager.loadDataFromStorage($scope.userKey);
-    
+
     $('#validateModal').on("hidden.bs.modal", function () {
         $('body').addClass('modal-open');
     });
@@ -153,7 +153,7 @@ var chooseTicketController = function ($scope, $http) {
     $scope.alpha = ["A", "B", "C", "D", "E", "F", "J", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"];
     $scope.TicketStatusEnum = Object.freeze({ "available": "btn-seat", "buyed": "btn-seat-buyed", "buying": "btn-seat-buyed", "resell": "btn-seat-resell", "choosing": "btn-seat-choosing" });
     // init data
-    
+
     // beforeunload---------------------
     window.addEventListener('beforeunload', function (e) {
         //auto change seat status from buying to available
@@ -207,7 +207,7 @@ var chooseTicketController = function ($scope, $http) {
             console.log(px + ":" + px);
             var index = 0;
             index = $scope.countClick % $scope.totalTicket;
-            
+
             $scope.choosedList[index] = aSeat;
             /*$scope.choosedList[index] = {
                 isNull: false,
@@ -424,20 +424,20 @@ var chooseTicketController = function ($scope, $http) {
                     if ($scope.countDown !== 0) { // !timeout
                         return actions.payment.execute().then(function () {
                             // Show a thank-you note
-                            $http({
-                                method: "POST",
-                                url: "/Ticket/MakeOrder",
-                                params: {
-                                    ticketListStr: JSON.stringify($scope.ticketData),
-                                    email: $scope.email,
-                                    phone: $scope.phone,
-                                    filmName: $scope.scheduleData.filmName,
-                                    cinemaName: $scope.scheduleData.cinemaName,
-                                    date: $scope.scheduleData.date,
-                                    roomName: $scope.scheduleData.roomName,
-                                    startTime: $scope.scheduleData.startTime,
-                                }
-                            })
+                                $http({
+                                    method: "POST",
+                                    url: "/Ticket/MakeOrder",
+                                    params: {
+                                        ticketListStr: JSON.stringify($scope.ticketData),
+                                        email: $scope.email,
+                                        phone: $scope.phone,
+                                        filmName: $scope.scheduleData.filmName,
+                                        cinemaName: $scope.scheduleData.cinemaName,
+                                        date: $scope.scheduleData.date,
+                                        roomName: $scope.scheduleData.roomName,
+                                        startTime: $scope.scheduleData.startTime,
+                                    }
+                                })
                                .then(function (response) {
                                    console.log("ticket data after update MakeOrder");
                                    $scope.ticketData = response.data;
@@ -501,7 +501,7 @@ var chooseTicketController = function ($scope, $http) {
         $http({
             method: "POST",
             url: "/utility/CheckAvailableSchedule",
-            params: { scheduleIdStr : $scope.scheduleId}
+            params: { scheduleIdStr: $scope.scheduleId }
         })
         .then(function (response) {
             if (response.data.valid == "false") {

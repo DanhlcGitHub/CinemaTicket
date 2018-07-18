@@ -22,6 +22,7 @@ namespace CinemaTicket
         public int timeId { get; set; }
         public string startTime { get; set; }
         public string endTime { get; set; }
+        public Nullable<double> startTimeDouble { get; set; }
     
         public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
     }

@@ -41,6 +41,7 @@
     </Key>
     <Property Name="managerId" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="managerPassword" Type="nvarchar" MaxLength="255" />
+    <Property Name="managerName" Type="nvarchar" MaxLength="255" />
     <Property Name="phone" Type="nvarchar" MaxLength="255" />
     <Property Name="email" Type="nvarchar" MaxLength="255" />
     <Property Name="cinemaId" Type="int" />
@@ -99,18 +100,10 @@
       <PropertyRef Name="scheduleId" />
     </Key>
     <Property Name="scheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="filmId" Type="int" />
-    <Property Name="timeId" Type="int" />
-    <Property Name="roomId" Type="int" />
-    <Property Name="scheduleDate" Type="date" />
-  </EntityType>
-  <EntityType Name="News">
-    <Key>
-      <PropertyRef Name="newsId" />
-    </Key>
-    <Property Name="newsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="filmId" Type="int" />
-    <Property Name="urlDocument" Type="nvarchar" MaxLength="255" />
+    <Property Name="filmId" Type="int" Nullable="false" />
+    <Property Name="timeId" Type="int" Nullable="false" />
+    <Property Name="roomId" Type="int" Nullable="false" />
+    <Property Name="scheduleDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="PartnerAccount">
     <Key>
@@ -118,6 +111,7 @@
     </Key>
     <Property Name="partnerId" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="partnerPassword" Type="nvarchar" MaxLength="255" />
+    <Property Name="partnerName" Type="nvarchar" MaxLength="255" />
     <Property Name="phone" Type="nvarchar" MaxLength="255" />
     <Property Name="email" Type="nvarchar" MaxLength="255" />
     <Property Name="groupOfCinemaId" Type="int" />
@@ -162,16 +156,7 @@
     <Property Name="timeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="startTime" Type="nvarchar" MaxLength="10" />
     <Property Name="endTime" Type="nvarchar" MaxLength="10" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
+    <Property Name="startTimeDouble" Type="float" />
   </EntityType>
   <EntityType Name="Ticket">
     <Key>
@@ -184,8 +169,8 @@
     <Property Name="paymentCode" Type="nvarchar" MaxLength="50" />
     <Property Name="qrCode" Type="nvarchar" MaxLength="255" />
     <Property Name="ticketStatus" Type="nvarchar" MaxLength="20" />
-    <Property Name="price" Type="float" />
     <Property Name="resellDescription" Type="nvarchar" MaxLength="50" />
+    <Property Name="price" Type="float" />
   </EntityType>
   <EntityType Name="TypeOfSeat">
     <Key>
@@ -206,7 +191,6 @@
     <Property Name="userPassword" Type="nvarchar" MaxLength="255" />
     <Property Name="phone" Type="nvarchar" MaxLength="255" />
     <Property Name="email" Type="nvarchar" MaxLength="255" />
-    <Property Name="tix" Type="float" />
   </EntityType>
   <Association Name="FKBookingTicketCustomer001">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -245,7 +229,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FKMovieScheduleFilm001">
-    <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+    <End Role="Film" Type="Self.Film" Multiplicity="1" />
     <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Film">
@@ -257,7 +241,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FKMovieScheduleRoom001">
-    <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
     <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Room">
@@ -269,7 +253,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FKMovieScheduleShowTime001">
-    <End Role="ShowTime" Type="Self.ShowTime" Multiplicity="0..1" />
+    <End Role="ShowTime" Type="Self.ShowTime" Multiplicity="1" />
     <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ShowTime">
@@ -277,18 +261,6 @@
       </Principal>
       <Dependent Role="MovieSchedule">
         <PropertyRef Name="timeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FKNewsFilm001">
-    <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
-    <End Role="News" Type="Self.News" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Film">
-        <PropertyRef Name="filmId" />
-      </Principal>
-      <Dependent Role="News">
-        <PropertyRef Name="filmId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -301,18 +273,6 @@
       </Principal>
       <Dependent Role="PartnerAccount">
         <PropertyRef Name="groupOfCinemaId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FKPromotionCinema001">
-    <End Role="Cinema" Type="Self.Cinema" Multiplicity="0..1" />
-    <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cinema">
-        <PropertyRef Name="cinemaId" />
-      </Principal>
-      <Dependent Role="Promotion">
-        <PropertyRef Name="cinemaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -422,13 +382,11 @@
     <EntitySet Name="Film" EntityType="Self.Film" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GroupCinema" EntityType="Self.GroupCinema" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MovieSchedule" EntityType="Self.MovieSchedule" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PartnerAccount" EntityType="Self.PartnerAccount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Seat" EntityType="Self.Seat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShowTime" EntityType="Self.ShowTime" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TypeOfSeat" EntityType="Self.TypeOfSeat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
@@ -456,17 +414,9 @@
       <End Role="ShowTime" EntitySet="ShowTime" />
       <End Role="MovieSchedule" EntitySet="MovieSchedule" />
     </AssociationSet>
-    <AssociationSet Name="FKNewsFilm001" Association="Self.FKNewsFilm001">
-      <End Role="Film" EntitySet="Film" />
-      <End Role="News" EntitySet="News" />
-    </AssociationSet>
     <AssociationSet Name="FKPartnerAccountGroupCinema001" Association="Self.FKPartnerAccountGroupCinema001">
       <End Role="GroupCinema" EntitySet="GroupCinema" />
       <End Role="PartnerAccount" EntitySet="PartnerAccount" />
-    </AssociationSet>
-    <AssociationSet Name="FKPromotionCinema001" Association="Self.FKPromotionCinema001">
-      <End Role="Cinema" EntitySet="Cinema" />
-      <End Role="Promotion" EntitySet="Promotion" />
     </AssociationSet>
     <AssociationSet Name="FKRoomCinema001" Association="Self.FKRoomCinema001">
       <End Role="Cinema" EntitySet="Cinema" />

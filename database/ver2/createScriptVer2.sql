@@ -78,7 +78,9 @@ CREATE TABLE ShowTime (
     timeId int IDENTITY(1,1) PRIMARY KEY,
     startTime nvarchar(10),
     endTime nvarchar(10),
+	startTimeDouble float,
 );
+
 
 CREATE TABLE Room (
     roomId int IDENTITY(1,1) PRIMARY KEY,

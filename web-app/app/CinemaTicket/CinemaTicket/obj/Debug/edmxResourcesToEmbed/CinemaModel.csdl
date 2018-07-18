@@ -180,6 +180,7 @@
     <Property Name="timeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="startTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="endTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="startTimeDouble" Type="Double" />
     <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleShowTime001" FromRole="ShowTime" ToRole="MovieSchedule" />
   </EntityType>
   <EntityType Name="Ticket">

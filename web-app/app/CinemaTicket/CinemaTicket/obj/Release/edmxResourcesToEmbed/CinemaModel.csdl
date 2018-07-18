@@ -38,7 +38,6 @@
     <Property Name="introduction" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="GroupCinema" Relationship="Self.FKCinemaGroupCinema001" FromRole="Cinema" ToRole="GroupCinema" />
     <NavigationProperty Name="CinemaManagers" Relationship="Self.FKCinemaManagerCinema001" FromRole="Cinema" ToRole="CinemaManager" />
-    <NavigationProperty Name="Promotions" Relationship="Self.FKPromotionCinema001" FromRole="Cinema" ToRole="Promotion" />
     <NavigationProperty Name="Rooms" Relationship="Self.FKRoomCinema001" FromRole="Cinema" ToRole="Room" />
   </EntityType>
   <EntityType Name="CinemaManager">
@@ -47,6 +46,7 @@
     </Key>
     <Property Name="managerId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="managerPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="managerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="cinemaId" Type="Int32" />
@@ -92,7 +92,6 @@
     <Property Name="additionPicture" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="filmStatus" Type="Int32" />
     <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleFilm001" FromRole="Film" ToRole="MovieSchedule" />
-    <NavigationProperty Name="News" Relationship="Self.FKNewsFilm001" FromRole="Film" ToRole="News" />
   </EntityType>
   <EntityType Name="GroupCinema">
     <Key>
@@ -113,23 +112,14 @@
       <PropertyRef Name="scheduleId" />
     </Key>
     <Property Name="scheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="filmId" Type="Int32" />
-    <Property Name="timeId" Type="Int32" />
-    <Property Name="roomId" Type="Int32" />
-    <Property Name="scheduleDate" Type="DateTime" Precision="0" />
+    <Property Name="filmId" Type="Int32" Nullable="false" />
+    <Property Name="timeId" Type="Int32" Nullable="false" />
+    <Property Name="roomId" Type="Int32" Nullable="false" />
+    <Property Name="scheduleDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Film" Relationship="Self.FKMovieScheduleFilm001" FromRole="MovieSchedule" ToRole="Film" />
     <NavigationProperty Name="Room" Relationship="Self.FKMovieScheduleRoom001" FromRole="MovieSchedule" ToRole="Room" />
     <NavigationProperty Name="ShowTime" Relationship="Self.FKMovieScheduleShowTime001" FromRole="MovieSchedule" ToRole="ShowTime" />
     <NavigationProperty Name="Tickets" Relationship="Self.FKTicketMovieSchedule001" FromRole="MovieSchedule" ToRole="Ticket" />
-  </EntityType>
-  <EntityType Name="News">
-    <Key>
-      <PropertyRef Name="newsId" />
-    </Key>
-    <Property Name="newsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="filmId" Type="Int32" />
-    <Property Name="urlDocument" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Film" Relationship="Self.FKNewsFilm001" FromRole="News" ToRole="Film" />
   </EntityType>
   <EntityType Name="PartnerAccount">
     <Key>
@@ -137,6 +127,7 @@
     </Key>
     <Property Name="partnerId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="partnerPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="partnerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="groupOfCinemaId" Type="Int32" />
@@ -150,7 +141,6 @@
     <Property Name="promotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="cinemaId" Type="Int32" />
     <Property Name="urlDocument" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Cinema" Relationship="Self.FKPromotionCinema001" FromRole="Promotion" ToRole="Cinema" />
   </EntityType>
   <EntityType Name="Room">
     <Key>
@@ -190,17 +180,8 @@
     <Property Name="timeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="startTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="endTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="startTimeDouble" Type="Double" />
     <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleShowTime001" FromRole="ShowTime" ToRole="MovieSchedule" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Ticket">
     <Key>
@@ -213,8 +194,8 @@
     <Property Name="paymentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="qrCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ticketStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="price" Type="Double" />
     <Property Name="resellDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Double" />
     <NavigationProperty Name="BookingTicket" Relationship="Self.FKTicketBookingTicket001" FromRole="Ticket" ToRole="BookingTicket" />
     <NavigationProperty Name="MovieSchedule" Relationship="Self.FKTicketMovieSchedule001" FromRole="Ticket" ToRole="MovieSchedule" />
     <NavigationProperty Name="Seat" Relationship="Self.FKTicketSeat001" FromRole="Ticket" ToRole="Seat" />
@@ -240,7 +221,6 @@
     <Property Name="userPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tix" Type="Double" />
   </EntityType>
   <Association Name="FKBookingTicketCustomer001">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -290,18 +270,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FKPromotionCinema001">
-    <End Role="Cinema" Type="Self.Cinema" Multiplicity="0..1" />
-    <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cinema">
-        <PropertyRef Name="cinemaId" />
-      </Principal>
-      <Dependent Role="Promotion">
-        <PropertyRef Name="cinemaId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FKRoomCinema001">
     <End Role="Cinema" Type="Self.Cinema" Multiplicity="0..1" />
     <End Role="Room" Type="Self.Room" Multiplicity="*" />
@@ -327,25 +295,13 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FKMovieScheduleFilm001">
-    <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+    <End Role="Film" Type="Self.Film" Multiplicity="1" />
     <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Film">
         <PropertyRef Name="filmId" />
       </Principal>
       <Dependent Role="MovieSchedule">
-        <PropertyRef Name="filmId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FKNewsFilm001">
-    <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
-    <End Role="News" Type="Self.News" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Film">
-        <PropertyRef Name="filmId" />
-      </Principal>
-      <Dependent Role="News">
         <PropertyRef Name="filmId" />
       </Dependent>
     </ReferentialConstraint>
@@ -375,7 +331,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FKMovieScheduleRoom001">
-    <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
     <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Room">
@@ -387,7 +343,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FKMovieScheduleShowTime001">
-    <End Role="ShowTime" Type="Self.ShowTime" Multiplicity="0..1" />
+    <End Role="ShowTime" Type="Self.ShowTime" Multiplicity="1" />
     <End Role="MovieSchedule" Type="Self.MovieSchedule" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ShowTime">
@@ -456,13 +412,11 @@
     <EntitySet Name="Films" EntityType="Self.Film" />
     <EntitySet Name="GroupCinemas" EntityType="Self.GroupCinema" />
     <EntitySet Name="MovieSchedules" EntityType="Self.MovieSchedule" />
-    <EntitySet Name="News" EntityType="Self.News" />
     <EntitySet Name="PartnerAccounts" EntityType="Self.PartnerAccount" />
     <EntitySet Name="Promotions" EntityType="Self.Promotion" />
     <EntitySet Name="Rooms" EntityType="Self.Room" />
     <EntitySet Name="Seats" EntityType="Self.Seat" />
     <EntitySet Name="ShowTimes" EntityType="Self.ShowTime" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Tickets" EntityType="Self.Ticket" />
     <EntitySet Name="TypeOfSeats" EntityType="Self.TypeOfSeat" />
     <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
@@ -482,10 +436,6 @@
       <End Role="Cinema" EntitySet="Cinemas" />
       <End Role="CinemaManager" EntitySet="CinemaManagers" />
     </AssociationSet>
-    <AssociationSet Name="FKPromotionCinema001" Association="Self.FKPromotionCinema001">
-      <End Role="Cinema" EntitySet="Cinemas" />
-      <End Role="Promotion" EntitySet="Promotions" />
-    </AssociationSet>
     <AssociationSet Name="FKRoomCinema001" Association="Self.FKRoomCinema001">
       <End Role="Cinema" EntitySet="Cinemas" />
       <End Role="Room" EntitySet="Rooms" />
@@ -497,10 +447,6 @@
     <AssociationSet Name="FKMovieScheduleFilm001" Association="Self.FKMovieScheduleFilm001">
       <End Role="Film" EntitySet="Films" />
       <End Role="MovieSchedule" EntitySet="MovieSchedules" />
-    </AssociationSet>
-    <AssociationSet Name="FKNewsFilm001" Association="Self.FKNewsFilm001">
-      <End Role="Film" EntitySet="Films" />
-      <End Role="News" EntitySet="News" />
     </AssociationSet>
     <AssociationSet Name="FKPartnerAccountGroupCinema001" Association="Self.FKPartnerAccountGroupCinema001">
       <End Role="GroupCinema" EntitySet="GroupCinemas" />

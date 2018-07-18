@@ -156,6 +156,7 @@
     <Property Name="timeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="startTime" Type="nvarchar" MaxLength="10" />
     <Property Name="endTime" Type="nvarchar" MaxLength="10" />
+    <Property Name="startTimeDouble" Type="float" />
   </EntityType>
   <EntityType Name="Ticket">
     <Key>

@@ -169,6 +169,7 @@
           <ScalarProperty Name="timeId" ColumnName="timeId" />
           <ScalarProperty Name="startTime" ColumnName="startTime" />
           <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="startTimeDouble" ColumnName="startTimeDouble" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

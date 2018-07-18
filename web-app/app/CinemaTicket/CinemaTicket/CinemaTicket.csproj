@@ -418,8 +418,8 @@
     <Content Include="Views\Home\Error404.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\VietCine - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\VietCine - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\CinemaBookingTicket - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\CinemaBookingTicket - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

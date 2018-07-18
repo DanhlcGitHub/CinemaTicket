@@ -421,6 +421,10 @@
       <LastGenOutput>CinemaModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\CinemaManagementApp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\CinemaManagementApp - Web Deploy.pubxml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

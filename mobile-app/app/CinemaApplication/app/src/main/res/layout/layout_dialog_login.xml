@@ -45,14 +45,53 @@
         android:layout_below="@+id/tv_dialog_password"
         android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/btn_dialog_login"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:id="@+id/liner_order_ticket_two_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
         android:layout_below="@+id/edt_dialog_password"
-        android:text="Login"
-        />
+        android:weightSum="10">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5">
+
+            <Button
+                android:id="@+id/btn_dialog_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:text="Login"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5">
+
+            <Button
+                android:id="@+id/btn_dialog_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+
+                android:text="Register"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
 
 
 </RelativeLayout>

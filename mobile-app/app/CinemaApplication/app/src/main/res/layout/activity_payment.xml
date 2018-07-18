@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:theme="@style/Theme.AppCompat"
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
@@ -23,21 +24,31 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/icon_cancel_order"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:src="@drawable/icon_cancel" />
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:orientation="horizontal"
+                android:weightSum="10">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/icon_cancel_order"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/icon_cancel" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7">
 
                     <TextView
                         android:id="@+id/tv_order_ticket_short_key"
@@ -63,6 +74,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_toEndOf="@+id/tv_order_ticket_space"
+                        android:ellipsize="end"
+                        android:lines="1"
                         android:textSize="16dp" />
 
                     <TextView
@@ -70,23 +83,39 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_order_ticket_cinema_name"
-                        android:text="Hôm nay - 09:20 - Room 1"
+                        android:ellipsize="end"
+                        android:lines="1"
                         android:textSize="12sp" />
 
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+
+                    <TextView
+                        android:id="@+id/tv_time_count_down_payment_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+
+                        android:text="10:10" />
                 </RelativeLayout>
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.CardView
-        android:layout_below="@+id/appbar_activity_payment"
         android:id="@+id/card_info_payment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/appbar_activity_payment"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
         card_view:cardCornerRadius="5dp"
         card_view:cardUseCompatPadding="true">
 
@@ -234,7 +263,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="3dp"
                 android:gravity="center_vertical"
-                android:text="Payyo"
+                android:text="Paypal"
                 android:textSize="10sp" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>

@@ -42,6 +42,5 @@ namespace CinemaBookingCore.Controllers
         {
             return Ok(context.Film.Where(f => f.FilmId == filmId).FirstOrDefault());
         }
-
     }
 }

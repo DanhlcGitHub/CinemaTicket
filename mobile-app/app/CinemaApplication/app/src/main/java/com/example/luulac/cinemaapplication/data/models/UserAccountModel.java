@@ -7,6 +7,7 @@ public class UserAccountModel implements Serializable{
     private String userPassword;
     private String phone;
     private String email;
+    private boolean isExited;
 
     public UserAccountModel() {
     }
@@ -41,5 +42,13 @@ public class UserAccountModel implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isExited() {
+        return isExited;
+    }
+
+    public void setExited(boolean exited) {
+        isExited = exited;
     }
 }

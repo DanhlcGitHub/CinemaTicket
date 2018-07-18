@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CinemaBookingCore.Data.Entities;
 using CinemaBookingCore.Data;
 using CinemaBookingCore.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinemaBookingCore.Controllers
 {
@@ -25,8 +26,39 @@ namespace CinemaBookingCore.Controllers
         public IActionResult Login(string username, string password)
         {
             UserAccount user = context.UserAccount.Where(u => u.UserId == username && u.UserPassword == password).FirstOrDefault();
+            if (user == null)
+            {
+                user = new UserAccount();
+            }
 
             return Ok(user);
+        }
+
+        [HttpGet("register")]
+        public IActionResult Register(string userId, string password, string email, string phone)
+        {
+            UserAccount user = context.UserAccount.Where(u => u.UserId == userId).FirstOrDefault();
+
+            AccountModel accountModel = new AccountModel();
+            if (user == null)
+            {
+                user = new UserAccount
+                {
+                    UserId = userId,
+                    UserPassword = password,
+                    Email = email,
+                    Phone = phone
+                };
+                context.Add(user);
+                context.SaveChanges();
+                accountModel.IsExited = false;
+            }
+            else
+            {
+                accountModel.IsExited = true;
+            }
+
+            return Ok(accountModel);
         }
 
         [HttpGet("getAllOrderByAccountId")]
@@ -34,8 +66,20 @@ namespace CinemaBookingCore.Controllers
         {
             try
             {
-                List<Customer> customers = context.Customer.Where(c => c.UserId == accountId).ToList();
-                List<BookingTicket> bookingTickets = null;
+                //List<Ticket> listTicket = context.Ticket.Where(t => t.BookingTicket.Customer.UserId == accountId)
+                //                                         .Include(t => t.BookingTicket).ThenInclude(bt => bt.Customer)
+                //                                         .Include(t => t.Seat)
+                //                                         .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Room).ThenInclude(r => r.DigitalType)
+                //                                         .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Room).ThenInclude(r => r.Cinema).ThenInclude(c => c.GroupCinema)
+                //                                         .Include(t => t.MovieSchedule).ThenInclude(ms => ms.ShowTime)
+                //                                         .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Film)
+                //                                         .ToList();
+
+                List<BookingTicket> bookingTickets = context.BookingTicket.Where(b => b.Customer.UserId == accountId)
+                    .Include(b => b.Customer)
+                    .Include(b => b.Tickets)
+                    .ToList();
+
                 List<AccountPurchasedModel> accountPurchasedModels = new List<AccountPurchasedModel>();
                 Ticket ticket = null;
                 MovieSchedule movieSchedule = null;
@@ -45,78 +89,79 @@ namespace CinemaBookingCore.Controllers
                 Cinema cinema = null;
                 GroupCinema groupCinema = null;
 
-                foreach (var customer in customers)
+
+                foreach (var bookingTicket in bookingTickets)
                 {
-                    bookingTickets = context.BookingTicket.Where(b => b.CustomerId == customer.CustomerId).ToList();
+                    List<Ticket> tickets = context.Ticket.Where(t => t.BookingId == bookingTicket.BookingId)
+                        .Include(t => t.Seat)
+                        .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Room).ThenInclude(r => r.DigitalType)
+                        .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Room).ThenInclude(r => r.Cinema).ThenInclude(c => c.GroupCinema)
+                        .Include(t => t.MovieSchedule).ThenInclude(ms => ms.ShowTime)
+                        .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Film)
+                        .ToList();
+                    Double totalPrice = 0;
 
-                    foreach (var bookingTicket in bookingTickets)
+                    String stringSeats = "";
+                    foreach (var item in tickets)
                     {
-                        List<Ticket> tickets = context.Ticket.Where(t => t.BookingId == bookingTicket.BookingId).ToList();
-                        Double totalPrice = 0;
+                        Seat seat = item.Seat;
+                        Room roomForSeat = item.MovieSchedule.Room;
 
+                        Char character = 'A';
+                        List<Char> resultAbc = new List<Char>();
+                        int ascii = (int)character;
 
-                        String stringSeats = "";
-                        foreach (var item in tickets)
+                        for (int i = 0; i < roomForSeat.MatrixSizeX; i++)
                         {
-                            Seat seat = context.Seat.Where(s => s.SeatId == item.SeatId).FirstOrDefault();
-                            Room roomForSeat = context.Room.Where(r => r.RoomId == seat.RoomId).FirstOrDefault();
-
-                            Char character = 'A';
-                            List<Char> resultAbc = new List<Char>();
-                            int ascii = (int)character;
-
-                            for (int i = 0; i < roomForSeat.MatrixSizeX; i++)
-                            {
-                                Char tmp = (char)(ascii + i);
-                                resultAbc.Add(tmp);
-                            }
-
-                            String position = resultAbc[seat.Px].ToString() + (seat.Py + 1);
-
-                            stringSeats += position + " ";
-                            totalPrice += item.Price;
+                            Char tmp = (char)(ascii + i);
+                            resultAbc.Add(tmp);
                         }
 
-                        ticket = tickets.FirstOrDefault();
-                        if (ticket != null)
+                        String position = resultAbc[seat.Px].ToString() + (seat.Py + 1);
+
+                        stringSeats += position + " ";
+                        totalPrice += item.Price;
+                    }
+
+                    ticket = tickets.FirstOrDefault();
+                    if (ticket != null)
+                    {
+                        movieSchedule = ticket.MovieSchedule;
+                        if (movieSchedule != null)
                         {
-                            movieSchedule = context.MovieSchedule.Where(m => m.ScheduleId == ticket.ScheduleId).FirstOrDefault();
-                            if (movieSchedule != null)
+                            film = ticket.MovieSchedule.Film;
+                            showTime = ticket.MovieSchedule.ShowTime;
+
+                            room = ticket.MovieSchedule.Room;
+                            DigitalType digitalType = room.DigitalType;
+
+                            if (room != null)
                             {
-                                film = context.Film.Where(f => f.FilmId == movieSchedule.FilmId).FirstOrDefault();
-                                showTime = context.ShowTime.Where(s => s.TimeId == movieSchedule.TimeId).FirstOrDefault();
-
-                                room = context.Room.Where(r => r.RoomId == movieSchedule.RoomId).FirstOrDefault();
-                                DigitalType digitalType = context.DigitalType.Where(d => d.DigTypeId == room.DigTypeId).FirstOrDefault();
-
-                                if (room != null)
+                                cinema = room.Cinema;
+                                if (cinema != null)
                                 {
-                                    cinema = context.Cinema.Where(c => c.CinemaId == room.CinemaId).FirstOrDefault();
-                                    if (cinema != null)
-                                    {
-                                        groupCinema = context.GroupCinema.Where(g => g.GroupId == cinema.GroupId).FirstOrDefault();
-                                    }
-                                    AccountPurchasedModel accountPurchasedModel = new AccountPurchasedModel
-                                    {
-                                        BookingTicketId = bookingTicket.BookingId,
-                                        CinemaName = cinema.CinemaName,
-                                        GroupCinemaName = groupCinema.Name,
-                                        Date = movieSchedule.ScheduleDate.ToString("dd/MM/yyyy"),
-                                        FilmImage = film.AdditionPicture,
-                                        FilmName = film.Name,
-                                        RoomName = room.Name,
-                                        ShowTime = showTime.StartTime,
-                                        ScheduleId = movieSchedule.ScheduleId,
-                                        RoomId = room.RoomId,
-                                        DigType = digitalType.Name,
-                                        Restricted = film.Restricted.ToString(),
-                                        TotalPrice = totalPrice,
-                                        StringSeats = stringSeats,
-                                        Email = customer.Email,
-                                        Phone = customer.Phone
-                                    };
-                                    accountPurchasedModels.Add(accountPurchasedModel);
+                                    groupCinema = cinema.GroupCinema;
                                 }
+                                AccountPurchasedModel accountPurchasedModel = new AccountPurchasedModel
+                                {
+                                    BookingTicketId = bookingTicket.BookingId,
+                                    CinemaName = cinema.CinemaName,
+                                    GroupCinemaName = groupCinema.Name,
+                                    Date = movieSchedule.ScheduleDate.ToString("dd/MM/yyyy"),
+                                    FilmImage = film.AdditionPicture,
+                                    FilmName = film.Name,
+                                    RoomName = room.Name,
+                                    ShowTime = showTime.StartTime,
+                                    ScheduleId = movieSchedule.ScheduleId,
+                                    RoomId = room.RoomId,
+                                    DigType = digitalType.Name,
+                                    Restricted = film.Restricted.ToString(),
+                                    TotalPrice = totalPrice,
+                                    StringSeats = stringSeats,
+                                    Email = bookingTicket.Customer.Email,
+                                    Phone = bookingTicket.Customer.Phone
+                                };
+                                accountPurchasedModels.Add(accountPurchasedModel);
                             }
                         }
                     }
@@ -127,8 +172,6 @@ namespace CinemaBookingCore.Controllers
             {
                 return BadRequest();
             }
-
-
         }
     }
 }

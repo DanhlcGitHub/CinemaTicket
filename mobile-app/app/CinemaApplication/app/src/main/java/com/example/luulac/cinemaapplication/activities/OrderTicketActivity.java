@@ -116,81 +116,76 @@ public class OrderTicketActivity extends AppCompatActivity {
 
                 RelativeLayout rlTypeOfSeatOne;
 
-                for (int i = 0; i < NUMBER_LAYOUT_CHOICE_ITEM_ORDER; i++) {
-                    if (i == 0) {
-                        rlTypeOfSeatOne = findViewById(R.id.layout_choice_item_order_one);
-                    } else {
-                        rlTypeOfSeatOne = findViewById(R.id.layout_choice_item_order_two);
+
+                rlTypeOfSeatOne = findViewById(R.id.layout_choice_item_order_one);
+
+                final TextView quantityTicket = (TextView) rlTypeOfSeatOne.findViewById(R.id.edit_text_choice_item_order_number);
+                final Double tmpPrice = typeOfSeats.get(0).getPrice();
+
+                TextView typeTicket = (TextView) rlTypeOfSeatOne.findViewById(R.id.tv_choice_item_order_type_ticket);
+                TextView price = (TextView) rlTypeOfSeatOne.findViewById(R.id.tv_choice_item_order_price_ticket);
+
+                typeTicket.setText(typeOfSeats.get(0).getTypeName());
+                price.setText(tmpPrice.toString());
+
+                // btn remove one number ticket
+                Button btnMius = (Button) rlTypeOfSeatOne.findViewById(R.id.btn_choice_item_order_remove);
+                btnMius.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Integer quantityString = Integer.valueOf(quantityTicket.getText().toString()) - 1;
+                        if (quantityString >= NUMBER_MIN_TICKET) {
+
+                            //update quantityTicket
+                            quantityTicket.setText(quantityString.toString());
+
+                            //reduce numberTicketOrder one unit
+                            numberTicketOrder--;
+
+                            //reduce totalPrice one unit per price of ticket
+                            totalPrice -= tmpPrice;
+
+                            //update tvTotalPrice to show total price
+                            tvTotalPrice.setText(totalPrice.toString());
+                        }
+
+                        if (numberTicketOrder != 0) {
+                            rv.setBackgroundColor(Color.GREEN);
+                        } else {
+                            rv.setBackgroundColor(Color.GRAY);
+                        }
                     }
+                });
 
-                    final TextView quantityTicket = (TextView) rlTypeOfSeatOne.findViewById(R.id.edit_text_choice_item_order_number);
-                    final Double tmpPrice = typeOfSeats.get(i).getPrice();
+                // btn add one number ticket
+                Button btnAdd = (Button) rlTypeOfSeatOne.findViewById(R.id.btn_choice_item_order_add);
+                btnAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Integer quantityString = Integer.valueOf(quantityTicket.getText().toString()) + 1;
 
-                    TextView typeTicket = (TextView) rlTypeOfSeatOne.findViewById(R.id.tv_choice_item_order_type_ticket);
-                    TextView price = (TextView) rlTypeOfSeatOne.findViewById(R.id.tv_choice_item_order_price_ticket);
+                        if (quantityString <= NUMBER_MAX_TICKET) {
 
-                    typeTicket.setText(typeOfSeats.get(i).getTypeName());
-                    price.setText(tmpPrice.toString());
+                            //update quantityTicket
+                            quantityTicket.setText(quantityString.toString());
 
-                    // btn remove one number ticket
-                    Button btnMius = (Button) rlTypeOfSeatOne.findViewById(R.id.btn_choice_item_order_remove);
-                    btnMius.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Integer quantityString = Integer.valueOf(quantityTicket.getText().toString()) - 1;
-                            if (quantityString >= NUMBER_MIN_TICKET) {
+                            //add numberTicketOrder one unit
+                            numberTicketOrder++;
 
-                                //update quantityTicket
-                                quantityTicket.setText(quantityString.toString());
+                            //add totalPrice one unit per price of ticket
+                            totalPrice += tmpPrice;
 
-                                //reduce numberTicketOrder one unit
-                                numberTicketOrder--;
-
-                                //reduce totalPrice one unit per price of ticket
-                                totalPrice -= tmpPrice;
-
-                                //update tvTotalPrice to show total price
-                                tvTotalPrice.setText(totalPrice.toString());
-                            }
-
-                            if(numberTicketOrder != 0){
-                                rv.setBackgroundColor(Color.GREEN);
-                            }else{
-                                rv.setBackgroundColor(Color.GRAY);
-                            }
+                            //update tvTotalPrice to show total price
+                            tvTotalPrice.setText(totalPrice.toString());
                         }
-                    });
 
-                    // btn add one number ticket
-                    Button btnAdd = (Button) rlTypeOfSeatOne.findViewById(R.id.btn_choice_item_order_add);
-                    btnAdd.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Integer quantityString = Integer.valueOf(quantityTicket.getText().toString()) + 1;
-
-                            if (quantityString <= NUMBER_MAX_TICKET) {
-
-                                //update quantityTicket
-                                quantityTicket.setText(quantityString.toString());
-
-                                //add numberTicketOrder one unit
-                                numberTicketOrder++;
-
-                                //add totalPrice one unit per price of ticket
-                                totalPrice += tmpPrice;
-
-                                //update tvTotalPrice to show total price
-                                tvTotalPrice.setText(totalPrice.toString());
-                            }
-
-                            if(numberTicketOrder != 0){
-                                rv.setBackgroundColor(Color.GREEN);
-                            }else{
-                                rv.setBackgroundColor(Color.GRAY);
-                            }
+                        if (numberTicketOrder != 0) {
+                            rv.setBackgroundColor(Color.GREEN);
+                        } else {
+                            rv.setBackgroundColor(Color.GRAY);
                         }
-                    });
-                }
+                    }
+                });
 
                 //click to continus order ticket
                 rv = (RelativeLayout) findViewById(R.id.rv_order_ticket_continues);
@@ -207,7 +202,7 @@ public class OrderTicketActivity extends AppCompatActivity {
                             intentChoiceSeat.putExtra("filmTranfer", filmTranfer);
 
                             startActivityForResult(intentChoiceSeat, REQUEST_CODE_ORDER);
-                        }else{
+                        } else {
                             Toast.makeText(OrderTicketActivity.this, "Please pick more than one seat to continues!", Toast.LENGTH_SHORT).show();
                         }
                     }

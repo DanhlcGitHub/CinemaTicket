@@ -10,6 +10,7 @@ namespace CinemaBookingCore.Data.Models
     public class SeatModel
     {
         public int SeatId { get; set; }
+        public int TicketId { get; set; }
         public int TypeSeatId { get; set; }
         public int RoomId { get; set; }
         public int Px { get; set; }

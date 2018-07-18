@@ -16,6 +16,12 @@ public class CustomerModel implements Serializable{
         this.email = email;
     }
 
+    public CustomerModel(String email, String phone, String userId) {
+        this.phone = phone;
+        this.email = email;
+        this.userId = userId;
+    }
+
     public int getCustomerId() {
         return customerId;
     }

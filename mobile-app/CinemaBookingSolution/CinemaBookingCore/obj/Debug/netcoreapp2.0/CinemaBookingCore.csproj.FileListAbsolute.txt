@@ -14,9 +14,9 @@ E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\bin\Debug\netcoreapp2.
 E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\bin\Debug\netcoreapp2.0\CinemaBookingCore.runtimeconfig.dev.json
 E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\bin\Debug\netcoreapp2.0\CinemaBookingCore.dll
 E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\bin\Debug\netcoreapp2.0\CinemaBookingCore.pdb
+E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\obj\Debug\netcoreapp2.0\CinemaBookingCore.csprojAssemblyReference.cache
 E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\obj\Debug\netcoreapp2.0\CinemaBookingCore.csproj.CoreCompileInputs.cache
 E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\obj\Debug\netcoreapp2.0\CinemaBookingCore.AssemblyInfoInputs.cache
 E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\obj\Debug\netcoreapp2.0\CinemaBookingCore.AssemblyInfo.cs
 E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\obj\Debug\netcoreapp2.0\CinemaBookingCore.dll
 E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\obj\Debug\netcoreapp2.0\CinemaBookingCore.pdb
-E:\Luu Lac\Backup\CinemaBookingSolution\CinemaBookingCore\obj\Debug\netcoreapp2.0\CinemaBookingCore.csprojAssemblyReference.cache

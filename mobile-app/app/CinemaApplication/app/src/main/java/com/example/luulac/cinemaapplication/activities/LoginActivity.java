@@ -21,7 +21,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText edtUsername, edtPassword;
-    private Button btnLogin;
+    private Button btnLogin, btnRegister;
     private int resultCode = RESULT_CANCELED;
 
     public UserAccountModel user;
@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<UserAccountModel> request, Response<UserAccountModel> response) {
                         user = response.body();
 
-                        if (user.getUserId() != "") {
+                        if (user.getUserId() != null) {
 
                             Intent resultIntent = new Intent();
 
@@ -67,6 +67,16 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+
+        btnRegister = findViewById(R.id.btn_dialog_register);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegisterAccountActivity.class);
+
+                startActivity(intent);
             }
         });
     }

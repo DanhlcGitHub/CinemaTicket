@@ -173,15 +173,7 @@
             android:layout_below="@+id/tv_order_ticket_please_choice"
             android:background="#e5e0e0" />
 
-        <include
-            android:id="@+id/layout_choice_item_order_two"
-            layout="@layout/layout_choice_item_order" />
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dip"
-            android:layout_below="@+id/tv_order_ticket_please_choice"
-            android:background="#e5e0e0" />
     </LinearLayout>
 
     <View

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class SeatModel implements Serializable {
     private int seatId;
+    private int ticketId;
     private int typeSeatId;
     private int roomId;
     private int px;
@@ -26,6 +27,14 @@ public class SeatModel implements Serializable {
 
     public void setSeatId(int seatId) {
         this.seatId = seatId;
+    }
+
+    public int getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(int ticketId) {
+        this.ticketId = ticketId;
     }
 
     public int getTypeSeatId() {

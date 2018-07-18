@@ -34,6 +34,9 @@
         <activity android:name=".activities.ResellTicketActivity"/>
         <activity android:name=".activities.FilmInfomationActivity"/>
         <activity android:name=".activities.CinemaActivity"/>
+        <activity android:name=".activities.RegisterAccountActivity"/>
+
+        <service android:name=".services.ChangeStatusService" android:stopWithTask="false" />
     </application>
 
 </manifest>

@@ -10,8 +10,8 @@ import retrofit2.http.Query;
 
 public interface FIlmScheduleService {
     @GET("filmschedule")
-    Call<List<FilmScheduleModel>> getScheduleByDayAndFilmId(@Query("filmId") int filmId);
+    Call<List<FilmScheduleModel>> getScheduleByDayAndFilmId(@Query("filmId") int filmId, @Query("indexDate") int indexDate);
 
     @GET("filmschedule/GetSchdeduleByCinemaId")
-    Call<List<FilmScheduleModel>> getSchdeduleByCinemaId(@Query("cinemaId") int cinemaId);
+    Call<List<FilmScheduleModel>> getSchdeduleByCinemaId(@Query("cinemaId") int cinemaId, @Query("indexDate") int indexDate);
 }

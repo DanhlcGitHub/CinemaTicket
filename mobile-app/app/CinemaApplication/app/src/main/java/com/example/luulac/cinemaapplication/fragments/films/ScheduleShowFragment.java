@@ -78,7 +78,7 @@ public class ScheduleShowFragment extends Fragment {
 
         //Call Api to get list schedule by filmId
         FIlmScheduleService service = ServiceBuilder.buildService(FIlmScheduleService.class);
-        Call<List<FilmScheduleModel>> request = service.getScheduleByDayAndFilmId(filmdId);
+        Call<List<FilmScheduleModel>> request = service.getScheduleByDayAndFilmId(filmdId, 0);
 
         //receiving and process data from the server
         request.enqueue(new Callback<List<FilmScheduleModel>>() {
@@ -108,31 +108,48 @@ public class ScheduleShowFragment extends Fragment {
 
                                 date = models.get(position).date.toString();
 
-                                //get schedule of first day in data re
-                                List<DateScheduleModel> dateScheduleModels = models.get(position).getDateScheduleModels();
+                                FIlmScheduleService service = ServiceBuilder.buildService(FIlmScheduleService.class);
+                                Call<List<FilmScheduleModel>> request = service.getScheduleByDayAndFilmId(filmdId, position);
 
-                                expandableLayout.removeAllViews();
-                                expandableLayout.getSections().clear();
+                                final int tmpPosition = position;
+                                //receiving and process data from the server
+                                request.enqueue(new Callback<List<FilmScheduleModel>>() {
 
-                                if(dateScheduleModels.size()!=0){
+                                    @Override
+                                    public void onResponse(Call<List<FilmScheduleModel>> request, Response<List<FilmScheduleModel>> response) {
 
-                                    tvDoNotHaveSchedule.setText("");
+                                        final List<FilmScheduleModel> newModels = response.body();
+                                        List<DateScheduleModel> dateScheduleModels = newModels.get(tmpPosition).getDateScheduleModels();
 
-                                    showTimes = new ArrayList<>();
-                                    for (int i = 0; i < dateScheduleModels.size(); i++) {
-                                        showTimes.add(dateScheduleModels.get(i).getShowTimeListModel());
+                                        expandableLayout.removeAllViews();
+                                        expandableLayout.getSections().clear();
+
+                                        if (dateScheduleModels.size() != 0) {
+
+                                            tvDoNotHaveSchedule.setText("");
+
+                                            showTimes = new ArrayList<>();
+                                            for (int i = 0; i < dateScheduleModels.size(); i++) {
+                                                showTimes.add(dateScheduleModels.get(i).getShowTimeListModel());
+                                            }
+
+                                            //set list showtime for expanable layout
+                                            sections = setSection(showTimes);
+
+                                            for (Section<ShowTimeListModel, ShowTimeChildModel> section : sections) {
+                                                expandableLayout.addSection(section);
+                                            }
+                                        } else {
+                                            tvDoNotHaveSchedule.setText("Chưa có lịch chiếu");
+                                        }
                                     }
 
-                                    //set list showtime for expanable layout
-                                    sections = setSection(showTimes);
+                                    @Override
+                                    public void onFailure(Call<List<FilmScheduleModel>> request, Throwable t) {
 
-                                    for (Section<ShowTimeListModel, ShowTimeChildModel> section : sections) {
-                                        expandableLayout.addSection(section);
+                                        Toast.makeText(context, "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();
                                     }
-                                }else{
-
-                                    tvDoNotHaveSchedule.setText("Chưa có lịch chiếu");
-                                }
+                                });
 
                             }
 
@@ -195,7 +212,7 @@ public class ScheduleShowFragment extends Fragment {
 
                 //get schedule of first day in data re
                 List<DateScheduleModel> dateScheduleModels = models.get(FIRST_DATE_INDEX).getDateScheduleModels();
-                if(dateScheduleModels.size()!=0){
+                if (dateScheduleModels.size() != 0) {
 
                     tvDoNotHaveSchedule.setText("");
 
@@ -209,7 +226,7 @@ public class ScheduleShowFragment extends Fragment {
                     for (Section<ShowTimeListModel, ShowTimeChildModel> section : sections) {
                         expandableLayout.addSection(section);
                     }
-                }else{
+                } else {
                     tvDoNotHaveSchedule.setText("Chưa có lịch chiếu");
                 }
 

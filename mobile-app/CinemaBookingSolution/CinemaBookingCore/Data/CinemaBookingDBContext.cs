@@ -37,7 +37,7 @@ namespace CinemaBookingCore.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=DESKTOP-D8NCIMI\SQLEXPRESS;Database=CinemaBookingDBTest;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(@"data source=CinemaBookingDB.database.windows.net;initial catalog=CinemaBookingDB;user id=CinemaBookingDB;password=Capstone@2018;MultipleActiveResultSets=True;");
             }
         }
 

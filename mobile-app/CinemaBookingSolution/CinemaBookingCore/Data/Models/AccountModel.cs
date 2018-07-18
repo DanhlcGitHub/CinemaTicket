@@ -12,5 +12,8 @@ namespace CinemaBookingCore.Data.Models
         public string UserPassword { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public Boolean IsExited { get; set; }
+
+
     }
 }

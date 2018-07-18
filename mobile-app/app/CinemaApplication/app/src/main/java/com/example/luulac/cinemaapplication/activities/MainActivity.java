@@ -20,6 +20,7 @@ import com.example.luulac.cinemaapplication.fragments.dashboards.DashboardFragme
 import com.example.luulac.cinemaapplication.fragments.news.NewsFragment;
 import com.example.luulac.cinemaapplication.fragments.theaters.TheatersFragment;
 import com.example.luulac.cinemaapplication.fragments.users.UsersFragment;
+import com.example.luulac.cinemaapplication.navigations.BottomNavigationViewHelper;
 
 import java.util.List;
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationViewHelper.removeShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         adapter = new TabLayoutMainAdapter(getSupportFragmentManager());

@@ -65,7 +65,6 @@ public class LoginDialog {
                     @Override
                     public void onFailure(Call<UserAccountModel> request, Throwable t) {
                         Toast.makeText(context, "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();
-                        ;
                     }
                 });
 

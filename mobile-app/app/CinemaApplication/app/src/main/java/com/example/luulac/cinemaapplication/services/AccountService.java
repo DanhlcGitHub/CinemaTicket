@@ -14,6 +14,9 @@ public interface AccountService {
     @GET("account/login")
     Call<UserAccountModel> login(@Query("username") String username, @Query("password") String password);
 
+    @GET("account/register")
+    Call<UserAccountModel> register(@Query("userId") String userId, @Query("password") String password, @Query("email") String email, @Query("phone") String phone);
+
     @GET("account/getAllOrderByAccountId")
     Call<List<AccountPurchasedModel>> getAllOrderByAccountId(@Query("accountId") String accountId);
 }

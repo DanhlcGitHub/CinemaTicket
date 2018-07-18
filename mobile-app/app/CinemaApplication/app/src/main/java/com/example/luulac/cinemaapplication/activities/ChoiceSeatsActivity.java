@@ -179,7 +179,8 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                                                         seats.get(position).setSelected(true);
 
                                                         //new ticketModel
-                                                        TicketModel ticket = new TicketModel(filmTranfer.getScheduleId(), seats.get(position).getSeatId(), seats.get(position).getPrice());
+                                                        TicketModel ticket = new TicketModel(seats.get(position).getTicketId() ,filmTranfer.getScheduleId(),
+                                                                                                seats.get(position).getSeatId(), seats.get(position).getPrice());
 
                                                         //add ticket to list tickets
                                                         tickets.add(ticket);

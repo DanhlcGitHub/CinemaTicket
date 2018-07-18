@@ -20,7 +20,8 @@ public class TicketModel implements Serializable{
         this.ticketId = ticketId;
     }
 
-    public TicketModel(int scheduleId, int seatId, double price) {
+    public TicketModel(int ticketId,int scheduleId, int seatId, double price) {
+        this.ticketId = ticketId;
         this.scheduleId = scheduleId;
         this.seatId = seatId;
         this.price = price;

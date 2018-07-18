@@ -23,11 +23,7 @@ namespace CinemaBookingCore.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var films = context.Film.Where(f => f.FilmStatus == 1).ToList().Take(6);
-            var home = new HomeModel();
-            home.filmTopSix = films;
-
-            return Ok(home);
+            return Ok(new HomeModel { filmTopSix = context.Film.Where(f => f.FilmStatus == 1).ToList().Take(6) });
         }
 
     }

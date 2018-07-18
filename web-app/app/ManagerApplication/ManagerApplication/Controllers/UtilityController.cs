@@ -35,7 +35,7 @@ namespace ManagerApplication.Controllers
             {
                 List<PartnerAccount> partnerList = new PartnerAccountService().FindBy(u => u.partnerId == username
                     && u.partnerPassword == encryptedPassword);
-                if (partnerList.Count != 0)
+                if (partnerList != null && partnerList.Count != 0)
                 {
                     PartnerAccount p = partnerList.First();
                     if (p != null)
@@ -50,7 +50,7 @@ namespace ManagerApplication.Controllers
             {
                 List<CinemaManager> managerList = new CinemaManagerService().FindBy(u => u.managerId == username
                     && u.managerPassword == encryptedPassword);
-                if (managerList.Count != 0)
+                if (managerList!=null && managerList.Count != 0)
                 {
                     CinemaManager c = managerList.First();
                     if (c != null)

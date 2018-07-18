@@ -12,6 +12,8 @@ var scheduleController = function ($scope, $http) {
     $scope.today;
     $scope.cinemaId = $("#cinemaId").val();
     $("#customScheduleArea").hide();
+    $("#loader").hide();
+    //$("#skeduler-container").hide();
 
     var StatusConstant = { available: "available", choosing: "choosing", added: "added" };
 
@@ -20,11 +22,14 @@ var scheduleController = function ($scope, $http) {
         var valueSelected = this.value;
         $scope.currentSelectedFilmId = valueSelected;
         console.log(valueSelected);
+        
     });
 
     $('#customScheduleDateSelector').on('change', function (e) {
         var selectDate = this.value;
         $scope.currentSelectedDate = selectDate;
+        $("#loader").show();
+        $("#skeduler-container").hide();
         $scope.GetSchedule();
         $("#customScheduleArea").show();
     });
@@ -59,6 +64,8 @@ var scheduleController = function ($scope, $http) {
            console.log(response);
            $scope.currentScheduleData = response.data;
            $scope.generateSchedule($scope.currentScheduleData);
+           $("#loader").hide();
+           $("#skeduler-container").show();
        });
     };
 
@@ -160,10 +167,13 @@ var scheduleController = function ($scope, $http) {
         return null;
     };
 
+    $scope.isSaveDone = true;
     $scope.saveSchedule = function () {
         if (new Date($("#customScheduleDateSelector").val()) < new Date($scope.today)) {
             console.log("can't add!");
-        } else {
+        }
+
+        if ($scope.isSaveDone == true) {
             if ($scope.currentSelectedFilmId != null) {
                 var allTimeList = [];
                 var dataArray = [];
@@ -182,13 +192,16 @@ var scheduleController = function ($scope, $http) {
                     }
                     dataArray.push(dataStr);
                 }
-
+                $scope.isSaveDone = false;
+                $("#loader").show();
+                $("#skeduler-container").hide();
                 $scope.saveToDB(dataArray);
             } else {
                 alert("select afilm to add!");
             }
         }
-    };
+    }
+
 
     $scope.saveToDB = function (dataArray) {
         $.ajax({
@@ -198,6 +211,9 @@ var scheduleController = function ($scope, $http) {
             success: function (response) {
                 console.log(response);
                 $scope.GetSchedule();
+                $scope.isSaveDone = true;
+                $("#loader").hide();
+                $("#skeduler-container").show();
             }
         });
     }

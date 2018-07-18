@@ -222,15 +222,17 @@
                                 <option ng-repeat="film in filmData" value="{{film.id}}">{{film.name}}</option>
                             </select>
                         </div>
-
+                        <div id="loader" class="loader"></div>
 
                     </div>
                     <div id="customScheduleArea" class="card-body">
                         <div class="row">
                             <div id="skeduler-container"></div>
+
+                            <button ng-click="saveSchedule()" type="button" class="btn btn-block btn-success" style="background: #576D7C ;margin-top:20px ">Save</button>
                         </div>
 
-                        <div class="row"><button ng-click="saveSchedule()" type="button" class="btn btn-block btn-success" style="background: #576D7C ;margin-top:20px ">Save</button></div>
+                        <div class="row"></div>
                     </div>
                     <!-- /.card-body -->
                 </div>

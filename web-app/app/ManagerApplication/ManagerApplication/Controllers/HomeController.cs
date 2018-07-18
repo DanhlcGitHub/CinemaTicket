@@ -36,7 +36,5 @@ namespace ManagerApplication.Controllers
             }
             return View();
         }
-
-       
     }
 }

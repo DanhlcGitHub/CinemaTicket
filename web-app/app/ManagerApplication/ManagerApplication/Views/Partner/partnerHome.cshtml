@@ -458,6 +458,10 @@
                                         <div class="col-sm-12">
                                             <input id="cinemaChooseFile" class="btn btn-default" type="file">
                                         </div>
+                                        <div class="col-sm-12">
+                                            <div class="loaderSmall" id="loaderPicture"></div>
+                                            <button id="uploadImageBtn" type="button" class="btn btn-info" ng-click="uploadPicture()">Upload Image</button>
+                                        </div>
                                     </div>
 
                                     <div class="form-group" ng-if="isAddnewCinema == false">
@@ -566,22 +570,34 @@
                                         </div>
                                     </div>
                                 </div>
-                                <nav class="navbar navbar-light navbar-expand-md border-bottom" style="height:90px; background-color:#ffffff; box-shadow: 5px 10px 8px  #888888;" id="topbar">
+                                <nav id="viewRoomHeader" class="navbar navbar-light navbar-expand-md border-bottom" style="height:90px; background-color:#ffffff; box-shadow: 5px 10px 8px  #888888;" id="topbar">
 
                                     <a href="#"><img src="~/Content/img/repository/logo.png" style="width:40px; height:40px;padding:0" /></a>
-                                    <div class="navbar-collapse collapse" id="collapsingNavbar">
+                                    <div id="viewRoomHeader" class="navbar-collapse collapse">
+                                        <div class="row col-sm-4" style="padding-left:20px">
+                                            <label class="col-sm-12 control-label font-weight-bold" style="">{{currentCinema.cinemaName}}</label>
+                                            <span style="margin-left:14px">{{currentRoom.name}}</span>
+                                        </div>
+                                    </div>
+                                </nav>
+                                <nav id="addRoomHeader" class="navbar navbar-light navbar-expand-md border-bottom" style="height:90px; background-color:#ffffff; box-shadow: 5px 10px 8px  #888888;" >
+
+                                    <a href="#"><img src="~/Content/img/repository/logo.png" style="width:40px; height:40px;padding:0" /></a>
+                                    <form id="addRoomHeader" class="navbar-collapse collapse">
 
                                         <div class="row col-sm-4" style="padding-left:20px">
                                             <label class="col-sm-12 control-label font-weight-bold" style="">{{currentCinema.cinemaName}}</label>
-                                            <input type="text" name="inputRoomName" value="{{currentRoom.name}}" id="inputRoomName" style="margin-left:14px">
+                                            <input type="text" class="form-control col-sm-6" style="margin-right:15px" id="inputRoomName" placeholder="Enter room name" required>
                                         </div>
 
-                                        <form id="seatForm" class="row col-sm-6" style="padding-left:20px; vertical-align: middle;">
-                                            <input type="text" name="inputCapacity" value="77" id="inputCapacity" class="form-control col-sm-6" id="InputChair" style="margin-right:15px" placeholder="Nhập số ghế">
-                                            <button type="submit" class="col-sm-3 btn btn-danger btn-block">Suggest</button>
-                                        </form>
+                                        <div  class="row col-sm-6" style="padding-left:20px; vertical-align: middle;">
+                                            <input type="text" name="inputCapacity" value="77" id="inputCapacity" class="form-control col-sm-6" style="margin-right:15px" placeholder="Enter number of seat">
+                                            <input type="number" min="40" max="150" class="form-control col-sm-6" style="margin-right:15px" placeholder="Enter price VND" required>
 
-                                    </div>
+                                            <button type="submit" class="col-sm-3 btn btn-danger btn-block">Suggest</button>
+                                        </div>
+
+                                    </form>
                                 </nav>
 
                                 <div class="row" style="padding-top: 10px;max-height:83vh; overflow-y:auto;overflow-x:hidden" id="chooseSeatMain">
@@ -622,7 +638,7 @@
                                                 <!-- /.description-block -->
                                             </div>
                                         </div>
-                                        <div class="col-sm-12" style="padding-right:0px;padding-left:0px; overflow-y:auto; max-height:60vh">
+                                        <div class="col-sm-12" style="padding-right:0px;padding-left:0px; overflow-y:auto; max-height:63vh">
                                             <img src="~/Content/img/repository/screen.png" style="width:100%" />
                                             <div class="w3-container" id="seatAreaId">
                                                 <div ng-repeat="row in matrix" class="center-div">
@@ -637,7 +653,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12" id="footer" style="bottom:0; position: fixed; padding-right:15% ;padding-left:0px; margin:0; margin-bottom:8px">
+                                            <div id="roomAction" class="col-sm-12" id="footer" style="bottom:0; position: fixed; padding-right:15% ;padding-left:0px; margin:0; margin-bottom:8px">
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <button ng-click="reviewSeat()" class="btn btn-info float-right" type="button" style="width: 100px">Preview</button>

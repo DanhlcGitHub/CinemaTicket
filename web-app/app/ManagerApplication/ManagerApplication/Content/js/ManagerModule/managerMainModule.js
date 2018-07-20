@@ -6,13 +6,14 @@ var managerModule = angular.module("managerModule", []);
 var managerController = function ($scope, $http) {
     $scope.cinemaInfor;
     $scope.cinemaId = $("#cinemaId").val();
-   /* $("#empManagement").hide();
-    $("#cinemaManagement").show();*/
 
-   /* $scope.$on('roomCallRefreshEvent', function (event) {
-        $('#viewSeatModal').modal('hide');
-        $scope.$broadcast('reloadCinemaEvent');
-    });*/
+    $scope.basicAdd = function () {
+        $("#basicAdd").show();
+        $("#advantageAdd").hide();
+
+        $scope.$broadcast('basicAddScheduleEvent');
+    };
+    $scope.basicAdd();
 
     $http({
         method: "POST",
@@ -23,12 +24,7 @@ var managerController = function ($scope, $http) {
        $scope.cinemaInfor = response.data;
    });
 
-    $scope.scheduleCustomAdd = function () {
-        /*$("#empManagement").show();
-        $("#cinemaManagement").hide();*/
-        var groupId = $scope.groupId;
-        $scope.$broadcast('customScheduleEvent', groupId);
-    };
+    
     
     $scope.logout = function () {
         $http({

@@ -14,10 +14,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/css/home.css">
     <link rel="stylesheet" href="~/Content/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="~/Content/css/index.css">
     <!-- iCheck 
     <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
+
         label.error {
             display: inline-block;
             color: #8b0000;
@@ -69,7 +71,8 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-lg-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <div class="loader" id="loader"></div>
+                        <button id="btnSubmit" type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                     </div>
                     <!-- /.col -->
                 </div>

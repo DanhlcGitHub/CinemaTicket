@@ -83,7 +83,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <li ng-click="basicAdd()" class="nav-item">
                                     <a class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Basic add</p>
@@ -203,10 +203,10 @@
         <!-- Main Content -->
         <div class="content-wrapper">
             <div class="col-lg-12" id="ScheduleManagement" ng-controller="scheduleController">
-
-                <div class="card card-danger col-lg-12">
+                <!-- advantage add -->
+                <div id="advantageAdd" class="card card-danger col-lg-12">
                     <div class="card-header">
-                        <h3 class="card-title">Filter Information</h3>
+                        <h3 class="card-title">Advantage Add Schedule</h3>
                     </div>
                     <div id="customFilterForm" class="card-body">
                         <div class="form-group has-warning">
@@ -237,44 +237,87 @@
                     <!-- /.card-body -->
                 </div>
 
+                <!-- basic add -->
+                <div id="basicAdd" class="card card-danger col-lg-12">
+                    <form id="basicAddForm" class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Select Film</label>
+                                <select id="basicFilmSelector" name="basicFilmSelector" class="form-control" required>
+                                    <option disabled selected value> -- select an film -- </option>
+                                    <option ng-repeat="film in filmData" value="{{film.id}}">{{film.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Select Room</label>
+                                <select id="basicRoomSelector" name="basicRoomSelector" class="form-control" required>
+                                    <option disabled selected value> -- select an room -- </option>
+                                    <option ng-repeat="room in roomData" value="{{room.roomId}}">{{room.roomName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label>Select Showtime</label>
+                                <select id="basicTimeSelector" name="basicTimeSelector" class="form-control" required>
+                                    <option disabled selected value> -- select a time -- </option>
+                                    <option ng-repeat="time in timeData" value="{{time.timeId}}">{{time.startTime}} - {{time.endTime}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group has-warning">
+                                <label class="control-label" for="inputWarning">
+                                    <i class="fa fa-calendar"></i> Input date
+                                </label>
+                                <input id="basicDateSelector" name="customScheduleDateSelector" type="date" class="form-control" placeholder="Enter ..." required>
+                            </div>
+                        </div>
+                        <button ng-click="basicAddSchedule()" type="submit" class="btn btn-block btn-success" style="background: #576D7C ;margin-top:20px ">Save</button>
+                    </form>
+                    <div class="row">
+                        
+                    </div>
+                </div>
+                <!-- /.content-wrapper -->
+                <!-- Control Sidebar -->
+                <aside class="control-sidebar control-sidebar-dark">
+                    <!-- Control sidebar content goes here -->
+                </aside>
+                <!-- /.control-sidebar -->
             </div>
-            <!-- /.content-wrapper -->
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
-        </div>
 
-        <!-- validate Modal -->
-        <div class="modal fade" id="validateModal" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header justify-content-center align-self-center border-bottom-0">
-                        <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
-                    </div>
-                    <div class="modal-body justify-content-center align-self-center ">
-                        <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button id="dismissBtn" type="button" class="btn  btn-danger" data-dismiss="modal">OK</button>
+            <!-- validate Modal -->
+            <div class="modal fade" id="validateModal" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                            <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                        </div>
+                        <div class="modal-body justify-content-center align-self-center ">
+                            <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button id="dismissBtn" type="button" class="btn  btn-danger" data-dismiss="modal">OK</button>
+
+                        </div>
 
                     </div>
-
                 </div>
             </div>
-        </div>
-        <script src="~/Content/js/angular.min.js"></script>
-        <script src="~/Content/js/jquery-3.3.1.min.js"></script>
-        <script src="~/Content/js/jquery-ui.min.js"></script>
-        <script src="~/Content/js/jquery.validate.min.js"></script>
-        <script src="~/Content/js/bootstrap.min.js"></script>
-        <script src="~/Content/js/adminlte.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        <script src="~/Content/js/CustomPlugin/jquery.skeduler.js"></script>
+            <script src="~/Content/js/angular.min.js"></script>
+            <script src="~/Content/js/jquery-3.3.1.min.js"></script>
+            <script src="~/Content/js/jquery-ui.min.js"></script>
+            <script src="~/Content/js/jquery.validate.min.js"></script>
+            <script src="~/Content/js/bootstrap.min.js"></script>
+            <script src="~/Content/js/adminlte.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+            <script src="~/Content/js/CustomPlugin/jquery.skeduler.js"></script>
 
 
-        <script src="~/Content/js/ManagerModule/managerMainModule.js"></script>
-        <script src="~/Content/js/ManagerModule/manageSchedule.js"></script>
+            <script src="~/Content/js/ManagerModule/managerMainModule.js"></script>
+            <script src="~/Content/js/ManagerModule/manageSchedule.js"></script>
 </body>
 </html>

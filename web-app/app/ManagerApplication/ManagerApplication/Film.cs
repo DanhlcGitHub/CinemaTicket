@@ -35,6 +35,7 @@ namespace ManagerApplication
         public string posterPicture { get; set; }
         public string additionPicture { get; set; }
         public Nullable<int> filmStatus { get; set; }
+        public Nullable<int> ticketSold { get; set; }
     
         public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
     }

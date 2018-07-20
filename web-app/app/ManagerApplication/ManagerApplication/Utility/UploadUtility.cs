@@ -9,24 +9,34 @@ namespace ManagerApplication.Utility
 {
     public class UploadUtility
     {
-        public static void Upload(byte[] uploadContent, string uri)
+        public static bool Upload(byte[] uploadContent, string uri)
         {
-            // Get the object used to communicate with the server.  
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(uri);
-            request.Method = WebRequestMethods.Ftp.UploadFile;
-
-            // This example assumes the FTP site uses anonymous logon. 
-            string username = @"CinemaBookingTicket\$CinemaBookingTicket";
-            string password = "yANEo72i0QZ0HMLe1lgQxYbMXSREkYZSWnyStt6xSFZRptHJpfJKziWZltwB";//
-            request.Credentials = new NetworkCredential(username, password);
-
-            request.ContentLength = uploadContent.Length;
-
-            using (Stream sendStream = request.GetRequestStream())
+            try
             {
-                sendStream.Write(uploadContent, 0, uploadContent.Length);
+                // Get the object used to communicate with the server.  
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(uri);
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+
+                // This example assumes the FTP site uses anonymous logon. 
+                string username = @"CinemaBookingTicket\$CinemaBookingTicket";
+                string password = "yANEo72i0QZ0HMLe1lgQxYbMXSREkYZSWnyStt6xSFZRptHJpfJKziWZltwB";//
+                request.Credentials = new NetworkCredential(username, password);
+
+                request.ContentLength = uploadContent.Length;
+
+                using (Stream sendStream = request.GetRequestStream())
+                {
+                    sendStream.Write(uploadContent, 0, uploadContent.Length);
+                }
+                request.GetResponse();
+                return true;
             }
-            request.GetResponse();
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+            
         }
     }
 }

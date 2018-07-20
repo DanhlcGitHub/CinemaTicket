@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -41,7 +43,7 @@ namespace ManagerApplication.Controllers.PartnerControler
             int groupId = Convert.ToInt32(groupIdStr);
             string serverPath = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
             GroupCinema group = new GroupCinemaServcie().FindByID(groupId);
-            var jsonObj =  new
+            var jsonObj = new
             {
                 logoImg = serverPath + group.logoImg,
                 name = group.name,
@@ -70,6 +72,27 @@ namespace ManagerApplication.Controllers.PartnerControler
             return Json(jsonObj);
         }
 
+        public JsonResult SaveImage()
+        {
+            string message = "success!";
+            if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                System.Web.HttpPostedFile pic = System.Web.HttpContext.Current.Request.Files["imageUpload"];
+                string fileName = pic.FileName;
+                Stream fs = pic.InputStream;
+                BinaryReader br = new BinaryReader(fs);
+                byte[] bytes = br.ReadBytes((Int32)fs.Length);
+                string uriString = @"ftp://waws-prod-dm1-039.ftp.azurewebsites.windows.net/site/wwwroot/Content/img/cinemaLogo/" + fileName;
+                bool isSuccess = UploadUtility.Upload(bytes, uriString);
+                if (!isSuccess) message = "fail"; 
+                }
+            var obj = new
+            {
+                message = message,
+            };
+            return Json(obj);
+        }
+
         public JsonResult GetAllCinemaInGroup(string groupIdStr)
         {
             int groupId = Convert.ToInt32(groupIdStr);
@@ -86,7 +109,8 @@ namespace ManagerApplication.Controllers.PartnerControler
                 openTime = item.openTime,
                 profilePicture = serverPath + item.profilePicture,
                 rooms = new RoomService().FindBy(r => r.cinemaId == item.cinemaId)
-                                         .Select(room => new {
+                                         .Select(room => new
+                                         {
                                              id = room.roomId,
                                              name = room.name,
                                              matrixSizeX = room.matrixSizeX,
@@ -101,7 +125,7 @@ namespace ManagerApplication.Controllers.PartnerControler
         public JsonResult UpdateEmployee(string empObj)
         {
             JObject emp = JObject.Parse(empObj);
-            string username = (string) emp.GetValue("username");
+            string username = (string)emp.GetValue("username");
             string name = (string)emp.GetValue("name");
             string phone = (string)emp.GetValue("phone");
             string email = (string)emp.GetValue("email");
@@ -113,7 +137,7 @@ namespace ManagerApplication.Controllers.PartnerControler
             return null;
         }
 
-        
+
 
         public JsonResult DeleteEmployee(string username)
         {
@@ -145,7 +169,7 @@ namespace ManagerApplication.Controllers.PartnerControler
         public JsonResult AddNewEmployee(string empObj)
         {
             JObject emp = JObject.Parse(empObj);
-            string username = (string) emp.GetValue("username");
+            string username = (string)emp.GetValue("username");
             string name = (string)emp.GetValue("name");
             string phone = (string)emp.GetValue("phone");
             string email = (string)emp.GetValue("email");
@@ -192,6 +216,15 @@ namespace ManagerApplication.Controllers.PartnerControler
             new CinemaService().Update(c);
             return null;
         }
+        public JsonResult UpdatePictureForCinema(string cinemaId, string fileName)
+        {
+            int cineId = Convert.ToInt32(cinemaId);
+            Cinema c = new CinemaService().FindByID(cineId);
+            c.profilePicture = "Content/img/cinemaLogo/" + fileName;
+            new CinemaService().Update(c);
+            return null;
+        }
+
 
         public JsonResult CreateCinema(string cinemaObj)
         {
@@ -280,7 +313,7 @@ namespace ManagerApplication.Controllers.PartnerControler
             return Json(obj);
         }
 
-        public JsonResult UploadImage(object data,string fileName)
+        public JsonResult UploadImage(object data, string fileName)
         {
             string uriString = @"ftp://waws-prod-dm1-039.ftp.azurewebsites.windows.net/site/wwwroot/Content/img/film/testPic1.jpg";
             //byte[] array = Encoding.ASCII.GetBytes(data);

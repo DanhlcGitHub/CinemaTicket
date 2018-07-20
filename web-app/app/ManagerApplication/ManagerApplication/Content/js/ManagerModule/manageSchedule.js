@@ -17,6 +17,35 @@ var scheduleController = function ($scope, $http) {
 
     var StatusConstant = { available: "available", choosing: "choosing", added: "added" };
 
+    $scope.$on('basicAddScheduleEvent', function (event) {
+        console.log('here');
+    });
+
+    $scope.basicAddSchedule = function(){
+        if ($("#basicAddForm").valid()) {
+            if (new Date($("#basicDateSelector").val()) < new Date($scope.today)) {//compare end <=, not >=
+                $("#validateModal").modal();
+                $("#modalMessage").html("These day is no longer available for add chedule");
+            } else {
+                var filmIdStr = $("#basicFilmSelector").val(); 
+                var timeIdStr = $("#basicTimeSelector").val();
+                var roomIdStr = $("#basicRoomSelector").val();
+                var scheduleDateStr = $("#basicDateSelector").val();
+                $http({
+                    method: "POST",
+                    url: "/CinemaManager/basicAddSchedule",
+                    params: { filmIdStr: filmIdStr ,timeIdStr : timeIdStr,
+                        roomIdStr:roomIdStr,scheduleDateStr:scheduleDateStr  }
+                })
+                .then(function (response) {
+                    var message = response.data.message;
+                    $("#validateModal").modal();
+                    $("#modalMessage").html(message);
+                });
+            }
+        }
+    };
+
     $('#customScheduleFilmSelector').on('change', function (e) {
         var optionSelected = $("option:selected", this);
         var valueSelected = this.value;
@@ -41,6 +70,24 @@ var scheduleController = function ($scope, $http) {
     .then(function (response) {
         $scope.filmData = response.data;
     });
+
+    $http({
+        method: "POST",
+        url: "/CinemaManager/LoadAllRoomByCinemaId",
+        params: { cinemaIdStr: $scope.cinemaId || $("#cinemaId").val() }
+    })
+    .then(function (response) {
+        $scope.roomData = response.data;
+    });
+    
+
+    $http({
+        method: "POST",
+        url: "/CinemaManager/LoadAllShowTime",
+    })
+   .then(function (response) {
+       $scope.timeData = response.data;
+   });
 
     $http({
         method: "POST",

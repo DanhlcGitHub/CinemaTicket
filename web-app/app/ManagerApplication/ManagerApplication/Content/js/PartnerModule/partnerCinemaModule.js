@@ -44,8 +44,48 @@ var partnerCinemaController = function ($scope, $http) {
             $scope.updateCinemaTrackingArray();
         });
     };
+    $("#loaderPicture").hide();
+    $scope.uploadPicture = function () {
+        var formData = new FormData();
+        var files = $("#cinemaChooseFile").get(0).files;
+        
+        // Add the uploaded image content to the form data collection
+        if (files.length > 0) {
+            formData.append("imageUpload", files[0]);
+            var fileName = files[0].name;
+            $("#uploadImageBtn").hide();
+            $("#loaderPicture").show();
+            
+            jQuery.ajax({
+                url: '/Partner/SaveImage',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                success: function (data) {
+                    console.log(data);
+                    alert("Upload image " + data.message);
+                    //save link to db if update
+                    /*$http({
+                        method: "POST",
+                        url: "/Partner/UpdatePictureForCinema",
+                        params: { cinemaId: $scope.currentCinema.cinemaId,fileName : fileName }
+                    })
+                    .then(function (response) {
 
-    
+                    })*/
+                    $("#uploadImageBtn").show();
+                    $("#loaderPicture").hide();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert("Some error occur, can't upload image!");
+                    $("#uploadImageBtn").show();
+                    $("#loaderPicture").hide();
+                }
+            });
+        }
+    };
 
     $scope.getAllCinema();
 
@@ -76,7 +116,7 @@ var partnerCinemaController = function ($scope, $http) {
                 $('#cinemaProfilePicture')
                     .attr('src', e.target.result)
                     .width(150)
-                    .height(200);
+                    .height(150);
             };
             reader.readAsDataURL(input.files[0]);
         }
@@ -95,6 +135,7 @@ var partnerCinemaController = function ($scope, $http) {
             if (imagePath != "") {
                 var arrStr = imagePath.split('\\');
                 path = arrStr[arrStr.length - 1];
+                //$scope.saveImage(path);
             }
 
             var cinemaObj = {};
@@ -106,7 +147,7 @@ var partnerCinemaController = function ($scope, $http) {
             cinemaObj.openTime = openTime;
             cinemaObj.introduction = introduction;
             cinemaObj.imagePath = path;
-            // upload file
+            // show current file
             if (path != "") {
                 var f = document.getElementById('cinemaChooseFile').files[0];
                 r = new FileReader();

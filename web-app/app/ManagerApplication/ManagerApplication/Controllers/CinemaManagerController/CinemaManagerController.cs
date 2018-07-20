@@ -145,10 +145,10 @@ namespace ManagerApplication.Controllers.CinemaManagerController
             return Json(returnObj);
         }
 
-        public ShowTime findShowTimeById(int id,List<ShowTime> showTimeList)
+        public ShowTime findShowTimeById(int id, List<ShowTime> showTimeList)
         {
             return showTimeList.Find(s => s.timeId == id);
-        } 
+        }
 
         public JsonResult SaveCustomSchedule()
         {
@@ -204,6 +204,112 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                     star = new string[(int)Math.Ceiling((double)item.imdb / 2)]
                 });
             return Json(obj);
+        }
+
+
+        public JsonResult LoadAllRoomByCinemaId(string cinemaIdStr)
+        {
+            int cinemaId = Convert.ToInt32(cinemaIdStr);
+            List<Room> roomList = new RoomService().FindBy(r => r.cinemaId == cinemaId);// 
+            var obj = roomList
+                .Select(item => new
+                {
+                    roomId = item.roomId,
+                    roomName = item.name,
+                });
+            return Json(obj);
+        }
+
+
+        public JsonResult LoadAllShowTime()
+        {
+            List<ShowTime> timeList = new ShowTimeService().GetAll();
+            var obj = timeList
+                .Select(item => new
+                {
+                    timeId = item.timeId,
+                    startTime = item.startTime,
+                    endTime = item.endTime
+                });
+            return Json(obj);
+        }
+
+        public JsonResult basicAddSchedule(string filmIdStr,string timeIdStr,string roomIdStr, string scheduleDateStr)
+        {
+            string message = "Add success!";
+            List<ShowTime> allShowTime = new ShowTimeService().GetAll();
+            int filmId = Convert.ToInt32(filmIdStr);
+            int timeId = Convert.ToInt32(timeIdStr);
+            ShowTime aTime = allShowTime.Find(t => t.timeId == timeId);
+            int roomId = Convert.ToInt32(roomIdStr);
+            DateTime inputedDate = DateTime.Parse(scheduleDateStr);
+            string formatDateStr = inputedDate.Year + "-" + inputedDate.Month + "-" + inputedDate.Day + " " + aTime.startTime;
+            DateTime scheduleDate = DateTime.Parse(formatDateStr);
+
+            List<MovieSchedule> list = new MovieScheduleService().FindBy(ms => ms.filmId == filmId && ms.roomId == roomId
+                                                             && ms.scheduleDate == scheduleDate);
+            if (list == null || list.Count == 0)
+            {
+                //lay tat ca suat chieu da add trong ngay
+                DateTime beginOfDate = DateTime.Parse(inputedDate.Year + "-" + inputedDate.Month + "-" + inputedDate.Day  +" 00:00");
+                DateTime endOfDate = DateTime.Parse(inputedDate.Year + "-" + inputedDate.Month + "-" + inputedDate.Day  +" 23:59");
+                List<MovieSchedule> addedShowTime = new MovieScheduleService().FindBy(s => s.scheduleDate > beginOfDate
+                                    && s.scheduleDate < endOfDate && s.roomId == roomId);
+                if (checkAddableSchedule(timeId, addedShowTime,allShowTime))
+                {
+                    MovieSchedule ms = new MovieSchedule();
+                    ms.filmId = filmId;
+                    ms.timeId = timeId;
+                    ms.roomId = roomId;
+                    ms.scheduleDate = scheduleDate;
+
+                    new MovieScheduleService().Create(ms);
+
+                    message = "Add Schedule Success!";
+                }
+                else
+                {
+                    message = "Schedule already exist!";
+                }
+            }
+            else
+            {
+                message = "Schedule already exist!";
+            }
+
+            var obj = new
+            {
+                message = message
+            };
+            return Json(obj);
+        }
+
+        public bool checkAddableSchedule(int timeId, List<MovieSchedule> addedShowTime, List<ShowTime> allShowTime)
+        {
+            
+            ShowTime aTime = allShowTime.Find(t => t.timeId == timeId);
+            foreach (MovieSchedule schedule in addedShowTime)
+            {
+                ShowTime addedTime = allShowTime.Find(t => t.timeId == schedule.timeId);
+                int startTime = Convert.ToInt32(aTime.startTime.Split(':')[0]) * 60 +
+                                             Convert.ToInt32(aTime.startTime.Split(':')[1]);
+                int endTime = Convert.ToInt32(aTime.endTime.Split(':')[0]) * 60 +
+                                    Convert.ToInt32(aTime.endTime.Split(':')[1]);
+                int addedStartTime = Convert.ToInt32(addedTime.startTime.Split(':')[0]) * 60 +
+                                        Convert.ToInt32(addedTime.startTime.Split(':')[1]);
+                int addedEndTime = Convert.ToInt32(addedTime.endTime.Split(':')[0]) * 60 +
+                                               Convert.ToInt32(addedTime.endTime.Split(':')[1]);
+
+                if (startTime < addedStartTime && addedStartTime < endTime)
+                {
+                    return false;
+                }
+                else if (startTime < addedEndTime && endTime > addedEndTime)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         [HttpPost]

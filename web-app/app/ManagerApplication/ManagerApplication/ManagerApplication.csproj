@@ -242,6 +242,7 @@
     <Content Include="Content\css\AdminLTE.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\cinemaManager.css" />
+    <Content Include="Content\css\index.css" />
     <Content Include="Content\css\partner.css" />
     <Content Include="Content\css\common.css" />
     <Content Include="Content\css\font-awesome.min.css" />
@@ -372,7 +373,9 @@
     <Content Include="Content\js\jquery-3.3.1.min.js" />
     <Content Include="Content\js\LoginModule.js" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -405,8 +408,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CinemaModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="CinemaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CinemaModel.edmx</DependentUpon>
@@ -420,8 +421,6 @@
       <DependentUpon>CinemaModel.edmx</DependentUpon>
       <LastGenOutput>CinemaModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\PublishProfiles\CinemaManagementApp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\CinemaManagementApp - Web Deploy.pubxml" />
   </ItemGroup>

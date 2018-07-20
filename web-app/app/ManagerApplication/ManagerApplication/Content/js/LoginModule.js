@@ -5,6 +5,7 @@
 var loginModule = angular.module("loginModule", []);
 var loginController = function ($scope, $http) {
     $scope.roleList = [{ key: "partner", value: "partner" }, { key: "cinemaManager", value: "cinemaManager" }];
+    $("#loader").hide();
 
     $("#loginForm").submit(function (e) {
         e.preventDefault(e);
@@ -19,20 +20,26 @@ var loginController = function ($scope, $http) {
         var password = $("#txtPassword").val();
         var role = $('#inputRole').val();
 
+        $("#loader").show();
+        $("#btnSubmit").hide();
         $http({
             method: "POST",
             url: "/Utility/CheckLogin",
             params: { username: username, password: password,role : role }
         })
         .then(function (response) {
+            $("#loader").hide();
+            
             var data = response.data;
             if (data == "") {
                 console.log('hể');
+                $("#btnSubmit").show();
                 $('#validateModal').modal();
                 $("#modalMessage").html("Sai tên đăng nhập hoặc mật khẩu!");
             } else if (data.valid == "true") {
                 //refresh page
                 location.reload();
+                $("#btnSubmit").hide();
             }
         });
     }

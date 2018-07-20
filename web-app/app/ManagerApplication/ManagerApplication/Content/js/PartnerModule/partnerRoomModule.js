@@ -3,20 +3,27 @@ var roomController = function ($scope, $http) {
     /*====================== receive event area ====================*/
     $scope.$on('viewRoomEvent', function (event, infor) {
         console.log(infor);
-        $("#seatForm").hide();
+        //$("#seatForm").hide();
+        $("#roomAction").hide();
+        $("#viewRoomHeader").show();
+        $("#addRoomHeader").hide();
+        
         $scope.currentCinema = infor.currentCinema;
         $scope.seat_close();
         $scope.viewRoom(infor.currentRoom);
     });
 
     $scope.$on('addRoomEvent', function (event, infor) {
-        $("#seatForm").show();
+       // $("#seatForm").show();
+        $("#roomAction").show();
+        $("#viewRoomHeader").hide();
+        $("#addRoomHeader").show();
         $scope.isAddRoom = true;
         $scope.seat_open();
         $scope.currentCinema = infor.currentCinema;
     });
 
-    $("#seatForm").submit(function (e) {
+    $("#addRoomHeader").submit(function (e) {
         e.preventDefault(e);
         $scope.initAddRoom();
     });

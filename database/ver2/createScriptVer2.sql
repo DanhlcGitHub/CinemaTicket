@@ -22,7 +22,8 @@ CREATE TABLE Film (
 	trailerLink nvarchar(500),
 	posterPicture nvarchar(255),
 	additionPicture nvarchar(1000),
-	filmStatus int
+	filmStatus int,
+	ticketSold int,
 );
 
 CREATE TABLE DigitalType (

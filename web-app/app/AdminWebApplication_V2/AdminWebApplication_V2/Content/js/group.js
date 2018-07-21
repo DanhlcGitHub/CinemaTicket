@@ -13,21 +13,22 @@ var groupController = function ($scope, $http) {
 
     $scope.clickDetail = function (index) {
         $scope.GroupCinemaNowSelected = $scope.ListGroupCinema[index];
-        document.getElementById("groupId").value = $scope.GroupCinemaNowSelected.GroupId;
-        document.getElementById("groupName").value = $scope.GroupCinemaNowSelected.name;
-        document.getElementById("address").value = $scope.GroupCinemaNowSelected.address;
-        document.getElementById("phone").value = $scope.GroupCinemaNowSelected.phone;
-        document.getElementById("email").value = $scope.GroupCinemaNowSelected.email;
-        document.getElementById("logoImg").value = $scope.GroupCinemaNowSelected.logoImg;
+        $("#groupId").val($scope.GroupCinemaNowSelected.GroupId);
+        $("#groupName").val($scope.GroupCinemaNowSelected.name);
+        $("#address").val($scope.GroupCinemaNowSelected.address);
+        $("#phone").val($scope.GroupCinemaNowSelected.phone);
+        $("#email").val($scope.GroupCinemaNowSelected.email);
+        $("#logoImg").val($scope.GroupCinemaNowSelected.logoImg);
+
     };
 
     $scope.createGroupCinema = function () {
-        var groupId = document.getElementById("groupId").value;
-        var groupName = document.getElementById("groupName").value;
-        var address = document.getElementById("address").value;
-        var phone = document.getElementById("phone").value;
-        var email = document.getElementById("email").value;
-        var logoImg = document.getElementById("logoImg").value;
+        var groupId = $("#groupId").val();
+        var groupName = $("#groupName").val();
+        var address = $("#address").val();
+        var phone = $("#phone").val();
+        var email = $("#email").val();
+        var logoImg = $("#logoImg").val();
 
         $http({
             method: "POST",
@@ -52,11 +53,7 @@ var groupController = function ($scope, $http) {
     };
 
     $scope.clearForm = function () {
-        document.getElementById("groupName").value = "";
-        document.getElementById("address").value = "";
-        document.getElementById("phone").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("logoImg").value = "";
+        $("form-group")[0].reset();
     };
 
 };

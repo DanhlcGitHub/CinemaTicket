@@ -158,6 +158,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CrawlDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\Entities\AdminAccount.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -6839,6 +6840,7 @@
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\js\crawl.js" />
     <Content Include="Content\js\group.js" />
     <Content Include="Content\js\home.js" />
     <Content Include="Content\js\partner.js" />
@@ -7668,6 +7670,8 @@
     <Content Include="Data\Entities\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\AdminCinema - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\AdminCinema - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -7697,6 +7701,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\ManagerGroupCinema.cshtml" />
     <Content Include="Views\Home\ManagerPartnerAccount.cshtml" />
+    <Content Include="Views\CrawlData\CrawlData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

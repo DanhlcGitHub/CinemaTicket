@@ -104,17 +104,11 @@ var partnerController = function ($scope, $http) {
     };
 
     $scope.clearForm = function () {
-        $("#partnerId").val("");
-        $("#partnerPassword").val("");
-        $("#phone").val("");
-        $("#email").val("");
+        $("#form-account")[0].reset();
     };
 
     $scope.clearFormUpdate = function () {
-        $("#partnerIdUpdate").val("");
-        $("#partnerPasswordUpdate").val("");
-        $("#phoneUpdate").val("");
-        $("#emailUpdate").val("");
+        $("#form-account-update")[0].reset();
     };
 }
 

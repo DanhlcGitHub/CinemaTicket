@@ -29,7 +29,6 @@ var homeController = function ($scope, $http) {
         
         if ($scope.FilmNowSelected.filmStatus == 1) {
             document.getElementById("filmStatus").value = "Now Showing";
-
         } else {
             document.getElementById("filmStatus").value = "Coming Soon";
         }

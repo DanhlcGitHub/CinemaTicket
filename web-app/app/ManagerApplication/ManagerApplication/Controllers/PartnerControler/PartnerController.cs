@@ -9,6 +9,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -21,6 +22,15 @@ namespace ManagerApplication.Controllers.PartnerControler
         public ActionResult Home()
         {
             return View("~/Views/Partner/partnerHome.cshtml");
+        }
+
+        public async Task<JsonResult> TestCrawl()
+        {
+            var obj = new
+            {
+                message = ""
+            };
+            return Json(obj);
         }
 
         public JsonResult GetTypeOfSeat(string groupIdStr)

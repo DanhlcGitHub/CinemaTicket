@@ -112,7 +112,7 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                 // current Film added ShowTime
                 foreach (var item in addedShowTime)
                 {
-                    ShowTime time = new ShowTimeService().FindByID(item.timeId);
+                    ShowTime time = allShowTime.Find(t => t.timeId == item.timeId);
                     int endTimeNum = Convert.ToInt32(time.endTime.Split(':')[0]);
                     int endTimeMinute = Convert.ToInt32(time.endTime.Split(':')[1]);
                     if (endTimeNum == 23 && endTimeMinute == 59) endTimeNum = 24;
@@ -130,6 +130,8 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                     };
                     currentShowTime.Add(aTime);
                 }
+
+                // add sugg
 
                 var obj = new
                 {

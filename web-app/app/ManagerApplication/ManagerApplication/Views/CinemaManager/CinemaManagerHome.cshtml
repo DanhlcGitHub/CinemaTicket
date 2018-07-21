@@ -89,7 +89,7 @@
                                         <p>Basic add</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li ng-click="advantageAdd()" class="nav-item">
                                     <a class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Advantage add</p>
@@ -218,7 +218,7 @@
                         <div class="form-group">
                             <label>Select Film</label>
                             <select id="customScheduleFilmSelector" name="customScheduleFilmSelector" class="form-control" required>
-                                <option disabled selected value> -- select an option -- </option>
+                                <option disabled selected value="null"> -- select an option -- </option>
                                 <option ng-repeat="film in filmData" value="{{film.id}}">{{film.name}}</option>
                             </select>
                         </div>
@@ -275,7 +275,7 @@
                                 <input id="basicDateSelector" name="customScheduleDateSelector" type="date" class="form-control" placeholder="Enter ..." required>
                             </div>
                         </div>
-                        <button ng-click="basicAddSchedule()" type="submit" class="btn btn-block btn-success" style="background: #576D7C ;margin-top:20px ">Save</button>
+                        <button ng-click="basicAddScheduleSave()" type="submit" class="btn btn-block btn-success" style="background: #576D7C ;margin-top:20px ">Save</button>
                     </form>
                     <div class="row">
                         

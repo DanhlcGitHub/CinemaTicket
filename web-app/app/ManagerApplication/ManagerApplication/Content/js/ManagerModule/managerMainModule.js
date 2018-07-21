@@ -15,6 +15,13 @@ var managerController = function ($scope, $http) {
     };
     $scope.basicAdd();
 
+    $scope.advantageAdd = function () {
+        $("#basicAdd").hide();
+        $("#advantageAdd").show();
+
+        $scope.$broadcast('advantageAddScheduleEvent');
+    };
+
     $http({
         method: "POST",
         url: "/CinemaManager/GetCinemaInfor",

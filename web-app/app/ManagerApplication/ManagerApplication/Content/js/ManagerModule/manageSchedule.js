@@ -21,7 +21,11 @@ var scheduleController = function ($scope, $http) {
         console.log('here');
     });
 
-    $scope.basicAddSchedule = function(){
+    $scope.$on('advantageAddScheduleEvent', function (event) {
+        console.log('here');
+    });
+
+    $scope.basicAddScheduleSave = function () {
         if ($("#basicAddForm").valid()) {
             if (new Date($("#basicDateSelector").val()) < new Date($scope.today)) {//compare end <=, not >=
                 $("#validateModal").modal();
@@ -261,6 +265,8 @@ var scheduleController = function ($scope, $http) {
                 $scope.isSaveDone = true;
                 $("#loader").hide();
                 $("#skeduler-container").show();
+                $('#customScheduleFilmSelector').val("null");
+                $scope.currentSelectedFilmId = null;
             }
         });
     }

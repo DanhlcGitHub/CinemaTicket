@@ -1,5 +1,6 @@
 ﻿using ManagerApplication.Constant;
 using ManagerApplication.Service;
+using ManagerApplication.Utility;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -40,16 +41,44 @@ namespace ManagerApplication.Controllers.CinemaManagerController
         {
             int cinemaId = Convert.ToInt32(cinemaIdStr);
             DateTime selectedDate = DateTime.Parse(selectedDateStr);
-            List<Film> filmList = new FilmService().FindBy(f => f.filmStatus != (int)FilmStatus.notAvailable);// 
+            List<object> returnList = new List<object>();
+            if (selectedDate < DateTime.Today)
+                returnList = getViewOnlyList(cinemaId, selectedDate);
+            else
+                returnList = getSuggestList(cinemaId, selectedDate);
+            
+            var returnObj = from s in returnList
+                            select s;
+            return Json(returnObj);
+        }
+
+        public List<object> getSuggestList(int cinemaId, DateTime selectedDate)
+        {
+            List<object> returnList = new List<object>();
+            Random ran = new Random();
             string compareDateStr = selectedDate.Year + "-" + selectedDate.Month + "-" + selectedDate.Day + " ";//21:30
             DateTime beginOfDate = DateTime.Parse(compareDateStr + "00:00");
             DateTime endOfDate = DateTime.Parse(compareDateStr + "23:59");
-
-            List<object> returnList = new List<object>();
+            List<Film> baseFilmList = new FilmService().FindBy(f => f.filmStatus != (int)FilmStatus.notAvailable);
+            List<Film> filmList = new FilmService().FindBy(f => f.filmStatus == (int)FilmStatus.showingMovie);// 
+            List<Film> hotFilmList = new List<Film>();
+            List<Film> normalFilmList = new List<Film>();
             List<Room> roomList = new RoomService().FindBy(r => r.cinemaId == cinemaId);
+            foreach (var item in filmList)
+            {
+                int rank = RankingUtility.getFilmRank(item);
+                if (RankingConstant.isHotFilm(rank))
+                {
+                    hotFilmList.Add(item);
+                    normalFilmList.Add(item);
+                }
+
+                normalFilmList.Add(item);
+            }
 
             for (int i = 0; i < roomList.Count; i++)
             {
+                List<ShowTime> baseShowTime = new ShowTimeService().GetAll();
                 List<ShowTime> allShowTime = new ShowTimeService().GetAll();
                 Room aRoom = roomList[i];
                 List<MovieSchedule> addedShowTime = new MovieScheduleService().FindBy(s => s.scheduleDate > beginOfDate
@@ -82,22 +111,73 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                 }
 
                 //self remove
+
+                for (int j = 0; j < addedShowTime.Count; j++)
+                {
+                    int addedTimeId = addedShowTime[j].timeId;
+                    ShowTime removeTime = allShowTime.Find(t => t.timeId == addedTimeId);
+                    if (removeTime != null)
+                    {
+                        allShowTime.Remove(removeTime);
+                    }
+                }
+
+
+                //get addable and not dupplicate showtimelist
+                List<ShowTime> suggestList = new List<ShowTime>();
                 for (int j = 0; j < allShowTime.Count; j++)
                 {
+                    //select one
                     ShowTime aTime = allShowTime[j];
-                    for (int k = 0; k < addedShowTime.Count; k++)
+                    //check dupplicate ; if dupplicate ->remove
+                    // checkAddableSchedule khong trung vs added list
+                    // isDupplicate() khong dupplicate vs list hien tai
+                    if (checkAddableSchedule(aTime.timeId, addedShowTime, baseShowTime) && !isDupplicate(aTime.timeId, suggestList, baseShowTime))
                     {
-                        if (aTime.timeId == addedShowTime[k].timeId)
+                        suggestList.Add(aTime);
+                    }
+                }
+
+                //get dictionary
+                Dictionary<ShowTime, Film> suggestDictionary = new Dictionary<ShowTime, Film>();
+                foreach (var time in suggestList)
+                {
+
+                    if (RankingConstant.isHotTime(time))
+                    {
+                        if (hotFilmList.Count != 0)
                         {
-                            allShowTime.Remove(aTime);
+                            int ranNum = ran.Next(hotFilmList.Count);
+                            suggestDictionary.Add(time, hotFilmList[ranNum]);
                         }
+                    }
+                    else
+                    {
+                        if (normalFilmList.Count != 0)
+                        {
+                            int ranNum = ran.Next(normalFilmList.Count);
+                            suggestDictionary.Add(time, normalFilmList[ranNum]);
+                        }
+
                     }
                 }
 
                 //"allShowTime" list now is contain all available showtime
                 List<object> currentShowTime = new List<object>();
-                foreach (var time in allShowTime)
+
+                foreach (var time in allShowTime)//11 13 14 15 19
                 {
+                    string status = "available";
+                    int filmId = -1;
+                    string name = "";
+                    Film aFilm = findFilmInDictionary(time, suggestDictionary);
+                    if (aFilm != null)
+                    {
+                        status = "suggested";
+                        filmId = aFilm.filmId;
+                        name = aFilm.name;
+                    }
+
                     var aTime = new
                     {
                         timeId = time.timeId,
@@ -105,18 +185,22 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                         endTimeNum = Convert.ToInt32(time.endTime.Split(':')[0]),
                         startTime = time.startTime,
                         endTime = time.endTime,
-                        status = "available"
+                        status = status,
+                        filmId = filmId,
+                        filmName = name,
                     };
                     currentShowTime.Add(aTime);
                 }
+                // add suggest show time
+
                 // current Film added ShowTime
-                foreach (var item in addedShowTime)
+                foreach (var item in addedShowTime)//19 
                 {
-                    ShowTime time = allShowTime.Find(t => t.timeId == item.timeId);
+                    ShowTime time = baseShowTime.Find(t => t.timeId == item.timeId);
                     int endTimeNum = Convert.ToInt32(time.endTime.Split(':')[0]);
                     int endTimeMinute = Convert.ToInt32(time.endTime.Split(':')[1]);
                     if (endTimeNum == 23 && endTimeMinute == 59) endTimeNum = 24;
-                    Film aFilm = filmList.Find(f => f.filmId == item.filmId);
+                    Film aFilm = baseFilmList.Find(f => f.filmId == item.filmId);
                     var aTime = new
                     {
                         timeId = time.timeId,
@@ -131,7 +215,6 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                     currentShowTime.Add(aTime);
                 }
 
-                // add sugg
 
                 var obj = new
                 {
@@ -142,9 +225,102 @@ namespace ManagerApplication.Controllers.CinemaManagerController
 
                 returnList.Add(obj);
             }
-            var returnObj = from s in returnList
-                            select s;
-            return Json(returnObj);
+            return returnList;
+        }
+
+        public List<object> getViewOnlyList(int cinemaId, DateTime selectedDate)
+        {
+            List<object> returnList = new List<object>();
+            string compareDateStr = selectedDate.Year + "-" + selectedDate.Month + "-" + selectedDate.Day + " ";//21:30
+            DateTime beginOfDate = DateTime.Parse(compareDateStr + "00:00");
+            DateTime endOfDate = DateTime.Parse(compareDateStr + "23:59");
+            List<Film> baseFilmList = new FilmService().FindBy(f => f.filmStatus != (int)FilmStatus.notAvailable);
+            List<Room> roomList = new RoomService().FindBy(r => r.cinemaId == cinemaId);
+
+
+            for (int i = 0; i < roomList.Count; i++)
+            {
+                List<ShowTime> allShowTime = new ShowTimeService().GetAll();
+                Room aRoom = roomList[i];
+                List<MovieSchedule> addedShowTime = new MovieScheduleService().FindBy(s => s.scheduleDate > beginOfDate
+                                    && s.scheduleDate < endOfDate && s.roomId == aRoom.roomId);
+
+                // add suggest show time
+                List<object> currentShowTime = new List<object>();
+                // current Film added ShowTime
+                foreach (var item in addedShowTime)
+                {
+                    ShowTime time = allShowTime.Find(t => t.timeId == item.timeId);
+                    int endTimeNum = Convert.ToInt32(time.endTime.Split(':')[0]);
+                    int endTimeMinute = Convert.ToInt32(time.endTime.Split(':')[1]);
+                    if (endTimeNum == 23 && endTimeMinute == 59) endTimeNum = 24;
+                    Film aFilm = baseFilmList.Find(f => f.filmId == item.filmId);
+                    var aTime = new
+                    {
+                        timeId = time.timeId,
+                        startTimeNum = Convert.ToInt32(time.startTime.Split(':')[0]),
+                        endTimeNum = endTimeNum,
+                        startTime = time.startTime,
+                        endTime = time.endTime,
+                        status = "added",
+                        filmId = aFilm.filmId,
+                        filmName = aFilm.name,
+                    };
+                    currentShowTime.Add(aTime);
+                }
+
+
+                var obj = new
+                {
+                    roomId = aRoom.roomId,
+                    roomName = aRoom.name,
+                    currentShowTime = currentShowTime
+                };
+
+                returnList.Add(obj);
+            }
+            return returnList;
+        }
+
+        private Film findFilmInDictionary(ShowTime aTime, Dictionary<ShowTime, Film> myDictionary)
+        {
+            foreach (KeyValuePair<ShowTime, Film> entry in myDictionary)
+            {
+                ShowTime time = entry.Key;
+                if (time.timeId == aTime.timeId)
+                {
+                    return entry.Value;
+                }
+            }
+            return null;
+        }
+
+        private bool isDupplicate(int timeId, List<ShowTime> addedShowTime, List<ShowTime> allShowTime)
+        {
+
+            ShowTime aTime = allShowTime.Find(t => t.timeId == timeId);
+            foreach (ShowTime schedule in addedShowTime)
+            {
+                ShowTime addedTime = allShowTime.Find(t => t.timeId == schedule.timeId);
+                int startTime = Convert.ToInt32(aTime.startTime.Split(':')[0]) * 60 +
+                                             Convert.ToInt32(aTime.startTime.Split(':')[1]);
+                int endTime = Convert.ToInt32(aTime.endTime.Split(':')[0]) * 60 +
+                                    Convert.ToInt32(aTime.endTime.Split(':')[1]);
+                int addedStartTime = Convert.ToInt32(addedTime.startTime.Split(':')[0]) * 60 +
+                                        Convert.ToInt32(addedTime.startTime.Split(':')[1]);
+                int addedEndTime = Convert.ToInt32(addedTime.endTime.Split(':')[0]) * 60 +
+                                               Convert.ToInt32(addedTime.endTime.Split(':')[1]);
+
+                if (startTime < addedStartTime && addedStartTime < endTime)
+                {
+                    return true;
+                }
+                else if (startTime < addedEndTime && endTime > addedEndTime)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public ShowTime findShowTimeById(int id, List<ShowTime> showTimeList)
@@ -160,7 +336,7 @@ namespace ManagerApplication.Controllers.CinemaManagerController
             foreach (JObject data in dataArray)
             {
                 int roomId = (int)data.GetValue("roomId");
-                int filmId = (int)data.GetValue("filmId");
+                //int filmId = (int)data.GetValue("filmId");
                 string selectedDateStr = (string)data.GetValue("selectedDate");
                 DateTime inputDate = DateTime.Parse(selectedDateStr);
 
@@ -168,6 +344,7 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                 foreach (JObject item in timeList)
                 {
                     int timeId = (int)item.GetValue("timeId");
+                    int filmId = (int)item.GetValue("filmId");
                     ShowTime aTime = new ShowTimeService().FindByID(timeId);
                     MovieSchedule ms = new MovieSchedule();
                     ms.timeId = timeId;
@@ -190,7 +367,7 @@ namespace ManagerApplication.Controllers.CinemaManagerController
         public JsonResult LoadAvailableFilm()
         {
             FilmService filmService = new FilmService();
-            List<Film> filmList = filmService.FindBy(f => f.filmStatus != (int)FilmStatus.notAvailable);// 
+            List<Film> filmList = filmService.FindBy(f => f.filmStatus == (int)FilmStatus.showingMovie);// 
             var obj = filmList
                 .Select(item => new
                 {

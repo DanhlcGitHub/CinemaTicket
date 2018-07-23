@@ -5,8 +5,9 @@
 var managerScheduleModule = angular.module("managerScheduleModule", []);
 var scheduleController = function ($scope, $http) {
     $scope.currentSelectedFilmId = null;
+    $scope.currentSelectedFilmName = null;
     $scope.baseStartTime = 9;
-    $scope.currentSelectedDate = "2018-07-12";
+    $scope.currentSelectedDate = null;
     $scope.currentScheduleData;
     $scope.filmData;
     $scope.today;
@@ -15,7 +16,7 @@ var scheduleController = function ($scope, $http) {
     $("#loader").hide();
     //$("#skeduler-container").hide();
 
-    var StatusConstant = { available: "available", choosing: "choosing", added: "added" };
+    var StatusConstant = { available: "available", choosing: "choosing", added: "added", suggested: "suggested" };
 
     $scope.$on('basicAddScheduleEvent', function (event) {
         console.log('here');
@@ -31,15 +32,17 @@ var scheduleController = function ($scope, $http) {
                 $("#validateModal").modal();
                 $("#modalMessage").html("These day is no longer available for add chedule");
             } else {
-                var filmIdStr = $("#basicFilmSelector").val(); 
+                var filmIdStr = $("#basicFilmSelector").val();
                 var timeIdStr = $("#basicTimeSelector").val();
                 var roomIdStr = $("#basicRoomSelector").val();
                 var scheduleDateStr = $("#basicDateSelector").val();
                 $http({
                     method: "POST",
                     url: "/CinemaManager/basicAddSchedule",
-                    params: { filmIdStr: filmIdStr ,timeIdStr : timeIdStr,
-                        roomIdStr:roomIdStr,scheduleDateStr:scheduleDateStr  }
+                    params: {
+                        filmIdStr: filmIdStr, timeIdStr: timeIdStr,
+                        roomIdStr: roomIdStr, scheduleDateStr: scheduleDateStr
+                    }
                 })
                 .then(function (response) {
                     var message = response.data.message;
@@ -54,8 +57,8 @@ var scheduleController = function ($scope, $http) {
         var optionSelected = $("option:selected", this);
         var valueSelected = this.value;
         $scope.currentSelectedFilmId = valueSelected;
-        console.log(valueSelected);
-        
+        var contentIdentity = "#customScheduleFilmSelector option[value='" + valueSelected + "']";
+        $scope.currentSelectedFilmName = $(contentIdentity).text()
     });
 
     $('#customScheduleDateSelector').on('change', function (e) {
@@ -83,7 +86,7 @@ var scheduleController = function ($scope, $http) {
     .then(function (response) {
         $scope.roomData = response.data;
     });
-    
+
 
     $http({
         method: "POST",
@@ -107,11 +110,11 @@ var scheduleController = function ($scope, $http) {
             url: "/CinemaManager/GetScheduleByDateFilm",
             params: {
                 cinemaIdStr: $scope.cinemaId, selectedDateStr: $scope.currentSelectedDate,
-                //filmIdStr: $scope.currentSelectedFilmId
             }
             //cinemaIdStr,string selectedDateStr, string filmIdStr
         })
        .then(function (response) {
+           console.log("response goes here!");
            console.log(response);
            $scope.currentScheduleData = response.data;
            $scope.generateSchedule($scope.currentScheduleData);
@@ -123,7 +126,15 @@ var scheduleController = function ($scope, $http) {
     $scope.getHeader = function (scheduleList) {
         var headers = [];
         for (var i = 0 ; i < scheduleList.length; i++) {
-            var aHeader = scheduleList[i].roomName;
+            var addedInfor = "(0 added)";
+            var addedShowTime = $.grep(scheduleList[i].currentShowTime, function (o) {
+                return (o.status == StatusConstant.added);
+            });
+            var totalAdded = addedShowTime.length;
+            if (totalAdded != 0) {
+                addedInfor = "(" + totalAdded + " added)";
+            }
+            var aHeader = scheduleList[i].roomName + " " + addedInfor;
             headers.push(aHeader);
         }
         return headers;
@@ -158,12 +169,15 @@ var scheduleController = function ($scope, $http) {
             backgroundColor = "#dc3545";//red
         } else if (status == StatusConstant.choosing) {
             backgroundColor = "green";
+        } else if (status == StatusConstant.suggested) {
+            backgroundColor = "#443354"; //purple
         }
         return backgroundColor;
     }
 
     $scope.onTimeClick = function (e, t) {
         if (new Date($("#customScheduleDateSelector").val()) < new Date($scope.today)) {//compare end <=, not >=
+            console.log("???!!");
             $("#validateModal").modal();
             $("#modalMessage").html("These day is no longer available for add chedule");
         } else {
@@ -172,10 +186,24 @@ var scheduleController = function ($scope, $http) {
             var aTime = $scope.findTimeById(t.id, selectedColumn);
             if (aTime.status != StatusConstant.added) {
                 //if available -> choosing; else if choosing -> available
-                if (aTime.status == StatusConstant.available) {
-                    aTime.status = "choosing";
+                if (aTime.status == StatusConstant.suggested) {
+                    aTime.status = "available";
+                    aTime.filmId = "";
+                    aTime.filmName = "";
+                }
+                else if (aTime.status == StatusConstant.available) {
+                    if ($scope.currentSelectedFilmId != null) {
+                        aTime.status = "choosing";
+                        aTime.filmId = $scope.currentSelectedFilmId;
+                        aTime.filmName = $scope.currentSelectedFilmName;
+                    } else {
+                        alert("Please select a film!");
+                    }
+
                 } else if (aTime.status == StatusConstant.choosing) {
                     aTime.status = "available";
+                    aTime.filmId = "";
+                    aTime.filmName = "";
                 }
                 $scope.changeVisibility(selectedColumn);
                 $scope.generateSchedule($scope.currentScheduleData);
@@ -208,6 +236,40 @@ var scheduleController = function ($scope, $http) {
         }
     }
 
+    $scope.filterSuggestList = function () {
+
+        for (var i = 0 ; i < $scope.currentScheduleData.length; i++) {
+            var timeList = $scope.currentScheduleData[i].currentShowTime;
+            //load choosing list
+            var choosingList = $.grep(timeList, function (o) {
+                return (o.status == StatusConstant.choosing);
+            });
+            console.log("-------------------------------");
+            console.log("before filter choosinglist");
+            console.log(choosingList);
+            console.log(timeList);
+            // check again
+            for (var k = 0 ; k < choosingList.length; k++) {
+                var aTime = choosingList[k];
+                for (var j = 0 ; j < timeList.length; j++) {
+                    var currentTime = timeList[j];
+                    if (aTime.startTimeNum > currentTime.startTimeNum && aTime.startTimeNum < currentTime.endTimeNum) {
+                        if (currentTime.status == StatusConstant.suggested)
+                            currentTime.status = StatusConstant.available;
+                    } else if (aTime.endTimeNum > currentTime.startTimeNum && aTime.endTimeNum < currentTime.endTimeNum) {
+                        if (currentTime.status == StatusConstant.suggested)
+                            currentTime.status = StatusConstant.available;
+                    }
+                }
+            }
+            console.log("after filter choosinglist");
+            console.log(choosingList);
+            console.log(timeList);
+            console.log("------------base object ------------");
+            console.log($scope.currentScheduleData);
+        }
+    }
+
     $scope.findTimeById = function (id, timeList) {
         for (var i = 0 ; i < timeList.length; i++) {
             var aTime = timeList[i];
@@ -220,24 +282,25 @@ var scheduleController = function ($scope, $http) {
 
     $scope.isSaveDone = true;
     $scope.saveSchedule = function () {
-        if (new Date($("#customScheduleDateSelector").val()) < new Date($scope.today)) {
-            console.log("can't add!");
-        }
-
-        if ($scope.isSaveDone == true) {
-            if ($scope.currentSelectedFilmId != null) {
+        if (new Date($("#customScheduleDateSelector").val()) < new Date($scope.today)) {//compare end <=, not >=
+            console.log("???!!");
+            $("#validateModal").modal();
+            $("#modalMessage").html("These day is no longer available for add chedule");
+        } else {
+            if ($scope.isSaveDone == true) {
                 var allTimeList = [];
+                $scope.filterSuggestList();
                 var dataArray = [];
                 for (var i = 0 ; i < $scope.currentScheduleData.length; i++) {
                     var anItem = $scope.currentScheduleData[i];
                     var roomId = anItem.roomId;
                     var timeList = anItem.currentShowTime;
                     var choosingList = $.grep(timeList, function (o) {
-                        return (o.status == StatusConstant.choosing);
+                        return (o.status == StatusConstant.choosing || o.status == StatusConstant.suggested);
                     });
                     var dataStr = {
                         roomId: roomId,
-                        filmId: $scope.currentSelectedFilmId,
+                        //filmId: $scope.currentSelectedFilmId,
                         selectedDate: $scope.currentSelectedDate,
                         timeList: choosingList,
                     }
@@ -247,8 +310,6 @@ var scheduleController = function ($scope, $http) {
                 $("#loader").show();
                 $("#skeduler-container").hide();
                 $scope.saveToDB(dataArray);
-            } else {
-                alert("select afilm to add!");
             }
         }
     }

@@ -229,6 +229,7 @@
     </Compile>
     <Compile Include="Utility\CinemaUtility.cs" />
     <Compile Include="Utility\EncryptUtility.cs" />
+    <Compile Include="Utility\RankingUtility.cs" />
     <Compile Include="Utility\UploadUtility.cs" />
     <Compile Include="Utility\DateUtility.cs" />
     <Compile Include="Utility\DBUtility.cs" />

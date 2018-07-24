@@ -3,13 +3,14 @@
 
 var crawlModule = angular.module("crawlModule", []);
 var crawlController = function ($scope, $http) {
-    $scope.CrawlFilmData;
+    $scope.CrawlFilmData = [];
     $scope.currentMonth = null;
     $scope.addedFilmList = [];
     $scope.currentFilmList;
     $scope.currentYear = null;
     $scope.selectedMonth = null;
     $scope.showingText = "N/A";
+    $scope.urlList;
     $("#crawlLoader").hide();
     $("#showFilmArea").hide();
 
@@ -31,9 +32,9 @@ var crawlController = function ($scope, $http) {
            return (o.num >= $scope.currentMonth);
        });
        var monthParam = $scope.currentYear + "-" + $scope.formattingMonth($scope.currentMonth);
-       
+
        console.log(monthParam);
-       $scope.crawlFilmData(monthParam);
+       $scope.StartCrawl(monthParam);
        //$("#monthPicker select").val($scope.formattingMonth($scope.currentMonth));
    });
 
@@ -44,23 +45,13 @@ var crawlController = function ($scope, $http) {
         var contentIdentity = "#monthPicker option[value='" + valueSelected + "']";
         $scope.showingText = $(contentIdentity).text();
         var monthParam = $scope.currentYear + "-" + $scope.selectedMonth;
-        console.log(monthParam); 
-        
-        $scope.crawlFilmData(monthParam);
-    });
-   
-    $scope.getCurrentFilmList = function () {
-        $http({
-            method: "POST",
-            url: "/Crawl/LoadAvailableFilm",
-        })
-       .then(function (response) {
-           $scope.currentFilmList = response.data;
-       });
-    };
+        console.log(monthParam);
 
-    $scope.getCurrentFilmList();
-    $scope.crawlFilmData = function (monthParam) {
+        $scope.StartCrawl(monthParam);
+    });
+
+    $scope.StartCrawl = function (monthParam) {
+        $scope.CrawlFilmData = [];
         $("#showFilmArea").hide();
         $("#crawlLoader").show();
         $('#monthPicker').prop('disabled', 'disabled');
@@ -71,27 +62,34 @@ var crawlController = function ($scope, $http) {
         })
        .then(function (response) {
            $("#crawlLoader").hide();
-           console.log(response.data);
-           //$scope.CrawlFilmData = response.data;
-           $scope.CrawlFilmData = $scope.filterCrawlList(response.data);
-           $('#monthPicker').prop('disabled', false);
+           $scope.urlList = response.data;
+           console.log($scope.urlList);
            $("#showFilmArea").show();
-
+           for (var i = 0 ; i < $scope.urlList.length; i++) {
+               var aUrl = $scope.urlList[i];
+               $http({
+                   method: "POST",
+                   url: "/Crawl/CrawlFilmObjectAsync",
+                   params: { url: aUrl.url, monthParam: monthParam, }
+               })
+               .then(function (response) {
+                   console.log(response.data);
+                   if(response.data != null && response.data!= "")
+                       $scope.CrawlFilmData.push(response.data);
+                       
+               });
+               $('#monthPicker').prop('disabled', false);
+           }
        });
     };
 
     $scope.addFilmToList = function (aFilm) {
-        //check dupplicate
-        if (!$scope.isDupplicateFilm(aFilm)) {
-            $scope.addedFilmList.push(aFilm);
 
-            //remove to $scope.CrawlFilmData 
-            $scope.CrawlFilmData = $.grep($scope.CrawlFilmData, function (o) {
-                return (o.name != aFilm.name);
-            });
-        } else {
-            alert("System detect that this film already exist!");
-        }
+        $scope.addedFilmList.push(aFilm);
+        //remove to $scope.CrawlFilmData 
+        $scope.CrawlFilmData = $.grep($scope.CrawlFilmData, function (o) {
+            return (o.name != aFilm.name);
+        });
     };
 
     $scope.removeFilmToList = function (aFilm) {
@@ -104,31 +102,7 @@ var crawlController = function ($scope, $http) {
         $scope.CrawlFilmData.push(aFilm);
     };
 
-    $scope.isDupplicateFilm = function (aFilm) {
-        //compare with addedlist
-        /*for (var i = 0 ; i < $scope.addedFilmList.length; i++) {
-            var filmItem = $scope.addedFilmList[i];
-            if (filmItem.name == aFilm.name) return true;
-        }*/
-        
-        for (var i = 0 ; i < $scope.currentFilmList.length; i++) {
-            var filmItem = $scope.currentFilmList[i];
-            if (filmItem.name == aFilm.name) return true;
-        }
-        //compare with currentlist
 
-        return false;
-    };
-
-    $scope.filterCrawlList = function (dataList) {
-        for (var i = dataList.length- 1 ; i >=0; i--) {
-            var item = dataList[i];
-            if ($scope.isDupplicateFilm(item)) {
-                dataList.splice(i, 1);
-            }
-        }
-        return dataList;
-    };
 
     $scope.saveFilmToDB = function () {
         $.ajax({
@@ -137,7 +111,6 @@ var crawlController = function ($scope, $http) {
             data: { addedFilmList: JSON.stringify($scope.addedFilmList) },
             success: function (response) {
                 $scope.addedFilmList = [];
-                $scope.getCurrentFilmList();
                 $scope.cancelFilmList = response;
                 console.log($scope.cancelFilmList);
                 if ($scope.cancelFilmList.length != 0) {
@@ -147,7 +120,7 @@ var crawlController = function ($scope, $http) {
                 else {
                     alert("All Item was added Success!");
                 }
-                    
+
             }
         });
     }
@@ -159,7 +132,7 @@ var crawlController = function ($scope, $http) {
             alert("No item added!");
     }
 
-    $scope.formattingMonth =  function (target) {
+    $scope.formattingMonth = function (target) {
         return target < 10 ? '0' + target : target;
     }
 }

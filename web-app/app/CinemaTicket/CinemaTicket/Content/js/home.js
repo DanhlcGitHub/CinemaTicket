@@ -130,9 +130,18 @@ var filmController = function ($scope, $http) {
     };
     $scope.openTrailerDialog = function (url) {
         console.log(url);
-        $('#myIframe').prop('src', url);
-        $('#myModalTrailer').modal();
+        if (url.includes("imdb")) {
+            $scope.openInNewTab(url);
+        } else {
+            $('#myIframe').prop('src', url);
+            $('#myModalTrailer').modal();
+        }
     };
+    $scope.openInNewTab = function(url) {
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+
     $scope.loadUpcommingMovie = function (event) {
         $("#showingMovieId").attr('class', 'nav-link text-muted');
         $("#upcommingMovieId").attr('class', 'nav-link text-danger');

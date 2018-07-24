@@ -348,7 +348,13 @@ footer {
 .modal-open {
   padding-right: 0 !important;
 }
-	
+
+.my-text-overflow {
+    white-space: nowrap; 
+    width: 150px; 
+    overflow: hidden;
+    text-overflow: "----"; 
+}
 
 
 

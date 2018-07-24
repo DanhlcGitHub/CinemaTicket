@@ -47,14 +47,14 @@ namespace CinemaTicket.Controllers
             ShowTimeService tService = new ShowTimeService();
             FilmService fService = new FilmService();
             string serverPath = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
-
+            
             List<GroupCinema> groupCinemaList = gcService.GetAll();
             var obj = groupCinemaList
                 .Select(item => new
                 {
                     id = item.GroupId,
                     name = item.name,
-                    img = serverPath + item.logoImg
+                    img = item.logoImg.Contains("http") ? item.logoImg : serverPath + item.logoImg
                 });
             return Json(obj);
         }

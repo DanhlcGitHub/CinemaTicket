@@ -300,7 +300,7 @@ var filmController = function ($scope, $http) {
             }
         });
     }
-    $scope.test = function () {
+    $scope.gohome = function () {
         document.getElementById('gotoHomeForm').submit();
     };
 }

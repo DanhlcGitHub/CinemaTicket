@@ -16,6 +16,7 @@
 <body ng-controller="filmController">
 
     <!-- The Room Modal -->
+    <form action="/" method="post" id="gotoHomeForm" style="display:none"></form>
     <div class="modal" id="myModalChooseRoom">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -202,21 +203,18 @@
         <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top shadow p-3 mb-5 bg-white rounded">
             <div class="left">
                 <a href="#">
-                    <img src="~/Content/img/repository/booking-cinema-logo.PNG" class="ex1" alt="Cinque Terre" style="height:30%">
+                    <img src="~/Content/img/repository/logo.png" class="ex1" alt="Cinque Terre" style="height:30%">
                 </a>
             </div>
             <ul class="navbar-nav navbar-center">
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold" href="#">Lịch chiếu</a>
+                    <a class="nav-link font-weight-bold" ng-click="gohome()" href="#">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold" href="#">Cụm rạp</a>
+                    <a class="nav-link font-weight-bold" href="#film_information">Thông tin phim</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold" href="#">Tin tức</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link font-weight-bold">Ứng dụng</a>
+                    <a class="nav-link font-weight-bold" href="#lichchieu">Lịch chiếu</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -238,10 +236,11 @@
         </nav>
     </div>
     <div class="container">
+        <a name="film_information" />
         <div class="row col-sm-12" style="padding-top: 100px;">
             <div class="col-sm-4">
                 <div class="myContainer" style="margin: 0 25px 0 25px">
-                    <img ng-click="gotoFilmDetail(aFilm.id)" width="255"
+                    <img  width="255"
                          height="370" class="img-movie rounded" ng-src="{{filmData.img}}" alt="Film image">
                     <div class="middle">
                         <div class="text">
@@ -320,6 +319,7 @@
     </div>
     <!-- Tab panes -->
     <div class="tab-content" style="font-size:14px;">
+        <a name="lichchieu" />
         <a name="muave"></a>
         <div id="home" class="container tab-pane active">
             <br>

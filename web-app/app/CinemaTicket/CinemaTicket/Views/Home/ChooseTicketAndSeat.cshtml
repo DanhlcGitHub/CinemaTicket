@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="~/Content/css/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/css/chooseSeatAndTicket.css">
@@ -21,7 +22,7 @@
         <div class="loader"></div>
     </div>
     <div id="chooseTicketAndSeatMainContainer" style="display:none">
-        <form action="/" id="gotoHomeForm"></form>
+        <form action="/" id="gotoHomeForm" method="post"></form>
         <!-- hidden are-->
         <div style="display:none">
             <input id="scheduleId" type="hidden" value=@ViewBag.scheduleId />
@@ -312,62 +313,67 @@
 
         <!-- confirm ticket modal  -->
         <div class="modal fade" id="confirmTicketModal" data-backdrop="static" data-keyboard="false" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" style="max-width: 60% !important;">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 40% !important;">
                 <div class="modal-content">
                     <div class="float-right" ng-click="closeClick()"><span id="btnCloseConfirmDialog" class="close float-right">&times;</span></div>
-
-                    <div class="content">
-                        <div class="box-a row container" style="width: 80%; margin-left: 10%; margin-right: 10%;">
-                            <div class="img-film column">
-                                <img style="width: 200px; height: 100%" ng-src="{{scheduleData.img}}">
-                            </div>
-                            <div class="info column" style="margin-left: 40px;">
-                                <p><i class="far fa-circle"></i>Giao dịch sẽ hết hạn trong vòng: <span ng-model="countDown" style="color: red; font-weight: bold;">{{Math.floor(countDown/60)}}:{{countDown%60}}</span> s</p>
-                                <div class="content-info">
-                                    <h2>{{scheduleData.cinemaName}}</h2>
-                                    <p>{{scheduleData.cinemaAddress}}</p>
-                                    <div class="info-sticket">
-                                        <table style="width:100%">
-                                            <tr>
-                                                <th>Suất chiếu:</th>
-                                                <td>{{scheduleData.startTime}} {{scheduleData.date}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Phòng:</th>
-                                                <td>{{scheduleData.cinemaName}} - {{scheduleData.roomName}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Ghế: </th>
-                                                <td><span ng-repeat="seat in choosedList">{{alpha[seat.locationY-1]}}{{seat.locationX}} | </span></td>
-                                            </tr>
-                                        </table>
+                    <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                        <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                        <p>Giao dịch sẽ hết hạn trong vòng: <span ng-model="countDown" style="color: red; font-weight: bold;">{{Math.floor(countDown/60)}}:{{countDown%60}}</span> s</p>
+                        <hr />
+                    </div>
+                    <div class="modal-body justify-content-center align-self-center ">
+                        <div class="content">
+                            <div class="row col-sm-12">
+                                <div class="col-sm-5">
+                                    <img style="width: 100%; height: 250px" ng-src="{{scheduleData.img}}">
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="content-info">
+                                        <kbd>{{scheduleData.cinemaAddress}}</kbd>
+                                        <div class="info-sticket">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <th>Suất :</th>
+                                                    <td class="my-text-overflow ">{{scheduleData.startTime}} {{scheduleData.date}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Phòng:</th>
+                                                    <td class="my-text-overflow ">{{scheduleData.cinemaName}} - {{scheduleData.roomName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Ghế: </th>
+                                                    <td class="my-text-overflow "><kbd ng-repeat="seat in choosedList">{{alpha[seat.locationY-1]}}{{seat.locationX}} | </kbd></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="content-info">
+                                        <div class="info-sticket">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <th>Điện thoại:</th>
+                                                    <td>{{phone}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Email:</th>
+                                                    <td>{{email}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Tổng tiền:</th>
+                                                    <td>{{totalAmount}}đ</td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                                <hr>
-                                <div class="content-info">
-                                    <div class="info-sticket">
-                                        <table style="width:100%">
-                                            <tr>
-                                                <th>Điện thoại:</th>
-                                                <td>{{phone}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Email:</th>
-                                                <td>{{email}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Tổng tiền:</th>
-                                                <td>{{totalAmount}}đ</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <div id="paypal-button-container" style="text-align: center; font-weight: bold">Thanh Toan Paypal</div>
-
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer justify-content-center">
+                        <div id="paypal-button-container" style="text-align: center; font-weight: bold">Thanh Toan Paypal</div>
+                    </div>
+
 
                 </div>
             </div>

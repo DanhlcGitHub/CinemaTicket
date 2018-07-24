@@ -348,8 +348,10 @@
     <Content Include="Content\img\repository\avatar.jpg" />
     <Content Include="Content\img\repository\booking-cinema-logo.jpg" />
     <Content Include="Content\img\repository\booking-cinema-logo.PNG" />
+    <Content Include="Content\img\repository\confirm-ticket.png" />
     <Content Include="Content\img\repository\facebook-logo.png" />
     <Content Include="Content\img\repository\icon_location.png" />
+    <Content Include="Content\img\repository\logo.png" />
     <Content Include="Content\img\repository\next.png" />
     <Content Include="Content\img\repository\paypal.png" />
     <Content Include="Content\img\repository\paypal.svg" />

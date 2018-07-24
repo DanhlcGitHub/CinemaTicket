@@ -25,10 +25,12 @@ namespace ManagerApplication.Controllers.CinemaManagerController
             int cinemaId = Convert.ToInt32(cinemaIdStr);
             string serverPath = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
             Cinema c = new CinemaService().FindByID(cinemaId);
+            string logoImg = new GroupCinemaServcie().FindByID(c.groupId).logoImg;
+            if(!logoImg.Contains("http")) logoImg = serverPath + logoImg;
             var jsonObj = new
             {
-                logoImg = serverPath + new GroupCinemaServcie().FindByID(c.groupId).logoImg,
-                profileImg = serverPath + c.profilePicture,
+                logoImg = logoImg,
+                profileImg = c.profilePicture.Contains("http") ? c.profilePicture : (serverPath + c.profilePicture),
                 name = c.cinemaName,
                 address = c.cinemaAddress,
                 email = c.email,

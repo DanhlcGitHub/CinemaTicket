@@ -23,17 +23,36 @@ namespace CinemaTicket.Controllers
             GroupCinema groupCinema = new GroupCinemaServcie().FindByID(cinema.groupId);
 
             string serverPath = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+            string groupCinemaImg = serverPath + groupCinema.logoImg;
+            if (groupCinema.logoImg.Contains("http"))
+            {
+                groupCinemaImg = groupCinema.logoImg;
+            }
+            string filmAdditionPicture = "";
+            if (aFilm.additionPicture != null)
+            {
+                filmAdditionPicture = aFilm.additionPicture.Split(';')[0];
+                if (!filmAdditionPicture.Contains("http"))
+                {
+                    filmAdditionPicture = serverPath + filmAdditionPicture;
+                }
+            }
+            else
+            {
+                filmAdditionPicture = "https://www.valmorgan.com.au/wp-content/uploads/2016/06/default-movie-1-3.jpg";
+            }
+
             var obj = new
             {
                 filmId = aFilm.filmId,
                 filmName = aFilm.name,
                 releaseDate = String.Format("{0:dd/MM/yyyy}", aFilm.dateRelease),
-                img = serverPath + aFilm.additionPicture.Split(';')[0],
+                img = filmAdditionPicture,
                 length = aFilm.filmLength,
                 restricted = aFilm.restricted,
                 imdb = aFilm.imdb,
                 digitalType = "2d",
-                groupCinemaImg = serverPath + groupCinema.logoImg,
+                groupCinemaImg = groupCinemaImg,
                 cinemaName = cinema.cinemaName,
                 cinemaAddress = cinema.cinemaAddress,
                 roomId = room.roomId,

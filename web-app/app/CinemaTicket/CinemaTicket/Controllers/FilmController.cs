@@ -41,6 +41,19 @@ namespace CinemaTicket.Controllers
             FilmService filmService = new FilmService();
             Film item = filmService.FindByID(Convert.ToInt32(filmId));
             string serverPath = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+            string additionPictureImage = item.additionPicture;
+            if (additionPictureImage != null)
+            {
+                if (additionPictureImage.Contains("http"))
+                {
+                    additionPictureImage = item.additionPicture.Split(';')[0];
+                }
+                else
+                {
+                    additionPictureImage = serverPath + item.additionPicture.Split(';')[0];
+                }
+            }
+
             var obj = new
             {
                 id = item.filmId,
@@ -50,7 +63,7 @@ namespace CinemaTicket.Controllers
                 imdb = item.imdb,
                 dateRelease = String.Format("{0:dd/MM/yyyy}", item.dateRelease),
                 restricted = item.restricted,
-                img = serverPath + item.additionPicture.Split(';')[0],
+                img = additionPictureImage,
                 length = item.filmLength,
                 star = new string[(int)Math.Ceiling((double)item.imdb / 2)],
                 author = item.author,

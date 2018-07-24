@@ -103,7 +103,7 @@ namespace CinemaTicket.Controllers
                 .Select(group => new
                 {
                     name = group.name,
-                    img = serverPath  + group.logoImg,
+                    img = group.logoImg.Contains("http") ? group.logoImg : ( serverPath  + group.logoImg),
                     dates = new DateUtility().getSevenDateFromNow(currentDate)
                             .Select(selectDate => new
                             {
@@ -136,7 +136,7 @@ namespace CinemaTicket.Controllers
                 .Select(group => new
                 {
                     name = group.name,
-                    img = serverPath + group.logoImg,
+                    img = group.logoImg.Contains("http") ? group.logoImg : (serverPath + group.logoImg),
                     dates = new DateUtility().getSevenDateFromNow(currentDate)
                             .Select(selectDate => new
                             {
@@ -146,7 +146,7 @@ namespace CinemaTicket.Controllers
                                       .Select(cine => new
                                       {
                                           id = cine.cinemaId,
-                                          img = serverPath + cine.profilePicture,
+                                          img =cine.profilePicture.Contains("http") ? cine.profilePicture : (serverPath + cine.profilePicture),
                                           name = cine.cinemaName,
                                           address = cine.cinemaAddress,
                                           digTypeList = currentFilm.digTypeId.Split(';')
@@ -181,7 +181,8 @@ namespace CinemaTicket.Controllers
                                       .Select(cine => new
                                       {
                                           id = cine.cinemaId,
-                                          img = serverPath + cine.profilePicture,
+                                          img = cine.profilePicture.Contains("http") ? cine.profilePicture : 
+                                                                (serverPath + cine.profilePicture),
                                           name = cine.cinemaName,
                                           address = cine.cinemaAddress,
                                           digTypeList = currentFilm.digTypeId.Split(';')

@@ -55,7 +55,7 @@ namespace ManagerApplication.Controllers.PartnerControler
             GroupCinema group = new GroupCinemaServcie().FindByID(groupId);
             var jsonObj = new
             {
-                logoImg = serverPath + group.logoImg,
+                logoImg = group.logoImg.Contains("http") ? group.logoImg : serverPath + group.logoImg,
                 name = group.name,
                 address = group.address,
                 email = group.email,
@@ -117,7 +117,7 @@ namespace ManagerApplication.Controllers.PartnerControler
                 phone = item.phone,
                 introduction = item.introduction,
                 openTime = item.openTime,
-                profilePicture = serverPath + item.profilePicture,
+                profilePicture = item.profilePicture.Contains("http") ? item.profilePicture : (serverPath + item.profilePicture),
                 rooms = new RoomService().FindBy(r => r.cinemaId == item.cinemaId)
                                          .Select(room => new
                                          {

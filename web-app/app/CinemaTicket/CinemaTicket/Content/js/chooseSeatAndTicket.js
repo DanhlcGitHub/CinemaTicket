@@ -356,6 +356,8 @@ var chooseTicketController = function ($scope, $http) {
                                 $("#modalMessage").html("Loại vé bạn chọn đã hết hoặc không đủ số lượng ghế trống!");
                             } else {
                                 //change available to buying
+                                $("#checkoutButton").prop('disabled', true);
+                                console.log("double click");
                                 $http({
                                     method: "POST",
                                     url: "/Ticket/ChangeAvailableToBuying",
@@ -507,7 +509,7 @@ var chooseTicketController = function ($scope, $http) {
             if (response.data.valid == "false") {
                 document.getElementById('gotoHomeForm').submit();
             } else {
-                location.reload();
+                document.getElementById('gotoHomeForm').submit();
             }
         });
     };

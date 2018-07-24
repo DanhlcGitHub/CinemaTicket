@@ -283,7 +283,6 @@ var scheduleController = function ($scope, $http) {
     $scope.isSaveDone = true;
     $scope.saveSchedule = function () {
         if (new Date($("#customScheduleDateSelector").val()) < new Date($scope.today)) {//compare end <=, not >=
-            console.log("???!!");
             $("#validateModal").modal();
             $("#modalMessage").html("These day is no longer available for add chedule");
         } else {

@@ -37,7 +37,8 @@ namespace CinemaBookingCore.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"data source=CinemaBookingDB.database.windows.net;initial catalog=CinemaBookingDB;user id=CinemaBookingDB;password=Capstone@2018;MultipleActiveResultSets=True;");
+                //optionsBuilder.UseSqlServer(@"data source=CinemaBookingDB.database.windows.net;initial catalog=CinemaBookingDB;user id=CinemaBookingDB;password=Capstone@2018;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"data source=DESKTOP-D8NCIMI\SQLEXPRESS;initial catalog=CinemaBookingDB;user id=sa;password=nghich;MultipleActiveResultSets=True;");
             }
         }
 
@@ -80,6 +81,7 @@ namespace CinemaBookingCore.Data
                 entity.Property(e => e.PaymentMethodId).HasColumnName("paymentMethodId");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
+
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.BookingTickets)

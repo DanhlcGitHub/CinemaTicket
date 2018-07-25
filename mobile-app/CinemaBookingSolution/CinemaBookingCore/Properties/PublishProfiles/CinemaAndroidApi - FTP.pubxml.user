@@ -7,5 +7,416 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAd3BYtSiM6keUU9dCZ0ZU/wAAAAACAAAAAAAQZgAAAAEAACAAAAAHFjtUQqPUyFbaHn1nBj/lFFi/qzCInooTLKghmnLsmgAAAAAOgAAAAAIAACAAAABxwD3GVxMCB+oadx2Mpm87/nJk0PZjvDOikwt1O+PbuYAAAAAUJmPOVTQZ26cnBQh6jwgIk2xrT5p9EzElNd5BYBYxNWosotqGCE0/yjwjtc328CoQ3HGnRVuvh2+afoRf7jzte2Y3XwsEq+jv7gHbhTGz9cYIAR9LKoz8qpAEtn2c6K6NWfl+OnaMz92g0bzDTV4ZaLIkEKMjn5OMM7gBF/gZk0AAAAAx/vUdVaywhQ6cJsCnSR8oU3vvhyMMVciyPMGpohm0c63mhhiwAbHwIh3zAp1DcqDPi2aqOwP7KDGehydB0IKA</EncryptedPassword>
+    <_PublishTargetUrl>ftp://waws-prod-dm1-039.ftp.azurewebsites.windows.net/site/wwwroot</_PublishTargetUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>06/05/2018 04:55:41</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>07/20/2018 06:59:44</publishTime>
+    </File>
+    <File Include="CinemaBookingCore.deps.json">
+      <publishTime>07/20/2018 12:30:53</publishTime>
+    </File>
+    <File Include="CinemaBookingCore.pdb">
+      <publishTime>07/20/2018 12:30:42</publishTime>
+    </File>
+    <File Include="CinemaBookingCore.PrecompiledViews.pdb">
+      <publishTime>07/20/2018 12:30:52</publishTime>
+    </File>
+    <File Include="CinemaBookingCore.runtimeconfig.json">
+      <publishTime>07/20/2018 12:30:53</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>07/20/2018 12:30:53</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/betacineplex-caothang.jpg">
+      <publishTime>07/03/2018 13:26:10</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/bhdstarcineplex-bitexco.jpg">
+      <publishTime>07/03/2018 13:16:57</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/bhdstarcineplex-levanviet.jpg">
+      <publishTime>07/03/2018 13:14:35</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/bhdstarcineplex-phamhung.jpg">
+      <publishTime>07/03/2018 13:15:34</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/bhdstarcineplex-vincomquangtrung.jpg">
+      <publishTime>07/03/2018 13:13:52</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/cgv-aeonbinhtan.jpg">
+      <publishTime>07/03/2018 13:28:18</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/cgv-goldenplaza.jpg">
+      <publishTime>07/03/2018 13:29:12</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/cgv-hoangvanthu.jpg">
+      <publishTime>07/03/2018 13:28:37</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/cgv-lethanhton.jpg">
+      <publishTime>07/03/2018 13:27:26</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/cinebox-lychinhthang.jpg">
+      <publishTime>07/03/2018 13:29:29</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/cinestar-haibatrung.jpg">
+      <publishTime>07/03/2018 13:17:57</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/cinestar-quocthanh.jpg">
+      <publishTime>07/03/2018 13:18:35</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/ddc-dongda.jpg">
+      <publishTime>07/03/2018 13:25:51</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/galaxy-huynhtanphat.jpg">
+      <publishTime>07/03/2018 13:23:40</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/galaxy-kinhduongvuong.jpg">
+      <publishTime>07/03/2018 13:24:05</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/galaxy-nguyendu.jpg">
+      <publishTime>07/03/2018 13:24:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/galaxy-quangtrung.jpg">
+      <publishTime>07/03/2018 13:24:26</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/lottecinema-diamond.jpg">
+      <publishTime>07/03/2018 13:22:12</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/lottecinema-govap.jpg">
+      <publishTime>07/03/2018 13:20:35</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/lottecinema-namsaigon.jpg">
+      <publishTime>07/03/2018 13:21:35</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/lottecinema-phutho.jpg">
+      <publishTime>07/03/2018 13:20:57</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/cinemaLogo/megags-caothang.jpg">
+      <publishTime>07/03/2018 13:26:25</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/2D.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/account.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/account_black.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/account_white.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/antmanandthewasp-imageplus.jpg">
+      <publishTime>07/03/2018 22:20:11</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/antmanandthewasp-poster.jpg">
+      <publishTime>07/03/2018 22:20:32</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/aquaman-imageplus.jpg">
+      <publishTime>07/03/2018 21:40:11</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/aquaman-poster.jpg">
+      <publishTime>07/03/2018 22:18:02</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/avatar.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/badsamaritan-imageplus.jpg">
+      <publishTime>07/03/2018 20:43:54</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/badsamaritan-poster.jpg">
+      <publishTime>07/03/2018 20:44:24</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/bangcuoptheky.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/bangcuoptheky1.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/bangcuoptheky2.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/baythoigian.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/bietdoicuncung.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/bietdoicuncung1.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/black_panther.jpg">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/brotheroftheyear-imageplus.jpg">
+      <publishTime>07/03/2018 21:16:58</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/brotheroftheyear-poster.jpg">
+      <publishTime>07/03/2018 21:17:30</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/champion-imageplus.jpg">
+      <publishTime>07/03/2018 20:13:29</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/champion-poster.jpg">
+      <publishTime>07/03/2018 20:13:07</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/chugakhonggian.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/chugakhonggian1.jpg">
+      <publishTime>06/07/2018 19:37:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/comment.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/deadpool2_banner.jpg">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/emgaimua.jpg">
+      <publishTime>06/06/2018 13:21:00</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/escapeplan2-imageplus.jpg">
+      <publishTime>07/03/2018 19:17:13</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/escapeplan2-poster.jpg">
+      <publishTime>07/03/2018 19:19:44</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/giadinhsieunhan.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/giadinhsieunhan1.jpg">
+      <publishTime>06/06/2018 13:21:00</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/giadinhsieunhan2.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/giaicuutini.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/giaicuutini1.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/gianhanhtubien.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/godzillakingofthemonsters-imageplus.jpg">
+      <publishTime>07/03/2018 22:28:31</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/godzillakingofthemonsters-poster.jpg">
+      <publishTime>07/03/2018 22:34:22</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/hollowchild-imageplus.jpg">
+      <publishTime>07/03/2018 20:57:11</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/hollowchild-poster.jpg">
+      <publishTime>07/03/2018 20:57:38</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/hotelartemis-imageplus.jpg">
+      <publishTime>07/03/2018 20:52:54</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/hotelartemis-poster.jpg">
+      <publishTime>07/03/2018 20:53:37</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/howtotrainyourdragon3-imageplus.jpg">
+      <publishTime>07/03/2018 22:27:07</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/howtotrainyourdragon3-poster.jpg">
+      <publishTime>07/03/2018 22:27:25</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/ic_location.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/ic_location_small.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/inccredibles2-poster.jpg">
+      <publishTime>07/03/2018 14:18:14</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/incredibles2-imageplus.jpg">
+      <publishTime>07/09/2018 15:09:48</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/jurassicworldfk-imageplus.jpg">
+      <publishTime>07/03/2018 19:28:22</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/jurassicworldfk-poster.jpg">
+      <publishTime>06/11/2018 23:47:46</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/khachsantoipham.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/landenbenem.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/like.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/lomat-imageplus.jpg">
+      <publishTime>07/03/2018 19:55:18</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/lomat-poster.jpg">
+      <publishTime>07/03/2018 19:55:54</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/lovingpablo-imageplus.jpg">
+      <publishTime>07/03/2018 20:34:42</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/lovingpablo-poster.jpg">
+      <publishTime>07/03/2018 20:35:19</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/luisandthealiens-imageplus.jpg">
+      <publishTime>07/03/2018 20:19:30</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/luisandthealiens-poster.jpg">
+      <publishTime>07/03/2018 20:20:15</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/mermaidlakeofthedead-imageplus.jpg">
+      <publishTime>07/03/2018 22:12:56</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/mermaidlakeofthedead-poster.jpg">
+      <publishTime>07/03/2018 22:13:22</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/news_avatar_2.jpg">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/ngaysinhton.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/nham_mat_thay_mua_he.jpg">
+      <publishTime>06/04/2018 21:10:43</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/nham_mat_thay_mua_he1.jpg">
+      <publishTime>06/07/2018 19:33:59</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/nobitavadaogiauvang.jpg">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/nobitavadaogiauvang1.jpg">
+      <publishTime>06/07/2018 19:33:30</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/ocean8-poster.jpg">
+      <publishTime>07/03/2018 19:14:27</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/oceans8-imageplus.jpg">
+      <publishTime>07/03/2018 19:15:25</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/ongkinhsatnhan-imageplus.jpg">
+      <publishTime>07/03/2018 20:03:18</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/ongkinhsatnhan-poster.jpg">
+      <publishTime>07/03/2018 20:05:06</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/ongkinhsatnhan1.jpg">
+      <publishTime>06/06/2018 22:31:11</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/ongnhiphieuluuky.jpg">
+      <publishTime>06/04/2018 21:15:16</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/ongnhiphieuluuky1.jpg">
+      <publishTime>06/07/2018 19:33:15</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/peterpanbook-imageplus.jpg">
+      <publishTime>07/03/2018 20:48:14</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/peterpanbook-poster.jpg">
+      <publishTime>07/03/2018 20:49:00</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/phim_ngan_bao.jpg">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/robinhood-imageplus.jpg">
+      <publishTime>07/03/2018 22:24:42</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/robinhood-poster.jpg">
+      <publishTime>07/03/2018 22:25:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/selfievoithanchet.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/sicariodayofthesoldado-imageplus.jpg">
+      <publishTime>07/03/2018 21:25:08</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/sicariodayofthesoldado-poster.jpg">
+      <publishTime>07/03/2018 21:25:59</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/skyscraper-imageplus.jpg">
+      <publishTime>07/03/2018 22:10:43</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/skyscraper-poster.jpg">
+      <publishTime>07/03/2018 22:11:19</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/starwarsngoaitruyen.jpg">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/starwarsngoaitruyen1.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/star_1_2.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/star_full.png">
+      <publishTime>06/04/2018 17:38:28</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/takemetothemoon-imageplus.jpg">
+      <publishTime>07/03/2018 20:28:25</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/takemetothemoon-poster.jpg">
+      <publishTime>07/03/2018 20:31:19</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/thegioikhunglong.jpg">
+      <publishTime>06/04/2018 21:12:54</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/thegioikhunglong1.jpg">
+      <publishTime>06/07/2018 19:30:39</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/thenun-imageplus.png">
+      <publishTime>07/03/2018 22:21:57</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/thenun-poster.jpg">
+      <publishTime>07/03/2018 22:22:30</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/timetrap-imageplus.jpg">
+      <publishTime>07/03/2018 20:39:23</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/timetrap-poster.jpg">
+      <publishTime>07/03/2018 20:40:24</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/film/yeunusieuquay.jpg">
+      <publishTime>06/06/2018 13:21:01</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/groupLogo/betaCineplex.png">
+      <publishTime>06/06/2018 13:21:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/groupLogo/bhdStar.png">
+      <publishTime>06/06/2018 13:21:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/groupLogo/cgvCinema.png">
+      <publishTime>06/06/2018 13:21:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/groupLogo/cineStar.png">
+      <publishTime>06/06/2018 13:21:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/groupLogo/ddcCinema.jpg">
+      <publishTime>06/06/2018 13:21:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/groupLogo/galaxyCinema.png">
+      <publishTime>06/06/2018 13:21:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/groupLogo/lotteCinema.png">
+      <publishTime>06/06/2018 13:21:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/groupLogo/megaGS.png">
+      <publishTime>06/06/2018 13:21:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/QRCode/qr.png">
+      <publishTime>06/26/2018 18:11:41</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/repository/next.png">
+      <publishTime>06/06/2018 21:22:19</publishTime>
+    </File>
+    <File Include="wwwroot/Content/img/repository/pre.png">
+      <publishTime>06/06/2018 21:22:19</publishTime>
+    </File>
+  </ItemGroup>
 </Project>

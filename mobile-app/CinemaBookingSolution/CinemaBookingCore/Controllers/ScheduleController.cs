@@ -20,8 +20,6 @@ namespace CinemaBookingCore.Controllers
         public static int NUMBER_BEGIN_RANDOM = 0;
         public static int NUMBER_DIVIDE_ROOMS = 2;
 
-        private List<RoomModel> listRoomModel;
-
         private readonly CinemaBookingDBContext context;
 
         public ScheduleController(CinemaBookingDBContext context)
@@ -35,57 +33,66 @@ namespace CinemaBookingCore.Controllers
             try
             {
                 StringBuilder stringBuilder = new StringBuilder();
-                DateTime date = DateTime.Now.Date;
+                DateTime nowDate = DateTime.Now.Date;
+
                 List<Film> films = context.Film.Where(f => f.FilmStatus == STATUS_FILM_NOW_SHOWING).ToList();
 
                 List<FilmModel> listFilmModel = new List<FilmModel>();
 
                 List<ShowTime> showTimes = context.ShowTime.ToList();
 
-                foreach (var film in films)
-                {
-                    FilmModel filmModel = new FilmModel
-                    {
-                        FilmId = film.FilmId,
-                        IsSelect = false
-                    };
-                    listFilmModel.Add(filmModel);
-                }
-
                 for (int j = 0; j < 7; j++)
                 {
-                    DateTime tpmDate = date.AddDays(j);
+                    DateTime tpmDate = nowDate.AddDays(j);
 
                     List<Cinema> cinemas = context.Cinema.ToList();
                     foreach (var cinema in cinemas)
                     {
                         List<Room> rooms = context.Room.Where(r => r.CinemaId == cinema.CinemaId).ToList();
 
+                        List<RoomModel> roomModels = new List<RoomModel>();
+
+                        foreach (var room in rooms)
+                        {
+                            roomModels.Add(new RoomModel
+                            {
+                                RoomId = room.RoomId,
+                                IsSelected = false
+                            });
+                        }
+
+                        int tmp = roomModels.Count();
                         List<MovieSchedule> schedules = new List<MovieSchedule>();
 
                         Random random = new Random();
 
-                        foreach (var room in rooms)
-                        {
-                            int indexOfFilm;
-                            int countFilm = 0;
-                            do
-                            {
-                                indexOfFilm = random.Next(0, films.Count());
-                                if (countFilm == films.Count())
-                                {
-                                    ResetListFilm(listFilmModel);
-                                }
-                                countFilm++;
-                            } while (listFilmModel[indexOfFilm].IsSelect != false);
+                        int indexOfRoom;
+                        int countRoom = 0;
 
-                            int indexShowTime = random.Next(0, showTimes.Count());
-                            ShowTime showTime = showTimes[indexShowTime];
+                        foreach (var showTime in showTimes)
+                        {
+                            do 
+                            {
+                                if (countRoom == roomModels.Count())
+                                {
+                                    ResetStatusListRooms(roomModels);
+                                    countRoom = 0;
+                                }
+
+                                indexOfRoom = random.Next(0, roomModels.Count());
+                                countRoom++;
+                            }
+                            while (roomModels[indexOfRoom].IsSelected != false);
+
+                            roomModels[indexOfRoom].IsSelected = true;
+
+                            int indexOfFilm = random.Next(0, films.Count());
+
                             DateTime scheduleDateTime = tpmDate.AddHours(showTime.StartTimeDouble);
 
                             MovieSchedule schedule = new MovieSchedule
                             {
-                                RoomId = room.RoomId,
+                                RoomId = roomModels[indexOfRoom].RoomId,
                                 FilmId = films[indexOfFilm].FilmId,
                                 TimeId = showTime.TimeId,
                                 ScheduleDate = scheduleDateTime
@@ -96,7 +103,6 @@ namespace CinemaBookingCore.Controllers
 
                             stringBuilder.Append(insertSchedule);
                             stringBuilder.Append(System.Environment.NewLine);
-                            listFilmModel[indexOfFilm].IsSelect = true;
                         }
                     }
                 }
@@ -112,7 +118,7 @@ namespace CinemaBookingCore.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return BadRequest();
             }
@@ -126,18 +132,11 @@ namespace CinemaBookingCore.Controllers
             }
         }
 
-        public void ResetStatusListRooms(List<Room> rooms)
+        public void ResetStatusListRooms(List<RoomModel> listRoomModel)
         {
-            listRoomModel = new List<RoomModel>();
-            foreach (var room in rooms)
+            foreach (var room in listRoomModel)
             {
-                RoomModel roomModel = new RoomModel
-                {
-                    RoomId = room.RoomId,
-                    IsSelected = false
-                };
-
-                listRoomModel.Add(roomModel);
+                room.IsSelected = false;
             }
         }
     }

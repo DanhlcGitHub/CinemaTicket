@@ -1,42 +1,46 @@
 package com.example.luulac.cinemaapplication.activities;
 
-        import android.app.Dialog;
-        import android.content.Context;
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.graphics.Color;
-        import android.os.Bundle;
-        import android.support.annotation.Nullable;
-        import android.support.v7.app.AlertDialog;
-        import android.support.v7.app.AppCompatActivity;
-        import android.support.v7.widget.GridLayoutManager;
-        import android.support.v7.widget.RecyclerView;
-        import android.view.View;
-        import android.view.Window;
-        import android.view.WindowManager;
-        import android.widget.Button;
-        import android.widget.ImageView;
-        import android.widget.RelativeLayout;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.example.luulac.cinemaapplication.R;
-        import com.example.luulac.cinemaapplication.adapters.ChoiceSeatAdapter;
-        import com.example.luulac.cinemaapplication.adapters.RecyclerItemClickListener;
-        import com.example.luulac.cinemaapplication.data.models.SeatModel;
-        import com.example.luulac.cinemaapplication.data.models.TicketModel;
-        import com.example.luulac.cinemaapplication.data.models.tranfers.FilmTranferModel;
-        import com.example.luulac.cinemaapplication.data.models.tranfers.ScheduleTranferModel;
-        import com.example.luulac.cinemaapplication.services.OrderService;
-        import com.example.luulac.cinemaapplication.services.ServiceBuilder;
+import com.example.luulac.cinemaapplication.R;
+import com.example.luulac.cinemaapplication.adapters.ChoiceSeatAdapter;
+import com.example.luulac.cinemaapplication.adapters.FilmComingSoonAdapter;
+import com.example.luulac.cinemaapplication.adapters.RecyclerItemClickListener;
+import com.example.luulac.cinemaapplication.data.models.FilmModel;
+import com.example.luulac.cinemaapplication.data.models.SeatModel;
+import com.example.luulac.cinemaapplication.data.models.TicketModel;
+import com.example.luulac.cinemaapplication.data.models.tranfers.FilmTranferModel;
+import com.example.luulac.cinemaapplication.data.models.tranfers.ScheduleTranferModel;
+import com.example.luulac.cinemaapplication.services.FilmService;
+import com.example.luulac.cinemaapplication.services.OrderService;
+import com.example.luulac.cinemaapplication.services.ServiceBuilder;
+import com.example.luulac.cinemaapplication.services.TicketService;
 
-        import java.io.Serializable;
-        import java.util.ArrayList;
-        import java.util.List;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-        import retrofit2.Call;
-        import retrofit2.Callback;
-        import retrofit2.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChoiceSeatsActivity extends AppCompatActivity {
     private Context context;
@@ -70,8 +74,13 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
         });
 
         final Intent intent = this.getIntent();
+
         final FilmTranferModel filmTranfer = (FilmTranferModel) intent.getSerializableExtra("filmTranfer");
+
         final ScheduleTranferModel scheduleTranfer = (ScheduleTranferModel) intent.getSerializableExtra("scheduleTranfer");
+
+        final boolean isChangeTicket = intent.getBooleanExtra("isChangeTicket", false);
+        final int ticketId = intent.getIntExtra("ticketId", 0);
 
         TextView tvGroupCinemaName = (TextView) findViewById(R.id.tv_choice_seat_short_key);
         TextView tvCinemaName = (TextView) findViewById(R.id.tv_choice_seat_cinema_name);
@@ -146,9 +155,9 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                             @Override
                             public void onItemClick(View view, int position) {
 
-                                if(seats.get(position).getSeatId() != 0){
+                                if (seats.get(position).getSeatId() != 0) {
                                     String ticketStatus = seats.get(position).getTicketStatus();
-                                    switch (ticketStatus){
+                                    switch (ticketStatus) {
                                         case "available":
                                             if (count <= quantity) {
 
@@ -179,8 +188,8 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                                                         seats.get(position).setSelected(true);
 
                                                         //new ticketModel
-                                                        TicketModel ticket = new TicketModel(seats.get(position).getTicketId() ,filmTranfer.getScheduleId(),
-                                                                                                seats.get(position).getSeatId(), seats.get(position).getPrice());
+                                                        TicketModel ticket = new TicketModel(seats.get(position).getTicketId(), filmTranfer.getScheduleId(),
+                                                                seats.get(position).getSeatId(), seats.get(position).getPrice());
 
                                                         //add ticket to list tickets
                                                         tickets.add(ticket);
@@ -216,7 +225,7 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                                                 //result ( A1 B2 C3 ...)
                                                 if (count == 0) {
                                                     listSelectedSeat.setText("Vui lòng chọn ghế");
-                                                }else{
+                                                } else {
                                                     for (String item : listStringSeatSelected) {
                                                         stringSeats += item + " ";
                                                     }
@@ -236,17 +245,40 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
 
                                                         @Override
                                                         public void onClick(View v) {
-                                                            Bundle bundle = new Bundle();
-                                                            bundle.putSerializable("list", (Serializable) tickets);
+                                                            if (isChangeTicket) {
 
-                                                            Intent intentPayment = new Intent(getApplicationContext(), PaymentApplicationActivity.class);
+                                                                //xy ly doi lai ve o day
+                                                                TicketService ticketService = ServiceBuilder.buildService(TicketService.class);
+                                                                Call<TicketModel> request = ticketService.confirmChangeTicket(ticketId, filmTranfer.getScheduleId(), tickets.get(0).getSeatId());
 
-                                                            intentPayment.putExtra("scheduleTranfer", scheduleTranfer);
-                                                            intentPayment.putExtra("filmTranfer", filmTranfer);
-                                                            intentPayment.putExtra("stringSeats", tmpStringSeats);
-                                                            intentPayment.putExtra("listTicket", bundle);
+                                                                request.enqueue(new Callback<TicketModel>() {
+                                                                    @Override
+                                                                    public void onResponse(Call<TicketModel> request, Response<TicketModel> response) {
+                                                                        TicketModel result = response.body();
+                                                                        finish();
+                                                                    }
 
-                                                            startActivityForResult(intentPayment, REQUEST_CODE_ORDER);
+                                                                    @Override
+                                                                    public void onFailure(Call<TicketModel> request, Throwable t) {
+                                                                        Toast.makeText(context, "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                });
+
+
+                                                            } else {
+                                                                Bundle bundle = new Bundle();
+                                                                bundle.putSerializable("list", (Serializable) tickets);
+
+                                                                Intent intentPayment = new Intent(getApplicationContext(), PaymentApplicationActivity.class);
+
+                                                                intentPayment.putExtra("scheduleTranfer", scheduleTranfer);
+                                                                intentPayment.putExtra("filmTranfer", filmTranfer);
+                                                                intentPayment.putExtra("stringSeats", tmpStringSeats);
+                                                                intentPayment.putExtra("listTicket", bundle);
+
+                                                                startActivityForResult(intentPayment, REQUEST_CODE_ORDER);
+                                                            }
+
                                                         }
                                                     });
                                                 } else {
@@ -264,7 +296,7 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                                             //click hien len dialog hien thi thong tin
                                             int px = seats.get(position).getPx();
                                             int py = seats.get(position).getPy();
-                                            int postionOfSeat = py *(filmTranfer.getRow()) + px;
+                                            int postionOfSeat = py * (filmTranfer.getRow()) + px;
                                             String email = seats.get(postionOfSeat).getEmail();
                                             String phone = seats.get(postionOfSeat).getPhone();
                                             showDialog(email, phone);
@@ -277,6 +309,7 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                                 }
 
                             }
+
                             @Override
                             public void onLongItemClick(View view, int position) {
                             }
@@ -289,11 +322,12 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
             }
         });
     }
+
     public static final int REQUEST_CODE_ORDER = 256;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE_ORDER){
+        if (requestCode == REQUEST_CODE_ORDER) {
             finish();
         }
     }
@@ -303,13 +337,12 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
         comfirmCancelOrder();
     }
 
-    public void comfirmCancelOrder(){
+    public void comfirmCancelOrder() {
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Hủy đặt vé")
                 .setMessage("Bạn có muốn hủy đơn hàng này?")
-                .setPositiveButton("Có", new DialogInterface.OnClickListener()
-                {
+                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -320,7 +353,7 @@ public class ChoiceSeatsActivity extends AppCompatActivity {
                 .show();
     }
 
-    public void showDialog(String email, String phone){
+    public void showDialog(String email, String phone) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);

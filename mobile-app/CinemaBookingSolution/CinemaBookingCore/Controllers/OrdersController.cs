@@ -22,7 +22,7 @@ namespace CinemaBookingCore.Controllers
         }
 
         [HttpGet("orderStepOne")]
-        public IActionResult getChoiceTicketOrder(int filmId, int roomId, int groupId, int scheduleId)
+        public IActionResult getChoiceTicketOrder(int scheduleId)
         {
             MovieSchedule schedule = context.MovieSchedule.Where(s => s.ScheduleId == scheduleId)
                                                             .Include(s => s.ShowTime)
@@ -186,7 +186,8 @@ namespace CinemaBookingCore.Controllers
                     {
                         Email = bookingTicketModel.Customer.Email,
                         Phone = bookingTicketModel.Customer.Phone,
-                        UserId = bookingTicketModel.Customer.UserId
+                        UserId = bookingTicketModel.Customer.UserId,
+                        
 
                     };
 
@@ -194,11 +195,13 @@ namespace CinemaBookingCore.Controllers
                     context.SaveChanges();
                 }
 
+                DateTime nowDate = DateTime.UtcNow;
+                nowDate = nowDate.AddHours(7);
                 BookingTicket bookingTicket = new BookingTicket
                 {
                     CustomerId = customer.CustomerId,
                     Quantity = bookingTicketModel.Quantity,
-                    BookingDate = DateTime.Now
+                    BookingDate = nowDate,
                 };
 
                 context.Add(bookingTicket);

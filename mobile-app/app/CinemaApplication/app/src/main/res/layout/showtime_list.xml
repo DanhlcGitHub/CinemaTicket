@@ -13,29 +13,62 @@
         android:layout_marginTop="0dp"
         android:background="#e5e0e0" />
 
-    <ImageView
-        android:id="@+id/img_showtime_group_cinema_logo"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="15dp"
-        android:src="@drawable/cinestar" />
+    <LinearLayout
+        android:id="@+id/liner_order_ticket_two_button"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:weightSum="10">
 
-    <TextView
-        android:id="@+id/tv_showtime_cinema_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/img_showtime_group_cinema_logo"
-        android:text=""
-        android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        //line 1
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+            <ImageView
+                android:id="@+id/img_showtime_group_cinema_logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/cinestar" />
 
-    <ImageView
-        android:id="@+id/icon_arrow_showtime_list"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="10dp" />
+        </RelativeLayout>
+
+        //line two
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7">
+
+            <TextView
+                android:id="@+id/tv_showtime_cinema_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        //line three
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/icon_arrow_showtime_list"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

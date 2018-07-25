@@ -79,7 +79,7 @@ public class CommingSoonFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<FilmModel>> request, Throwable t) {
-                Toast.makeText(context, "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();;
+                Toast.makeText(context, "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -40,6 +40,8 @@ public class OrderDetailActivity extends AppCompatActivity {
     private Context context;
     private List<TicketModel> data;
 
+    private final int REQUEST_CODE_CHANGE_TICKET = 102;
+
     private RecyclerView recyclerView;
 
     @Override
@@ -114,6 +116,22 @@ public class OrderDetailActivity extends AppCompatActivity {
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
 
+                adapter.setOnItemClickedListener(new PurchasedTicketAdapter.OnItemClickedListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent intentChangeTicket = new Intent(getApplicationContext(), ChangeTicketActivity.class);
+
+                        //pass filmId, cinemaId, indexDate to ChangeTicketActivity
+                        intentChangeTicket.putExtra("cinemaId", data.get(position).getCinemaId());
+                        intentChangeTicket.putExtra("indexDate",data.get(position).getIndexDate());
+                        intentChangeTicket.putExtra("filmId",data.get(position).getFilmId());
+                        intentChangeTicket.putExtra("price",data.get(position).getPrice());
+                        intentChangeTicket.putExtra("ticketId",data.get(position).getTicketId());
+
+                        startActivityForResult(intentChangeTicket, REQUEST_CODE_CHANGE_TICKET);
+                    }
+                });
+
 
             }
 
@@ -126,8 +144,17 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_CHANGE_TICKET) {
+            recreateView();
+        }
+    }
+
     public void recreateView() {
         this.recreate();
     }
+
+
 
 }

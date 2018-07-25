@@ -16,7 +16,7 @@
         <iammert.com.expandablelib.ExpandableLayout
             android:id="@+id/el_schedule_show"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/rv_schedule_show"
             app:parentLayout="@layout/showtime_list"
             app:childLayout="@layout/showtime_child"/>

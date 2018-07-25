@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CinemaBookingDBTestModelStoreContainer" CdmEntityContainer="CinemaBookingDBTestEntities">
+    <EntitySetMapping Name="AdminAccounts">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.AdminAccount">
+        <MappingFragment StoreEntitySet="AdminAccount">
+          <ScalarProperty Name="adminId" ColumnName="adminId" />
+          <ScalarProperty Name="adminPassword" ColumnName="adminPassword" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingTickets">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.BookingTicket">
+        <MappingFragment StoreEntitySet="BookingTicket">
+          <ScalarProperty Name="bookingId" ColumnName="bookingId" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="paymentMethodId" ColumnName="paymentMethodId" />
+          <ScalarProperty Name="paymentCode" ColumnName="paymentCode" />
+          <ScalarProperty Name="qrCode" ColumnName="qrCode" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cinemas">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.Cinema">
+        <MappingFragment StoreEntitySet="Cinema">
+          <ScalarProperty Name="cinemaId" ColumnName="cinemaId" />
+          <ScalarProperty Name="cinemaName" ColumnName="cinemaName" />
+          <ScalarProperty Name="groupId" ColumnName="groupId" />
+          <ScalarProperty Name="profilePicture" ColumnName="profilePicture" />
+          <ScalarProperty Name="cinemaAddress" ColumnName="cinemaAddress" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="openTime" ColumnName="openTime" />
+          <ScalarProperty Name="introduction" ColumnName="introduction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CinemaManagers">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.CinemaManager">
+        <MappingFragment StoreEntitySet="CinemaManager">
+          <ScalarProperty Name="managerId" ColumnName="managerId" />
+          <ScalarProperty Name="managerPassword" ColumnName="managerPassword" />
+          <ScalarProperty Name="managerName" ColumnName="managerName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="cinemaId" ColumnName="cinemaId" />
+          <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DigitalTypes">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.DigitalType">
+        <MappingFragment StoreEntitySet="DigitalType">
+          <ScalarProperty Name="digTypeId" ColumnName="digTypeId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Films">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.Film">
+        <MappingFragment StoreEntitySet="Film">
+          <ScalarProperty Name="filmId" ColumnName="filmId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="dateRelease" ColumnName="dateRelease" />
+          <ScalarProperty Name="restricted" ColumnName="restricted" />
+          <ScalarProperty Name="filmLength" ColumnName="filmLength" />
+          <ScalarProperty Name="imdb" ColumnName="imdb" />
+          <ScalarProperty Name="digTypeId" ColumnName="digTypeId" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="movieGenre" ColumnName="movieGenre" />
+          <ScalarProperty Name="filmContent" ColumnName="filmContent" />
+          <ScalarProperty Name="actorList" ColumnName="actorList" />
+          <ScalarProperty Name="countries" ColumnName="countries" />
+          <ScalarProperty Name="trailerLink" ColumnName="trailerLink" />
+          <ScalarProperty Name="posterPicture" ColumnName="posterPicture" />
+          <ScalarProperty Name="additionPicture" ColumnName="additionPicture" />
+          <ScalarProperty Name="filmStatus" ColumnName="filmStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupCinemas">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.GroupCinema">
+        <MappingFragment StoreEntitySet="GroupCinema">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="logoImg" ColumnName="logoImg" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MovieSchedules">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.MovieSchedule">
+        <MappingFragment StoreEntitySet="MovieSchedule">
+          <ScalarProperty Name="scheduleId" ColumnName="scheduleId" />
+          <ScalarProperty Name="filmId" ColumnName="filmId" />
+          <ScalarProperty Name="timeId" ColumnName="timeId" />
+          <ScalarProperty Name="roomId" ColumnName="roomId" />
+          <ScalarProperty Name="scheduleDate" ColumnName="scheduleDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PartnerAccounts">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.PartnerAccount">
+        <MappingFragment StoreEntitySet="PartnerAccount">
+          <ScalarProperty Name="partnerId" ColumnName="partnerId" />
+          <ScalarProperty Name="partnerPassword" ColumnName="partnerPassword" />
+          <ScalarProperty Name="partnerName" ColumnName="partnerName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="groupOfCinemaId" ColumnName="groupOfCinemaId" />
+          <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Promotions">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.Promotion">
+        <MappingFragment StoreEntitySet="Promotion">
+          <ScalarProperty Name="promotionId" ColumnName="promotionId" />
+          <ScalarProperty Name="cinemaId" ColumnName="cinemaId" />
+          <ScalarProperty Name="urlDocument" ColumnName="urlDocument" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rooms">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.Room">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="roomId" ColumnName="roomId" />
+          <ScalarProperty Name="cinemaId" ColumnName="cinemaId" />
+          <ScalarProperty Name="capacity" ColumnName="capacity" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="digTypeId" ColumnName="digTypeId" />
+          <ScalarProperty Name="matrixSizeX" ColumnName="matrixSizeX" />
+          <ScalarProperty Name="matrixSizeY" ColumnName="matrixSizeY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seats">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.Seat">
+        <MappingFragment StoreEntitySet="Seat">
+          <ScalarProperty Name="seatId" ColumnName="seatId" />
+          <ScalarProperty Name="typeSeatId" ColumnName="typeSeatId" />
+          <ScalarProperty Name="roomId" ColumnName="roomId" />
+          <ScalarProperty Name="px" ColumnName="px" />
+          <ScalarProperty Name="py" ColumnName="py" />
+          <ScalarProperty Name="locationX" ColumnName="locationX" />
+          <ScalarProperty Name="locationY" ColumnName="locationY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShowTimes">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.ShowTime">
+        <MappingFragment StoreEntitySet="ShowTime">
+          <ScalarProperty Name="timeId" ColumnName="timeId" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="startTimeDouble" ColumnName="startTimeDouble" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tickets">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.Ticket">
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+          <ScalarProperty Name="bookingId" ColumnName="bookingId" />
+          <ScalarProperty Name="scheduleId" ColumnName="scheduleId" />
+          <ScalarProperty Name="seatId" ColumnName="seatId" />
+          <ScalarProperty Name="paymentCode" ColumnName="paymentCode" />
+          <ScalarProperty Name="qrCode" ColumnName="qrCode" />
+          <ScalarProperty Name="ticketStatus" ColumnName="ticketStatus" />
+          <ScalarProperty Name="resellDescription" ColumnName="resellDescription" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeOfSeats">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.TypeOfSeat">
+        <MappingFragment StoreEntitySet="TypeOfSeat">
+          <ScalarProperty Name="typeSeatId" ColumnName="typeSeatId" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+          <ScalarProperty Name="capacity" ColumnName="capacity" />
+          <ScalarProperty Name="groupId" ColumnName="groupId" />
+          <ScalarProperty Name="isPrimary" ColumnName="isPrimary" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAccounts">
+      <EntityTypeMapping TypeName="CinemaBookingDBTestModel.UserAccount">
+        <MappingFragment StoreEntitySet="UserAccount">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

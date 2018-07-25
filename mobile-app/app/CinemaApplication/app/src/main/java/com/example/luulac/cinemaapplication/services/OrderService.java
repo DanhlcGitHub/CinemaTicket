@@ -21,7 +21,7 @@ import retrofit2.http.Query;
 public interface OrderService {
 
     @GET("orders/orderStepOne")
-    Call<OrderChoiceTicketModel> getOrderChoiceTicket(@Query("filmId") int filmId, @Query("roomId") int roomId, @Query("groupId") int groupId, @Query("scheduleId") int scheduleId);
+    Call<OrderChoiceTicketModel> getOrderChoiceTicket(@Query("scheduleId") int scheduleId);
 
     @GET("orders/seats")
     Call<List<SeatModel>> getOrderChoiceSeats(@Query("roomId") int roomId,@Query("scheduleId") int scheduleId);

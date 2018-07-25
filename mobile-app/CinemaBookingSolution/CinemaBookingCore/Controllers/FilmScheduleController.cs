@@ -20,10 +20,12 @@ namespace CinemaBookingCore.Controllers
         {
             this.context = context;
         }
+
         [HttpGet]
-        public async Task<List<FilmScheduleModel>> Get(int filmId, int indexDate)
+        public List<FilmScheduleModel> Get(int filmId, int indexDate)
         {
-            DateTime nowDate = DateTime.Now;
+            DateTime nowDate = DateTime.UtcNow;
+            nowDate = nowDate.AddHours(7);
 
             List<FilmScheduleModel> schedule = new List<FilmScheduleModel>();
 
@@ -31,7 +33,7 @@ namespace CinemaBookingCore.Controllers
             {
                 var tmpDate = new DateTime();
                 var tmpNextDate = new DateTime();
-                if (j != 0)
+                if (indexDate != 0)
                 {
                     tmpDate = nowDate.Date.AddDays(j);
                 }
@@ -40,7 +42,8 @@ namespace CinemaBookingCore.Controllers
                     tmpDate = nowDate.AddDays(j);
                 }
 
-                tmpNextDate = tmpDate.AddDays(j + 1).Date;
+                tmpNextDate = nowDate.AddDays(j +1).Date;
+
                 List<DateScheduleModel> dateScheduleModels = new List<DateScheduleModel>();
 
                 if (j == indexDate)
@@ -160,7 +163,8 @@ namespace CinemaBookingCore.Controllers
         [HttpGet("GetSchdeduleByCinemaId")]
         public IActionResult GetSchdeduleByCinemaId(int cinemaId, int indexDate)
         {
-            DateTime nowDate = DateTime.Now;
+            DateTime nowDate = DateTime.UtcNow;
+            nowDate = nowDate.AddHours(7);
 
             List<FilmScheduleModel> schedule = new List<FilmScheduleModel>();
 
@@ -205,9 +209,9 @@ namespace CinemaBookingCore.Controllers
                                                                 && ms.ScheduleDate < tmpNextDate
                                                               ).Include(s => s.ShowTime)
                                                               .Include(ms => ms.Film)
+                                                              .OrderBy(ms => ms.ShowTime.StartTimeDouble)
                                                         .ToList());
                     }
-
 
                     List<int> listFilmId = new List<int>();
 
@@ -306,6 +310,89 @@ namespace CinemaBookingCore.Controllers
                 schedule.Add(schdeduleInDay);
             }
             return Ok(schedule);
+        }
+
+        [HttpGet("GetSchdeduleForChangeTicket")]
+        public IActionResult GetSchdeduleForChangeTicket(int cinemaId, int indexDate, int filmId)
+        {
+            DateTime nowDate = DateTime.UtcNow;
+            nowDate = nowDate.AddHours(7);
+
+            List<FilmScheduleModel> schedule = new List<FilmScheduleModel>();
+
+            Cinema cinema = context.Cinema.Where(c => c.CinemaId == cinemaId)
+                                                .Include(c => c.GroupCinema).ThenInclude(g => g.TypeOfSeats)
+                                                .Include(c => c.Rooms).ThenInclude(r => r.DigitalType)
+                                                .Include(c => c.Rooms).ThenInclude(r => r.MovieSchedules).ThenInclude(s => s.ShowTime)
+                                                .Include(c => c.Rooms).ThenInclude(r => r.MovieSchedules).ThenInclude(s => s.Film)
+                                                .FirstOrDefault();
+
+            int groupId = cinema.GroupCinema.GroupId;
+
+            String basePrice = cinema.GroupCinema.TypeOfSeats.FirstOrDefault().Price.ToString();
+
+            var rooms = cinema.Rooms;
+
+            var tmpDate = new DateTime();
+            var tmpNextDate = new DateTime();
+
+            if (indexDate != 0)
+            {
+                tmpDate = nowDate.Date.AddDays(indexDate);
+            }
+            else
+            {
+                tmpDate = nowDate.AddDays(indexDate);
+            }
+
+            tmpNextDate = nowDate.AddDays(indexDate + 1).Date;
+
+            List<DateScheduleModel> dateScheduleModels = new List<DateScheduleModel>();
+
+
+            List<MovieSchedule> movieSchedules = new List<MovieSchedule>();
+
+            foreach (var room in rooms)
+            {
+                int roomId = room.RoomId;
+                movieSchedules.AddRange(room.MovieSchedules.OrderBy(ms => ms.ShowTime.StartTimeDouble).Where(
+                                                                    ms => ms.RoomId == roomId
+                                                                    && ms.ScheduleDate >= tmpDate
+                                                                    && ms.ScheduleDate < tmpNextDate
+                                                                 ));
+            }
+
+            ShowTimeListModel listChild = new ShowTimeListModel();
+
+            listChild.CinemaGroupName = cinema.GroupCinema.Name;
+            listChild.CinemaName = cinema.CinemaName;
+            listChild.FilmImg = movieSchedules.FirstOrDefault().Film.AdditionPicture;
+            listChild.FilmName = movieSchedules.FirstOrDefault().Film.Name;
+
+            List<ShowTimeChildModel> showTimeChildModels = new List<ShowTimeChildModel>();
+            foreach (var item in movieSchedules)
+            {
+                ShowTimeChildModel showTimeChildModel = new ShowTimeChildModel
+                {
+                    TimeId = item.ShowTime.TimeId,
+                    ScheduleId = item.ScheduleId,
+                    Type = item.Room.DigitalType.Name,
+                    Price = basePrice,
+                    TimeStart = item.ShowTime.StartTime,
+                    TimeEnd = item.ShowTime.EndTime,
+                    FilmId = item.FilmId,
+                    RoomId = item.RoomId,
+                    GroupId = groupId,
+                    Col = item.Room.MatrixSizeY,
+                    Row = item.Room.MatrixSizeX,
+                    Datetime = item.ScheduleDate.ToString()
+                };
+                showTimeChildModels.Add(showTimeChildModel);
+            }
+
+            listChild.ShowTimeChildModels = showTimeChildModels;
+
+            return Ok(listChild);
         }
     }
 

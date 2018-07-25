@@ -32,6 +32,7 @@ import com.example.luulac.cinemaapplication.data.models.tranfers.ScheduleTranfer
 import com.example.luulac.cinemaapplication.services.ChangeStatusService;
 import com.example.luulac.cinemaapplication.services.OrderService;
 import com.example.luulac.cinemaapplication.services.ServiceBuilder;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -54,7 +55,7 @@ public class PaymentApplicationActivity extends AppCompatActivity {
     private final int REQUEST_CODE_ORDER = 256;
 
     private CountDownTimer countDownTimer;
-    private long timeLeftMilliseconds = 15000;
+    private long timeLeftMilliseconds = 300000;
     private long timeReduceMilliseconds = 1000;
 
 
@@ -312,7 +313,8 @@ public class PaymentApplicationActivity extends AppCompatActivity {
                             CustomerModel customer = new CustomerModel(edtEmail.getText().toString(), edtPhone.getText().toString(), userId);
 
                             //new Booking ticket model for send data to server
-                            BookingTicketModel bookingTicket = new BookingTicketModel(scheduleTranfer.getQuantityTicket(), customer, ticketModels);
+                            BookingTicketModel bookingTicket = new BookingTicketModel(scheduleTranfer.getQuantityTicket(), customer,
+                                                                                         ticketModels, FirebaseInstanceId.getInstance().getToken()+"");
 
                             //call service from server to make booking ticket and booking detail
                             OrderService orderService = ServiceBuilder.buildService(OrderService.class);

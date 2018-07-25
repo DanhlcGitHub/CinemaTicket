@@ -9,6 +9,6 @@ namespace CinemaBookingCore.Data.Models
     public class RoomModel
     {
         public int RoomId { get; set; }
-        public bool IsSelected { get; set; }
+        public Boolean IsSelected { get; set; }
     }
 }

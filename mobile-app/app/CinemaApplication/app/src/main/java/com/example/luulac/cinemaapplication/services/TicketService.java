@@ -22,4 +22,8 @@ public interface TicketService {
 
     @GET("ticket/getAllTicketByBookingTicketId")
     Call<List<TicketModel>> getAllTicketByBookingTicketId(@Query("bookingTicketId") int bookingTicketId);
+
+    @PUT("ticket/confirmChangeTicket")
+    //int ticketId, int scheduleId, int seatId
+    Call<TicketModel> confirmChangeTicket(@Query("ticketId") int ticketId, @Query("scheduleId") int scheduleId, @Query("seatId") int seatId);
 }

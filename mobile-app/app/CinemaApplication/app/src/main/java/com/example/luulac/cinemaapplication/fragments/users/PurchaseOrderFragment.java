@@ -17,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.luulac.cinemaapplication.R;
+import com.example.luulac.cinemaapplication.activities.FilmInfomationActivity;
 import com.example.luulac.cinemaapplication.activities.OrderDetailActivity;
+import com.example.luulac.cinemaapplication.adapters.FilmComingSoonAdapter;
 import com.example.luulac.cinemaapplication.adapters.PurchasedOrderAdapter;
 import com.example.luulac.cinemaapplication.adapters.RecyclerItemClickListener;
 import com.example.luulac.cinemaapplication.data.models.AccountPurchasedModel;
@@ -36,6 +38,9 @@ public class PurchaseOrderFragment extends Fragment {
     private TextView tvPurchasedOffline, tvPurchasedNoOrder;
     private RecyclerView recyclerView;
     private View view;
+    private final int REQUEST_CODE_CHANGE_TICKET = 102;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,14 +89,13 @@ public class PurchaseOrderFragment extends Fragment {
                         recyclerView.setLayoutManager(layoutManager);
                         recyclerView.setAdapter(adapter);
 
-
                         recyclerView.addOnItemTouchListener(
                                 new RecyclerItemClickListener(context, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(View view, int position) {
                                         Intent intent = new Intent(context, OrderDetailActivity.class);
                                         intent.putExtra("accountPurchasedModel", data.get(position));
-                                        startActivity(intent);
+                                        startActivityForResult(intent, REQUEST_CODE_CHANGE_TICKET);
                                     }
                                     @Override
                                     public void onLongItemClick(View view, int position) {
@@ -110,5 +114,16 @@ public class PurchaseOrderFragment extends Fragment {
                 }
             });
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE_CHANGE_TICKET){
+
+        }
+    }
+
+    public void recreateActivity(){
+
     }
 }

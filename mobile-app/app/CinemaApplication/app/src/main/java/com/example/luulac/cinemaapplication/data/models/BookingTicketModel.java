@@ -10,6 +10,7 @@ public class BookingTicketModel implements Serializable {
     private int paymentMethodId;
     private int quantity;
     private String bookingDate;
+    private String tokenId;
 
     private CustomerModel customer;
     private List<TicketModel> tickets;
@@ -17,10 +18,11 @@ public class BookingTicketModel implements Serializable {
     public BookingTicketModel() {
     }
 
-    public BookingTicketModel(int quantity, CustomerModel customer, List<TicketModel> tickets) {
+    public BookingTicketModel(int quantity, CustomerModel customer, List<TicketModel> tickets, String tokenId) {
         this.quantity = quantity;
         this.customer = customer;
         this.tickets = tickets;
+        this.tokenId = tokenId;
     }
 
     public int getBookingId() {
@@ -77,5 +79,13 @@ public class BookingTicketModel implements Serializable {
 
     public void setTickets(List<TicketModel> tickets) {
         this.tickets = tickets;
+    }
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
 }

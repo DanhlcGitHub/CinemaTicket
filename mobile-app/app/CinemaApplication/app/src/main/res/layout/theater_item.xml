@@ -9,18 +9,20 @@
         android:id="@+id/tv_theater_item_theater_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:text="alkshdkashfdkjahsfk"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
         android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_theater_item_theater_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_theater_item_theater_name"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="10sp" />
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="15dp"
+        android:text="chilasldkhjkalsjhd"
+        android:textSize="12sp" />
 
 </RelativeLayout>

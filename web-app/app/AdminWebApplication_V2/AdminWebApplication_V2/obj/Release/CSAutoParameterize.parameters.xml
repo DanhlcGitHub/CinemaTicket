@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="CinemaBookingDBTestEntities-Web.config Connection String" description="CinemaBookingDBTestEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Data.Entities.Model1.csdl|res://*/Data.Entities.Model1.ssdl|res://*/Data.Entities.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=CinemaBookingDB.database.windows.net;initial catalog=CinemaBookingDB;user id=CinemaBookingDB;password=Capstone@2018;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\LuuLac\\source\\repos\\AdminWebApplication_V2\\AdminWebApplication_V2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CinemaBookingDBTestEntities']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,6 +1,7 @@
 package com.example.luulac.cinemaapplication.data.models;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class TicketModel implements Serializable{
@@ -12,6 +13,9 @@ public class TicketModel implements Serializable{
     private String ticketStatus;
     private double price;
     private String seatPosition;
+    private int cinemaId;
+    private int indexDate;
+    private int filmId;
 
     public TicketModel() {
     }
@@ -89,5 +93,29 @@ public class TicketModel implements Serializable{
 
     public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
+    }
+
+    public int getCinemaId() {
+        return cinemaId;
+    }
+
+    public void setCinemaId(int cinemaId) {
+        this.cinemaId = cinemaId;
+    }
+
+    public int getIndexDate() {
+        return indexDate;
+    }
+
+    public void setIndexDate(int indexDate) {
+        this.indexDate = indexDate;
+    }
+
+    public int getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
     }
 }

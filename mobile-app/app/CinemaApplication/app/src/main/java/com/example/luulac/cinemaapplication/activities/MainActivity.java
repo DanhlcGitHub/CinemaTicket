@@ -1,5 +1,6 @@
 package com.example.luulac.cinemaapplication.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -10,9 +11,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.luulac.cinemaapplication.R;
 import com.example.luulac.cinemaapplication.adapters.TabLayoutMainAdapter;
@@ -21,6 +25,11 @@ import com.example.luulac.cinemaapplication.fragments.news.NewsFragment;
 import com.example.luulac.cinemaapplication.fragments.theaters.TheatersFragment;
 import com.example.luulac.cinemaapplication.fragments.users.UsersFragment;
 import com.example.luulac.cinemaapplication.navigations.BottomNavigationViewHelper;
+import com.example.luulac.cinemaapplication.services.MyFirebaseIdService;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -33,12 +42,16 @@ public class MainActivity extends AppCompatActivity {
     private List<Fragment> fragmentList;
     private List<String> titleList;
     private boolean isFirstLoad = true;
+    private String TAG = "MainActivity";
+    private String msg = "msg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FirebaseMessaging.getInstance().subscribeToTopic("schedule-coming-show-soon");
 
+        Log.d("TokenID", FirebaseInstanceId.getInstance().getToken() + "");
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
             // Restore value of members from saved state
@@ -61,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new TabLayoutMainAdapter(getSupportFragmentManager());
 
-        if(isFirstLoad){
+        if (isFirstLoad) {
             toolbar.setTitle(R.string.title_dashboard);
             DashboardFragment dashboardFragment = new DashboardFragment(tabLayout);
 
@@ -69,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             titleList = dashboardFragment.getTitles();
 
             fragment = dashboardFragment;
-        }else{
+        } else {
             toolbar.setTitle(R.string.title_user);
 
             UsersFragment usersFragment = new UsersFragment();

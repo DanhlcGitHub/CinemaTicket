@@ -19,6 +19,7 @@ namespace CinemaBookingCore.Data.Models
         public int GroupId { get; set; }
         public int Row { get; set; }
         public int Col { get; set; }
+        public String Datetime { get; set; }
 
 
     }

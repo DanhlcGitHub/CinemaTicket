@@ -16,5 +16,8 @@ namespace CinemaBookingCore.Data.Models
         public string TicketStatus { get; set; }
         public double Price { get; set; }
         public String SeatPosition { get; set; }
+        public int CinemaId { get; set; }
+        public int IndexDate { get; set; }
+        public int FilmId { get; set; }
     }
 }

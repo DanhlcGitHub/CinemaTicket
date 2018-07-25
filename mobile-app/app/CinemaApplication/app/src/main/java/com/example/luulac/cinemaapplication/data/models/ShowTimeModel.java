@@ -2,7 +2,7 @@ package com.example.luulac.cinemaapplication.data.models;
 
 import java.util.List;
 
-class ShowTimeModel {
+public class ShowTimeModel {
 
     private int timeId;
     private String startTime;

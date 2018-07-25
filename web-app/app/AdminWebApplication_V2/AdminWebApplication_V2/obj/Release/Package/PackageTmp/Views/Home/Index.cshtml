@@ -1,0 +1,174 @@
+﻿<div class="content-wrapper" ng-app="homeModule" ng-controller="homeController">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">List Film</h3>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#modal-film">Create Film</button>
+                    </div> <!-- /.box-header -->
+
+                    <div class="box-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Film Name</th>
+                                    <th>Date Release</th>
+                                    <th>Movie Genre</th>
+                                    <th>Countries</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="film in FilmNowShowing">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{film.name}}</td>
+                                    <td>{{film.dateRelease}}</td>
+                                    <td>{{film.movieGenre}}</td>
+                                    <td>{{film.countries}}</td>
+                                    <td><button type="button" class="btn btn-block btn-info" ng-click="clickDetail($index)" data-toggle="modal" data-target="#modal-film">Detail</button></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Film Name Ahihi</th>
+                                    <th>Date Release</th>
+                                    <th>Movie Genre</th>
+                                    <th>Countries</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </section><!-- /.content -->
+
+    <div class="modal fade" id="modal-film" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Film Modal</h4>
+                </div>
+                <form class="form-row" id="form-film">
+                    <div class="modal-body">
+                        <div class="box box-primary">
+                            <div class="box-body">
+                                <input type="hidden" class="form-control" id="filmId" name="filmId" value="0">
+
+                                <div class="form-group col-md-12">
+                                    <label for="filmName">Film Name</label>
+                                    <input type="text" class="form-control" id="filmName" name="filmName" value="">
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label>Date:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="datepicker" name="datepicker">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label>Film Restricted</label>
+                                    <div class="radio-inline">
+                                        <label>
+                                            <input type="radio" name="restricted" id="restricted" value="13" checked>
+                                            13
+                                        </label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label>
+                                            <input type="radio" name="restricted" id="restricted" value="16">
+                                            16
+                                        </label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label>
+                                            <input type="radio" name="restricted" id="restricted" value="18">
+                                            18
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="filmLength">Film Length</label>
+                                    <input type="text" class="form-control" id="filmLength" name="filmLength" value="">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="author">Author</label>
+                                    <input type="text" class="form-control" id="author" name="author" value="">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="movieGenre">Film Genre</label>
+                                    <input type="text" class="form-control" id="movieGenre" name="movieGenre" value="">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="actorList">Actor List</label>
+                                    <input type="text" class="form-control" id="actorList" name="actorList" value="">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="countries">Countries</label>
+                                    <input type="text" class="form-control" id="countries" name="countries" value="">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="trailerLink">Trailer Link</label>
+                                    <input type="text" class="form-control" id="trailerLink" name="trailerLink" value="">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="posterPicture">Poster Picture</label>
+                                    <input type="file" id="posterPicture" name="posterPicture" value="">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="additionPicture">Addition Picture</label>
+                                    <input type="file" id="additionPicture" name="additionPicture" value="" multiple>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label>Film Status</label>
+                                    <select class="form-control select2" id="filmStatus" name="filmStatus" style=" width: 100%;">
+                                        <option selected="selected" value="1">Now Showing</option>
+                                        <option value="2">Comming Soon</option>
+                                    </select>
+                                </div>
+
+                                <!-- textarea -->
+                                <div class="form-group col-md-12">
+                                    <label>Film Content</label>
+                                    <textarea class="form-control" rows="3" placeholder="Enter ..." id="filmContent" name="filmContent"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" ng-click="clearForm()" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="createOrUpdateFilm()">Save changes</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+
+<script src="~/Content/js/home.js"></script>

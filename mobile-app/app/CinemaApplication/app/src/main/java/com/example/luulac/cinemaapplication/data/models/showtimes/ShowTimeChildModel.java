@@ -13,6 +13,7 @@ public class ShowTimeChildModel {
     private int groupId;
     private int col;
     private int row;
+    private String datetime;
 
     public int getId() {
         return id;
@@ -100,5 +101,13 @@ public class ShowTimeChildModel {
 
     public void setRow(int row) {
         this.row = row;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 }

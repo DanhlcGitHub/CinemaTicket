@@ -21,18 +21,22 @@ namespace CinemaBookingCore.Controllers
             this.context = context;
         }
 
-        [HttpGet("getAllTicketByBookingTicketId")]
+        [HttpGet("GetAllTicketByBookingTicketId")]
         public IActionResult GetAllTicketByBookingTicketId(int bookingTicketId)
         {
             try
             {
-                List<Ticket> tickets = context.Ticket.Where(t => t.BookingId == bookingTicketId).ToList();
+                List<Ticket> tickets = context.Ticket.Where(t => t.BookingId == bookingTicketId && t.MovieSchedule.ScheduleDate > DateTime.Now)
+                                                        .Include(t => t.Seat)
+                                                        .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Room).ThenInclude(r => r.Cinema)
+                                                        .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Film)
+                                                        .ToList();
                 List<TicketModel> ticketModels = new List<TicketModel>();
 
                 foreach (var ticket in tickets)
                 {
-                    Seat seat = context.Seat.Where(s => s.SeatId == ticket.SeatId).FirstOrDefault();
-                    Room roomForSeat = context.Room.Where(r => r.RoomId == seat.RoomId).FirstOrDefault();
+                    Seat seat = ticket.Seat;
+                    Room roomForSeat = ticket.MovieSchedule.Room;
 
                     Char character = 'A';
                     List<Char> resultAbc = new List<Char>();
@@ -46,6 +50,8 @@ namespace CinemaBookingCore.Controllers
 
                     String position = resultAbc[seat.Py].ToString() + (seat.Px + 1);
 
+                    TimeSpan span = ticket.MovieSchedule.ScheduleDate.Subtract(DateTime.Now);
+
                     TicketModel ticketModel = new TicketModel
                     {
                         BookingId = ticket.BookingId,
@@ -55,7 +61,10 @@ namespace CinemaBookingCore.Controllers
                         SeatId = ticket.SeatId,
                         TicketId = ticket.TicketId,
                         TicketStatus = ticket.TicketStatus,
-                        SeatPosition = position
+                        SeatPosition = position,
+                        CinemaId = roomForSeat.CinemaId,
+                        IndexDate = (int) span.TotalDays,
+                        FilmId = ticket.MovieSchedule.FilmId
                     };
 
                     ticketModels.Add(ticketModel);
@@ -118,17 +127,20 @@ namespace CinemaBookingCore.Controllers
             {
                 Customer customer = context.Customer.Where(u => u.Email == email).FirstOrDefault();
 
-                if(customer == null)
+                if (customer == null)
                 {
-                    customer = new Customer {
+                    customer = new Customer
+                    {
                         Email = email
                     };
                     context.SaveChanges();
                 }
 
+                DateTime nowDate = DateTime.UtcNow.AddHours(7);
+
                 BookingTicket bookingTicket = new BookingTicket
                 {
-                    BookingDate = DateTime.Now,
+                    BookingDate = nowDate,
                     Quantity = 1,
                     CustomerId = customer.CustomerId
                 };
@@ -143,7 +155,6 @@ namespace CinemaBookingCore.Controllers
                     context.SaveChanges();
                 }
 
-
                 return Ok(ticket);
             }
             catch (Exception)
@@ -152,5 +163,40 @@ namespace CinemaBookingCore.Controllers
             }
         }
 
+        [HttpPut("confirmChangeTicket")]
+        public IActionResult ConfirmChangeTicket(int ticketId, int scheduleId, int seatId)
+        {
+            try
+            {
+                var ticket = context.Ticket.Where(t => t.TicketId == ticketId).Include(t => t.BookingTicket).FirstOrDefault();
+
+                var bookingTicketOld = ticket.BookingTicket;
+                bookingTicketOld.Quantity -= 1;
+
+                BookingTicket bookingTicket = new BookingTicket
+                {
+                    CustomerId = ticket.BookingTicket.CustomerId,
+                    Quantity = 1,
+                    BookingDate = DateTime.UtcNow.AddHours(7)
+                };
+                context.Add(bookingTicket);
+                context.SaveChanges();
+
+                if(ticket != null)
+                {
+                    ticket.BookingId = bookingTicket.BookingId;
+                    ticket.SeatId = seatId;
+                    ticket.ScheduleId = scheduleId;
+                    context.Update(ticket);
+                    context.SaveChanges();
+                }
+
+                return Ok(ticket);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

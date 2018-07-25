@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.luulac.cinemaapplication.R;
+import com.example.luulac.cinemaapplication.activities.ChangeTicketActivity;
 import com.example.luulac.cinemaapplication.activities.OrderDetailActivity;
 import com.example.luulac.cinemaapplication.data.models.TicketModel;
 import com.example.luulac.cinemaapplication.services.BaseService;
@@ -68,8 +69,7 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
                 holder.btnResellTicket.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        confirmResellTicket(data.get(position).getTicketId(), holder.btnResellTicket, holder.btnChangeTicket, position, holder.tvTicketStatus);
-
+                        confirmResellTicket(data.get(position).getTicketId());
                     }
                 });
 
@@ -77,7 +77,22 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
                 holder.btnChangeTicket.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context, "Click to button Change ticket", Toast.LENGTH_SHORT).show();
+                        if (onItemClickedListener != null) {
+                            new AlertDialog.Builder(context)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setTitle("Xác nhận đổi lại vé")
+                                    .setMessage("Bạn muốn đổi lại vé này?")
+                                    .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //xy ly doi lai ve o day
+                                            onItemClickedListener.onItemClick(position);
+                                        }
+                                    })
+                                    .setNegativeButton("Hủy", null)
+                                    .show();
+                        }
+
                     }
                 });
 
@@ -88,7 +103,7 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
                 holder.btnResellTicket.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        confirmCancelResellTicket(data.get(position).getTicketId(), holder.btnResellTicket, holder.btnChangeTicket, position, holder.tvTicketStatus);
+                        confirmCancelResellTicket(data.get(position).getTicketId());
 
                     }
                 });
@@ -132,7 +147,7 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
 
     private TicketModel ticketModel;
 
-    public void confirmResellTicket(final int ticketId, final Button btnResellTicket, final Button btnChangeTicket, final int position, final TextView tvStatus) {
+    public void confirmResellTicket(final int ticketId) {
         new AlertDialog.Builder(context)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Xác nhận bán lại vé")
@@ -166,8 +181,7 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
                 .show();
     }
 
-
-    public void confirmCancelResellTicket(final int ticketId, final Button btnResellTicket, final Button btnChangeTicket, final int position, final TextView tvStatus) {
+    public void confirmCancelResellTicket(final int ticketId) {
         new AlertDialog.Builder(context)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Xác nhận hủy bán lại vé")
@@ -239,5 +253,15 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
                     }
                 })
                 .show();
+    }
+
+    public interface OnItemClickedListener {
+        void onItemClick(int position);
+    }
+
+    private PurchasedTicketAdapter.OnItemClickedListener onItemClickedListener;
+
+    public void setOnItemClickedListener(PurchasedTicketAdapter.OnItemClickedListener onItemClickedListener) {
+        this.onItemClickedListener = onItemClickedListener;
     }
 }

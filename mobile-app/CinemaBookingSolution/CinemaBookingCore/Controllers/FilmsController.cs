@@ -31,7 +31,7 @@ namespace CinemaBookingCore.Controllers
             }
             else
             {
-                films = context.Film.ToList().Where(f => f.FilmStatus == 0);
+                films = context.Film.ToList().Where(f => f.FilmStatus == 2);
             }
 
             return Ok(films);

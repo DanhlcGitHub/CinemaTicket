@@ -72,7 +72,7 @@ public class OrderTicketActivity extends AppCompatActivity {
 
         //call service from server to get data to show in order ticket activity
         OrderService orderService = ServiceBuilder.buildService(OrderService.class);
-        Call<OrderChoiceTicketModel> request = orderService.getOrderChoiceTicket(filmTranfer.getFilmId(), filmTranfer.getRoomId(), filmTranfer.getGroupId(), filmTranfer.getScheduleId());
+        Call<OrderChoiceTicketModel> request = orderService.getOrderChoiceTicket(filmTranfer.getScheduleId());
 
         //receiving and process data from the server
         request.enqueue(new Callback<OrderChoiceTicketModel>() {

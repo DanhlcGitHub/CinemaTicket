@@ -6,11 +6,6 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAd3BYtSiM6keUU9dCZ0ZU/wAAAAACAAAAAAAQZgAAAAEAACAAAACGAv77p24ZRR9Pn5IacGZuZPpIyTJcYkb7M+axMUxxMwAAAAAOgAAAAAIAACAAAACMgGRkvoyPxMxKLuguS2YjUnd9wxlXOjA5xCUGdSomfYAAAADJWkAaowIUBK4nfmDhGzrI7pkW8Pqk7IpGpWrAWGUSYpFymbCo6QiGiZN3Wso3thHAbLR1clKORR5BjFlNHDCheCD52eZFtCegMc4T7Ry6AqDBM59Y4ijz2Kk7toSw3hmhEZRTduGwW2hhCslSv0ASRaCo6HSHpYbnQZrnhiDzE0AAAABGpOidHAb1r+I1ETcBcaOwtEATW0C4zrv3nwbmyA5AUmv4+eAx2A3mN+6hJhlWTsmVs3mBHY5Ui951n9N6XR9H</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAd3BYtSiM6keUU9dCZ0ZU/wAAAAACAAAAAAAQZgAAAAEAACAAAABi8qUZ+UHmBMl/GVh5fEm1edFeL0jpRXCr90A0eT5yFAAAAAAOgAAAAAIAACAAAABNy7dKV54f5ESmI+fN4tGLu7rHTRIteQuC366/qx8a8IAAAACnZdgX77RiMx6C2IjDx1JnsazwhiE0FE1G/SjivMfFe6qXaZj30UpraOS5530bQFFL5nKvgaSs1WNvd8g5wlWymsEtgPkGx2AdDIyF8FCsOkIlcSyrxrBYfUwY2CO5a92G3Vlcn3FuS5c+amac70RtN3Dl0DlMgxgm2OMYV2/u2UAAAACIiaRzDRtv2bwubetBSNj1fyDJqj37AN5pF5XQVj9Me7rVA0LKnuN5uKjnzQXv0I9sBxEhnR8y3crQmU6BRz54</EncryptedPassword>
   </PropertyGroup>
-  <ItemGroup>
-    <DestinationConnectionStrings Include="CinemaBookingConnectionString">
-      <Value>Data Source=CinemaBookingDB.database.windows.net;Initial Catalog=CinemaBookingDB;Persist Security Info=True;User ID=CinemaBookingDB;Password=Capstone@2018</Value>
-    </DestinationConnectionStrings>
-  </ItemGroup>
 </Project>

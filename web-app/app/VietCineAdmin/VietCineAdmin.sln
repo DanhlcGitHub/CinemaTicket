@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VietCineAdmin", "VietCineAdmin\VietCineAdmin.csproj", "{9AD8D505-0ED6-44B8-9F95-17ECB056C663}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VietCineAdmin", "CrawlCinemaFilm\VietCineAdmin.csproj", "{AB3FBACA-C3E7-4054-B105-CB82676CDD0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9AD8D505-0ED6-44B8-9F95-17ECB056C663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9AD8D505-0ED6-44B8-9F95-17ECB056C663}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9AD8D505-0ED6-44B8-9F95-17ECB056C663}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9AD8D505-0ED6-44B8-9F95-17ECB056C663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB3FBACA-C3E7-4054-B105-CB82676CDD0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB3FBACA-C3E7-4054-B105-CB82676CDD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB3FBACA-C3E7-4054-B105-CB82676CDD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB3FBACA-C3E7-4054-B105-CB82676CDD0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFC134E2-3799-420F-A8CE-2A81671476DA}
 	EndGlobalSection
 EndGlobal

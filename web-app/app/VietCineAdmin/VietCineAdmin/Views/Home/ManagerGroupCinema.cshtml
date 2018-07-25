@@ -1,0 +1,105 @@
+﻿<div ng-app="homeModule" ng-controller="groupController">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">List Group Cinema</h3>
+                    </div>
+                   
+                    <div  class="col-3">
+                        <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#modal-group">Create Group Cinema</button>
+                    </div>
+
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Group Name</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="group in ListGroupCinema">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{group.name}}</td>
+                                    <td>{{group.address}}</td>
+                                    <td>{{group.email}}</td>
+                                    <td>{{group.phone}}</td>
+                                    <td><button type="button" class="btn btn-block btn-info" ng-click="clickDetail($index)" data-toggle="modal" data-target="#modal-group">Detail</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+    <div class="modal fade" id="modal-group">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Group Modal</h4>
+                </div>
+                <form role="form" id="form-group">
+                    <div class="modal-body">
+                        <div class="box box-primary">
+                            <div class="box-body">
+                                <input type="hidden" class="form-control" id="groupId" name="groupId" value="0">
+
+                                <div class="form-group">
+                                    <label for="groupName">Group Name</label>
+                                    <input type="text" class="form-control" id="groupName" name="groupName" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" id="address" name="address" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" class="form-control" id="phone" name="phone" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">logoImg</label>
+                                    <input type="text" class="form-control" id="logoImg" name="logoImg" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" ng-click="clearForm()" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="createGroupCinema()">Save changes</button>
+                    </div>
+                </form>
+            </div>
+            <div class="alert alert-success text-center" id="alert">Success!</div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+<script src="~/Content/js/group.js"></script>

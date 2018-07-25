@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div ng-app="crawlModule" ng-controller="crawlController">
+    <div class="card-header">
+        <h3 class="card-title">Crawl Film Data</h3>
+        <button class="btn btn-success float-right" ng-click="viewAddedList()">View Added List</button>
+    </div>
+    <div id="customFilterForm" class="card-body">
+        <div class="form-group has-warning">
+            <label class="control-label" for="inputWarning">
+                <i class="fa fa-calendar"></i> Input date for crawl  ( {{CrawlFilmData.length}} item found )
+
+            </label>
+            <select id="monthPicker" class="form-control" required>
+                <option disabled selected value="null"> -- select a month -- </option>
+                <option ng-repeat="m in months" value="{{m.num}}">{{m.name}}</option>
+            </select>
+
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="loader" id="crawlLoader">
+
+            </div>
+            <div class="row" id="showFilmArea">
+                <div class="col-md-6" ng-repeat="aFilm in CrawlFilmData">
+                    <!-- Box Comment -->
+                    <div class="card card-widget">
+                        <div class="card-header">
+                            <div class="user-block">
+                                <img class="img-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2oPUCMfCF9AN1oozvrpBR-PczvZhIo1eSPfXmmlLjLo4FXHqZ" alt="User Image">
+                                <span class="username"><a href="#">{{aFilm.name}}</a></span>
+                                <span class="description"><b>{{aFilm.restristed}}</b> {{aFilm.filmLength}}   -   {{aFilm.genre}}</span>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img class="img-fluid pad" ng-src="{{aFilm.picture}}" alt="Photo">
+                                </div>
+                                <div class="col-md-9">
+                                    <p style="height:100px; overflow-y: hidden;">{{aFilm.description}}</p>
+                                    <span><b>imdb: </b> {{aFilm.imdb}}</span>
+                                    <br />
+                                    <span><b>Dicrector: </b> {{aFilm.author}}</span>
+                                    <br />
+                                    <span><b>Stars: </b> {{aFilm.actors}}</span>
+                                    <br />
+                                    <a target="_blank" href="{{aFilm.trailerLink}}">Trailer link</a>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="col-md-12">
+                                <button ng-click="addFilmToList(aFilm)" type="button" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> add film</button>
+                                <span class="float-right text-muted">{{aFilm.releaseDate}}</span>
+                            </div>
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+        <!-- added Film Modal -->
+        <div class="modal fade" id="addedFilmModal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important">
+
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header d-block" style="background-color:#e8e8e8">
+                        <h4>Added Film ({{addedFilmList.length}})</h4>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="row modal-body justify-content-center align-self-center ">
+                        <div class="col-md-6" ng-repeat="aFilm in addedFilmList">
+                            <!-- Box Comment -->
+                            <div class="card card-widget">
+                                <div class="card-header" style="background:#f5c518">
+                                    <div class="user-block">
+                                        <img class="img-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2oPUCMfCF9AN1oozvrpBR-PczvZhIo1eSPfXmmlLjLo4FXHqZ" alt="User Image">
+                                        <span class="username">{{aFilm.name}}</span>
+                                        <span class="description"><b>{{aFilm.restristed}}</b> {{aFilm.filmLength}}   -   {{aFilm.genre}}</span>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img class="img-fluid pad" ng-src="{{aFilm.picture}}" alt="Photo">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <p style="height:100px; overflow-y: hidden;">{{aFilm.description}}</p>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="col-md-12">
+                                        <button ng-click="removeFilmToList(aFilm)" type="button" class="btn btn-default btn-sm"><i class="fa fa-minus"></i> remove film</button>
+                                        <span class="float-right text-muted">publish in July 6</span>
+                                    </div>
+                                </div>
+                                <!-- /.card-footer -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button ng-click="saveFilmToDB()" id="dismissBtn" type="button" class="btn btn-danger" data-dismiss="modal">Save to db</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- cancelFilmList Modal -->
+        <div class="modal fade" id="cancelFilmModal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important">
+                <div class="modal-content">
+                    <div class="row" style="margin:auto;">
+                        <h4 style="color:#dc3545; font-weight:600">These {{cancelFilmList.length}} was canceled cause not valid information or dupplicate</h4>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6" ng-repeat="aFilm in cancelFilmList">
+                            <!-- Box Comment -->
+                            <div class="card card-widget">
+                                <div class="card-header">
+                                    <div class="user-block">
+                                        <img class="img-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2oPUCMfCF9AN1oozvrpBR-PczvZhIo1eSPfXmmlLjLo4FXHqZ" alt="User Image">
+                                        <span class="username"><a href="#">{{aFilm.name}}</a></span>
+                                        <span class="description"><b>{{aFilm.restristed}}</b> {{aFilm.filmLength}}   -   {{aFilm.genre}}</span>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img class="img-fluid pad" ng-src="{{aFilm.picture}}" alt="Photo">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <span><b>imdb: </b> {{aFilm.imdb}}</span>
+                                            <br />
+                                            <span><b>Dicrector: </b> {{aFilm.author}}</span>
+                                            <br />
+                                            <span><b>Stars: </b> {{aFilm.actors}}</span>
+                                            <br />
+                                            <a target="_blank" href="{{aFilm.trailerLink}}">Trailer link</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-footer -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+

@@ -239,6 +239,7 @@
     <Compile Include="Utility\EncryptUtility.cs" />
     <Compile Include="Utility\MailUtility.cs" />
     <Compile Include="Utility\RandomUtility.cs" />
+    <Compile Include="Utility\RankingUtility.cs" />
     <Compile Include="Utility\ScheduleUtility.cs" />
     <Compile Include="Utility\DateUtility.cs" />
     <Compile Include="Utility\DBUtility.cs" />
@@ -400,6 +401,9 @@
     <Content Include="Views\Home\ChooseTicketAndSeat.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Home\Error404.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EntityDeploy Include="CinemaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CinemaModel.Designer.cs</LastGenOutput>
@@ -417,9 +421,6 @@
       <DependentUpon>CinemaModel.edmx</DependentUpon>
       <LastGenOutput>CinemaModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Home\Error404.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\PublishProfiles\CinemaBookingTicket - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\CinemaBookingTicket - Web Deploy.pubxml" />
   </ItemGroup>

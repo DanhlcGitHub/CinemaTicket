@@ -14,6 +14,7 @@ namespace CinemaTicket
     
     public partial class BookingTicket
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BookingTicket()
         {
             this.Tickets = new HashSet<Ticket>();
@@ -28,6 +29,7 @@ namespace CinemaTicket
         public Nullable<System.DateTime> bookingDate { get; set; }
     
         public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

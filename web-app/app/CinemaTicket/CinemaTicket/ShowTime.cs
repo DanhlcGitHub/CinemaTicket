@@ -14,6 +14,7 @@ namespace CinemaTicket
     
     public partial class ShowTime
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ShowTime()
         {
             this.MovieSchedules = new HashSet<MovieSchedule>();
@@ -24,6 +25,7 @@ namespace CinemaTicket
         public string endTime { get; set; }
         public Nullable<double> startTimeDouble { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
     }
 }

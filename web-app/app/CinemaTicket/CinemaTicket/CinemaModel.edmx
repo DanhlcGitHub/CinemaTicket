@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CinemaBookingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CinemaBookingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminAccount">
           <Key>
             <PropertyRef Name="adminId" />
@@ -88,6 +88,7 @@
           <Property Name="posterPicture" Type="nvarchar" MaxLength="255" />
           <Property Name="additionPicture" Type="nvarchar" MaxLength="1000" />
           <Property Name="filmStatus" Type="int" />
+          <Property Name="ticketSold" Type="int" />
         </EntityType>
         <EntityType Name="GroupCinema">
           <Key>
@@ -460,7 +461,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CinemaBookingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CinemaBookingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AdminAccount">
           <Key>
             <PropertyRef Name="adminId" />
@@ -552,6 +553,7 @@
           <Property Name="posterPicture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="additionPicture" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="filmStatus" Type="Int32" />
+          <Property Name="ticketSold" Type="Int32" />
           <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleFilm001" FromRole="Film" ToRole="MovieSchedule" />
         </EntityType>
         <EntityType Name="GroupCinema">
@@ -1036,6 +1038,7 @@
                 <ScalarProperty Name="posterPicture" ColumnName="posterPicture" />
                 <ScalarProperty Name="additionPicture" ColumnName="additionPicture" />
                 <ScalarProperty Name="filmStatus" ColumnName="filmStatus" />
+                <ScalarProperty Name="ticketSold" ColumnName="ticketSold" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

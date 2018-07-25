@@ -1,5 +1,6 @@
 ﻿using CinemaTicket.Constant;
 using CinemaTicket.Service;
+using CinemaTicket.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,25 @@ namespace CinemaTicket.Controllers
         public ActionResult Index()
         {
             FilmService filmService = new FilmService();
-            List<Film> hightLight = filmService.FindByTop(4);
-            ViewBag.hightLight = hightLight;
+            //
+            List<Film> filmList = filmService.FindBy(f => f.filmStatus == (int)FilmStatus.showingMovie);// 
+            var dictionaryRank = new Dictionary<Film, int>();
+            foreach (var item in filmList)
+            {
+                int rank = RankingUtility.getFilmRank(item);
+                dictionaryRank.Add(item, rank);
+            }
+            var items = from pair in dictionaryRank
+                        orderby pair.Value descending
+                        select pair;
+
+            List<Film> hightlightFilm = new List<Film>();
+            foreach (KeyValuePair<Film, int> pair in items.Take(4))
+            {
+                hightlightFilm.Add(pair.Key);
+            }
+
+            ViewBag.hightLight = hightlightFilm;
             return View();
         }
 

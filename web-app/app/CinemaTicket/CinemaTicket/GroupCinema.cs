@@ -14,6 +14,7 @@ namespace CinemaTicket
     
     public partial class GroupCinema
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GroupCinema()
         {
             this.Cinemas = new HashSet<Cinema>();
@@ -28,8 +29,11 @@ namespace CinemaTicket
         public string email { get; set; }
         public string phone { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cinema> Cinemas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PartnerAccount> PartnerAccounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TypeOfSeat> TypeOfSeats { get; set; }
     }
 }

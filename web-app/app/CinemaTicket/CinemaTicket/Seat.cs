@@ -14,6 +14,7 @@ namespace CinemaTicket
     
     public partial class Seat
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Seat()
         {
             this.Tickets = new HashSet<Ticket>();
@@ -29,6 +30,7 @@ namespace CinemaTicket
     
         public virtual Room Room { get; set; }
         public virtual TypeOfSeat TypeOfSeat { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

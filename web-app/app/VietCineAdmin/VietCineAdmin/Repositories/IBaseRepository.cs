@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrawlCinemaFilm.Repositories
+namespace VietCineAdmin.Repositories
 {
     interface IBaseRepository<T> where T : class
     {

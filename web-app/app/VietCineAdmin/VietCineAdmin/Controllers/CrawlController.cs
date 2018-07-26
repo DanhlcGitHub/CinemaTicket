@@ -1,5 +1,4 @@
-﻿using CrawlController.Constant;
-using CrawlController.Service;
+﻿using VietCineAdmin.Services;
 using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
 using System;
@@ -9,8 +8,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using VietCineAdmin.Constant;
 
-namespace CrawlCinemaFilm.Controllers
+namespace VietCineAdmin.Controllers
 {
     public class CrawlController : Controller
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using CrawlCinemaFilm.Repositories;
+using VietCineAdmin.Repositories;
 
-namespace CrawlCinemaFilm.Services
+namespace VietCineAdmin.Services
 {
     interface IDigitalTypeService
     {

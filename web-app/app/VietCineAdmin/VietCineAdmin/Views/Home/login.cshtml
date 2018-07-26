@@ -1,7 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "login";
+    Layout = null;
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +12,17 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/Content/css/home.css">
-    <link rel="stylesheet" href="~/Content/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="~/Content/css/index.css">
-    <!-- iCheck 
+    <link href="~/Content/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+    <!-- iCheck
     <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
-
         label.error {
             display: inline-block;
             color: #8b0000;
         }
+
         button.ex1 {
             background-color: #FF0000; /* Green */
             border: none;
@@ -36,9 +35,12 @@
             cursor: pointer;
             border-radius: 4px;
         }
+
+
     </style>
 </head>
 <body class="hold-transition login-page" ng-app="loginModule" ng-controller="loginController">
+    
     <div class="login-box">
         <div class="login-logo">
             <b>Viet </b>CINE</a>
@@ -55,12 +57,6 @@
                     <input id="txtPassword" name="txtPassword" value="" type="password" class="form-control" placeholder="Password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-                <div class="form-group">
-                    <select id="inputRole" name="inputRole" class="form-control" required>
-                        <option disabled selected> -- select a role -- </option>
-                        <option ng-repeat="role in roleList" value="{{role.key}}">{{role.value}}</option>
-                    </select>
-                </div>
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="checkbox">
@@ -71,7 +67,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-lg-4">
-                        <div class="loader" id="loader"></div>
+                        <div class="loader-small" id="loader"></div>
                         <button id="btnSubmit" type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                     </div>
                     <!-- /.col -->
@@ -88,7 +84,7 @@
                     Google+
                 </a>
             </div>
-            
+
             <a href="#">I forgot my password</a><br>
             <a href="register.html" class="text-center">Register a new membership</a>-->
         </div>

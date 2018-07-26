@@ -1,10 +1,10 @@
-﻿using CrawlCinemaFilm;
+﻿using VietCineAdmin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CrawlController.Constant
+namespace VietCineAdmin.Constant
 {
     public enum FilmStatus
     {

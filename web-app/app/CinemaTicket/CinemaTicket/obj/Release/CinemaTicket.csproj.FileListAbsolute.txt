@@ -43,11 +43,8 @@ E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\Newtonsoft.Json.dll
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.dll
-E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.Formatting.dll
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.WebRequest.dll
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Helpers.dll
-E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Http.dll
-E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Http.WebHost.dll
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Mvc.dll
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Razor.dll
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Deployment.dll
@@ -57,11 +54,8 @@ E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\EntityFramework.SqlServer.xml
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\Newtonsoft.Json.xml
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.xml
-E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.Formatting.xml
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.WebRequest.xml
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Helpers.xml
-E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Http.xml
-E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Http.WebHost.xml
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Mvc.xml
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Razor.xml
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.xml

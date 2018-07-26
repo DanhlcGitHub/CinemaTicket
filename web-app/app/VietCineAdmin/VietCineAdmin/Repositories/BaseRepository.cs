@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrawlCinemaFilm.Repositories
+namespace VietCineAdmin.Repositories
 {
     class BaseRepository<T> : IBaseRepository<T> where T : class
     {

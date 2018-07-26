@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CrawlCinemaFilm</RootNamespace>
-    <AssemblyName>CrawlCinemaFilm</AssemblyName>
+    <RootNamespace>VietCineAdmin</RootNamespace>
+    <AssemblyName>VietCineAdmin</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -127,7 +127,6 @@
     <Compile Include="AdminAccount.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="BaseRepository.cs" />
     <Compile Include="BookingTicket.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
@@ -152,7 +151,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CinemaModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Constant.cs" />
+    <Compile Include="Constant\Constant.cs" />
     <Compile Include="Controllers\CrawlController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Customer.cs">
@@ -164,15 +163,12 @@
     <Compile Include="Film.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FilmRepository.cs" />
-    <Compile Include="FilmService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GroupCinema.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="IBaseRepository.cs" />
     <Compile Include="MovieSchedule.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
@@ -217,6 +213,7 @@
     <Compile Include="UserAccount.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\EncryptUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -234,6 +231,7 @@
     </Content>
     <Content Include="Content\css\AdminLTE.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\login.css" />
     <Content Include="Content\js\angular.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\CrawlModule.js" />
@@ -241,8 +239,14 @@
     <Content Include="Content\js\home.js" />
     <Content Include="Content\js\jquery-3.3.1.min.js" />
     <Content Include="Content\js\jquery-ui.min.js" />
+    <Content Include="Content\js\jquery.validate.min.js" />
+    <Content Include="Content\js\LoginModule.js" />
+    <Content Include="Content\js\common.js" />
     <Content Include="Content\js\partner.js" />
     <Content Include="Global.asax" />
+    <Content Include="Content\img\repository\logo.png" />
+    <Content Include="Content\img\repository\logout.png" />
+    <Content Include="Content\img\repository\Post-notification.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -288,6 +292,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

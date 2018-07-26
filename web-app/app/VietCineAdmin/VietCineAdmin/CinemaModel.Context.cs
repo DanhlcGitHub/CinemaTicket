@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CrawlCinemaFilm
+namespace VietCineAdmin
 {
     using System;
     using System.Data.Entity;

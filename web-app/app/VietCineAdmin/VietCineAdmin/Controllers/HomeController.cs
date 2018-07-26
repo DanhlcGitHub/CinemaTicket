@@ -1,17 +1,56 @@
-﻿using CrawlCinemaFilm.Services;
+﻿using VietCineAdmin.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VietCineAdmin.Utility;
+using VietCineAdmin.Constant;
 
-namespace CrawlCinemaFilm.Controllers
+namespace VietCineAdmin.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            return View();
+            var obj = Session[AppSession.User];
+            if (obj != null)
+            {
+                return View("~/Views/Home/index.cshtml");
+            }
+            return View("~/Views/Home/login.cshtml");
+        }
+
+        public JsonResult logout()
+        {
+            var obj = new
+            {
+                status = "ok"
+            };
+            Session.Clear();
+            return Json(obj);
+        }
+
+        public JsonResult CheckLogin(string username, string password, string role)
+        {
+            var obj = new
+            {
+                valid = "true",
+            };
+            string encryptedPassword = EncryptUtility.EncryptString(password);
+            List<AdminAccount> adminList = new AdminAccountService().FindBy(u => u.adminId == username
+                && u.adminPassword == encryptedPassword);
+            if (adminList != null && adminList.Count != 0)
+            {
+                AdminAccount p = adminList.First();
+                if (p != null)
+                {
+                    Session[AppSession.User] = p;
+                    return Json(obj);
+                }
+            }
+
+            return null;
         }
 
         public ActionResult ManagerPartnerAccount()
@@ -154,8 +193,8 @@ namespace CrawlCinemaFilm.Controllers
 
         public JsonResult GetAllGroupCinema()
         {
-            
-            using(var context = new CinemaBookingDBEntities())
+
+            using (var context = new CinemaBookingDBEntities())
             {
                 var listGroupCinema = context.GroupCinemas.ToList();
 
@@ -189,7 +228,7 @@ namespace CrawlCinemaFilm.Controllers
 
             var account = service.FindByID(partnerId);
 
-            if(account != null)
+            if (account != null)
             {
                 account.phone = phone;
                 account.email = email;

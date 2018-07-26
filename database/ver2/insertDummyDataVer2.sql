@@ -394,22 +394,35 @@ INSERT INTO ShowTime (startTime,endTime) VALUES (N'21:00',N'23:00')
 INSERT INTO ShowTime (startTime,endTime) VALUES (N'22:00',N'24:00')
 /*------------------------------------------- insert cinema manager --------------- */
 INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
-VALUES (N'manager1',N'123456', N'Danh le',N'0934526123',N'Danhle@gmail.com',3,1)
+VALUES (N'manager1',N'7C4A8D09CA3762AF61E59520943DC26494F8941B', N'Danh le',N'0934526123',N'Danhle@gmail.com',3,1)
 
 INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
-VALUES (N'manager2',N'123456', N'Duy hung',N'0934526888',N'Duyhung@gmail.com',3,1)
+VALUES (N'manager2',N'7C4A8D09CA3762AF61E59520943DC26494F8941B', N'Duy hung',N'0934526888',N'Duyhung@gmail.com',3,1)
 
 INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
-VALUES (N'manager3',N'123456', N'Huy Hoang',N'0934426123',N'huyhoang@gmail.com',4,1)
+VALUES (N'manager3',N'7C4A8D09CA3762AF61E59520943DC26494F8941B', N'Huy Hoang',N'0934426123',N'huyhoang@gmail.com',4,1)
 
 INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
-VALUES (N'manager4',N'123456', N'Trong Duc',N'0911526123',N'trongduc@gmail.com',4,1)
+VALUES (N'manager4',N'7C4A8D09CA3762AF61E59520943DC26494F8941B', N'Trong Duc',N'0911526123',N'trongduc@gmail.com',4,1)
 
 INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
-VALUES (N'manager5',N'123456', N'Minh Hoa',N'0934529923',N'Minhhoa@gmail.com',5,1)
+VALUES (N'manager5',N'7C4A8D09CA3762AF61E59520943DC26494F8941B', N'Minh Hoa',N'0934529923',N'Minhhoa@gmail.com',5,1)
 
 INSERT INTO CinemaManager (managerId,managerPassword,managerName,phone,email,cinemaId,isAvailable) 
-VALUES (N'manager6',N'123456', N'Duc Manh',N'0934526123',N'Ducmanh@gmail.com',6,1)
+VALUES (N'manager6',N'7C4A8D09CA3762AF61E59520943DC26494F8941B', N'Duc Manh',N'0934526123',N'Ducmanh@gmail.com',6,1)
 
+/*--------------------------------- insert partner -------------------------------*/
+
+INSERT INTO PartnerAccount (partnerId,partnerPassword,partnerName,phone,email,groupOfCinemaId,isAvailable) 
+VALUES (N'manager1',N'7C4A8D09CA3762AF61E59520943DC26494F8941B', N'Duc Manh',N'0934526123',N'partner1@gmail.com',1,1)
+
+INSERT INTO PartnerAccount (partnerId,partnerPassword,partnerName,phone,email,groupOfCinemaId,isAvailable) 
+VALUES (N'manager2',N'7C4A8D09CA3762AF61E59520943DC26494F8941B', N'Hoang Ho Si',N'0934526123',N'partner1@gmail.com',2,1)
+
+INSERT INTO PartnerAccount (partnerId,partnerPassword,partnerName,phone,email,groupOfCinemaId,isAvailable) 
+VALUES (N'manager3',N'7C4A8D09CA3762AF61E59520943DC26494F8941B', N'Danh',N'0934526123',N'partner1@gmail.com',3,1)
+
+INSERT INTO PartnerAccount (partnerId,partnerPassword,partnerName,phone,email,groupOfCinemaId,isAvailable) 
+VALUES (N'manager4',N'7C4A8D09CA3762AF61E59520943DC26494F8941B', N'Danh',N'0934526123',N'partner1@gmail.com',4,1)
 
 

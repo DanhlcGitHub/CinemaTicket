@@ -1,5 +1,4 @@
 ﻿<div ng-app="homeModule" ng-controller="groupController">
-
     <div class="card-header">
         <h3 class="card-title">List Group Cinema Data</h3>
         <button class="btn btn-success float-right" data-toggle="modal" data-target="#modal-group">Create Group Cinema</button>
@@ -59,7 +58,7 @@
 
                                 <div class="form-group">
                                     <label for="phone">Phone</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" value="">
+                                    <input type="number" class="form-control" id="phone" name="phone" value="">
                                 </div>
 
                                 <div class="form-group">
@@ -69,7 +68,12 @@
                                 <div class="form-group">
                                     <label for="email">logoImg</label>
                                     <input type="text" class="form-control" id="logoImg" name="logoImg" value="">
-                                </div>                           
+                                </div>     
+                               
+                                <div class="form-group">
+                                    <label for="defaultPrice">Default Price</label>
+                                    <input type="number" min="40" max="150" id="priceDefault" name="priceDefault" class="form-control col-sm-6" style="margin-right:15px" placeholder="Enter price VND" required>
+                                </div>
                             </div>
                         </div>
                     </div>

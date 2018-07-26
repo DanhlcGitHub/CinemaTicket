@@ -37,6 +37,8 @@ var groupController = function ($scope, $http) {
                 var phone = $("#phone").val();
                 var email = $("#email").val();
                 var logoImg = $("#logoImg").val();
+                var priceDefault = $("#priceDefault").val();
+                
 
                 $http({
                     method: "POST",
@@ -47,7 +49,8 @@ var groupController = function ($scope, $http) {
                         address: address,
                         phone: phone,
                         email: email,
-                        logoImg: logoImg
+                        logoImg: logoImg,
+                        priceDefault: priceDefault
                     }
                 }).then(function (response) {
 
@@ -64,7 +67,7 @@ var groupController = function ($scope, $http) {
     };
 
     $scope.clearForm = function () {
-        $("form-group")[0].reset();
+        document.getElementById("form-group").reset()
     };
 
 };
@@ -93,6 +96,10 @@ var validationManager = {
                 logoImg: {
                     required: true
                 },
+                defaultPrice: {
+                    required: true,
+
+                }
 
             },
             messages: {

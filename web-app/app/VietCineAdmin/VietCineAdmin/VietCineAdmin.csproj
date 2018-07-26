@@ -188,6 +188,7 @@
     <Compile Include="Repositories\GroupCinemaRepository.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
     <Compile Include="Repositories\PartnerAccountRepository.cs" />
+    <Compile Include="Repositories\TypeOfSeatRepository.cs" />
     <Compile Include="Room.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
@@ -201,6 +202,7 @@
     <Compile Include="Services\FilmService.cs" />
     <Compile Include="Services\GroupCinemaServcie.cs" />
     <Compile Include="Services\PartnerAccountService.cs" />
+    <Compile Include="Services\TypeOfSeatService.cs" />
     <Compile Include="ShowTime.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>

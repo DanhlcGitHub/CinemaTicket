@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using VietCineAdmin.Utility;
 using VietCineAdmin.Constant;
+using VietCineAdmin.Service;
 
 namespace VietCineAdmin.Controllers
 {
@@ -241,7 +242,8 @@ namespace VietCineAdmin.Controllers
             return Json(listPartnerAccount, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult CreateGroupCinema(int groupId, String groupName, String address, String phone, String email, String logoImg)
+        public JsonResult CreateGroupCinema(int groupId, String groupName, String address, String phone,
+                                                                    String email, String logoImg, Double priceDefault)
         {
             GroupCinemaServcie service = new GroupCinemaServcie();
 
@@ -266,7 +268,20 @@ namespace VietCineAdmin.Controllers
                     email = email,
                     logoImg = logoImg
                 };
+
                 service.Create(groupCinema);
+
+                TypeOfSeat typeOfSeat = new TypeOfSeat
+                {
+                    groupId = groupCinema.GroupId,
+                    typeName = "vé người lớn",
+                    price = priceDefault,
+                    capacity = 1
+                };
+
+                TypeOfSeatService typeOfSeatService = new TypeOfSeatService();
+
+                typeOfSeatService.Create(typeOfSeat);
             }
 
             var listGroupCinema = service.GetAll();

@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net;
 using System.IO;
+using System.Data.SqlClient;
 
 namespace CinemaBookingCore.Controllers
 {
@@ -39,7 +40,7 @@ namespace CinemaBookingCore.Controllers
         }
 
 
-        public String getAndroidMessage(String title, String body, String image, String message, List<String> listUserAccountId, String to)
+        public String getAndroidMessage(String title, String body, String image, String message, String accountId, String to)
         {
             MessageModel model = new MessageModel
             {
@@ -53,13 +54,9 @@ namespace CinemaBookingCore.Controllers
                 {
                     { "image", image },
                     { "message", message },
+                    { "accountId",  accountId}
                 },
             };
-
-            foreach (var item in listUserAccountId)
-            {
-                model.data.Add(item, item);
-            }
 
             return JsonConvert.SerializeObject(model);
 
@@ -79,78 +76,13 @@ namespace CinemaBookingCore.Controllers
             return notification;
         }
 
-        [HttpGet("notificationSchedule")]
-        public String NotificationSchedule()
-        {
-
-            String title = "Đến giờ chiếu phim rồi nè.";
-            String body = "Mau đến rạp nào.";
-            String image = "https://s3.amazonaws.com/user-media.venngage.com/886214-19c392a6acb8bfa85f72fd6051c0284d.png";
-            String message = "nghich message";
-            String to = "/topics/schedule-coming-show-soon";
-
-            DateTime nowDate = DateTime.UtcNow;
-            //GMT +7
-            nowDate = nowDate.AddHours(7);
-
-            //add one hour
-            nowDate = nowDate.AddHours(1);
-
-            List<Ticket> tickets = context.Ticket.Where(t => t.MovieSchedule.ShowTime.StartTimeDouble == nowDate.Hour
-                                                            && t.MovieSchedule.ScheduleDate.Date == nowDate.Date
-                                                            && t.TicketStatus == "buyed")
-                                                            .Include(t => t.MovieSchedule).ThenInclude(ms => ms.ShowTime)
-                                                            .Include(t => t.BookingTicket).ThenInclude(bt => bt.Customer)
-                                                            .ToList();
-
-            List<int> listBookingTicketId = new List<int>();
-            foreach (var ticket in tickets)
-            {
-                int tmpId = (int)ticket.BookingId;
-                if (listBookingTicketId.IndexOf(tmpId) == -1)
-                {
-                    listBookingTicketId.Add(tmpId);
-                }
-            }
-
-            List<int> listCustomerId = new List<int>();
-
-            foreach (var bookingId in listBookingTicketId)
-            {
-                int tmpId = tickets.Where(t => t.BookingId == bookingId).FirstOrDefault().BookingTicket.CustomerId;
-                if (listCustomerId.IndexOf(tmpId) == -1)
-                {
-                    listCustomerId.Add(tmpId);
-                }
-            }
-
-            List<String> listUserId = new List<String>();
-
-            foreach (var customerId in listCustomerId)
-            {
-                String tmpId = tickets.Where(t => t.BookingTicket.CustomerId == customerId).FirstOrDefault().BookingTicket.Customer.UserId;
-                if (listUserId.IndexOf(tmpId) == -1)
-                {
-                    listUserId.Add(tmpId);
-                }
-            }
-
-            String notification = getAndroidMessage(title, body, image, message, listUserId, to);
-
-            Send(notification);
-
-            return notification;
-        }
-
         [HttpGet("notificationScheduleAuto")]
-        public string NotificationScheduleAuto()
+        public IActionResult NotificationScheduleAuto()
         {
+            
             try
             {
-                var startTimeSpan = TimeSpan.Zero;
-                var periodTimeSpan = TimeSpan.FromHours(1);
-
-                var timer = new System.Threading.Timer((e) =>
+                while (true)
                 {
                     DateTime nowDate = DateTime.UtcNow;
                     //GMT +7
@@ -187,14 +119,14 @@ namespace CinemaBookingCore.Controllers
                         }
                     }
 
-                    List<String> listUserId = new List<String>();
+                    List<String> listAccountId = new List<String>();
 
                     foreach (var customerId in listCustomerId)
                     {
                         String tmpId = tickets.Where(t => t.BookingTicket.CustomerId == customerId).FirstOrDefault().BookingTicket.Customer.UserId;
-                        if (listUserId.IndexOf(tmpId) == -1)
+                        if (listAccountId.IndexOf(tmpId) == -1)
                         {
-                            listUserId.Add(tmpId);
+                            listAccountId.Add(tmpId);
                         }
                     }
 
@@ -204,71 +136,15 @@ namespace CinemaBookingCore.Controllers
                     String message = "nghich message";
                     String to = "/topics/schedule-coming-show-soon";
 
-                    String notification = getAndroidMessage(title, body, image, message, listUserId, to);
-
-                    Send(notification);
-
-                }, null, startTimeSpan, periodTimeSpan);
-                return "ok";
-            }
-            catch (Exception)
-            {
-                return "bad";
-            }
-        }
-
-        [HttpGet("getUserAccountNS")]
-        public IActionResult GetUserAccountNS()
-        {
-            try
-            {
-                DateTime nowDate = DateTime.UtcNow;
-                //GMT +7
-                nowDate = nowDate.AddHours(7);
-
-                //add one hour
-                nowDate = nowDate.AddHours(1);
-
-                List<Ticket> tickets = context.Ticket.Where(t => t.MovieSchedule.ShowTime.StartTimeDouble == nowDate.Hour
-                                                                && t.MovieSchedule.ScheduleDate.Date == nowDate.Date
-                                                                && t.TicketStatus == "buyed")
-                                                                .Include(t => t.MovieSchedule).ThenInclude(ms => ms.ShowTime)
-                                                                .Include(t => t.BookingTicket).ThenInclude(bt => bt.Customer)
-                                                                .ToList();
-
-                List<int> listBookingTicketId = new List<int>();
-                foreach (var ticket in tickets)
-                {
-                    int tmpId = (int)ticket.BookingId;
-                    if (listBookingTicketId.IndexOf(tmpId) == -1)
+                    foreach (var accountId in listAccountId)
                     {
-                        listBookingTicketId.Add(tmpId);
+                        String notification = getAndroidMessage(title, body, image, message, accountId, to);
+
+                        Send(notification);
                     }
+
+                    System.Threading.Thread.Sleep(TimeSpan.FromMinutes(15));
                 }
-
-                List<int> listCustomerId = new List<int>();
-
-                foreach (var bookingId in listBookingTicketId)
-                {
-                    int tmpId = tickets.Where(t => t.BookingId == bookingId).FirstOrDefault().BookingTicket.CustomerId;
-                    if (listCustomerId.IndexOf(tmpId) == -1)
-                    {
-                        listCustomerId.Add(tmpId);
-                    }
-                }
-
-                List<String> listUserId = new List<String>();
-
-                foreach (var customerId in listCustomerId)
-                {
-                    String tmpId = tickets.Where(t => t.BookingTicket.CustomerId == customerId).FirstOrDefault().BookingTicket.Customer.UserId;
-                    if (listUserId.IndexOf(tmpId) == -1)
-                    {
-                        listUserId.Add(tmpId);
-                    }
-                }
-
-                return Ok(listUserId);
             }
             catch (Exception)
             {

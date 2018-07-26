@@ -26,7 +26,7 @@ namespace CinemaBookingCore.Controllers
         {
             try
             {
-                List<Ticket> tickets = context.Ticket.Where(t => t.BookingId == bookingTicketId && t.MovieSchedule.ScheduleDate > DateTime.Now)
+                List<Ticket> tickets = context.Ticket.Where(t => t.BookingId == bookingTicketId)
                                                         .Include(t => t.Seat)
                                                         .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Room).ThenInclude(r => r.Cinema)
                                                         .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Film)

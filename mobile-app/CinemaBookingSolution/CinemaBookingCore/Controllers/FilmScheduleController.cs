@@ -354,12 +354,10 @@ namespace CinemaBookingCore.Controllers
 
             foreach (var room in rooms)
             {
-                int roomId = room.RoomId;
-                movieSchedules.AddRange(room.MovieSchedules.OrderBy(ms => ms.ShowTime.StartTimeDouble).Where(
-                                                                    ms => ms.RoomId == roomId
-                                                                    && ms.ScheduleDate >= tmpDate
-                                                                    && ms.ScheduleDate < tmpNextDate
-                                                                 ));
+                movieSchedules.AddRange(room.MovieSchedules.Where(ms => ms.FilmId == filmId
+                                                                  && ms.ScheduleDate >= tmpDate
+                                                                  && ms.ScheduleDate < tmpNextDate
+                                                                 ).OrderBy(ms => ms.ShowTime.StartTimeDouble));
             }
 
             ShowTimeListModel listChild = new ShowTimeListModel();

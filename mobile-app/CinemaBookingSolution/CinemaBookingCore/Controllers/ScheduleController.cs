@@ -118,7 +118,7 @@ namespace CinemaBookingCore.Controllers
 
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest();
             }

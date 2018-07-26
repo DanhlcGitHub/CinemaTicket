@@ -3,6 +3,7 @@ package com.example.luulac.cinemaapplication.services;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
@@ -28,10 +29,10 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
     Target target = new Target() {
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 showNotificationImageLevel26(bitmap);
 
-            }else{
+            } else {
                 showNotificationImage(bitmap);
 
             }
@@ -53,7 +54,7 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
     private void showNotificationImageLevel26(Bitmap bitmap) {
         NotificationHelper helper = new NotificationHelper(getBaseContext());
 
-        Notification.Builder builder = helper.getChannel(MyNotificationModel.title, MyNotificationModel.message,bitmap);
+        Notification.Builder builder = helper.getChannel(MyNotificationModel.title, MyNotificationModel.message, bitmap);
         helper.getManager().notify(0, builder.build());
     }
 
@@ -70,7 +71,7 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
 
-           getImage(remoteMessage);
+            getImage(remoteMessage);
 
         }
 
@@ -79,26 +80,30 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
     }
 
     private void showNotificationImage(Bitmap bitmap) {
-        NotificationCompat.BigPictureStyle style = new NotificationCompat.BigPictureStyle();
-        style.setSummaryText(MyNotificationModel.message);
-        style.bigPicture(bitmap);
 
-        Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        SharedPreferences sharedPreferences = getSharedPreferences("loginInformation", Context.MODE_PRIVATE);
 
-        NotificationCompat.Builder notificationBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(getApplicationContext())
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(MyNotificationModel.title)
-                .setAutoCancel(true)
-                .setSound(defaultSound)
-                .setStyle(style);
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(0, notificationBuilder.build());
+        String accountId = sharedPreferences.getString("username", "");
+        if (MyNotificationModel.accountId.equalsIgnoreCase(accountId)) {
+            NotificationCompat.BigPictureStyle style = new NotificationCompat.BigPictureStyle();
+            style.setSummaryText(MyNotificationModel.message);
+            style.bigPicture(bitmap);
 
+            Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle(MyNotificationModel.title)
+                    .setAutoCancel(true)
+                    .setSound(defaultSound)
+                    .setStyle(style);
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.notify(0, notificationBuilder.build());
+
+        }
     }
 
     private void showNotificationImage(RemoteMessage remoteMessage) {
@@ -107,8 +112,9 @@ public class MyFirebaseMessageService extends FirebaseMessagingService {
     private void getImage(final RemoteMessage remoteMessage) {
         MyNotificationModel.message = remoteMessage.getNotification().getBody();
         MyNotificationModel.title = remoteMessage.getNotification().getTitle();
+        MyNotificationModel.accountId = remoteMessage.getData().get("accountId");
 
-        if(remoteMessage.getData() != null){
+        if (remoteMessage.getData() != null) {
 
             Handler handler = new Handler(Looper.getMainLooper());
 

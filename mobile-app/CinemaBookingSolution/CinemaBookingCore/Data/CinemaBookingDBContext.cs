@@ -15,7 +15,6 @@ namespace CinemaBookingCore.Data
         }
 
         public virtual DbSet<AdminAccount> AdminAccount { get; set; }
-        
         public virtual DbSet<BookingTicket> BookingTicket { get; set; }
         public virtual DbSet<Cinema> Cinema { get; set; }
         public virtual DbSet<CinemaManager> CinemaManager { get; set; }

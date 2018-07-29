@@ -6,6 +6,8 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -94,8 +96,8 @@ namespace ManagerApplication.Controllers.PartnerControler
                 byte[] bytes = br.ReadBytes((Int32)fs.Length);
                 string uriString = @"ftp://waws-prod-dm1-039.ftp.azurewebsites.windows.net/site/wwwroot/Content/img/cinemaLogo/" + fileName;
                 bool isSuccess = UploadUtility.Upload(bytes, uriString);
-                if (!isSuccess) message = "fail"; 
-                }
+                if (!isSuccess) message = "fail";
+            }
             var obj = new
             {
                 message = message,
@@ -178,26 +180,45 @@ namespace ManagerApplication.Controllers.PartnerControler
 
         public JsonResult AddNewEmployee(string empObj)
         {
-            JObject emp = JObject.Parse(empObj);
-            string username = (string)emp.GetValue("username");
-            string name = (string)emp.GetValue("name");
-            string phone = (string)emp.GetValue("phone");
-            string email = (string)emp.GetValue("email");
-            string password = (string)emp.GetValue("password");
-            int cinemaId = (int)emp.GetValue("cinemaId");
+            var obj = new
+            {
+                message = "Create success!"
+            };
+            try
+            {
+                JObject emp = JObject.Parse(empObj);
+                string username = (string)emp.GetValue("username");
+                string name = (string)emp.GetValue("name");
+                string phone = (string)emp.GetValue("phone");
+                string email = (string)emp.GetValue("email");
+                string password = (string)emp.GetValue("password");
+                int cinemaId = (int)emp.GetValue("cinemaId");
+                string encrytedPassword = EncryptUtility.EncryptString(password);
 
-            string encrytedPassword = EncryptUtility.EncryptString(password);
-            CinemaManager cm = new CinemaManager();
-            cm.managerId = username;
-            cm.managerPassword = encrytedPassword;
-            cm.email = email;
-            cm.phone = phone;
-            cm.managerName = name;
-            cm.cinemaId = cinemaId;
-            cm.isAvailable = true;
+                string mailContent = "Your username: " + username + " | password: " + password;
+                string mailSubject = "VietCine | Cinema manager - " + new CinemaService().FindByID(cinemaId).cinemaName;
+                MailUtility.SendEmail(mailSubject, mailContent, email);
+                
+                CinemaManager cm = new CinemaManager();
+                cm.managerId = username;
+                cm.managerPassword = encrytedPassword;
+                cm.email = email;
+                cm.phone = phone;
+                cm.managerName = name;
+                cm.cinemaId = cinemaId;
+                cm.isAvailable = true;
 
-            new CinemaManagerService().Create(cm);
-            return null;
+                new CinemaManagerService().Create(cm);
+            }
+            catch (Exception)
+            {
+                obj = new
+                {
+                    message = "Some error happen, please check your connection!"
+                };
+            }
+            
+            return Json(obj);
         }
 
         public JsonResult UpdateCinema(string cinemaObj)
@@ -221,7 +242,7 @@ namespace ManagerApplication.Controllers.PartnerControler
             c.introduction = introduction;
             if (imagePath != "")
             {
-                c.profilePicture = "Content/img/cinemaLogo/" + imagePath;
+                c.profilePicture = @"https://cinemabookingticket.azurewebsites.net/" + "Content/img/cinemaLogo/" + imagePath;
             }
             new CinemaService().Update(c);
             return null;
@@ -230,7 +251,7 @@ namespace ManagerApplication.Controllers.PartnerControler
         {
             int cineId = Convert.ToInt32(cinemaId);
             Cinema c = new CinemaService().FindByID(cineId);
-            c.profilePicture = "Content/img/cinemaLogo/" + fileName;
+            c.profilePicture = @"https://cinemabookingticket.azurewebsites.net/" + "Content/img/cinemaLogo/" + fileName;
             new CinemaService().Update(c);
             return null;
         }
@@ -258,7 +279,11 @@ namespace ManagerApplication.Controllers.PartnerControler
             c.groupId = groupId;
             if (imagePath != "")
             {
-                c.profilePicture = "Content/img/cinemaLogo/" + imagePath;
+                c.profilePicture = @"https://cinemabookingticket.azurewebsites.net/" + "Content/img/cinemaLogo/" + imagePath;
+            }
+            else
+            {
+                c.profilePicture = @"https://www.shofu.de/wp-content/themes/aaika/assets/images/default.jpg";
             }
             new CinemaService().Create(c);
             return null;
@@ -320,6 +345,157 @@ namespace ManagerApplication.Controllers.PartnerControler
             {
                 isSucess = "true",
             };
+            return Json(obj);
+        }
+
+        [HttpPost]
+        public JsonResult GetDashboardCommonData(string groupIdStr)
+        {
+            int groupId = Convert.ToInt32(groupIdStr);
+            List<CinemaManager> employeeList = new CinemaManagerService().FindCinemaManagerByGroupId(groupId);
+            List<Cinema> cinemaList = new CinemaService().FindBy(c => c.groupId == groupId);
+            float price = 0;
+            try
+            {
+                price = (float)new TypeOfSeatService().FindBy(t => t.groupId == groupId).FirstOrDefault().price;
+            }
+            catch (Exception)
+            {
+
+            }
+            DateTime startOfWeek = DateTime.Today.AddDays(
+              (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek -
+              (int)DateTime.Today.DayOfWeek);
+            int ticketSoldInday = getTicketSoldInDay(groupId, DateTime.Today);
+            int ticketSoldInWeek = getTicketSoldInWeek(groupId, startOfWeek);
+
+
+            var obj = new
+            {
+                totalEmp = employeeList.Count,
+                totalCinema = cinemaList.Count,
+                ticketSoldInday = ticketSoldInday,
+                ticketSoldInWeek = ticketSoldInWeek,
+                revenueToday = ticketSoldInday * price,
+                revenueWeek = ticketSoldInWeek * price,
+                price = price,
+            };
+            return Json(obj);
+        }
+
+        [HttpPost]
+        public JsonResult GetPieChartData(string groupIdStr)
+        {
+            int groupId = Convert.ToInt32(groupIdStr);
+            List<object> returnList = new List<object>();
+            List<Cinema> cinemaList = new CinemaService().FindBy(c => c.groupId == groupId);
+            float price = 0;
+            try
+            {
+                price = (float)new TypeOfSeatService().FindBy(t => t.groupId == groupId).FirstOrDefault().price;
+            }
+            catch (Exception)
+            {
+
+            }
+            DateTime startOfWeek = DateTime.Today.AddDays(
+              (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek -
+              (int)DateTime.Today.DayOfWeek);
+            foreach (var cinema in cinemaList)
+            {
+                int ticketSold = getTicketSoldInWeekByCinema(cinema.cinemaId, startOfWeek);
+                var obj = new
+                {
+                    cinemaName = cinema.cinemaName,
+                    ticketSold = ticketSold,
+                    revenue = ticketSold * price / 1000
+                };
+                returnList.Add(obj);
+            }
+            return Json(returnList);
+        }
+
+        private int getTicketSoldInDay(int groupId, DateTime date)
+        {
+            int ticketInDay = 0;
+            List<Cinema> cinemaList = new CinemaService().FindBy(c => c.groupId == groupId);
+            foreach (var cinema in cinemaList)
+            {
+                List<Room> roomList = new RoomService().FindBy(r => r.cinemaId == cinema.cinemaId);
+                DateTime beginOfDate = DateTime.Parse(date.Year + "-" + date.Month + "-" + date.Day + " 00:00");
+                DateTime endOfDate = DateTime.Parse(date.Year + "-" + date.Month + "-" + date.Day + " 23:59");
+                foreach (var aRoom in roomList)
+                {
+                    List<MovieSchedule> addedSchedules = new MovieScheduleService().FindBy(s => s.scheduleDate > beginOfDate
+                                        && s.scheduleDate < endOfDate && s.roomId == aRoom.roomId);
+
+                    foreach (var schedule in addedSchedules)
+                    {
+                        List<Ticket> tickets = new TicketService().FindBy(t => t.scheduleId == schedule.scheduleId && t.ticketStatus == TicketStatus.buyed);
+                        if (tickets != null)
+                            ticketInDay += tickets.Count;
+                    }
+                }
+            }
+            return ticketInDay;
+        }
+
+        private int getTicketSoldInWeek(int groupId, DateTime dateStart)
+        {
+            DateTime dateEnd = dateStart.AddDays(6);
+            int ticketInDay = 0;
+            List<Cinema> cinemaList = new CinemaService().FindBy(c => c.groupId == groupId);
+            foreach (var cinema in cinemaList)
+            {
+                List<Room> roomList = new RoomService().FindBy(r => r.cinemaId == cinema.cinemaId);
+                DateTime beginOfDate = DateTime.Parse(dateStart.Year + "-" + dateStart.Month + "-" + dateStart.Day + " 00:00");
+                DateTime endOfDate = DateTime.Parse(dateEnd.Year + "-" + dateEnd.Month + "-" + dateEnd.Day + " 23:59");
+                foreach (var aRoom in roomList)
+                {
+                    List<MovieSchedule> addedSchedules = new MovieScheduleService().FindBy(s => s.scheduleDate > beginOfDate
+                                        && s.scheduleDate < endOfDate && s.roomId == aRoom.roomId);
+
+                    foreach (var schedule in addedSchedules)
+                    {
+                        List<Ticket> tickets = new TicketService().FindBy(t => t.scheduleId == schedule.scheduleId && t.ticketStatus == TicketStatus.buyed);
+                        if (tickets != null)
+                            ticketInDay += tickets.Count;
+                    }
+                }
+            }
+            return ticketInDay;
+        }
+
+        private int getTicketSoldInWeekByCinema(int cinemaId, DateTime dateStart)
+        {
+            DateTime dateEnd = dateStart.AddDays(6);
+            int ticketInDay = 0;
+            List<Room> roomList = new RoomService().FindBy(r => r.cinemaId == cinemaId);
+            DateTime beginOfDate = DateTime.Parse(dateStart.Year + "-" + dateStart.Month + "-" + dateStart.Day + " 00:00");
+            DateTime endOfDate = DateTime.Parse(dateEnd.Year + "-" + dateEnd.Month + "-" + dateEnd.Day + " 23:59");
+            foreach (var aRoom in roomList)
+            {
+                List<MovieSchedule> addedSchedules = new MovieScheduleService().FindBy(s => s.scheduleDate > beginOfDate
+                                    && s.scheduleDate < endOfDate && s.roomId == aRoom.roomId);
+
+                foreach (var schedule in addedSchedules)
+                {
+                    List<Ticket> tickets = new TicketService().FindBy(t => t.scheduleId == schedule.scheduleId && t.ticketStatus == TicketStatus.buyed);
+                    if (tickets != null)
+                        ticketInDay += tickets.Count;
+                }
+            }
+            return ticketInDay;
+        }
+        public JsonResult GetListCinema(string groupIdStr)
+        {
+            int groupId = Convert.ToInt32(groupIdStr);
+            List<object> returnList = new List<object>();
+            List<Cinema> cinemaList = new CinemaService().FindBy(c => c.groupId == groupId);
+            var obj = cinemaList.Select(item => new
+            {
+                cinemaName = item.cinemaName,
+            });
             return Json(obj);
         }
 

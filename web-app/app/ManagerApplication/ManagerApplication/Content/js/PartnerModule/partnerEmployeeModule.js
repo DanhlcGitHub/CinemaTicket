@@ -85,7 +85,9 @@ var partnerEmployeeController = function ($scope, $http) {
     $scope.employeeDetail = function (index) {
         $scope.currentSelectedEmployeeIndex = index;
         var validator = $("#empForm").validate();
+        
         validator.resetForm();
+        $("#inputEmpUsername").attr("disabled", "disabled");
         $scope.isAddnewEmp = false;
         $scope.currentEmployee = $scope.currentPageEmpData[index];
     };
@@ -93,13 +95,16 @@ var partnerEmployeeController = function ($scope, $http) {
     $scope.showAddEmpForm = function () {
         $('#empForm')[0].reset();
         var validator = $("#empForm").validate();
+        
         validator.resetForm();
+        $("#inputEmpUsername").removeAttr("disabled");
         $scope.isAddnewEmp = true;
         $scope.currentEmployee = {};
     };
 
     $scope.updateEmployee = function () {
         if ($("#empForm").valid()) {
+            inputEmpUsername
             var empName = $("#inputEmpName").val();
             var empEmail = $("#inputEmpEmail").val();
             var empPhone = $("#inputEmpPhone").val();
@@ -129,7 +134,8 @@ var partnerEmployeeController = function ($scope, $http) {
                    $scope.updateEmpTrackingArray();
                    $scope.currentEmployee = $scope.currentPageEmpData[$scope.currentSelectedEmployeeIndex];
                });
-                alert("Update success!");
+                $("#validateModal").modal();
+                $("#modalMessage").html("Update success!");
             });
         }
     };
@@ -169,10 +175,12 @@ var partnerEmployeeController = function ($scope, $http) {
                     .then(function (response) {
                         $('#empForm')[0].reset();
                         $scope.getAllEmployee();
-                        alert("Create success!");
+                        $("#validateModal").modal();
+                        $("#modalMessage").html(response.data.message);
                     });
                 } else {
-                    alert("this username already exist!");
+                    $("#validateModal").modal();
+                    $("#modalMessage").html("this username already exist!");
                     $('#inputEmpUsername').focus();
                 }
             });
@@ -192,7 +200,8 @@ var partnerEmployeeController = function ($scope, $http) {
             .then(function (response) {
                 $('#empForm')[0].reset();
                 $scope.getAllEmployee();
-                alert("delete success!")
+                $("#validateModal").modal();
+                $("#modalMessage").html("delete success!");
             });
         }
         else {

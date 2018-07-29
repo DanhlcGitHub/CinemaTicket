@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-   
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
@@ -35,17 +35,6 @@
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
                 </li>
             </ul>
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
             <!-- Right navbar links -->
         </nav>
         <!-- /.navbar -->
@@ -74,123 +63,29 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li ng-click="manageEmployee()" class="nav-item has-treeview">
+                        <li ng-click="manageDashboard()" class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-calendar"></i>
+                                <i class="nav-icon fa fa-dashboard"></i>
                                 <p>
-                                    Manage Employee
-                                    <i class="fa fa-angle-left right"></i>
+                                    Dashboard
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Add Employee</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Edit employee</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Delete Employee</p>
-                                    </a>
-                                </li>
-                            </ul>
+                        </li>
+                        <hr style="border: 1px solid white" />
+                        <li ng-click="manageEmployee()" class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-user"></i>
+                                <p>
+                                    Manage Employee
+                                </p>
+                            </a>
                         </li>
                         <li ng-click="manageCinema()" class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-book"></i>
                                 <p>
                                     Manage Cinema
-                                    <i class="fa fa-angle-left right"></i>
                                 </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Add Cinema</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Edit Cinema</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Add Room</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-plus-square-o"></i>
-                                <p>
-                                    Extras
-                                    <i class="fa fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Error 404</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Error 500</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Blank Page</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="starter.html" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Starter Page</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-header">MISCELLANEOUS</li>
-                        <li class="nav-item">
-                            <a href="https://adminlte.io/docs" class="nav-link">
-                                <i class="nav-icon fa fa-file"></i>
-                                <p>Documentation</p>
-                            </a>
-                        </li>
-                        <li class="nav-header">LABELS</li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-circle-o text-danger"></i>
-                                <p class="text">Important</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-circle-o text-warning"></i>
-                                <p>Warning</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-circle-o text-info"></i>
-                                <p>Informational</p>
                             </a>
                         </li>
                     </ul>
@@ -229,7 +124,7 @@
                                         <thead>
                                             <tr role="row">
                                                 <th>No.</th>
-                                                <th>Name</th>
+                                                <th>username</th>
                                                 <th>Email</th>
                                                 <th>phone</th>
                                                 <th>Cinema</th>
@@ -239,7 +134,7 @@
                                         <tbody>
                                             <tr ng-repeat="emp in currentPageEmpData" role="row" class="odd">
                                                 <td>{{$index + 1}}</td>
-                                                <td>{{emp.name}}</td>
+                                                <td>{{emp.username}}</td>
                                                 <td>{{emp.email}}</td>
                                                 <td>{{emp.phone}}</td>
                                                 <td>{{emp.cinemaName}}</td>
@@ -278,10 +173,10 @@
                     </div>
                     <form id="empForm" class="form-horizontal">
                         <div class="card-body">
-                            <div ng-if="isAddnewEmp == true" class="form-group">
+                            <div class="form-group">
                                 <b class="col-sm-6 control-label">Employee username</b>
                                 <div class="col-sm-12">
-                                    <input name="inputEmpUsername" type="text" class="form-control" id="inputEmpUsername" placeholder="">
+                                    <input name="inputEmpUsername" type="text" class="form-control" id="inputEmpUsername" value="{{currentEmployee.username}}" placeholder="">
                                 </div>
                             </div>
                             <div ng-if="isAddnewEmp == true" class="form-group">
@@ -563,7 +458,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
 
                                             </div>
@@ -580,7 +475,7 @@
                                         </div>
                                     </div>
                                 </nav>
-                                <nav id="addRoomHeader" class="navbar navbar-light navbar-expand-md border-bottom" style="height:90px; background-color:#ffffff; box-shadow: 5px 10px 8px  #888888;" >
+                                <nav id="addRoomHeader" class="navbar navbar-light navbar-expand-md border-bottom" style="height:90px; background-color:#ffffff; box-shadow: 5px 10px 8px  #888888;">
 
                                     <a href="#"><img src="~/Content/img/repository/logo.png" style="width:40px; height:40px;padding:0" /></a>
                                     <form id="addRoomHeader" class="navbar-collapse collapse">
@@ -590,10 +485,8 @@
                                             <input type="text" class="form-control col-sm-6" style="margin-right:15px" id="inputRoomName" placeholder="Enter room name" required>
                                         </div>
 
-                                        <div  class="row col-sm-6" style="padding-left:20px; vertical-align: middle;">
-                                            <input type="text" name="inputCapacity" value="77" id="inputCapacity" class="form-control col-sm-6" style="margin-right:15px" placeholder="Enter number of seat">
-                                            <input type="number" min="40" max="150" class="form-control col-sm-6" style="margin-right:15px" placeholder="Enter price VND" required>
-
+                                        <div class="row col-sm-6" style="padding-left:20px; vertical-align: middle;">
+                                            <input type="number" min="80" max="300" name="inputCapacity" value="" id="inputCapacity" class="form-control col-sm-6" style="margin-right:15px" placeholder="Enter number of seat">
                                             <button type="submit" class="col-sm-3 btn btn-danger btn-block">Suggest</button>
                                         </div>
 
@@ -659,13 +552,14 @@
                                                         <button ng-click="reviewSeat()" class="btn btn-info float-right" type="button" style="width: 100px">Preview</button>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <button ng-click="save()" class="btn btn-info float-left" type="button" style="width: 100px">Save</button>
+                                                        <div class="loaderSmall" id="room-loader" style="display:none"></div>
+                                                        <button ng-click="save()" id="room-saver" class="btn btn-info float-left" type="button" style="width: 100px">Save</button>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
-                                         </div>
-                                        
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -677,6 +571,134 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12" id="dashboardManagement" ng-controller="partnerDashboardController">
+                <div class="container-fluid">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-info elevation-1"><i class="fa fa-film"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Cinemas</span>
+                                    <span class="info-box-number">
+                                        {{dashboardCommonData.totalCinema}}
+                                    </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-users"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Employee</span>
+                                    <span class="info-box-number">{{dashboardCommonData.totalEmp}}</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <!-- /.col -->
+                        <!-- fix for small devices only -->
+                        <div class="clearfix hidden-md-up"></div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-success elevation-1"><i class="fa fa-shopping-cart"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Daily Sales (VND)</span>
+                                    <span class="info-box-number">{{dashboardCommonData.revenueToday}} K</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-shopping-cart"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Weekly Sales (VND)</span>
+                                    <span class="info-box-number">{{dashboardCommonData.revenueWeek / 1000}} K</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 card" style="height: 330px">
+                            <div class="card-header">
+                                <h3 class="card-title">Ticket Weekly Statistic</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="chart-responsive">
+                                            <canvas id="pieChart" height="162" width="199" style="width: 199px; height: 162px;"></canvas>
+                                        </div>
+                                        <!-- ./chart-responsive -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-4">
+                                        <ul class="chart-legend clearfix">
+                                            <li ng-repeat="cine in pieChartData"><i class="fa fa-circle-o text-danger" style="color: {{cine.color}} !important;"></i> {{cine.label}}</li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer bg-white p-0">
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            Total ticket Sold
+                                            <span class="float-right text-danger">
+                                                {{dashboardCommonData.ticketSoldInWeek}}
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.footer -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header no-border">
+                                    <h3 class="card-title">Revenue In Week</h3>
+                                </div>
+                                <div class="card-body p-0">
+                                    <table class="table table-striped table-valign-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>Cinema</th>
+                                                <th>Revenue (VND)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="cine in pieChartData">
+                                                <td>{{cine.label}}</td>
+                                                <td>
+                                                    {{cine.revenue }} K
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+
+                    </div>
+                    <!-- /.content -->
+                </div>
+            </div>
         </div>
         <!-- /.content-wrapper -->
         <!-- Control Sidebar -->
@@ -685,9 +707,9 @@
         </aside>
         <!-- /.control-sidebar -->
     </div>
-
+    
     <!-- validate Modal -->
-    <div class="modal fade" id="validateModal" role="dialog">
+    <div class="modal fade" id="validateModal" role="dialog" style="z-index:20000">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header justify-content-center align-self-center border-bottom-0">
@@ -697,7 +719,7 @@
                     <h6 id="modalMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button id="dismissBtn" type="button" class="ex1 button1" data-dismiss="modal">OK</button>
+                    <button id="dismissBtn" type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
 
                 </div>
 
@@ -712,8 +734,10 @@
     <script src="~/Content/js/adminlte.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="~/Content/js/PartnerModule/partnerValidator.js"></script>
+    <script src="~/Content/js/PartnerModule/pieChart.js"></script>
     <script src="~/Content/js/PartnerModule/partnerMainModule.js"></script>
     <script src="~/Content/js/PartnerModule/partnerCinemaModule.js"></script>
+    <script src="~/Content/js/PartnerModule/partnerDashboardModule.js"></script>
     <script src="~/Content/js/PartnerModule/partnerRoomModule.js"></script>
     <script src="~/Content/js/PartnerModule/partnerEmployeeModule.js"></script>
     <script src="~/Content/js/PartnerModule/partnerReportModule.js"></script>

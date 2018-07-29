@@ -34,7 +34,6 @@ namespace ManagerApplication.Utility
             catch (Exception)
             {
                 return false;
-                throw;
             }
             
         }

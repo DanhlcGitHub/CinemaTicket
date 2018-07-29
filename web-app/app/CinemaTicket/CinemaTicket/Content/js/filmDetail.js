@@ -189,17 +189,6 @@ var filmController = function ($scope, $http) {
                         $("#myModalChooseRoom").modal();
                     }
                 });
-                /*console.log("filmId " + filmId);
-                console.log("timeId " + timeId);
-                console.log("cinemaId " + cinemaId);
-                console.log("selectDate " + selectDate);
-
-                var param1 = "<input type='hidden' name='filmId' value='" + filmId + "' />";
-                var param2 = "<input type='hidden' name='timeId' value='" + timeId + "' />";
-                var param3 = "<input type='hidden' name='cinemaId' value='" + cinemaId + "' />";
-                var param4 = "<input type='hidden' name='selectDate' value='" + selectDate + "' />";
-                document.getElementById('goToChooseTicketAndTicketForm').innerHTML = param1 + param2 + param3 + param4;
-                document.getElementById('goToChooseTicketAndTicketForm').submit();*/
             }
         });
     };

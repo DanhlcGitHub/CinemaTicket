@@ -116,36 +116,56 @@ namespace CinemaTicket.Controllers
             order.customerId = cusId;
             order.paymentCode = RandomUtility.RandomString(9);
             int orderId = new BookingTicketService().CreateOrder(order);
-
-            foreach (JObject item in list)
-            {
-                int ticketId = (int)item.GetValue("ticketId");
-                Ticket aTicket = new TicketService().FindByID(ticketId);
-                if (aTicket.ticketStatus == TicketStatus.buying)
+            var obj = new
                 {
-                    aTicket.ticketStatus = TicketStatus.buyed;
-                    //update ticket price
-                    double price = (double)new TypeOfSeatService().FindByID(
-                                        (new SeatService().FindByID(aTicket.seatId).typeSeatId)).price;
-                    aTicket.price = price;
+                    isSuccess = "true"
+                };
+            try
+            {
+                
+                foreach (JObject item in list)
+                {
+                    int ticketId = (int)item.GetValue("ticketId");
+                    Ticket aTicket = new TicketService().FindByID(ticketId);
+                    if (aTicket.ticketStatus == TicketStatus.buying)
+                    {
+                        aTicket.ticketStatus = TicketStatus.buyed;
+                        //update ticket price
+                        double price = (double)new TypeOfSeatService().FindByID(
+                                            (new SeatService().FindByID(aTicket.seatId).typeSeatId)).price;
+                        aTicket.price = price;
 
-                    string code = aTicket.ticketId + RandomUtility.RandomString(9);
-                    aTicket.paymentCode = code;
-                    aTicket.bookingId = orderId;
+                        string code = aTicket.ticketId + RandomUtility.RandomString(9);
+                        aTicket.paymentCode = code;
+                        aTicket.bookingId = orderId;
+                    }
+                    ticketList.Add(aTicket);
+                }
+
+                //send email for customer
+                string mailContent = getEmailContent(ticketList, order, filmName, cinemaName, date, roomName, startTime);
+                string mailSubject = "VietCine - Mã vé xem phim tại " + cinemaName;
+                MailUtility.SendEmail(mailSubject, mailContent, email);
+                // insert into db
+                foreach (var aTicket in ticketList)
+                {
                     new TicketService().Update(aTicket);
                 }
-                ticketList.Add(aTicket);
             }
-            //send email for customer
-            string mailContent = getEmailContent(ticketList, order, filmName, cinemaName, date, roomName, startTime);
-            string mailSubject = "CinemaBookingTicket - Mã vé xem phim tại " + cinemaName;
-            MailUtility.SendEmail(mailSubject, mailContent, email);
-            var obj = ticketList
+            catch (Exception)
+            {
+                obj = new 
+                {
+                    isSuccess = "false"
+                };
+            }
+            
+            /*var obj = ticketList
                 .Select(item => new
                 {
                     ticketId = item.ticketId,
                     ticketStatus = item.ticketStatus,
-                });
+                });*/
             return Json(obj);
         }
 
@@ -174,13 +194,14 @@ namespace CinemaTicket.Controllers
             string confirmCode = RandomUtility.RandomString(4);
             string mailContent = "Mã xác nhận email của bạn là: " + confirmCode;
             string mailSubject = "CinemaBookingTicket - Mã xác nhận bán lại vé";
-            //MailUtility.SendEmail(mailSubject, mailContent, email);
+            MailUtility.SendEmail(mailSubject, mailContent, email);
             Session["resellConfirmCode"] = confirmCode;
         }
 
         public JsonResult GetTicketListBelongToMail(string confirmCode, string email)
         {
-            if (confirmCode.Equals("123456"))
+            string sessionConfirmCode = (string)Session["resellConfirmCode"];
+            if (sessionConfirmCode != null && sessionConfirmCode.Equals(confirmCode))
             {
                 List<object> objectList = new List<object>();
                 List<Ticket> ticketList = new TicketService().getTicketByEmail(email);
@@ -209,6 +230,7 @@ namespace CinemaTicket.Controllers
                         date = date,
                         startTime = startTime,
                         status = item.ticketStatus,
+                        isOverDay = DateTime.Now > schedule.scheduleDate ? true : false,
                         statusvn = TicketStatus.ViStatus[item.ticketStatus],
                     };
                     objectList.Add(aObj);
@@ -227,10 +249,11 @@ namespace CinemaTicket.Controllers
             }
         }
         //
-        public JsonResult PostSellingTicket( string ticketId)
+        public JsonResult PostSellingTicket(string ticketId, string description)
         {
             Ticket ticket = new TicketService().FindByID(Convert.ToInt32(ticketId));
             ticket.ticketStatus = TicketStatus.resell;
+            ticket.resellDescription = description;
             new TicketService().Update(ticket);
             var aObj = new
             {
@@ -241,15 +264,14 @@ namespace CinemaTicket.Controllers
         }
 
 
-        public JsonResult ResellTicket(string ticketId,string buyerEmail, string sellerEmail)
+        public JsonResult ResellTicket(string ticketId, string buyerEmail, string sellerEmail)
         {
             Ticket ticket = new TicketService().FindByID(Convert.ToInt32(ticketId));
             ticket.ticketStatus = TicketStatus.reselled;
             string newCode = ticket.ticketId + RandomUtility.RandomString(9);
-            
 
             string content = "Chúc mừng quý khách đã mua lại vé thành công!";
-            content += "Bạn đã mua lại 1 vé của " + buyerEmail + "\n";
+            content += "Bạn đã mua lại 1 vé của " + sellerEmail + "\n";
             Seat seat = new SeatService().FindByID(ticket.seatId);
             Room room = new RoomService().FindByID(seat.roomId);
             Cinema cinema = new CinemaService().FindByID(room.cinemaId);
@@ -261,10 +283,24 @@ namespace CinemaTicket.Controllers
             content += ". Ghế: " + ConstantArray.Alphabet[(int)seat.py] + "" + ((int)seat.px + 1) +
                         "- Mã vé: " + newCode + "\n";
             string mailSubject = "CinemaBookingTicket - Mua lại vé thành công " + cinema.cinemaName;
-            MailUtility.SendEmail(mailSubject, content, buyerEmail);
-            new TicketService().Update(ticket);
+            try
+            {
+                MailUtility.SendEmail(mailSubject, content, buyerEmail);
+                ticket.paymentCode = newCode;
+                new TicketService().Update(ticket);
+            }
+            catch (Exception)
+            {
+                var obj = new
+                {
+                    isSuccess = "false"
+                };
+                return Json(obj);
+            }
+
             var aObj = new
             {
+                isSuccess = "true",
                 status = ticket.ticketStatus,
                 statusvn = TicketStatus.ViStatus[ticket.ticketStatus]
             };

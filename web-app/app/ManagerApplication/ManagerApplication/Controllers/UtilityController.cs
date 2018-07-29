@@ -26,6 +26,8 @@ namespace ManagerApplication.Controllers
 
         public JsonResult CheckLogin(string username, string password, string role)
         {
+            username = username.Trim();
+            password = password.Trim();
             var obj = new
             {
                 valid = "true",

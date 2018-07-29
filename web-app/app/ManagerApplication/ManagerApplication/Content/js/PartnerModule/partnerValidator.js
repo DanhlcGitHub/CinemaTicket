@@ -16,7 +16,7 @@ function readURL(input) {
         reader.onload = function (e) {
             $('#cinemaProfilePicture').attr('src', e.target.result)
                 .width(150)
-                .height(200);
+                .height(150);
 
         }
         reader.readAsDataURL(input.files[0]);

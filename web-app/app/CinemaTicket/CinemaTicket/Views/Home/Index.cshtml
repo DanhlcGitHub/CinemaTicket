@@ -11,6 +11,7 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -26,13 +27,13 @@
     <form method="post" target="_blank" action="/home/ChooseTicketAndSeatToday" id="goToChooseTicketAndSeatForm" style="display:none"></form>
 
     <div class="mainMaxWidth2 contentMain">
-        <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top shadow p-3 mb-5 bg-white rounded">
+        <nav class="navbar navbar-expand-sm navbar-light fixed-top shadow p-3 mb-5 bg-white rounded">
             <div class="left">
                 <a href="#">
                     <img src="~/Content/img/repository/logo.png" class="ex1" alt="Cinque Terre" style="height:30%">
                 </a>
             </div>
-            <ul class="navbar-nav navbar-center">
+            <ul class="navbar-nav navbar-center" style="font-size:15px">
                 <li class="nav-item">
                     <a class="nav-link font-weight-bold" href="#noibat">Nổi bật</a>
                 </li>
@@ -140,9 +141,13 @@
                     <img ng-click="next()" src="Content/img/repository/next.png" />
                 </div>
             </div>
+
+        </div>
+
+        <div style="clear:both;overflow: hidden; position: relative;">
+            <span style="top: -200px;visibility: hidden;" id="lichchieu"></span>
         </div>
         <br /><br />
-        <a name="lichchieu" />
         <!---Quick navigate-->
         <div class="tab-content">
             <ul class="nav nav-pills justify-content-center">
@@ -165,7 +170,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-3 border border-top overflow-scroll" style="padding-left:0px; padding-right:0px">
+                        <div class="col-sm-3 border border-top overflow-scroll" style="padding-left:0px; padding-right:0px;">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item" ng-click="onclickCinema($index)" ng-repeat="cinema in currentCinemaList">
                                     <button id="{{'cinema' + $index}}" type="button" class="list-group-item list-group-item-action btn" style="padding-left:0px; padding-right:0px">
@@ -259,7 +264,7 @@
             </div>
         </div>
         <br />
-        <div id="resellTicketList" class="w3-container overflow-scroll" style="display: none">
+        <div id="resellTicketList" class="w3-container overflow-scroll" style="display: none;">
             <div ng-repeat="item in resellData" class=" w3-card-4 w3-margin-bottom">
                 <div class="w3-container" style="padding: 10px 10px">
                     <div class="w3-col m7">
@@ -271,8 +276,9 @@
                     </div>
                     <div ng-if="item.status == 'buyed'" class="w3-col m5">
                         <!--<input id="{{'ticketCode' + $index}}"  class="w3-input w3-border" name="ticketCode" type="text" placeholder="mã vé">-->
-                        <input class="w3-input w3-border" name="ticketCode" type="text" style="visibility:hidden;">
-                        <button ng-click="postSellingTicket($index)" class="w3-btn w3-block w3-teal">Đăng bán</button>
+                        <p ng-if="item.isOverDay">Không thể bán lại</p>
+                        <input ng-if="!item.isOverDay" id="{{'resellDescription' + $index}}" class="w3-input w3-border" name="ticketCode" type="text" placeholder="Nhập mô tả (vd: bán lại giảm giá 50%) ">
+                        <button ng-if="!item.isOverDay" ng-click="postSellingTicket($index)" class="w3-btn w3-block w3-teal">Đăng bán</button>
                     </div>
                     <div ng-if="item.status == 'resell'" class="w3-col m5">
                         <input id="{{'customerEmail' + $index}}" class="w3-input w3-border" name="email" type="text" placeholder="Nhập email người mua">
@@ -352,7 +358,36 @@
     <!--Modal part-->
     <div>
 
+        <!--Modal choose room-->
+        <div class="modal" id="myModalChooseRoom">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div ng-repeat="schedule in transferTicketData" ng-click="submitChooseTicketForm(schedule.scheduleId)" style="cursor:pointer" class="col-sm-6 col-12">
+                                <div class="info-box bg-danger">
+                                    <span class="info-box-icon"><i class="fa fa-film"></i></span>
 
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">{{schedule.cinemaName}}</span>
+                                        <span class="info-box-number">{{schedule.roomName}} - {{schedule.startTime}}</span>
+
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 100%"></div>
+                                        </div>
+                                        <span class="progress-description">
+                                            {{schedule.availableSeat}} Ghe con trong
+                                        </span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- The Video Modal -->
         <div class="modal" id="myModalTrailer">
 

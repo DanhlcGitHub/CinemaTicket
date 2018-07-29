@@ -345,10 +345,10 @@
                         <div class=" col-sm-12 border border-bottom-0" style="padding-top:6px">
                             <div class="list-group list-group-flush" style="flex-direction: row;">
                                 <a id="{{'dateofweek' + $index}}" ng-click="dateClickHandler($index)" ng-repeat="d in dateList" class="list-group-item list-group-item-action border-top-0" href="#tuesday">
-                                    <div class="row text-center font-weight-bold" style="justify-content:center;">Thứ {{ d.dateOfWeek + 1 }}</div>
+                                    <div ng-if="d.dateOfWeek != 0" class="row text-center font-weight-bold" style="justify-content:center;">Thứ {{ d.dateOfWeek + 1 }}</div>
+                                    <div ng-if="d.dateOfWeek == 0" class="row text-center font-weight-bold" style="justify-content:center;">Chủ Nhật</div>
                                     <div class="text-center font-weight-bold">{{ d.date }}</div>
                                 </a>
-                                <button type="button" style="center;" class=" btn-primary border-top-0">Share</button>
                             </div>
                         </div>
                         <div class="col-sm-12 border border-top" style="overflow-y: auto; max-height:728px">

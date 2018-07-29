@@ -212,7 +212,7 @@
                                     </div>
                                     <div ng-if="seat.seatStatus == 'resell'" class="original-box">
                                         <button class="{{seat.className}}" type="button">{{seat.locationX}}</button>
-                                        <div class="popup-box popup-box-left" style="height:70px;width:250px;text-align:left">
+                                        <div class="popup-box popup-box-left" style="height:auto;width:250px;text-align:left;border: 1px solid black; border-radius:4px">
                                             <b>{{seat.emailOwner}}</b><br />
                                             <b style="color:red">Mô tả: {{seat.resellDescription}}</b>
                                         </div>
@@ -304,7 +304,7 @@
                         <h6 id="backdropMessage">Bạn không thể bỏ trống 1 ghế ở đầu mỗi dãy</h6>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button id="goHomeBtn" type="button" ng-click="endTransaction()" class="ex1 button1">OK home</button>
+                        <button id="goHomeBtn" type="button" ng-click="endTransaction()" class="ex1 button1" style="cursor:pointer">Về <i class="fa fa-home"></i></button>
                     </div>
 
                 </div>
@@ -342,7 +342,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Ghế: </th>
-                                                    <td class="my-text-overflow "><kbd ng-repeat="seat in choosedList">{{alpha[seat.locationY-1]}}{{seat.locationX}} | </kbd></td>
+                                                    <td class="my-text-overflow " style="word-wrap: break-word;"><kbd ng-repeat="seat in choosedList">{{alpha[seat.locationY-1]}}{{seat.locationX}} | </kbd></td>
                                                 </tr>
                                             </table>
                                         </div>

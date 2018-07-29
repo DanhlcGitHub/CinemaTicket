@@ -211,6 +211,9 @@ var filmController = function ($scope, $http) {
                 document.getElementById("confirmResellEmailBlock").style.display = "none";
                 $("#resellTicketList").slideToggle("slow");
                 $scope.resellData = response.data;
+                if ($scope.resellData.length > 5) {
+                    $('#resellTicketList').css("height", "400px");
+                }
                 console.log("resell ticket data");
                 console.log(response.data);
             }
@@ -219,10 +222,12 @@ var filmController = function ($scope, $http) {
     };
     $scope.postSellingTicket = function (index) {
         var ticketId = $scope.resellData[index].ticketId;
+        var inputId = "resellDescription" + index;
+        var description = document.getElementById(inputId).value;
         $http({
             method: "POST",
             url: "Ticket/PostSellingTicket",
-            params: { ticketId: ticketId }
+            params: { ticketId: ticketId, description: description }
         })
         .then(function (response) {
             $scope.resellData[index].status = response.data.status;
@@ -240,8 +245,14 @@ var filmController = function ($scope, $http) {
                 params: { ticketId: ticketId, buyerEmail: buyerEmail, sellerEmail: $scope.resellEmail }
             })
             .then(function (response) {
-                $scope.resellData[index].status = response.data.status;
-                $scope.resellData[index].statusvn = response.data.statusvn;
+                if (response.data.isSuccess == "true") {
+                    $scope.resellData[index].status = response.data.status;
+                    $scope.resellData[index].statusvn = response.data.statusvn;
+                } else {
+                    $('#validateModal').modal();
+                    $("#modalMessage").html("Xảy ra lỗi kết nối, vui lòng kiểm tra kết nối!");
+                }
+                
             });
         } else {
             $('#validateModal').modal();
@@ -259,6 +270,26 @@ var filmController = function ($scope, $http) {
                 $('#validateModal').modal();
                 $("#modalMessage").html("Xuất chiếu đã hết hạn");
             } else {
+                $http({
+                    method: "POST",
+                    url: "/home/CheckDupplicateRoom",
+                    params: { filmId: filmId, timeId: timeId, cinemaId: cinemaId, selectDate: selectDate }
+                })
+                .then(function (response) {
+                    $scope.transferTicketData = response.data;
+                    console.log($scope.transferTicketData);
+                    if ($scope.transferTicketData.length == 1) {
+                        var scheduleId = $scope.transferTicketData[0].scheduleId;
+                        $scope.submitChooseTicketForm(scheduleId);
+                    } else {
+                        $("#myModalChooseRoom").modal();
+                    }
+                });
+            }
+            /*if (response.data.valid == "false") {
+                $('#validateModal').modal();
+                $("#modalMessage").html("Xuất chiếu đã hết hạn");
+            } else {
                 var cinemaId = $scope.currentCinemaList[$scope.currentCinemaIndex].id;
                 console.log("go to choose seat");
                 console.log("filmId " + filmId);
@@ -271,7 +302,7 @@ var filmController = function ($scope, $http) {
 
                 document.getElementById('goToChooseTicketAndSeatForm').innerHTML = param1 + param2 + param3;
                 document.getElementById('goToChooseTicketAndSeatForm').submit();
-            }
+            }*/
         });
     };
     /*================ Login & Register Part*/

@@ -16,6 +16,13 @@ var scheduleController = function ($scope, $http) {
     $("#loader").hide();
     //$("#skeduler-container").hide();
 
+    /*$("#saveScheduleId").one('click', function (event) {
+        event.preventDefault();
+        //do something
+        $scope.saveSchedule();
+        $(this).prop('disabled', true);
+    });*/
+
     var StatusConstant = { available: "available", choosing: "choosing", added: "added", suggested: "suggested" };
 
     $scope.$on('basicAddScheduleEvent', function (event) {
@@ -107,7 +114,7 @@ var scheduleController = function ($scope, $http) {
     $scope.GetSchedule = function () {
         $http({
             method: "POST",
-            url: "/CinemaManager/GetScheduleByDateFilm",
+            url: "/CinemaManager/GetScheduleByDate",
             params: {
                 cinemaIdStr: $scope.cinemaId, selectedDateStr: $scope.currentSelectedDate,
             }
@@ -197,7 +204,8 @@ var scheduleController = function ($scope, $http) {
                         aTime.filmId = $scope.currentSelectedFilmId;
                         aTime.filmName = $scope.currentSelectedFilmName;
                     } else {
-                        alert("Please select a film!");
+                        $("#validateModal").modal();
+                        $("#modalMessage").html("Please select a film!");
                     }
 
                 } else if (aTime.status == StatusConstant.choosing) {
@@ -282,11 +290,15 @@ var scheduleController = function ($scope, $http) {
 
     $scope.isSaveDone = true;
     $scope.saveSchedule = function () {
+        $("#saveScheduleId").prop('disabled', true);
         if (new Date($("#customScheduleDateSelector").val()) < new Date($scope.today)) {//compare end <=, not >=
             $("#validateModal").modal();
             $("#modalMessage").html("These day is no longer available for add chedule");
+            $("#saveScheduleId").prop('disabled', false);
         } else {
             if ($scope.isSaveDone == true) {
+                $scope.isSaveDone = false;
+                console.log("save");
                 var allTimeList = [];
                 $scope.filterSuggestList();
                 var dataArray = [];
@@ -305,14 +317,51 @@ var scheduleController = function ($scope, $http) {
                     }
                     dataArray.push(dataStr);
                 }
-                $scope.isSaveDone = false;
+
                 $("#loader").show();
                 $("#skeduler-container").hide();
                 $scope.saveToDB(dataArray);
+            } else {
+
             }
         }
     }
 
+    $scope.saveScheduleNextDay = function () {
+        if (new Date($("#customScheduleDateSelector").val()) < new Date($scope.today)) {//compare end <=, not >=
+            $("#validateModal").modal();
+            $("#modalMessage").html("These day is no longer available for add chedule");
+        } else {
+            if ($scope.isSaveDone == true) {
+                $scope.isSaveDone = false;
+                console.log("save");
+                var allTimeList = [];
+                //$scope.filterSuggestList();
+                var dataArray = [];
+                for (var i = 0 ; i < $scope.currentScheduleData.length; i++) {
+                    var anItem = $scope.currentScheduleData[i];
+                    var roomId = anItem.roomId;
+                    var timeList = anItem.currentShowTime;
+                    var addedList = $.grep(timeList, function (o) {
+                        return (o.status == StatusConstant.added);
+                    });
+                    var dataStr = {
+                        roomId: roomId,
+                        //filmId: $scope.currentSelectedFilmId,
+                        selectedDate: $scope.currentSelectedDate,
+                        timeList: addedList,
+                    }
+                    dataArray.push(dataStr);
+                }
+
+                $("#loader").show();
+                $("#skeduler-container").hide();
+                $scope.saveToDBNextDay(dataArray);
+            } else {
+
+            }
+        }
+    }
 
     $scope.saveToDB = function (dataArray) {
         $.ajax({
@@ -327,6 +376,27 @@ var scheduleController = function ($scope, $http) {
                 $("#skeduler-container").show();
                 $('#customScheduleFilmSelector').val("null");
                 $scope.currentSelectedFilmId = null;
+                $("#saveScheduleId").prop('disabled', false);
+            }
+        });
+    }
+
+    $scope.saveToDBNextDay = function (dataArray) {
+        $.ajax({
+            type: 'POST',
+            url: "/CinemaManager/SaveCustomScheduleNextDay",
+            data: { scheduleInfor: JSON.stringify({ dataArray: dataArray }) },
+            success: function (response) {
+                console.log(response);
+                //$scope.GetSchedule();
+                $("#validateModal").modal();
+                $("#modalMessage").html("Save for next day done!");
+                $scope.isSaveDone = true;
+                $("#loader").hide();
+                $("#skeduler-container").show();
+                $('#customScheduleFilmSelector').val("null");
+                $scope.currentSelectedFilmId = null;
+                $("#saveForNextDay").prop('disabled', false);
             }
         });
     }
@@ -339,6 +409,45 @@ var scheduleController = function ($scope, $http) {
             tasks: $scope.formatData(scheduleList),
             cardTemplate: '<div><i class="nav-icon fa fa-calendar"></i></div><div>${filmName}</div><div>${title}</div>',
             onClick: function (e, t) { $scope.onTimeClick(e, t) }
+        });
+    }
+
+    $scope.unSuggest = function () {
+        for (var i = 0 ; i < $scope.currentScheduleData.length; i++) {
+            var timeList = $scope.currentScheduleData[i].currentShowTime;
+            // check again
+            for (var k = 0 ; k < timeList.length; k++) {
+                var aTime = timeList[k];
+                if (aTime.status == StatusConstant.suggested) {
+                    aTime.status = "available";
+                    aTime.filmId = "";
+                    aTime.filmName = "";
+                }
+            }
+        }
+        $scope.generateSchedule($scope.currentScheduleData);
+    }
+
+    $scope.saveScheduleForNextDay = function () {
+        $("#saveForNextDay").prop('disabled', true);
+        $http({
+            method: "POST",
+            url: "/CinemaManager/IsEmptyScheduleNextDay",
+            params: {
+                cinemaIdStr: $scope.cinemaId, selectedDateStr: $scope.currentSelectedDate,
+            }
+        })
+        .then(function (response) {
+            console.log('check for next day');
+            console.log(response);
+            if (response.data.isEmpty == "true") {
+                //save next day
+                $scope.saveScheduleNextDay();
+            } else {
+                $("#validateModal").modal();
+                $("#modalMessage").html("Can't add, next day already have schedule!");
+                $("#saveForNextDay").prop('disabled', false);
+            }
         });
     }
 }

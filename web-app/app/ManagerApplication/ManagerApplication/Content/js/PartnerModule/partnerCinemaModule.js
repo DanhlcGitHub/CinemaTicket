@@ -44,6 +44,26 @@ var partnerCinemaController = function ($scope, $http) {
             $scope.updateCinemaTrackingArray();
         });
     };
+    $scope.cinemaPreviousClick = function () {
+        $scope.cinemaPageIndex--;
+        if ($scope.cinemaPageIndex < 0) $scope.cinemaPageIndex = Math.ceil($scope.currentCinemaList.length / $scope.cinemaMaxItem) - 1;
+        $scope.currentPageCinemaData = $scope.currentCinemaList.slice($scope.cinemaPageIndex * $scope.cinemaMaxItem, (($scope.cinemaPageIndex + 1) * $scope.cinemaMaxItem));
+        $scope.updateCinemaTrackingArray();
+    };
+
+    $scope.cinemaNextClick = function () {
+        $scope.cinemaPageIndex++;
+        if ($scope.cinemaPageIndex >= (Math.ceil($scope.currentCinemaList.length / $scope.cinemaMaxItem))) $scope.cinemaPageIndex = 0;
+        $scope.currentPageCinemaData = $scope.currentCinemaList.slice($scope.cinemaPageIndex * $scope.cinemaMaxItem, (($scope.cinemaPageIndex + 1) * $scope.cinemaMaxItem));
+        $scope.updateCinemaTrackingArray();
+    };
+
+    $scope.cinemaPageClick = function (index) {
+        $scope.cinemaPageIndex = index;
+        $scope.currentPageCinemaData = $scope.currentCinemaList.slice($scope.cinemaPageIndex * $scope.cinemaMaxItem, (($scope.cinemaPageIndex + 1) * $scope.cinemaMaxItem));
+        $scope.updateCinemaTrackingArray();
+    };
+
     $("#loaderPicture").hide();
     $scope.uploadPicture = function () {
         var formData = new FormData();
@@ -64,26 +84,21 @@ var partnerCinemaController = function ($scope, $http) {
                 processData: false,
                 method: 'POST',
                 success: function (data) {
-                    console.log(data);
-                    alert("Upload image " + data.message);
-                    //save link to db if update
-                    /*$http({
-                        method: "POST",
-                        url: "/Partner/UpdatePictureForCinema",
-                        params: { cinemaId: $scope.currentCinema.cinemaId,fileName : fileName }
-                    })
-                    .then(function (response) {
-
-                    })*/
                     $("#uploadImageBtn").show();
                     $("#loaderPicture").hide();
+                    $("#validateModal").modal();
+                    $("#modalMessage").html("Upload image " + data.message);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    alert("Some error occur, can't upload image!");
                     $("#uploadImageBtn").show();
                     $("#loaderPicture").hide();
+                    $("#validateModal").modal();
+                    $("#modalMessage").html("Some error occur, can't upload image!");
                 }
             });
+        } else {
+            $("#validateModal").modal();
+            $("#modalMessage").html("No file selected");
         }
     };
 
@@ -104,7 +119,7 @@ var partnerCinemaController = function ($scope, $http) {
         $scope.isAddnewCinema = true;
         $scope.currentCinema = {};
         //set default picture
-        $scope.currentCinema.profilePicture = "https://media-cdn.tripadvisor.com/media/photo-s/0e/22/45/01/the-arc-cinema-screen.jpg";
+        $scope.currentCinema.profilePicture = "https://www.shofu.de/wp-content/themes/aaika/assets/images/default.jpg";
     };
 
     $scope.readFile = function () {
@@ -154,7 +169,6 @@ var partnerCinemaController = function ($scope, $http) {
                 r.onloadend = function (e) {
                     var data = e.target.result;
                     //send your binary data via $http or $resource or do anything else with it
-                    console.log(data);
                     //$scope.uploadImage(data);
                 }
                 r.readAsBinaryString(f);
@@ -186,7 +200,8 @@ var partnerCinemaController = function ($scope, $http) {
                     $scope.updateCinemaTrackingArray();
                     $scope.currentCinema = $scope.currentPageCinemaData[$scope.currentSelectedCinemaIndex];
                 });
-                 alert("Update success!");
+                 $("#validateModal").modal();
+                 $("#modalMessage").html("Update success!");
              });
         }
     };
@@ -223,7 +238,6 @@ var partnerCinemaController = function ($scope, $http) {
                 r.onloadend = function (e) {
                     var data = e.target.result;
                     //send your binary data via $http or $resource or do anything else with it
-                    console.log(data);
                     //$scope.uploadImage(data);
                 }
                 r.readAsBinaryString(f);
@@ -237,8 +251,10 @@ var partnerCinemaController = function ($scope, $http) {
              .then(function (response) {
                  //load list cinema again
                  $('#cinemaForm')[0].reset();
+                 $("#cinemaProfilePicture").attr("src", "https://www.shofu.de/wp-content/themes/aaika/assets/images/default.jpg");
                  $scope.getAllCinema();
-                 alert("Create success!");
+                 $("#validateModal").modal();
+                 $("#modalMessage").html("Create success!");
              });
         }
     }

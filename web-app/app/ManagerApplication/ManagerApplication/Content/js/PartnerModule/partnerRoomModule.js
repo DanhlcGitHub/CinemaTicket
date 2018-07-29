@@ -14,7 +14,8 @@ var roomController = function ($scope, $http) {
     });
 
     $scope.$on('addRoomEvent', function (event, infor) {
-       // $("#seatForm").show();
+        // $("#seatForm").show();
+        $scope.seatData = {};
         $("#roomAction").show();
         $("#viewRoomHeader").hide();
         $("#addRoomHeader").show();
@@ -54,7 +55,7 @@ var roomController = function ($scope, $http) {
 
     console.log("room running now");
 
-    $scope.alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"];
+    $scope.alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U","V","W","S","Y","Z"];
 
     $http({
         method: "POST",
@@ -82,6 +83,7 @@ var roomController = function ($scope, $http) {
             $scope.matrixX = $scope.currentRoom.matrixSizeX;
             $scope.matrixY = $scope.currentRoom.matrixSizeY;
             $scope.showRoomData($scope.matrixX, $scope.matrixY);
+            
             $("#seatAreaId").show();
             $('#viewSeatModal').modal();
         });
@@ -93,7 +95,7 @@ var roomController = function ($scope, $http) {
         $scope.currentMode = "null";
         var seatClass = "btn-seat";
         if ($scope.isAddRoom == false) seatClass = "btn-seat-disable";
-        $scope.initMatrixData(matrixX, matrixX);
+        $scope.initMatrixData(matrixX, matrixY);
         for (var i = 0; i < $scope.seatData.length; i++) {
             $scope.seatData[i].seatClass = seatClass;
         }
@@ -278,7 +280,9 @@ var roomController = function ($scope, $http) {
             if($scope.seatData.length < $scope.currentCapacity){
                 $scope.addSeatToList(px, py);
             } else {
-                alert("can't add, full seat added");
+                //alert("can't add, full seat added");
+                $("#validateModal").modal();
+                $("#modalMessage").html("can't add, full seat added");
             }
         }
     };
@@ -308,7 +312,9 @@ var roomController = function ($scope, $http) {
             $scope.initMatrixData($scope.currentSizeX, $scope.currentSizeY);
             $scope.fillDataToMatrix();
         } else {
-            alert("Row limit to " + $scope.maxSizeY + " with capacity " + $scope.currentCapacity);
+            //alert("Row limit to " + $scope.maxSizeY + " with capacity " + $scope.currentCapacity);
+            $("#validateModal").modal();
+            $("#modalMessage").html("Row limit to " + $scope.maxSizeY + " with capacity " + $scope.currentCapacity);
         }
     }
 
@@ -318,7 +324,9 @@ var roomController = function ($scope, $http) {
             $scope.initMatrixData($scope.currentSizeX, $scope.currentSizeY);
             $scope.fillDataToMatrix();
         } else {
-            alert("Column limit to " + $scope.maxSizeX + " with capacity " + $scope.currentCapacity);
+            //alert("Column limit to " + $scope.maxSizeX + " with capacity " + $scope.currentCapacity);
+            $("#validateModal").modal();
+            $("#modalMessage").html("Column limit to " + $scope.maxSizeX + " with capacity " + $scope.currentCapacity);
         }
     }
 
@@ -329,7 +337,9 @@ var roomController = function ($scope, $http) {
             $scope.initMatrixData($scope.currentSizeX, $scope.currentSizeY);
             $scope.fillDataToMatrix();
         } else {
-            alert("Column must greater than " + $scope.baseSizeX + " with capacity " + $scope.currentCapacity);
+            //alert("Column must greater than " + $scope.baseSizeX + " with capacity " + $scope.currentCapacity);
+            $("#validateModal").modal();
+            $("#modalMessage").html("Column must greater than " + $scope.baseSizeX + " with capacity " + $scope.currentCapacity);
         }
     };
 
@@ -340,7 +350,9 @@ var roomController = function ($scope, $http) {
             $scope.initMatrixData($scope.currentSizeX, $scope.currentSizeY);
             $scope.fillDataToMatrix();
         } else {
-            alert("Row must greater than " + $scope.baseSizeY + " with capacity " + $scope.currentCapacity);
+            //alert("Row must greater than " + $scope.baseSizeY + " with capacity " + $scope.currentCapacity);
+            $("#validateModal").modal();
+            $("#modalMessage").html("Row must greater than " + $scope.baseSizeY + " with capacity " + $scope.currentCapacity);
         }
     };
 
@@ -403,7 +415,9 @@ var roomController = function ($scope, $http) {
     $scope.save = function () {
         console.log("save");
         if ($scope.currentCapacity != $scope.seatData.length) {
-            alert("not select enought seat");
+            //alert("not select enought seat");
+            $("#validateModal").modal();
+            $("#modalMessage").html("not select enought seat");
         } else {
             $scope.saveRoomToDB();
         }
@@ -423,14 +437,17 @@ var roomController = function ($scope, $http) {
             },
             seatData: $scope.seatData
         }
-
+        $("#room-loader").show();
+        $("#room-saver").hide();
         $.ajax({
             type: 'POST',
             url: "/Partner/SaveRoom",
             data: { roomInfor: JSON.stringify(dataStr) },
             success: function () {
                 $scope.$emit('roomCallRefreshEvent');
-                alert("success!");
+                //alert("success!");
+                $("#validateModal").modal();
+                $("#modalMessage").html("success!");
             }
         });
     };

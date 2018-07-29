@@ -6,18 +6,29 @@ var managerModule = angular.module("managerModule", []);
 var managerController = function ($scope, $http) {
     $scope.cinemaInfor;
     $scope.cinemaId = $("#cinemaId").val();
+    
+    $scope.showDashboard = function () {
+        $("#dashboardManager").show();
+        $("#basicAdd").hide();
+        $("#advantageAdd").hide();
+
+        $scope.$broadcast('viewDashBoardEvent');
+    }
+    $scope.showDashboard();
 
     $scope.basicAdd = function () {
         $("#basicAdd").show();
         $("#advantageAdd").hide();
+        $("#dashboardManager").hide();
+        
 
         $scope.$broadcast('basicAddScheduleEvent');
     };
-    $scope.basicAdd();
 
     $scope.advantageAdd = function () {
         $("#basicAdd").hide();
         $("#advantageAdd").show();
+        $("#dashboardManager").hide();
 
         $scope.$broadcast('advantageAddScheduleEvent');
     };
@@ -44,9 +55,9 @@ var managerController = function ($scope, $http) {
            }
        });
     };
-
+    
 }
 
 managerModule.controller("managerController", managerController);
-angular.module("CombineModule", ["managerModule", "managerScheduleModule"]);
+angular.module("CombineModule", ["managerModule", "managerScheduleModule", "dashboardModule"]);
 

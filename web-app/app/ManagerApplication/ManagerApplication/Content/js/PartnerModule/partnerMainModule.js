@@ -25,16 +25,27 @@ var partnerController = function ($scope, $http) {
 
     $scope.manageEmployee = function () {
         $("#empManagement").show();
-        $("#cinemaManagement").hide();
+        $("#cinemaManagement").hide(); 
+        $("#dashboardManagement").hide();
         var groupId = $scope.groupId;
         $scope.$broadcast('reloadEmployeeEvent', groupId);
     };
 
     $scope.manageCinema = function () {
         $("#empManagement").hide();
+        $("#dashboardManagement").hide();
         $("#cinemaManagement").show();
         $scope.$broadcast('reloadCinemaEvent');
     };
+
+    $scope.manageDashboard = function () {
+        $("#empManagement").hide();
+        $("#cinemaManagement").hide();
+        $("#dashboardManagement").show();
+        $scope.$broadcast('manageDashboardEvent');
+    };
+
+    $scope.manageDashboard();
     
     $scope.logout = function () {
         $http({
@@ -51,5 +62,5 @@ var partnerController = function ($scope, $http) {
 
 partnerModule.controller("partnerController", partnerController);
 angular.module("CombineModule", ["partnerModule", "partnerRoomModule", "partnerEmployeeModule",
-    "partnerCinemaModule", "partnerReportModule"]);
+    "partnerCinemaModule", "partnerReportModule", "partnerDashboardModule"]);
 

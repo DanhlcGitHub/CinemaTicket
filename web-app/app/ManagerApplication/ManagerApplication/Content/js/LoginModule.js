@@ -4,7 +4,7 @@
 
 var loginModule = angular.module("loginModule", []);
 var loginController = function ($scope, $http) {
-    $scope.roleList = [{ key: "partner", value: "partner" }, { key: "cinemaManager", value: "cinemaManager" }];
+    $scope.roleList = [{ key: "partner", value: "partner" }, { key: "cinemaManager", value: "Cinema Manager" }];
     $("#loader").hide();
 
     $("#loginForm").submit(function (e) {

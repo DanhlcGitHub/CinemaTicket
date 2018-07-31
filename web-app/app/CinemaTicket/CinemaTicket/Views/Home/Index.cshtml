@@ -16,6 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/adminlte.min.css">
     <link rel="stylesheet" href="~/Content/css/w3.css">
 
     <link rel="stylesheet" href="~/Content/css/common.css">
@@ -23,8 +24,7 @@
 </head>
 <body ng-controller="filmController" style="padding-right: 0 !important">
 
-
-    <form method="post" target="_blank" action="/home/ChooseTicketAndSeatToday" id="goToChooseTicketAndSeatForm" style="display:none"></form>
+    <form method="post" target="_blank" action="/home/ChooseTicketAndSeat" id="goToChooseTicketAndSeatForm" style="display:none"></form>
 
     <div class="mainMaxWidth2 contentMain">
         <nav class="navbar navbar-expand-sm navbar-light fixed-top shadow p-3 mb-5 bg-white rounded">
@@ -364,7 +364,7 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="row">
-                            <div ng-repeat="schedule in transferTicketData" ng-click="submitChooseTicketForm(schedule.scheduleId)" style="cursor:pointer" class="col-sm-6 col-12">
+                            <div ng-if="schedule.availableSeat!=0" ng-repeat="schedule in transferTicketData" ng-click="submitChooseTicketForm(schedule.scheduleId)" style="cursor:pointer" class="col-sm-6 col-12">
                                 <div class="info-box bg-danger">
                                     <span class="info-box-icon"><i class="fa fa-film"></i></span>
 
@@ -376,7 +376,7 @@
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                            {{schedule.availableSeat}} Ghe con trong
+                                            {{schedule.availableSeat}} Ghế còn trống
                                         </span>
                                     </div>
                                     <!-- /.info-box-content -->

@@ -42,6 +42,11 @@ namespace CinemaTicket.Controllers
             }
             return Json(obj);
         }
+        public string GetEncryptPass(string password)
+        {
+            string encryptedPass = EncryptUtility.EncryptString(password);
+            return encryptedPass;
+        }
 
         public JsonResult CheckRegister(string username, string password, string email, string phone)
         {

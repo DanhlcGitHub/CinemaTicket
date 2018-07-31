@@ -47,7 +47,23 @@
                                 <a class="nav-link font-weight-bold" href="#" style="padding-left:0px; padding-right:0px">03 KẾT QUẢ ĐẶT VÉ</a>
                             </div>
                         </div>
-                        <div class="col-sm-5 float-right" style="padding-left:0px; padding-right:0px">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <span class="nav-link" ng-if="userData == ''" ng-click="showLogin()"><i class="fa fa-user"></i> Đăng nhập</span>
+                                <div class="original-box">
+                                    <span class="nav-link" ng-if="userData != ''"><i class="fa fa-user"></i> {{userData.username}}</span>
+                                    <div class="popup-box popup-box-left border" style="height:35px; width: 100px">
+                                        <a ng-click="logout()" href="#">Đăng xuất</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <span ng-click="gohome()" class="nav-link" data-toggle="dropdown" style="font-size:15px;cursor:pointer">
+                                    <i class="fa fa-home"></i>
+                                </span>
+                            </li>
+                        </ul>
+                        <!--<div class="col-sm-5 float-right" style="padding-left:0px; padding-right:0px">
                             <div class="nav-item float-right">
                                 <a class="nav-link" ng-if="userData == ''" href="#" ng-click="showLogin()"><i class="fa fa-user"></i> Đăng nhập</a>
                                 <div class="original-box">
@@ -56,8 +72,12 @@
                                         <a ng-click="logout()" href="#">Đăng xuất</a>
                                     </div>
                                 </div>
+                                <a class="nav-link">
+                                    <span ng-click="gohome()"><i class="fa fa-home"></i></span>
+                                </a>
                             </div>
-                        </div>
+
+                        </div>-->
 
                     </div>
                 </div>

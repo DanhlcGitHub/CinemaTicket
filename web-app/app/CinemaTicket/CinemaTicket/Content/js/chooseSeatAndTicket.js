@@ -559,6 +559,9 @@ var chooseTicketController = function ($scope, $http) {
             }
         });
     }
+    $scope.gohome = function () {
+        document.getElementById('gotoHomeForm').submit();
+    };
 };
 myApp.controller("chooseTicketController", chooseTicketController);
 

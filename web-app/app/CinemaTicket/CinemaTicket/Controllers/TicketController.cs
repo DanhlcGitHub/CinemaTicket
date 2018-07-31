@@ -154,6 +154,7 @@ namespace CinemaTicket.Controllers
             }
             catch (Exception)
             {
+                new BookingTicketService().Delete(orderId);
                 obj = new 
                 {
                     isSuccess = "false"

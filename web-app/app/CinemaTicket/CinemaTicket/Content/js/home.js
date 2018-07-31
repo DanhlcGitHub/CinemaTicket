@@ -260,6 +260,7 @@ var filmController = function ($scope, $http) {
         }
     };
     $scope.gotoChooseTicket = function (filmId, timeId, startTime) {
+        var cinemaId = $scope.currentCinemaList[$scope.currentCinemaIndex].id;
         $http({
             method: "POST",
             url: "utility/CompareScheduleTimeForToday",
@@ -272,15 +273,21 @@ var filmController = function ($scope, $http) {
             } else {
                 $http({
                     method: "POST",
-                    url: "/home/CheckDupplicateRoom",
-                    params: { filmId: filmId, timeId: timeId, cinemaId: cinemaId, selectDate: selectDate }
+                    url: "/home/CheckDupplicateRoomToday",
+                    params: { filmId: filmId, timeId: timeId, cinemaId: cinemaId }
                 })
                 .then(function (response) {
                     $scope.transferTicketData = response.data;
                     console.log($scope.transferTicketData);
                     if ($scope.transferTicketData.length == 1) {
                         var scheduleId = $scope.transferTicketData[0].scheduleId;
-                        $scope.submitChooseTicketForm(scheduleId);
+                        var availableSeat = $scope.transferTicketData[0].availableSeat;
+                        if (availableSeat != 0) {
+                            $scope.submitChooseTicketForm(scheduleId);
+                        } else {
+                            $("#validateModal").modal();
+                            $("#modalMessage").html("Suất chiếu đã hết ghế!");
+                        }
                     } else {
                         $("#myModalChooseRoom").modal();
                     }
@@ -305,6 +312,12 @@ var filmController = function ($scope, $http) {
             }*/
         });
     };
+
+    $scope.submitChooseTicketForm = function (scheduleId) {
+        var param1 = "<input type='hidden' name='scheduleIdStr' value='" + scheduleId + "' />";
+        document.getElementById('goToChooseTicketAndSeatForm').innerHTML = param1;
+        document.getElementById('goToChooseTicketAndSeatForm').submit();
+    }
     /*================ Login & Register Part*/
     $scope.showLogin = function () {
         $("#myModalRegister").modal('hide');

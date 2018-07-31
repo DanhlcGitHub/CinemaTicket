@@ -184,7 +184,12 @@ var filmController = function ($scope, $http) {
                     console.log($scope.transferTicketData);
                     if ($scope.transferTicketData.length == 1) {
                         var scheduleId = $scope.transferTicketData[0].scheduleId;
-                        $scope.submitChooseTicketForm(scheduleId);
+                        if (availableSeat != 0) {
+                            $scope.submitChooseTicketForm(scheduleId);
+                        } else {
+                            $("#validateModal").modal();
+                            $("#modalMessage").html("Suất chiếu đã hết ghế!");
+                        }
                     } else {
                         $("#myModalChooseRoom").modal();
                     }
@@ -195,8 +200,8 @@ var filmController = function ($scope, $http) {
 
     $scope.submitChooseTicketForm = function (scheduleId) {
         var param1 = "<input type='hidden' name='scheduleIdStr' value='" + scheduleId + "' />";
-        document.getElementById('goToChooseTicketAndTicketForm').innerHTML = param1;
-        document.getElementById('goToChooseTicketAndTicketForm').submit();
+        document.getElementById('goToChooseTicketAndSeatForm').innerHTML = param1;
+        document.getElementById('goToChooseTicketAndSeatForm').submit();
     }
     /*================ Login & Register Part*/
     $scope.showLogin = function () {

@@ -203,6 +203,50 @@ VALUES (N'Thế Giới Khủng Long: Vương Quốc Sụp Đổ - Jurassic World
 		 N'Jeff Goldblum, Chris Pratt, Bryce Dallas Howard',N'Tây Ban Nha, Mỹ',N'https://www.youtube.com/embed/whixKrf1M_k',
 		 N'Content/img/film/jurassicworldfk-poster.jpg',N'Content/img/film/jurassicworldfk-imageplus.jpg',1);
 		 
+/*------------------------------------------------------*/
+INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
+						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
+VALUES (N'Nhiệm Vụ Bất Khả Thi: Sụp Đổ - Mission: Impossible - Fallout','2018-08-20',16, 147, 8.6, N'1',N'Christopher McQuarrie',N'Hành động, phiêu lưu',
+         N'Ba năm sau Mission: Impossible – Rogue Nation, chàng đặc vụ điển trai và hào hoa bậc nhất trên màn ảnh rộng Ethan Hunt sẽ tái xuất màn bạc trong mùa hè 2018. Trailer đầu tiên của Nhiệm Vụ Bất Khả Thi: Sụp Đổ (Tựa gốc: Mission: Impossible - Fallout) vừa được hãng phát hành Paramount tung ra ngay lập tức trở thành tâm điểm của đại chúng bởi sự trở lại của ngôi sao hành động hàng đầu thế giới Tom Cruise cùng những khoảnh khắc nghẹt thở bắt nguồn từ pha hành động đẳng cấp mang đậm dấu ấn cá nhân anh.',
+		 N'Ving Rhames, Simon Pegg, Angela Bassett, Henry Cavill, Vanessa Kirby, Rebecca Ferguson, Tom Cruise',N'Mỹ',N'https://www.youtube.com/embed/KO-sbWbSrHw',
+		 N'Content/img/film/missionImpossible-poster.jpg',N'Content/img/film/missionImpossible-imageplus.jpg',1);
+
+/*------------------------------------------------------*/
+INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
+						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
+VALUES (N'Thám Tử Gà Mơ: Bộ Ba Khó Đỡ - The Accidental Detective 2: In Action','2018-08-15',13, 116, 6.8, N'1',N'Lee Eon-hee',N'Hình sự, Hài',
+         N'Sau khi phá án thành công ở phần 1, Dae-man và Tae-soo đã hợp lực lại và chính thức mở một văn phòng thám tử tư. Tuy đã không còn vô công rồi nghề nhưng “thám tử bỉm sữa” Dae-man vẫn còn nguyên bản tính sợ vợ, cùng với “cục nợ” là con gái nhỏ phải ôm theo khi đi phá án. Điều này gây ra vô số “tai nạn lao động” cho cả hai. Thanh tra Tae-soo thậm chí còn chơi lớn hơn khi quyết định bỏ hẳn công việc ở sở cảnh sát để chung kèo làm việc với Dae-man.',
+		 N'Dam-Bi Son, Dong-il Sung, Sang-Woo Kwon, Lee Eon-hee',N'Hàn Quốc',N'https://www.youtube.com/embed/OYpBeY3BMnE',
+		 N'Content/img/film/accidentalDetective2-poster.jpg',N'Content/img/film/accidentalDetective2-imageplus.jpg',1);
+
+		 
+		 
+/*------------------------------------------------------*/
+INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
+						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
+VALUES (N'Khách Sạn Huyền Bí 3: Kỳ Nghỉ Ma Cà Rồng - Hotel Transylvania 3: Summer Vacation','2018-08-20',0, 99, 6.4, N'1',N'Genndy Tartakovsky',N'Hoạt hình, phiêu lưu, gia đình',
+         N'Hotel Transylvania phần 3 lần này sẽ là “cuộc chơi lớn” với một phen tiệc tùng sang chảnh hết nấc của gia đình Dracula. Đã quá “ngán” với cường độ làm việc chăm chỉ 365 ngày không nghỉ, bá tước Dracula quyết định đòi “đình công”. Để khai sáng cho người cha trăm tuổi chưa bao giờ bước ra khỏi “lũy tre làng”, vợ chồng nhà Jonathan – Mavis lập một kế hoạch xả hơi táo bạo: Thuê đứt một du thuyền du lịch hạng sang để đưa tất thảy bộ xậu quái vật già trẻ lớn bé làm một chuyến ra khơi nhớ đời.',
+		 N'Steve Buscemi , Andy Samberg, Kevin James, Selena Gomez, Adam Sandler',N'Mỹ',N'https://www.youtube.com/embed/OKIlGWO_NPg',
+		 N'Content/img/film/hoteltransylvania3-poster.jpg',N'Content/img/film/hoteltransylvania3-imageplus.jpg',1);	
+
+/*------------------------------------------------------*/
+INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
+						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
+VALUES (N'Mamma Mia!: Yêu Lần Nữa','2018-08-17',16, 108, 7.3, N'1',N'Ol Parker',N'Nhạc kịch',
+         N'Trong phần tiếp theo của Mamma Mia! Sophie học về quá khứ của mẹ trong khi mang thai.',
+		 N'Colin Firth, Pierce Brosnan, Stellan Skarsgård, Dominic Cooper, Amanda Seyfried, Meryl Streep, Lily James',N'Mỹ',N'https://www.youtube.com/embed/F8gsyi_qCF4',
+		 N'Content/img/film/mammamia-poster.jpg',N'Content/img/film/mammamia-imageplus.jpg',1);	
+
+/*------------------------------------------------------*/
+INSERT INTO Film (name,dateRelease,restricted,filmLength,imdb,digTypeId,author,movieGenre,filmContent
+						,actorList,countries,trailerLink,posterPicture,additionPicture, filmStatus )
+VALUES (N'Ông Bác Siêu Nhân - Inuyashiki','2018-08-19',18, 100, 7.3, N'1',N'Shinsuke Sato',N'Hành động, Phiêu lưu',
+         N'Ông Inuyashiki là một ông lão khốn khổ có công việc và đời sống gia đình không mấy tốt đẹp. Bỗng một ngày, ông và một cậu học sinh tên Hiro chứng kiến vụ nổ từ chiếc phi thuyền của người ngoài hành tinh và bị biến đổi thành con người mới có sức mạnh siêu nhiên. Trong khi Hiro muốn hủy diệt cả thế giới thì ông Inuyashiki lại dùng năng lực đó để cứu người và ngăn cản Hiro.',
+		 N'Noritake Kinashi, Nayuta Fukuzaki, Mari Hamada, Fumi Nikaidô',N'Nhật Bản',N'https://www.youtube.com/embed/cV91uG2897k',
+		 N'Content/img/film/inuyashiki-poster.jpg',N'Content/img/film/inuyashiki-imageplus.jpg',1);	
+
+/*------------------------------------------------------*/
+
 /* --------------DigitalType -------------------- */
 
 INSERT INTO DigitalType (name)

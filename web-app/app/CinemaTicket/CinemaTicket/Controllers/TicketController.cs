@@ -15,11 +15,15 @@ namespace CinemaTicket.Controllers
         //
         // GET: /Ticket/
 
-        public JsonResult GetTicketList(string choosedList, string scheduleIdStr)
+        public JsonResult GetTicketList()
         {
+            string ticketDataStr = Request.Params["ticketData"];
+            JObject ticketData = JObject.Parse(ticketDataStr);
             List<Ticket> ticketList = new List<Ticket>();
+            string scheduleIdStr = (string)ticketData.GetValue("scheduleIdStr");
             int scheduleId = Convert.ToInt32(scheduleIdStr);
-            JArray seatList = JArray.Parse(choosedList);
+            string choosedListStr = (string)ticketData.GetValue("choosedList");
+            JArray seatList = JArray.Parse(choosedListStr);
             foreach (JObject item in seatList)
             {
                 int seatId = (int)item.GetValue("id");
@@ -51,8 +55,9 @@ namespace CinemaTicket.Controllers
             return Json(obj);
         }
 
-        public JsonResult ChangeAvailableToBuying(string ticketListStr)
+        public JsonResult ChangeAvailableToBuying()
         {
+            string ticketListStr = Request.Params["ticketListStr"];
             JArray list = JArray.Parse(ticketListStr);
             List<Ticket> ticketList = new List<Ticket>();
             foreach (JObject item in list)
@@ -99,15 +104,26 @@ namespace CinemaTicket.Controllers
             return Json(obj);
         }
 
-        public JsonResult MakeOrder(string ticketListStr, string email, string phone, string filmName, string cinemaName,
-            string date, string roomName, string startTime)
+        public JsonResult MakeOrder()
         {
+            string orderDataStr = Request.Params["orderData"];
+            JObject orderData = JObject.Parse(orderDataStr);
+            string ticketListStr = (string) orderData.GetValue("ticketListStr");
+            string email = (string)orderData.GetValue("email");
+            string phone = (string)orderData.GetValue("phone");
+            string filmName = (string)orderData.GetValue("filmName");
+            string cinemaName = (string)orderData.GetValue("cinemaName");
+            string date = (string)orderData.GetValue("date");
+            string roomName = (string)orderData.GetValue("roomName");
+            string startTime = (string)orderData.GetValue("startTime");
+            string userId = (string)orderData.GetValue("userId");
             JArray list = JArray.Parse(ticketListStr);
             List<Ticket> ticketList = new List<Ticket>();
             //create customer 
             Customer cus = new Customer();
             cus.email = email;
             cus.phone = phone;
+            if (userId != null) cus.userId = userId;
             int cusId = new CustomerService().createCustomer(cus);//get cusId
             //create order
             BookingTicket order = new BookingTicket();

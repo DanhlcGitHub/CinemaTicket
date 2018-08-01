@@ -505,7 +505,7 @@ namespace ManagerApplication.Controllers.CinemaManagerController
             string formatDateStr = inputedDate.Year + "-" + inputedDate.Month + "-" + inputedDate.Day + " " + aTime.startTime;
             DateTime scheduleDate = DateTime.Parse(formatDateStr);
 
-            List<MovieSchedule> list = new MovieScheduleService().FindBy(ms => ms.filmId == filmId && ms.roomId == roomId
+            List<MovieSchedule> list = new MovieScheduleService().FindBy(ms => ms.roomId == roomId
                                                              && ms.scheduleDate == scheduleDate);
             if (list == null || list.Count == 0)
             {

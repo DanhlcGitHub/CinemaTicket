@@ -184,6 +184,7 @@ var filmController = function ($scope, $http) {
                     console.log($scope.transferTicketData);
                     if ($scope.transferTicketData.length == 1) {
                         var scheduleId = $scope.transferTicketData[0].scheduleId;
+                        var availableSeat = $scope.transferTicketData[0].availableSeat;
                         if (availableSeat != 0) {
                             $scope.submitChooseTicketForm(scheduleId);
                         } else {

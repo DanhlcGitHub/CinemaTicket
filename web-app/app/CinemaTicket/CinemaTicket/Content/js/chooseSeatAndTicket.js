@@ -62,7 +62,7 @@ var chooseTicketController = function ($scope, $http) {
         //console.log("Chỉ còn lại " + $scope.availableSeat + " vé");
         if (sum >= $scope.availableSeat) {
             alert("Chỉ còn lại " + $scope.availableSeat + " vé");
-        }else if (sum >= 10) {
+        } else if (sum >= 10) {
             alert("Bạn Chỉ Được Mua 10 Vé!");
         } else {
             $scope.chooseTicketData.typeOfSeats[index].userChoose++;
@@ -342,37 +342,41 @@ var chooseTicketController = function ($scope, $http) {
                     if (validateEmail($("#emailId").val()) && validatePhone($("#phoneId").val())) {
                         console.log("success!");
                         // get ticketId, check status, show thanh toan dialog
-                        $http({
-                            method: "POST",
+                        var ticketData = {
+                            choosedList: JSON.stringify($scope.choosedList),
+                            scheduleIdStr: $scope.scheduleId
+                        };
+                        $.ajax({
+                            type: 'POST',
                             url: "/Ticket/GetTicketList",
-                            params: {
-                                choosedList: JSON.stringify($scope.choosedList),
-                                scheduleIdStr: $scope.scheduleId
-                            }
-                        })
-                        .then(function (response) {
-                            console.log("ticket data");
-                            $scope.ticketData = response.data;
-                            console.log(response.data);
-                            if (!$scope.IsSeatStillAvailable()) {//not available
-                                $("#validateModal").modal();
-                                $("#modalMessage").html("Loại vé bạn chọn đã hết hoặc không đủ số lượng ghế trống!");
-                            } else {
-                                //change available to buying
-                                $("#checkoutButton").prop('disabled', true);
-                                console.log("double click");
-                                $http({
-                                    method: "POST",
-                                    url: "/Ticket/ChangeAvailableToBuying",
-                                    params: { ticketListStr: JSON.stringify($scope.ticketData) }
-                                })
-                               .then(function (response) {
-                                   console.log("ticket data after update");
-                                   $scope.ticketData = response.data;
-                               });
-                                $scope.countController();
-                                $scope.renderPaypalButton();
-                                $scope.openConfirmDialog();
+                            data: {
+                                ticketData: JSON.stringify(ticketData)
+                            },
+                            success: function (response) {
+                                console.log("ticket data");
+                                $scope.ticketData = response;
+                                console.log(response);
+                                if (!$scope.IsSeatStillAvailable()) {//not available
+                                    $("#validateModal").modal();
+                                    $("#modalMessage").html("Loại vé bạn chọn đã hết hoặc không đủ số lượng ghế trống!");
+                                } else {
+                                    //change available to buying
+                                    $("#checkoutButton").prop('disabled', true);
+                                    console.log("double click");
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: "/Ticket/ChangeAvailableToBuying",
+                                        data: { ticketListStr: JSON.stringify($scope.ticketData) },
+                                        success: function (response) {
+                                            console.log("ticket data after update");
+                                            $scope.ticketData = response;
+                                        }
+                                    });
+                                    $scope.countController();
+                                    $scope.renderPaypalButton();
+                                    $scope.openConfirmDialog();
+                                }
                             }
                         });
                     } else {
@@ -429,34 +433,36 @@ var chooseTicketController = function ($scope, $http) {
                     if ($scope.countDown !== 0) { // !timeout
                         return actions.payment.execute().then(function () {
                             // Show a thank-you note
-                            $http({
-                                method: "POST",
+
+                            var orderData = {
+                                ticketListStr: JSON.stringify($scope.ticketData),
+                                email: $scope.email,
+                                phone: $scope.phone,
+                                filmName: $scope.scheduleData.filmName,
+                                cinemaName: $scope.scheduleData.cinemaName,
+                                date: $scope.scheduleData.date,
+                                roomName: $scope.scheduleData.roomName,
+                                startTime: $scope.scheduleData.startTime,
+                                userId : $scope.userData.username,
+                            };
+                            $.ajax({
+                                type: 'POST',
                                 url: "/Ticket/MakeOrder",
-                                params: {
-                                    ticketListStr: JSON.stringify($scope.ticketData),
-                                    email: $scope.email,
-                                    phone: $scope.phone,
-                                    filmName: $scope.scheduleData.filmName,
-                                    cinemaName: $scope.scheduleData.cinemaName,
-                                    date: $scope.scheduleData.date,
-                                    roomName: $scope.scheduleData.roomName,
-                                    startTime: $scope.scheduleData.startTime,
+                                data: { orderData: JSON.stringify(orderData) },
+                                success: function (response) {
+                                    console.log(response);
+                                    console.log("ticket data after update MakeOrder");
+                                    if (response.isSuccess == "true") {
+                                        $('#confirmTicketModal').modal('hide');
+                                        $('#backdropModal').modal();
+                                        $("#backdropMessage").html("Đặt vé thành công, bấm nút bên dưới để tiếp tục!");
+                                    } else {
+                                        $('#confirmTicketModal').modal('hide');
+                                        $('#backdropModal').modal();
+                                        $("#backdropMessage").html("Lỗi đã xảy ra, bấm nút bên dưới để tiếp tục!");
+                                    }
                                 }
-                            })
-                           .then(function (response) {
-                               console.log(response);
-                               console.log("ticket data after update MakeOrder");
-                               if (response.data.isSuccess == "true") {
-                                   $('#confirmTicketModal').modal('hide');
-                                   $('#backdropModal').modal();
-                                   $("#backdropMessage").html("Đặt vé thành công, bấm nút bên dưới để tiếp tục!");
-                               } else {
-                                   $('#confirmTicketModal').modal('hide');
-                                   $('#backdropModal').modal();
-                                   $("#backdropMessage").html("Lỗi đã xảy ra, bấm nút bên dưới để tiếp tục!");
-                               }
-                               //$scope.ticketData = response.data;
-                           });
+                            });
                         });
                     } else {
                         $('#confirmTicketModal').modal('hide');

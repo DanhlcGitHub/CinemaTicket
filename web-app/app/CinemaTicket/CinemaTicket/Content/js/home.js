@@ -197,6 +197,7 @@ var filmController = function ($scope, $http) {
     //checkResellConfirmCode
     $scope.checkResellConfirmCode = function () {
         var confirmCode = document.getElementById("resellConfirmCodeTxt").value;
+        document.getElementById("confirmResellTicketBtn").disabled = true;
         console.log("confirmCode: " + confirmCode);
         $http({
             method: "POST",
@@ -207,6 +208,7 @@ var filmController = function ($scope, $http) {
             if (response.data.isWrong == "true") {
                 $('#validateModal').modal();
                 $("#modalMessage").html("Mã xác nhận không đúng.");
+                document.getElementById("confirmResellTicketBtn").disabled = false;
             } else {
                 document.getElementById("confirmResellEmailBlock").style.display = "none";
                 $("#resellTicketList").slideToggle("slow");

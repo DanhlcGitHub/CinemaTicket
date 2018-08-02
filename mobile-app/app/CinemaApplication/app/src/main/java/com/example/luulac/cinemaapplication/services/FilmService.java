@@ -13,8 +13,11 @@ import retrofit2.http.QueryMap;
 
 public interface FilmService {
 
-    @GET("films")
-    Call<List<FilmModel>> getFilms(@Query("isShowing") boolean isShow);
+    @GET("films/getFilmNowShowing")
+    Call<List<FilmModel>> getFilmNowShowing();
+
+    @GET("films/getFilmComingSoon")
+    Call<List<FilmModel>> getFilmComingSoon();
 
     @GET("films/{filmId}")
     Call<FilmModel> getFilm(@Path("filmId")int filmId);

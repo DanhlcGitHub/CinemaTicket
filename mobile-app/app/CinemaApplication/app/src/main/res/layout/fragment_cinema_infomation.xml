@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/img_cinema_information"
             android:layout_width="match_parent"
-            android:layout_height="460dp"
+            android:layout_height="360dp"
             android:src="@drawable/avengers" />
 
         <TextView
@@ -23,10 +23,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/img_cinema_information"
             android:layout_marginTop="10dp"
-            android:text="CineStar Quoc Thanh"
             android:textColor="@android:color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_cinema_address_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_cinema_name_information"
+            android:layout_marginTop="10dp"
+            android:text="Địa chỉ: " />
 
         <TextView
             android:id="@+id/tv_cinema_address"
@@ -34,7 +41,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_cinema_name_information"
             android:layout_marginTop="10dp"
-            android:text="271 Nguyen Trai" />
+            android:layout_toEndOf="@+id/tv_cinema_address_content" />
+
+        <TextView
+            android:id="@+id/tv_cinema_phone_number_conntent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_cinema_address"
+            android:layout_marginTop="10dp"
+            android:text="Số điện thoại: " />
 
         <TextView
             android:id="@+id/tv_cinema_phone_number"
@@ -42,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_cinema_address"
             android:layout_marginTop="10dp"
-            android:text="02873008881" />
+            android:layout_toEndOf="@+id/tv_cinema_phone_number_conntent" />
 
     </RelativeLayout>
 

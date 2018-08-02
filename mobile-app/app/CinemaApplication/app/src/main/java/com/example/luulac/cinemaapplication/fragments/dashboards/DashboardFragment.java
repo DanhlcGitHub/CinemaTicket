@@ -51,7 +51,7 @@ public class DashboardFragment extends Fragment {
 
     public static List<String> getTitles() {
         titles = new ArrayList<>();
-        titles.add("Home");
+        titles.add("Trang chủ");
         titles.add("Đang Chiếu");
         titles.add("Sắp Chiếu");
 

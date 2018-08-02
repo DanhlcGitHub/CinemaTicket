@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class TicketModel implements Serializable{
+public class TicketModel implements Serializable {
     private int bookingId;
     private int ticketId;
     private int scheduleId;
     private int seatId;
+    private String paymentCode;
     private String qrCode;
     private String ticketStatus;
     private double price;
@@ -24,7 +25,7 @@ public class TicketModel implements Serializable{
         this.ticketId = ticketId;
     }
 
-    public TicketModel(int ticketId,int scheduleId, int seatId, double price) {
+    public TicketModel(int ticketId, int scheduleId, int seatId, double price) {
         this.ticketId = ticketId;
         this.scheduleId = scheduleId;
         this.seatId = seatId;
@@ -117,5 +118,13 @@ public class TicketModel implements Serializable{
 
     public void setFilmId(int filmId) {
         this.filmId = filmId;
+    }
+
+    public String getPaymentCode() {
+        return paymentCode;
+    }
+
+    public void setPaymentCode(String paymentCode) {
+        this.paymentCode = paymentCode;
     }
 }

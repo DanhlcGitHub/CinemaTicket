@@ -4,25 +4,26 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="15dp"
     card_view:cardCornerRadius="15dp"
     card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="488dp">
+        android:layout_height="430dp">
 
         <ImageView
             android:id="@+id/img_film_card_lager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:src="@drawable/incredibles2_imageplus" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="430dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/gradient_bg"></FrameLayout>

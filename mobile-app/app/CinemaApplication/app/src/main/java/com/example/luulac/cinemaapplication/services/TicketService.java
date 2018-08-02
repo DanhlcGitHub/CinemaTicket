@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 public interface TicketService {
 
     @PUT("ticket/resellTicket")
-    Call<TicketModel> resellTicket(@Query("ticketId") int ticketId);
+    Call<TicketModel> resellTicket(@Query("ticketId") int ticketId,@Query("resellDescription") String resellDescription);
 
     @PUT("ticket/cancelResellTicket")
     Call<TicketModel> cancelResellTicket(@Query("ticketId") int ticketId);
@@ -24,6 +24,5 @@ public interface TicketService {
     Call<List<TicketModel>> getAllTicketByBookingTicketId(@Query("bookingTicketId") int bookingTicketId);
 
     @PUT("ticket/confirmChangeTicket")
-    //int ticketId, int scheduleId, int seatId
     Call<TicketModel> confirmChangeTicket(@Query("ticketId") int ticketId, @Query("scheduleId") int scheduleId, @Query("seatId") int seatId);
 }

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using CinemaBookingCore.Data.Models;
+using CinemaTicket.Utility;
+using CinemaBookingCore.Constant;
 
 namespace CinemaBookingCore.Controllers
 {
@@ -79,17 +81,17 @@ namespace CinemaBookingCore.Controllers
         }
 
         [HttpPut("resellTicket")]
-        public IActionResult ResellTicket(int ticketId)
+        public IActionResult ResellTicket(int ticketId, String resellDescription)
         {
             try
             {
                 Ticket ticket = context.Ticket.Where(t => t.TicketId == ticketId).FirstOrDefault();
                 if (ticket != null)
                 {
-                    ticket.TicketStatus = "resell";
+                    ticket.TicketStatus = "reselling";
+                    ticket.ResellDescription = resellDescription;
                     context.SaveChanges();
                 }
-
 
                 return Ok(ticket);
             }
@@ -111,7 +113,6 @@ namespace CinemaBookingCore.Controllers
                     context.SaveChanges();
                 }
 
-
                 return Ok(ticket);
             }
             catch (Exception)
@@ -125,34 +126,31 @@ namespace CinemaBookingCore.Controllers
         {
             try
             {
-                Customer customer = context.Customer.Where(u => u.Email == email).FirstOrDefault();
-
-                if (customer == null)
-                {
-                    customer = new Customer
-                    {
-                        Email = email
-                    };
-                    context.SaveChanges();
-                }
-
-                DateTime nowDate = DateTime.UtcNow.AddHours(7);
-
-                BookingTicket bookingTicket = new BookingTicket
-                {
-                    BookingDate = nowDate,
-                    Quantity = 1,
-                    CustomerId = customer.CustomerId
-                };
-                context.Add(bookingTicket);
-                context.SaveChanges();
-
-                Ticket ticket = context.Ticket.Where(t => t.TicketId == ticketId).FirstOrDefault();
+                Ticket ticket = context.Ticket.Where(t => t.TicketId == ticketId)
+                                                .Include(t => t.BookingTicket).ThenInclude(bt => bt.Customer)
+                                                .Include(t => t.Seat).ThenInclude(s => s.Room).ThenInclude(r => r.Cinema)
+                                                .Include(t => t.MovieSchedule).ThenInclude(ms => ms.Film)
+                                                .FirstOrDefault();
                 if (ticket != null)
                 {
-                    ticket.BookingId = bookingTicket.BookingId;
-                    ticket.TicketStatus = "buyed";
+                    ticket.TicketStatus = "reselled";
+                    String newTicketPaymentCode = ticket.TicketId + RandomUtility.RandomString(9);
+                    ticket.PaymentCode = newTicketPaymentCode;
+
+                    string content = "Chúc mừng quý khách đã mua lại vé thành công!";
+                    content += "Bạn đã mua lại 1 vé của " + ticket.BookingTicket.Customer.Email + "\n";
+
+                    content += "Tại " + ticket.Seat.Room.Cinema.CinemaName + "\n";
+                    content += "Mã vé mới của bạn là " + newTicketPaymentCode + "\n";
+                    content += "Phim " + ticket.MovieSchedule.Film.Name + "\n";
+                    content += ". Ghế: " + ConstantArray.Alphabet[(int) ticket.Seat.Py] + "" + ((int)ticket.Seat.Px + 1) +
+                                "- Mã vé: " + newTicketPaymentCode + "\n";
+                    string mailSubject = "CinemaBookingTicket - Mua lại vé thành công " + ticket.Seat.Room.Cinema.CinemaName;
+
+                    MailUtility.SendEmail(mailSubject, content, email);
+
                     context.SaveChanges();
+
                 }
 
                 return Ok(ticket);
@@ -168,10 +166,11 @@ namespace CinemaBookingCore.Controllers
         {
             try
             {
-                var ticket = context.Ticket.Where(t => t.TicketId == ticketId).Include(t => t.BookingTicket).FirstOrDefault();
+                Ticket ticket = context.Ticket.Where(t => t.TicketId == ticketId).Include(t => t.BookingTicket).FirstOrDefault();
 
                 var bookingTicketOld = ticket.BookingTicket;
                 bookingTicketOld.Quantity -= 1;
+
 
                 BookingTicket bookingTicket = new BookingTicket
                 {
@@ -182,11 +181,41 @@ namespace CinemaBookingCore.Controllers
                 context.Add(bookingTicket);
                 context.SaveChanges();
 
-                if(ticket != null)
+                String newBookingTicketPaymentCode = bookingTicket.BookingId + RandomUtility.RandomString(9);
+
+                bookingTicket.PaymentCode = newBookingTicketPaymentCode;
+                context.Update(bookingTicket);
+
+                if (ticket != null)
                 {
                     ticket.BookingId = bookingTicket.BookingId;
                     ticket.SeatId = seatId;
+                    ticket.TicketStatus = "changed";
                     ticket.ScheduleId = scheduleId;
+
+                    MovieSchedule movieSchedule = context.MovieSchedule
+                        .Where(ms => ms.ScheduleId == scheduleId)
+                        .Include(ms => ms.Film)
+                        .Include(ms => ms.Room).ThenInclude(r => r.Cinema)
+                        .FirstOrDefault();
+
+                    Seat seat = context.Seat.Where(s => s.SeatId == seatId).FirstOrDefault();
+                    String newTicketPaymentCode = ticket.TicketId + RandomUtility.RandomString(9);
+
+                    ticket.PaymentCode = newTicketPaymentCode;
+                    String cinemaName = movieSchedule.Room.Cinema.CinemaName;
+
+                    string content = "Quý khách đã đổi lại vé thành công!";
+                    content += "Bạn đã đổi lại 1 vé \n";
+                    content += "Tại " + cinemaName + "\n";
+                    content += "Mã đơn hàng của bạn là " + newBookingTicketPaymentCode + "\n";
+                    content += "Phim " + movieSchedule.Film.Name + "\n";
+                    content += ". Ghế: " + ConstantArray.Alphabet[(int)seat.Py] + "" + ((int)seat.Px + 1) +
+                                "- Mã vé: " + newTicketPaymentCode + "\n";
+                    string mailSubject = "CinemaBookingTicket - Đổi lại vé thành công " + cinemaName;
+
+                    MailUtility.SendEmail(mailSubject, content, ticket.BookingTicket.Customer.Email);
+
                     context.Update(ticket);
                     context.SaveChanges();
                 }

@@ -16,5 +16,6 @@ namespace CinemaBookingCore.Data.Entities
         public BookingTicket BookingTicket { get; set; }
         public virtual MovieSchedule MovieSchedule { get; set; }
         public virtual Seat Seat { get; set; }
+        public String ResellDescription { get; set; }
     }
 }

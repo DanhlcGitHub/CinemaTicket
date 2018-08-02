@@ -14,6 +14,7 @@ namespace CinemaBookingCore.Data.Entities
         public int BookingId { get; set; }
         public int CustomerId { get; set; }
         public int PaymentMethodId { get; set; }
+        public String PaymentCode { get; set; }
         public int Quantity { get; set; }
         public System.DateTime BookingDate { get; set; }
 

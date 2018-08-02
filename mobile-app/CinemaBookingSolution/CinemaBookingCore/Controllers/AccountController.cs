@@ -2,17 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CinemaBookingCore.Data.Entities;
 using CinemaBookingCore.Data;
 using CinemaBookingCore.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Net.Http;
-using System.Net;
-using System.IO;
-using System.Data.SqlClient;
+using CinemaBookingCore.Utility;
+using System.Threading.Tasks;
 
 namespace CinemaBookingCore.Controllers
 {
@@ -30,7 +27,8 @@ namespace CinemaBookingCore.Controllers
         [HttpGet("login")]
         public IActionResult Login(String username, String password)
         {
-            UserAccount user = context.UserAccount.Where(u => u.UserId == username && u.UserPassword == password).FirstOrDefault();
+            String passwordEncript = EncryptUtility.EncryptString(password);
+            UserAccount user = context.UserAccount.Where(u => u.UserId == username && u.UserPassword == passwordEncript).FirstOrDefault();
             if (user == null)
             {
                 user = new UserAccount();
@@ -38,7 +36,6 @@ namespace CinemaBookingCore.Controllers
 
             return Ok(user);
         }
-
 
         public String getAndroidMessage(String title, String body, String image, String message, String accountId, String to)
         {
@@ -79,20 +76,21 @@ namespace CinemaBookingCore.Controllers
         [HttpGet("notificationScheduleAuto")]
         public IActionResult NotificationScheduleAuto()
         {
-            
             try
             {
                 while (true)
                 {
                     DateTime nowDate = DateTime.UtcNow;
-                    //GMT +7
-                    nowDate = nowDate.AddHours(7);
 
-                    //add one hour
-                    nowDate = nowDate.AddHours(1);
+                    //GMT +7 and + them 1h de tim kiem lich chieu sau 1 gio
+                    nowDate = nowDate.AddHours(8);
+
+                    //5 phut sau
+                    DateTime nextFiveMinuteDateTime = nowDate.AddMinutes(5);
 
                     List<Ticket> tickets = context.Ticket.Where(t => t.MovieSchedule.ShowTime.StartTimeDouble == nowDate.Hour
-                                                                    && t.MovieSchedule.ScheduleDate.Date == nowDate.Date
+                                                                    && t.MovieSchedule.ScheduleDate >= nowDate
+                                                                    && t.MovieSchedule.ScheduleDate < nextFiveMinuteDateTime
                                                                     && t.TicketStatus == "buyed")
                                                                     .Include(t => t.MovieSchedule).ThenInclude(ms => ms.ShowTime)
                                                                     .Include(t => t.BookingTicket).ThenInclude(bt => bt.Customer)
@@ -143,7 +141,7 @@ namespace CinemaBookingCore.Controllers
                         Send(notification);
                     }
 
-                    System.Threading.Thread.Sleep(TimeSpan.FromMinutes(15));
+                    System.Threading.Thread.Sleep(TimeSpan.FromMinutes(5));
                 }
             }
             catch (Exception)
@@ -158,12 +156,15 @@ namespace CinemaBookingCore.Controllers
             UserAccount user = context.UserAccount.Where(u => u.UserId == userId).FirstOrDefault();
 
             AccountModel accountModel = new AccountModel();
+
+            String passwordEncript = EncryptUtility.EncryptString(password);
+
             if (user == null)
             {
                 user = new UserAccount
                 {
                     UserId = userId,
-                    UserPassword = password,
+                    UserPassword = passwordEncript,
                     Email = email,
                     Phone = phone
                 };

@@ -167,23 +167,6 @@ public class MainActivity extends AppCompatActivity {
 
                     return true;
 
-                case R.id.navigation_cart:
-                    toolbar.setTitle(R.string.title_news);
-
-                    adapter = new TabLayoutMainAdapter(getSupportFragmentManager());
-
-                    NewsFragment newsFragment = new NewsFragment();
-
-                    fragmentList = newsFragment.getFragments();
-                    titleList = newsFragment.getTitles();
-
-                    setTabLayoutMain(fragmentList, titleList);
-
-                    fragment = newsFragment;
-                    loadFragment(fragment);
-
-                    return true;
-
                 case R.id.navigation_profile:
                     toolbar.setTitle(R.string.title_user);
 

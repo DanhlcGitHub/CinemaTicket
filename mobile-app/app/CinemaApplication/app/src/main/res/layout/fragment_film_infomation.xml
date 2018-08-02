@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/img_film_information"
             android:layout_width="match_parent"
-            android:layout_height="460dp"
+            android:layout_height="430dp"
             android:src="@drawable/avengers" />
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/img_film_information"
             android:layout_marginTop="10dp"
-            android:text="Jurassic World: Fallen Kingdom"
+            android:text=""
             android:textColor="@android:color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_film_name_information"
             android:layout_marginTop="10dp"
-            android:text="C13 08/06 - 128 phút - 123phim 8.7 - IMDb 7.7" />
+            android:text="" />
 
         <TextView
             android:id="@+id/tv_film_title_content"

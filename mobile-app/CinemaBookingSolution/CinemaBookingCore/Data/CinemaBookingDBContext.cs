@@ -37,7 +37,7 @@ namespace CinemaBookingCore.Data
             if (!optionsBuilder.IsConfigured)
             {
                 //optionsBuilder.UseSqlServer(@"data source=CinemaBookingDB.database.windows.net;initial catalog=CinemaBookingDB;user id=CinemaBookingDB;password=Capstone@2018;MultipleActiveResultSets=True;");
-                optionsBuilder.UseSqlServer(@"data source=DESKTOP-D8NCIMI\SQLEXPRESS;initial catalog=CinemaBookingDB;user id=sa;password=nghich;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"data source=DESKTOP-58U8RAL\SQLEXPRESS;initial catalog=CinemaBookingDB;user id=sa;password=nghich;MultipleActiveResultSets=True;");
             }
         }
 
@@ -78,6 +78,7 @@ namespace CinemaBookingCore.Data
                 entity.Property(e => e.CustomerId).HasColumnName("customerId");
 
                 entity.Property(e => e.PaymentMethodId).HasColumnName("paymentMethodId");
+                entity.Property(e => e.PaymentCode).HasColumnName("paymentCode");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
 
@@ -208,6 +209,7 @@ namespace CinemaBookingCore.Data
                 entity.Property(e => e.DigTypeId)
                     .HasColumnName("digTypeId")
                     .HasMaxLength(50);
+                
 
                 entity.Property(e => e.FilmContent)
                     .HasColumnName("filmContent")
@@ -216,6 +218,7 @@ namespace CinemaBookingCore.Data
                 entity.Property(e => e.FilmLength).HasColumnName("filmLength");
 
                 entity.Property(e => e.FilmStatus).HasColumnName("filmStatus");
+                entity.Property(e => e.TicketSold).HasColumnName("ticketSold");
 
                 entity.Property(e => e.Imdb).HasColumnName("imdb");
 
@@ -402,6 +405,7 @@ namespace CinemaBookingCore.Data
                 entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.QrCode).HasColumnName("qrCode");
+                entity.Property(e => e.ResellDescription).HasColumnName("resellDescription").HasMaxLength(50); ;
 
                 entity.Property(e => e.ScheduleId).HasColumnName("scheduleId");
 

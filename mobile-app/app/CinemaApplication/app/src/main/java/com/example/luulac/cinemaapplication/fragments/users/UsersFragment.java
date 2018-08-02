@@ -32,7 +32,6 @@ public class UsersFragment extends Fragment {
         fragments = new ArrayList<>();
         fragments.add(new AccountFragment());
         fragments.add(new PurchaseOrderFragment());
-        fragments.add(new NotificationsFragment());
 
         return fragments;
     }
@@ -41,7 +40,6 @@ public class UsersFragment extends Fragment {
         titles = new ArrayList<>();
         titles.add("Tài Khoản");
         titles.add("Vé Đã Mua");
-        titles.add("Thông Báo");
 
         return titles;
     }

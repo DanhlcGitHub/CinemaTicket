@@ -355,7 +355,7 @@ namespace CinemaBookingCore.Controllers
             foreach (var room in rooms)
             {
                 movieSchedules.AddRange(room.MovieSchedules.Where(ms => ms.FilmId == filmId
-                                                                  && ms.ScheduleDate >= tmpDate
+                                                                  && ms.ScheduleDate >= tmpDate.AddHours(4)
                                                                   && ms.ScheduleDate < tmpNextDate
                                                                  ).OrderBy(ms => ms.ShowTime.StartTimeDouble));
             }

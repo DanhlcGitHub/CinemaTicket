@@ -30,7 +30,6 @@ public class TheatersFragment extends Fragment {
     }
     public static List<Fragment> getFragments() {
         fragments = new ArrayList<>();
-        fragments.add(new TheatersAroundFragment());
         fragments.add(new TheaterFragment());
 
         return fragments;
@@ -38,7 +37,6 @@ public class TheatersFragment extends Fragment {
 
     public static List<String> getTitles() {
         titles = new ArrayList<>();
-        titles.add("Rạp Xung Quanh");
         titles.add("Cụm Rạp");
 
         return titles;

@@ -1,63 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        android:background="@color/colorBackgroundFragment"
-        android:scrollbars="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.victor.loading.rotate.RotateLoading
+            android:id="@+id/rotateloading"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            app:loading_color="#ffffff"
+            app:loading_width="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="18dp"
-            android:text="Phim Nổi Bật"
-            />
+            android:animateLayoutChanges="true"
+            android:background="@color/colorBackgroundFragment"
+            android:orientation="vertical"
+            android:scrollbars="vertical">
 
-        <include
-            android:id="@+id/card_1"
-            layout="@layout/film_card_lager" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Phim Nổi Bật"
+                android:textSize="18dp" />
 
-        <include
-            android:id="@+id/card_2"
-            layout="@layout/film_card_lager" />
+            <include
+                android:id="@+id/card_1"
+                layout="@layout/film_card_lager" />
 
-        <include
-            android:id="@+id/card_3"
-            layout="@layout/film_card_lager" />
+            <include
+                android:id="@+id/card_2"
+                layout="@layout/film_card_lager" />
+
+            <include
+                android:id="@+id/card_3"
+                layout="@layout/film_card_lager" />
 
 
-        <include android:id="@+id/card_into_showing"
-            layout="@layout/card_show"/>
+            <include
+                android:id="@+id/card_into_showing"
+                layout="@layout/card_show" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="18dp"
-            android:text="Tin Nổi Bật"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Tin Nổi Bật"
+                android:textSize="18dp" />
 
-        <include layout="@layout/new_item" />
+            <include layout="@layout/new_item" />
 
-        <include layout="@layout/new_item" />
+            <include layout="@layout/new_item" />
 
-        <include layout="@layout/new_item" />
+            <include layout="@layout/new_item" />
 
-        <include layout="@layout/home_latest_news_list" />
+            <include layout="@layout/home_latest_news_list" />
 
-    </LinearLayout>
-
+        </LinearLayout>
+    </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

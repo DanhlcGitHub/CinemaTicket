@@ -49,7 +49,7 @@ public class ShowingFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_film_showing);
 
         FilmService filmService = ServiceBuilder.buildService(FilmService.class);
-        Call<List<FilmModel>> request = filmService.getFilms(true);
+        Call<List<FilmModel>> request = filmService.getFilmNowShowing();
 
 
         request.enqueue(new Callback<List<FilmModel>>() {

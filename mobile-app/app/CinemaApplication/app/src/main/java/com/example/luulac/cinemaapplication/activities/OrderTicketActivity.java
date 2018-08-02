@@ -46,7 +46,7 @@ public class OrderTicketActivity extends AppCompatActivity {
     private RelativeLayout rv;
 
     public static final int NUMBER_LAYOUT_CHOICE_ITEM_ORDER = 2;
-    public static final int NUMBER_MAX_TICKET = 8;
+    public static final int NUMBER_MAX_TICKET = 10;
     public static final int NUMBER_MIN_TICKET = 0;
 
     ImageView iconCancelOrder;

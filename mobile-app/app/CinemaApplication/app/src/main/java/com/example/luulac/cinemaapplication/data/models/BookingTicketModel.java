@@ -8,21 +8,22 @@ public class BookingTicketModel implements Serializable {
     private int bookingId;
     private int customerId;
     private int paymentMethodId;
+    private String PaymentCode;
     private int quantity;
     private String bookingDate;
-    private String tokenId;
+
+    private String filmName;
+    private String cinemaName;
+    private String roomName;
+    private String startTime;
 
     private CustomerModel customer;
     private List<TicketModel> tickets;
 
-    public BookingTicketModel() {
-    }
-
-    public BookingTicketModel(int quantity, CustomerModel customer, List<TicketModel> tickets, String tokenId) {
+    public BookingTicketModel(int quantity, CustomerModel customer, List<TicketModel> tickets) {
         this.quantity = quantity;
         this.customer = customer;
         this.tickets = tickets;
-        this.tokenId = tokenId;
     }
 
     public int getBookingId() {
@@ -81,11 +82,43 @@ public class BookingTicketModel implements Serializable {
         this.tickets = tickets;
     }
 
-    public String getTokenId() {
-        return tokenId;
+    public String getFilmName() {
+        return filmName;
     }
 
-    public void setTokenId(String tokenId) {
-        this.tokenId = tokenId;
+    public void setFilmName(String filmName) {
+        this.filmName = filmName;
+    }
+
+    public String getCinemaName() {
+        return cinemaName;
+    }
+
+    public void setCinemaName(String cinemaName) {
+        this.cinemaName = cinemaName;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getPaymentCode() {
+        return PaymentCode;
+    }
+
+    public void setPaymentCode(String paymentCode) {
+        PaymentCode = paymentCode;
     }
 }

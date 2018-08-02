@@ -18,6 +18,7 @@ namespace CinemaBookingCore.Controllers
         public String DigType { get; set; }
         public String FilmImage { get; set; }
         public List<TypeOfSeatModel> TypeOfSeats { get; set; }
-        
+        public int NumberSeatAvailable { get; set; }
+
     }
 }

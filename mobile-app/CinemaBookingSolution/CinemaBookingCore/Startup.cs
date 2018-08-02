@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CinemaBookingCore.Controllers;
 using CinemaBookingCore.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,6 +45,7 @@ namespace CinemaBookingCore
             app.UseStaticFiles();
 
             app.UseMvc();
+
         }
     }
 }

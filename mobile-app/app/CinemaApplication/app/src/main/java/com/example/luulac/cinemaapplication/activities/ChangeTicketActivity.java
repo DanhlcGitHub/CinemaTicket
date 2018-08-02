@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.luulac.cinemaapplication.R;
@@ -33,6 +35,7 @@ public class ChangeTicketActivity extends AppCompatActivity {
     private ShowTimeListModel data;
     private OrderChoiceTicketModel modelOrder;
     private final int REQUEST_CODE_CHANGE_TICKET = 102;
+    private TextView tvNotification;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class ChangeTicketActivity extends AppCompatActivity {
         setContentView(R.layout.layout_change_ticket);
 
         recyclerView = findViewById(R.id.rcl_list_schedule_change);
+        tvNotification = findViewById(R.id.tv_change_ticket_notification);
+        tvNotification.setVisibility(View.INVISIBLE);
 
         //dung intent lay du lieu pass qua tu OrderDetailActivity
 
@@ -58,58 +63,61 @@ public class ChangeTicketActivity extends AppCompatActivity {
         request.enqueue(new Callback<ShowTimeListModel>() {
             @Override
             public void onResponse(Call<ShowTimeListModel> request, Response<ShowTimeListModel> response) {
+
                 data = response.body();
-                data.getShowTimeChildModels();
+                if(data != null){
+                    data.getShowTimeChildModels();
 
-                List<ShowTimeChildModel> childs = data.getShowTimeChildModels();
-                ChangeTicketAdapter adapter = new ChangeTicketAdapter(childs);
+                    List<ShowTimeChildModel> childs = data.getShowTimeChildModels();
+                    ChangeTicketAdapter adapter = new ChangeTicketAdapter(childs);
 
-                LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(adapter);
-                adapter.setOnItemClickedListener(new ChangeTicketAdapter.OnItemClickedListener() {
-                    @Override
-                    public void onItemClick(int position) {
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setAdapter(adapter);
+                    adapter.setOnItemClickedListener(new ChangeTicketAdapter.OnItemClickedListener() {
+                        @Override
+                        public void onItemClick(int position) {
 
-                        final ShowTimeChildModel model = data.getShowTimeChildModels().get(position);
+                            final ShowTimeChildModel model = data.getShowTimeChildModels().get(position);
 
-                        //request getOrderChoiceTicket
-                        OrderService orderService = ServiceBuilder.buildService(OrderService.class);
-                        Call<OrderChoiceTicketModel> requestOrder = orderService.getOrderChoiceTicket(model.getScheduleId());
+                            //request getOrderChoiceTicket
+                            OrderService orderService = ServiceBuilder.buildService(OrderService.class);
+                            Call<OrderChoiceTicketModel> requestOrder = orderService.getOrderChoiceTicket(model.getScheduleId());
 
-                        //receiving and process data from the server
-                        requestOrder.enqueue(new Callback<OrderChoiceTicketModel>() {
-                            @Override
-                            public void onResponse(Call<OrderChoiceTicketModel> request, Response<OrderChoiceTicketModel> response) {
-                                modelOrder = response.body();
+                            //receiving and process data from the server
+                            requestOrder.enqueue(new Callback<OrderChoiceTicketModel>() {
+                                @Override
+                                public void onResponse(Call<OrderChoiceTicketModel> request, Response<OrderChoiceTicketModel> response) {
+                                    modelOrder = response.body();
 
-                                Intent intent = new Intent(getApplicationContext(), ChoiceSeatsActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), ChoiceSeatsActivity.class);
 
-                                ScheduleTranferModel scheduleTranfer = new ScheduleTranferModel(1, price, modelOrder.getGroupCinemaName(), modelOrder.getTimeShow(),
-                                        modelOrder.getCinemaName(), modelOrder.getRoomName(), modelOrder.getFilmName(), modelOrder.getRestricted(), modelOrder.getFilmLength(),
-                                        modelOrder.getDigType(), modelOrder.getFilmImage());
+                                    ScheduleTranferModel scheduleTranfer = new ScheduleTranferModel(1, price, modelOrder.getGroupCinemaName(), modelOrder.getTimeShow(),
+                                            modelOrder.getCinemaName(), modelOrder.getRoomName(), modelOrder.getFilmName(), modelOrder.getRestricted(), modelOrder.getFilmLength(),
+                                            modelOrder.getDigType(), modelOrder.getFilmImage());
 
-                                FilmTranferModel filmTranfer = new FilmTranferModel(model.getFilmId(), model.getRoomId(), model.getGroupId(), model.getScheduleId(),
-                                        model.getCol(), model.getRow(), model.getDatetime());
+                                    FilmTranferModel filmTranfer = new FilmTranferModel(model.getFilmId(), model.getRoomId(), model.getGroupId(), model.getScheduleId(),
+                                            model.getCol(), model.getRow(), model.getDatetime());
 
-                                intent.putExtra("scheduleTranfer", scheduleTranfer);
-                                intent.putExtra("filmTranfer", filmTranfer);
-                                intent.putExtra("isChangeTicket", true);
-                                intent.putExtra("ticketId", ticketId);
+                                    intent.putExtra("scheduleTranfer", scheduleTranfer);
+                                    intent.putExtra("filmTranfer", filmTranfer);
+                                    intent.putExtra("isChangeTicket", true);
+                                    intent.putExtra("ticketId", ticketId);
 
-                                startActivityForResult(intent, REQUEST_CODE_CHANGE_TICKET);
-                            }
+                                    startActivityForResult(intent, REQUEST_CODE_CHANGE_TICKET);
+                                }
 
-                            @Override
-                            public void onFailure(Call<OrderChoiceTicketModel> request, Throwable t) {
-                                Toast.makeText(getApplication(), "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();
-
-                            }
-                        });
-
-                    }
-                });
+                                @Override
+                                public void onFailure(Call<OrderChoiceTicketModel> request, Throwable t) {
+                                    Toast.makeText(getApplication(), "Xin hãy kiểm tra lại kết nối mạng!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    tvNotification.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

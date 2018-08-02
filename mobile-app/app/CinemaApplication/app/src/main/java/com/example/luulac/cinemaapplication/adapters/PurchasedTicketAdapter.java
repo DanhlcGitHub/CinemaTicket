@@ -58,13 +58,12 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
 
         holder.tvTicketPrice.setText(data.get(position).getPrice() + "");
         holder.tvTicketSeatPosition.setText(data.get(position).getSeatPosition());
-        holder.tvTicketStatus.setText(data.get(position).getTicketStatus());
 
         Glide.with(context).load(BaseService.BASE_URL + data.get(position).getQrCode()).into(holder.imgTicketQrCode);
 
-
         switch (data.get(position).getTicketStatus()) {
             case "buyed":
+                holder.tvTicketStatus.setText("Đã mua");
                 holder.btnResellTicket.setText("Bán lại vé");
                 holder.btnResellTicket.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -97,8 +96,8 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
                 });
 
                 break;
-            case "resell":
-
+            case "reselling":
+                holder.tvTicketStatus.setText("Đang bán lại");
                 holder.btnResellTicket.setText("Hủy bán lại vé");
                 holder.btnResellTicket.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -118,6 +117,18 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
                 });
 
                 break;
+            case "reselled":
+                holder.tvTicketStatus.setText("Đã bán lại");
+                holder.btnChangeTicket.setVisibility(View.GONE);
+                holder.btnResellTicket.setVisibility(View.GONE);
+                break;
+
+            case "changed":
+                holder.tvTicketStatus.setText("Đã đổi");
+                holder.btnChangeTicket.setVisibility(View.GONE);
+                holder.btnResellTicket.setVisibility(View.GONE);
+                break;
+
         }
 
     }
@@ -148,17 +159,20 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
     private TicketModel ticketModel;
 
     public void confirmResellTicket(final int ticketId) {
+        final EditText edtDecription = new EditText(context);
         new AlertDialog.Builder(context)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Xác nhận bán lại vé")
                 .setMessage("Bạn muốn bán lại vé này?")
+                .setView(edtDecription)
                 .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //xy ly ban lai ve o day
                         TicketService ticketService = ServiceBuilder.buildService(TicketService.class);
                         ticketModel = new TicketModel();
-                        Call<TicketModel> request = ticketService.resellTicket(ticketId);
+                        String resellDescription = edtDecription.getText().toString();
+                        Call<TicketModel> request = ticketService.resellTicket(ticketId, resellDescription);
 
                         //receiving and process data from the server
                         request.enqueue(new Callback<TicketModel>() {
@@ -217,8 +231,7 @@ public class PurchasedTicketAdapter extends RecyclerView.Adapter<PurchasedTicket
     public void confirmEmail(final int ticketId) {
         final EditText txtEmail = new EditText(context);
 
-// Set the default text to a link of the Queen
-        txtEmail.setHint("you_email@gmail.com");
+        txtEmail.setHint("email@gmail.com");
 
         new AlertDialog.Builder(context)
                 .setTitle("Nhập email ")

@@ -29,6 +29,7 @@ import com.example.luulac.cinemaapplication.services.BaseService;
 import com.example.luulac.cinemaapplication.services.FilmService;
 import com.example.luulac.cinemaapplication.services.HomeService;
 import com.example.luulac.cinemaapplication.services.ServiceBuilder;
+import com.victor.loading.rotate.RotateLoading;
 
 import java.net.URL;
 import java.util.List;
@@ -46,6 +47,7 @@ public class HomeFragment extends Fragment {
     private static final int NUMBER_ALL_CARD= 6;
     private Context context;
     private TabLayout tabLayout;
+    private RotateLoading rotateLoading;
 
     public HomeFragment(TabLayout tabLayout) {
         this.tabLayout = tabLayout;
@@ -60,6 +62,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, null);
+        rotateLoading = (RotateLoading) view.findViewById(R.id.rotateloading);
+        rotateLoading.start();
 
         context = view.getContext();
 
@@ -72,6 +76,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<HomeModel> request, Response<HomeModel> response) {
 
+                rotateLoading.stop();
                 HomeModel data = response.body();
 
                 List<FilmModel> films = data.getFilms();

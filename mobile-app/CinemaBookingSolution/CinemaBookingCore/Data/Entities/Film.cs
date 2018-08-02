@@ -16,7 +16,7 @@ namespace CinemaBookingCore.Data.Entities
         public System.DateTime DateRelease { get; set; }
         public int Restricted { get; set; }
         public int FilmLength { get; set; }
-        public double Imdb { get; set; }
+        public Nullable<Double> Imdb { get; set; }
         public string DigTypeId { get; set; }
         public string Author { get; set; }
         public string MovieGenre { get; set; }
@@ -27,7 +27,8 @@ namespace CinemaBookingCore.Data.Entities
         public string PosterPicture { get; set; }
         public string AdditionPicture { get; set; }
         public int FilmStatus { get; set; }
-    
+        public Nullable<int> TicketSold { get; set; }
+
         public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
         
     }

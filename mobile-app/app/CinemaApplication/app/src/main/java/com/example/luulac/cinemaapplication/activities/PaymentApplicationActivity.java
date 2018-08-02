@@ -301,9 +301,7 @@ public class PaymentApplicationActivity extends AppCompatActivity {
 
                             for (int i = 0; i < scheduleTranfer.getQuantityTicket(); i++) {
 
-                                int ticketId = newSeatCollectionModel.getTicketModels().get(i).getTicketId();
-
-                                ticketModels.add(new TicketModel(ticketId));
+                                ticketModels.add(newSeatCollectionModel.getTicketModels().get(i));
                             }
 
                             SharedPreferences sharedPreferences = getSharedPreferences("loginInformation", Context.MODE_PRIVATE);
@@ -314,7 +312,11 @@ public class PaymentApplicationActivity extends AppCompatActivity {
 
                             //new Booking ticket model for send data to server
                             BookingTicketModel bookingTicket = new BookingTicketModel(scheduleTranfer.getQuantityTicket(), customer,
-                                                                                         ticketModels, FirebaseInstanceId.getInstance().getToken()+"");
+                                                                                         ticketModels);
+                            bookingTicket.setCinemaName(scheduleTranfer.getCinemaName());
+                            bookingTicket.setFilmName(scheduleTranfer.getFilmName());
+                            bookingTicket.setRoomName(scheduleTranfer.getRoomName());
+                            bookingTicket.setStartTime(scheduleTranfer.getShowTime());
 
                             //call service from server to make booking ticket and booking detail
                             OrderService orderService = ServiceBuilder.buildService(OrderService.class);

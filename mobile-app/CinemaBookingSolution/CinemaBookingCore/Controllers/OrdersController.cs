@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using CinemaBookingCore.Data.Entities;
 using CinemaBookingCore.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using CinemaTicket.Utility;
+using CinemaBookingCore.Constant;
 
 namespace CinemaBookingCore.Controllers
 {
@@ -28,6 +30,7 @@ namespace CinemaBookingCore.Controllers
                                                             .Include(s => s.ShowTime)
                                                             .Include(s => s.Room).ThenInclude(r => r.DigitalType)
                                                             .Include(s => s.Room).ThenInclude(r => r.Cinema).ThenInclude(c => c.GroupCinema).ThenInclude(g => g.TypeOfSeats)
+                                                            .Include(s => s.Room).ThenInclude(r => r.Seats)
                                                             .Include(s => s.Film)
                                                             .Include(s => s.ShowTime)
                                                             .FirstOrDefault();
@@ -43,6 +46,8 @@ namespace CinemaBookingCore.Controllers
             var room = schedule.Room;
             var film = schedule.Film;
 
+            int numberSeatAvaiable = room.Seats.Count() - schedule.Tickets.Count();
+
             OrderChoiceTicketModel result = new OrderChoiceTicketModel
             {
                 CinemaName = room.Cinema.CinemaName,
@@ -54,7 +59,8 @@ namespace CinemaBookingCore.Controllers
                 TimeShow = schedule.ShowTime.StartTime,
                 GroupCinemaName = schedule.Room.Cinema.GroupCinema.Name,
                 TypeOfSeats = typeOfSeatModels,
-                FilmImage = film.AdditionPicture
+                FilmImage = film.AdditionPicture,
+                NumberSeatAvailable = numberSeatAvaiable
             };
 
             return Ok(result);
@@ -92,7 +98,7 @@ namespace CinemaBookingCore.Controllers
                             BookingTicket bookingTicket = context.BookingTicket.Where(b => b.BookingId == ticket.BookingId).FirstOrDefault();
                             Customer customer = context.Customer.Where(c => c.CustomerId == bookingTicket.CustomerId).FirstOrDefault();
 
-                            
+
 
                             seatModel.Email = customer.Email;
                             seatModel.Phone = customer.Phone;
@@ -107,12 +113,15 @@ namespace CinemaBookingCore.Controllers
         }
 
         [HttpPost("bookingTicket")]
-        public IActionResult bookingTicket([FromBody] SeatCollectionModel seatCollectionModel)
+        public IActionResult BookingTicket([FromBody] SeatCollectionModel seatCollectionModel)
         {
             try
             {
                 List<Ticket> tickets = seatCollectionModel.TicketModels;
                 int listTicketSize = tickets.Count();
+
+                List<Ticket> resultTickets = new List<Ticket>();
+
                 for (int i = 0; i < listTicketSize; i++)
                 {
                     var item = tickets[i];
@@ -130,6 +139,11 @@ namespace CinemaBookingCore.Controllers
                         context.Add(ticket);
                         context.SaveChanges();
 
+                        ticket.PaymentCode = ticket.TicketId + RandomUtility.RandomString(9);
+
+                        context.Update(ticket);
+                        context.SaveChanges();
+
                         seatCollectionModel.TicketModels[i] = ticket;
                         seatCollectionModel.isSuccesBookingTicket = true;
                     }
@@ -140,6 +154,7 @@ namespace CinemaBookingCore.Controllers
                             case "available":
                                 ticket.TicketStatus = "buying";
                                 item.TicketStatus = "buying";
+
                                 context.Update(ticket);
                                 context.SaveChanges();
                                 seatCollectionModel.isSuccesBookingTicket = true;
@@ -162,7 +177,10 @@ namespace CinemaBookingCore.Controllers
                                 break;
                         }
                     }
+                    resultTickets.Add(ticket);
                 }
+
+                seatCollectionModel.TicketModels = resultTickets;
             }
             catch (System.Exception)
             {
@@ -175,37 +193,52 @@ namespace CinemaBookingCore.Controllers
         public List<int> listTicketId = new List<int>();
 
         [HttpPost("finishPaypalPayment")]
-        public IActionResult finishPaypalPayment([FromBody] BookingTicket bookingTicketModel)
+        public IActionResult finishPaypalPayment([FromBody] BookingTicketModel bookingTicketModel)
         {
-            try
+
+            Customer customer = context.Customer.Where(c => c.Phone == bookingTicketModel.Customer.Phone && c.Email == bookingTicketModel.Customer.Email).FirstOrDefault();
+            if (customer == null)
             {
-                Customer customer = context.Customer.Where(c => c.Phone == bookingTicketModel.Customer.Phone && c.Email == bookingTicketModel.Customer.Email).FirstOrDefault();
-                if (customer == null)
+                customer = new Customer
                 {
-                    customer = new Customer
-                    {
-                        Email = bookingTicketModel.Customer.Email,
-                        Phone = bookingTicketModel.Customer.Phone,
-                        UserId = bookingTicketModel.Customer.UserId,
-                        
-
-                    };
-
-                    context.Add(customer);
-                    context.SaveChanges();
-                }
-
-                DateTime nowDate = DateTime.UtcNow;
-                nowDate = nowDate.AddHours(7);
-                BookingTicket bookingTicket = new BookingTicket
-                {
-                    CustomerId = customer.CustomerId,
-                    Quantity = bookingTicketModel.Quantity,
-                    BookingDate = nowDate,
+                    Email = bookingTicketModel.Customer.Email,
+                    Phone = bookingTicketModel.Customer.Phone,
+                    UserId = bookingTicketModel.Customer.UserId,
                 };
 
-                context.Add(bookingTicket);
+                context.Add(customer);
                 context.SaveChanges();
+            }
+
+            DateTime nowDate = DateTime.UtcNow;
+            nowDate = nowDate.AddHours(7);
+
+            BookingTicket bookingTicket = new BookingTicket
+            {
+                CustomerId = customer.CustomerId,
+                Quantity = bookingTicketModel.Quantity,
+                BookingDate = nowDate,
+
+            };
+
+            context.Add(bookingTicket);
+            context.SaveChanges();
+
+            int orderId = bookingTicket.BookingId;
+
+            bookingTicket.PaymentCode = orderId + RandomUtility.RandomString(9);
+
+            context.Update(bookingTicket);
+            context.SaveChanges();
+            try
+            {
+                var ticketList = (List<Ticket>)bookingTicketModel.Tickets;
+
+                //send email for customer
+                string mailContent = getEmailContent(ticketList, bookingTicket, bookingTicketModel.FilmName, bookingTicketModel.CinemaName
+                    , bookingTicket.BookingDate.Date.ToString(), bookingTicketModel.RoomName, bookingTicketModel.StartTime);
+                string mailSubject = "VietCine - Mã vé xem phim tại " + bookingTicketModel.CinemaName;
+                MailUtility.SendEmail(mailSubject, mailContent, bookingTicketModel.Customer.Email);
 
                 foreach (var item in bookingTicketModel.Tickets)
                 {
@@ -218,6 +251,7 @@ namespace CinemaBookingCore.Controllers
                     ticket.BookingId = bookingTicket.BookingId;
                     ticket.QrCode = "Content/img/QRCode/qr.png";
                     ticket.TicketStatus = "buyed";
+
                     context.Update(ticket);
                 }
                 context.SaveChanges();
@@ -229,20 +263,42 @@ namespace CinemaBookingCore.Controllers
             }
             catch (System.Exception)
             {
+                context.Remove(bookingTicket);
             }
 
             return Ok(bookingTicketModel);
         }
 
+        private string getEmailContent(List<Ticket> ticketList, BookingTicket bt, string filmName, string cinemaName,
+            string date, string roomName, string startTime)
+        {
+            string content = "Chúc mừng quý khách đã đặt vé thành công!";
+            content += "Phim " + filmName + "\n";
+            content += "Tại " + cinemaName + "\n";
+            content += date + " - " + startTime + " - " + roomName + "\n";
+            content += "Mã đặt vé của bạn là: " + bt.PaymentCode + "\n";
+            content += "Mã từng vé của bạn là: \n";
+            for (int i = 0; i < ticketList.Count; i++)
+            {
+                Ticket aTicket = ticketList[i];
+                Seat seat = context.Seat.Where(s => s.SeatId == aTicket.SeatId).FirstOrDefault();
+                content += "    " + (i + 1) +
+                            ". Ghế: " + ConstantArray.Alphabet[(int)seat.Py] + "" + ((int)seat.Px + 1) +
+                            "- Mã vé: " + aTicket.PaymentCode + "\n";
+            }
+            content += "Chúc quý khách xem phim vui vẻ";
+            return content;
+        }
+
 
         [HttpPut("changeStatusTicket")]
-        public IActionResult changeStatusTicket([FromBody]List<Ticket> tickets)
+        public IActionResult ChangeStatusTicket([FromBody]List<Ticket> tickets)
         {
 
             Ticket ticket;
             foreach (var item in tickets)
             {
-                if(item.TicketStatus != "buyed")
+                if (item.TicketStatus != "buyed")
                 {
                     ticket = context.Ticket.Where(t => t.TicketId == item.TicketId).FirstOrDefault();
                     ticket.TicketStatus = "available";

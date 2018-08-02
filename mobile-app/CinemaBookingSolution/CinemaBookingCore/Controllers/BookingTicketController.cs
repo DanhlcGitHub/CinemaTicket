@@ -18,7 +18,5 @@ namespace CinemaBookingCore.Controllers
         {
             this.context = context;
         }
-
-
     }
 }

@@ -52,7 +52,7 @@ public class CommingSoonFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_film_comming_soon);
 
         FilmService filmService = ServiceBuilder.buildService(FilmService.class);
-        Call<List<FilmModel>> request = filmService.getFilms(false);
+        Call<List<FilmModel>> request = filmService.getFilmComingSoon();
 
         request.enqueue(new Callback<List<FilmModel>>() {
             @Override

@@ -20,19 +20,24 @@ namespace CinemaBookingCore.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Get(Boolean isShowing = true)
+        [HttpGet("getFilmNowShowing")]
+        public IActionResult GetFilmNowShowing()
         {
             IEnumerable<Film> films;
-            if (isShowing)
-            {
+           
 
                 films = context.Film.ToList().Where(f => f.FilmStatus == 1);
-            }
-            else
-            {
-                films = context.Film.ToList().Where(f => f.FilmStatus == 2);
-            }
+            
+
+            return Ok(films);
+        }
+
+        [HttpGet("getFilmComingSoon")]
+        public IActionResult GetFilmComingSoon()
+        {
+            IEnumerable<Film> films;
+
+            films = context.Film.ToList().Where(f => f.FilmStatus == 2);
 
             return Ok(films);
         }

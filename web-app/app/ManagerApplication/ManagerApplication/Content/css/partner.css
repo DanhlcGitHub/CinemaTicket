@@ -223,3 +223,13 @@ div::-webkit-scrollbar-thumb {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.mynewclassclose {
+    position: absolute;
+    margin: 0;
+    top: -23px;
+    right: -23px;
+    opacity: 0.9;
+    z-index: 1000;
+    cursor:pointer;
+}

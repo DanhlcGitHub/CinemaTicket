@@ -325,6 +325,7 @@ var chooseTicketController = function ($scope, $http) {
             $scope.$apply()
         }, 1000);
     };
+    $scope.isCheckoutDone = true;
     $scope.checkout = function () {
         // check condition
         if ($scope.choosedList.length == $scope.totalTicket) {
@@ -362,20 +363,24 @@ var chooseTicketController = function ($scope, $http) {
                                 } else {
                                     //change available to buying
                                     $("#checkoutButton").prop('disabled', true);
-                                    console.log("double click");
 
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: "/Ticket/ChangeAvailableToBuying",
-                                        data: { ticketListStr: JSON.stringify($scope.ticketData) },
-                                        success: function (response) {
-                                            console.log("ticket data after update");
-                                            $scope.ticketData = response;
-                                        }
-                                    });
-                                    $scope.countController();
-                                    $scope.renderPaypalButton();
-                                    $scope.openConfirmDialog();
+                                    if ($scope.isCheckoutDone == true) {
+                                        $scope.isCheckoutDone = false;
+                                        $scope.countController();
+                                        $scope.renderPaypalButton();
+                                        $scope.openConfirmDialog();
+                                        console.log("double click");
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: "/Ticket/ChangeAvailableToBuying",
+                                            data: { ticketListStr: JSON.stringify($scope.ticketData) },
+                                            success: function (response) {
+                                                $scope.isCheckoutDone = true;
+                                                console.log("ticket data after update");
+                                                $scope.ticketData = response;
+                                            }
+                                        });
+                                    }
                                 }
                             }
                         });
@@ -443,7 +448,7 @@ var chooseTicketController = function ($scope, $http) {
                                 date: $scope.scheduleData.date,
                                 roomName: $scope.scheduleData.roomName,
                                 startTime: $scope.scheduleData.startTime,
-                                userId : $scope.userData.username,
+                                userId: $scope.userData.username,
                             };
                             $.ajax({
                                 type: 'POST',
@@ -475,6 +480,11 @@ var chooseTicketController = function ($scope, $http) {
             onError: function (err) {
                 console.log("some error occur");
                 console.log(err);
+            },
+            onCancel: function (data) {
+                $('#confirmTicketModal').modal('hide');
+                $('#backdropModal').modal();
+                $("#backdropMessage").html("Bạn đã hủy đặt vé, vui lòng bấm nút bên dưới để tiếp tục!");
             }
         }, '#paypal-button-container');
     };

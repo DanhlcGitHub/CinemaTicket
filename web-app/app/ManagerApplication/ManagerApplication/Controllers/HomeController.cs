@@ -14,7 +14,10 @@ namespace ManagerApplication.Controllers
     {
         //
         // GET: /Home/
-
+        public string test()
+        {
+            return EncryptUtility.EncryptString1("123456");
+        }
         public ActionResult Index()
         {
             var obj = Session[AppSession.User];

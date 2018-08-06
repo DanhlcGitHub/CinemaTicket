@@ -1,12 +1,14 @@
 ﻿var partnerRoomModule = angular.module("partnerRoomModule", []);
 var roomController = function ($scope, $http) {
     /*====================== receive event area ====================*/
+
     $scope.$on('viewRoomEvent', function (event, infor) {
         console.log(infor);
         //$("#seatForm").hide();
         $("#roomAction").hide();
         $("#viewRoomHeader").show();
         $("#addRoomHeader").hide();
+        $("#seatScrollPart").css("max-height", "75vh");
         
         $scope.currentCinema = infor.currentCinema;
         $scope.seat_close();
@@ -15,7 +17,13 @@ var roomController = function ($scope, $http) {
 
     $scope.$on('addRoomEvent', function (event, infor) {
         // $("#seatForm").show();
+        $("#inputRoomName").val("");
+        $("#inputCapacity").val(0);
+        $scope.currentCapacity = 0;
+        $scope.currentSizeX = 0;
+        $scope.currentSizeY = 0;
         $scope.seatData = {};
+        $("#seatScrollPart").css("max-height", "63vh");
         $("#roomAction").show();
         $("#viewRoomHeader").hide();
         $("#addRoomHeader").show();
@@ -412,6 +420,8 @@ var roomController = function ($scope, $http) {
         }
     }
 
+
+    $scope.isSaveSeatDone = true;
     $scope.save = function () {
         console.log("save");
         if ($scope.currentCapacity != $scope.seatData.length) {
@@ -419,7 +429,11 @@ var roomController = function ($scope, $http) {
             $("#validateModal").modal();
             $("#modalMessage").html("not select enought seat");
         } else {
-            $scope.saveRoomToDB();
+            if ($scope.isSaveSeatDone == true) {
+                $scope.isSaveSeatDone = false;
+                
+                $scope.saveRoomToDB();
+            }
         }
     }
 
@@ -439,6 +453,12 @@ var roomController = function ($scope, $http) {
         }
         $("#room-loader").show();
         $("#room-saver").hide();
+        $scope.seat_close();
+        $("#seat_sidebar").hide();
+        $("#inputRoomName").val("");
+        $("#inputCapacity").val("");
+        $('#suggestBtn').prop('disabled', true);
+        $('#reviewSeatBtn').prop('disabled', true);
         $.ajax({
             type: 'POST',
             url: "/Partner/SaveRoom",
@@ -447,9 +467,24 @@ var roomController = function ($scope, $http) {
                 $scope.$emit('roomCallRefreshEvent');
                 //alert("success!");
                 $("#validateModal").modal();
-                $("#modalMessage").html("success!");
+                $("#modalMessage").html("save room success!");
+                $scope.isSaveSeatDone = true;
+                $('#viewSeatModal').modal('hide');
+                $("#room-loader").hide();
+                $("#room-saver").show();
+                $('#suggestBtn').prop('disabled', false);
+                $('#reviewSeatBtn').prop('disabled', false);
             }
         });
+    };
+
+    $scope.closeSeatModal = function () {
+        if ($scope.isSaveSeatDone == true)
+            $('#viewSeatModal').modal('hide');
+        else {
+            $("#validateModal").modal();
+            $("#modalMessage").html("Wait until save seat done!");
+        }
     };
 
     $scope.seat_open = function () {

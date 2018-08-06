@@ -240,6 +240,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="float-right">
+                                        <button ng-click="testBackDrop()">test</button>
                                         <button ng-click="showAddCinemaForm()" onclick="location.href='#cinemaForm';" type="button" class="btn btn-danger " style="width:100%">
                                             Add Cinema
                                         </button>
@@ -403,13 +404,12 @@
                     </form>
                 </div>
                 <!-- choose Seat Modal-->
-                <div style="z-index:10000" class="modal fade" id="viewSeatModal" role="dialog">
+                <div style="z-index:10000" class="modal fade" id="viewSeatModal" data-backdrop="static" data-keyboard="false" role="dialog">
                     <div class="modal-dialog modal-dialog-centered" style="max-width: 90% !important">
                         <div class="modal-content" ng-controller="roomController" style="height:95vh">
                             <div class="modal-body" style="padding:0" id="chooseSeatAreaContent">
+                                <img ng-click="closeSeatModal()" class="mynewclassclose" src="http://expediaholiday.d.seven2.net/_images/modal_close.png" />
                                 <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" id="seat_sidebar" style="overflow-x:hidden; right:0; border-radius: 0px 0px;display: none; background-color:#463a3c">
-
-
                                     <div class="w3-container w3-collapse" style="padding:0">
 
                                         <div class="col-lg-12" style="padding:0">
@@ -487,7 +487,7 @@
 
                                         <div class="row col-sm-6" style="padding-left:20px; vertical-align: middle;">
                                             <input type="number" min="80" max="300" name="inputCapacity" value="" id="inputCapacity" class="form-control col-sm-6" style="margin-right:15px" placeholder="Enter number of seat">
-                                            <button type="submit" class="col-sm-3 btn btn-danger btn-block">Suggest</button>
+                                            <button type="submit" id="suggestBtn" class="col-sm-3 btn btn-danger btn-block">Suggest</button>
                                         </div>
 
                                     </form>
@@ -531,7 +531,7 @@
                                                 <!-- /.description-block -->
                                             </div>
                                         </div>
-                                        <div class="col-sm-12" style="padding-right:0px;padding-left:0px; overflow-y:auto; max-height:63vh">
+                                        <div class="col-sm-12" id="seatScrollPart" style="padding-right:0px;padding-left:0px; overflow-y:auto; max-height:63vh">
                                             <img src="~/Content/img/repository/screen.png" style="width:100%" />
                                             <div class="w3-container" id="seatAreaId">
                                                 <div ng-repeat="row in matrix" class="center-div">
@@ -549,7 +549,7 @@
                                             <div id="roomAction" class="col-sm-12" id="footer" style="bottom:0; position: fixed; padding-right:15% ;padding-left:0px; margin:0; margin-bottom:8px">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <button ng-click="reviewSeat()" class="btn btn-info float-right" type="button" style="width: 100px">Preview</button>
+                                                        <button ng-click="reviewSeat()" id="reviewSeatBtn" class="btn btn-info float-right" type="button" style="width: 100px">Preview</button>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="loaderSmall" id="room-loader" style="display:none"></div>
@@ -707,7 +707,7 @@
         </aside>
         <!-- /.control-sidebar -->
     </div>
-    
+
     <!-- validate Modal -->
     <div class="modal fade" id="validateModal" role="dialog" style="z-index:20000">
         <div class="modal-dialog modal-dialog-centered">

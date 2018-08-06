@@ -12,6 +12,8 @@ namespace VietCineAdmin.Controllers
 {
     public class HomeController : Controller
     {
+        private static int DEFAULT_PRICE_MUTIL = 1000;
+
         public ActionResult Index()
         {
             var obj = Session[AppSession.User];
@@ -58,6 +60,8 @@ namespace VietCineAdmin.Controllers
         {
             GroupCinemaServcie servcie = new GroupCinemaServcie();
             var groupCinema = servcie.GetAll();
+
+
 
             return View();
         }
@@ -229,10 +233,12 @@ namespace VietCineAdmin.Controllers
         {
             PartnerAccountService service = new PartnerAccountService();
 
+            String tmpPassword = EncryptUtility.EncryptString(partnerPassword);
+
             PartnerAccount partnerAccount = new PartnerAccount
             {
                 partnerId = partnerId,
-                partnerPassword = partnerPassword,
+                partnerPassword = tmpPassword,
                 phone = phone,
                 email = email,
                 isAvailable = true,
@@ -240,7 +246,13 @@ namespace VietCineAdmin.Controllers
                 partnerName = partnerName
             };
             service.Create(partnerAccount);
+
             var listPartnerAccount = service.FindBy(pa => pa.isAvailable == true).ToList();
+
+            foreach (var partner in listPartnerAccount)
+            {
+                partner.partnerPassword = "";
+            }
 
             return Json(listPartnerAccount, JsonRequestBehavior.AllowGet);
         }
@@ -297,7 +309,7 @@ namespace VietCineAdmin.Controllers
                 {
                     groupId = groupCinema.GroupId,
                     typeName = "vé người lớn",
-                    price = priceDefault,
+                    price = priceDefault * DEFAULT_PRICE_MUTIL,
                     capacity = 1
                 };
 

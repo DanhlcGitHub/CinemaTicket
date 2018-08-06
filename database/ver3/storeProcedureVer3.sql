@@ -46,5 +46,5 @@ create proc spGetTicketByEmail
 as
 begin
 	select * from Ticket t JOIN BookingTicket b ON t.bookingId = b.bookingId
-		where b.bookingId in (select customerId from Customer where email = @email)
+		where b.customerId in (select customerId from Customer where email = @email)
 end

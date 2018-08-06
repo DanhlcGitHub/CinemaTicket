@@ -23,49 +23,54 @@ var groupController = function ($scope, $http) {
         $("#phone").val($scope.GroupCinemaNowSelected.phone);
         $("#email").val($scope.GroupCinemaNowSelected.email);
         $("#logoImg").val($scope.GroupCinemaNowSelected.logoImg);
-
+        $("#divDefaultPrice").hide();
     };
 
+
+    $("#form-group").submit(function (e) {
+        $scope.createGroupCinema();
+    });
+
     $scope.createGroupCinema = function () {
-        $("#form-group").submit(function (e) {
-            e.preventDefault(e);
-            var valid = $("#form-group").valid();
-            if (valid == true) {
-                var groupId = $("#groupId").val();
-                var groupName = $("#groupName").val();
-                var address = $("#address").val();
-                var phone = $("#phone").val();
-                var email = $("#email").val();
-                var logoImg = $("#logoImg").val();
-                var priceDefault = $("#priceDefault").val();
-                
+        var valid = $("#form-group").valid();
+        if (valid == true) {
+            var groupId = $("#groupId").val();
+            var groupName = $("#groupName").val();
+            var address = $("#address").val();
+            var phone = $("#phone").val();
+            var email = $("#email").val();
+            var logoImg = $("#logoImg").val();
+            var priceDefault = $("#priceDefault").val();
 
-                $http({
-                    method: "POST",
-                    url: "/Home/CreateGroupCinema",
-                    params: {
-                        groupId: groupId,
-                        groupName: groupName,
-                        address: address,
-                        phone: phone,
-                        email: email,
-                        logoImg: logoImg,
-                        priceDefault: priceDefault
-                    }
-                }).then(function (response) {
+            $http({
+                method: "POST",
+                url: "/Home/CreateGroupCinema",
+                params: {
+                    groupId: groupId,
+                    groupName: groupName,
+                    address: address,
+                    phone: phone,
+                    email: email,
+                    logoImg: logoImg,
+                    priceDefault: priceDefault
+                }
+            }).then(function (response) {
 
-                    $scope.clearForm();
+                $scope.clearForm();
 
-                    $scope.ListGroupCinema = response.data;
+                $('#modal-group').modal('hide');
 
-                    alert("Success!");
-                });
-            }
-        });
+                $scope.ListGroupCinema = response.data;
+
+                alert("Success!");
+            });
+        }
+
     };
 
     $scope.clearForm = function () {
-        document.getElementById("form-group").reset()
+        document.getElementById("form-group").reset();
+        $("#divDefaultPrice").show();
     };
 
 };

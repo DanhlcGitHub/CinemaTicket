@@ -63,3 +63,39 @@ E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csprojResolveAssemblyReference.cache
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.dll
 E:\AAA\CapstoneProject\github\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.pdb
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\CinemaTicket.dll.config
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\CinemaTicket.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\CinemaTicket.pdb
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\EntityFramework.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\EntityFramework.SqlServer.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\Microsoft.Web.Infrastructure.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\Newtonsoft.Json.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Net.Http.Formatting.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.Helpers.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.Http.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.Http.WebHost.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.Mvc.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.Razor.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Deployment.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Razor.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Net.Http.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\EntityFramework.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\EntityFramework.SqlServer.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\Newtonsoft.Json.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Net.Http.Formatting.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.Helpers.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.Http.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.Http.WebHost.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.Mvc.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.Razor.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Deployment.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Razor.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\bin\System.Net.Http.xml
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csprojAssemblyReference.cache
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csproj.CoreCompileInputs.cache
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csproj.CopyComplete
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.dll
+E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.pdb

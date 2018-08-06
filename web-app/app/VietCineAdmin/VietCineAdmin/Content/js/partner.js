@@ -8,7 +8,7 @@ var partnerController = function ($scope, $http) {
         url: "/Home/GetAllPartner"
     }).then(function (response) {
         $scope.ListPartnerAccount = response.data;
-        });
+    });
 
     $http({
         method: "GET",
@@ -22,11 +22,11 @@ var partnerController = function ($scope, $http) {
         $scope.PartnerNowSelected = $scope.ListPartnerAccount[index];
         $("#partnerIdUpdate").val($scope.PartnerNowSelected.partnerId);
         $("#partnerPasswordUpdate").val($scope.PartnerNowSelected.partnerPassword);
-        $("#groupCinemaIdUpdate").val($scope.PartnerNowSelected.groupOfCinemaId); 
+        $("#groupCinemaIdUpdate").val($scope.PartnerNowSelected.groupOfCinemaId);
         $("#partnerName").val($scope.PartnerNowSelected.partnerName);
         $("#phoneUpdate").val($scope.PartnerNowSelected.phone);
         $("#emailUpdate").val($scope.PartnerNowSelected.email);
-        
+
     };
 
     $scope.clickDelete = function (index) {
@@ -46,72 +46,75 @@ var partnerController = function ($scope, $http) {
         }
     };
 
+
+    $("#form-account").submit(function (e) {
+        $scope.createPartner();
+    });
+
     $scope.createPartner = function () {
-        $("#form-account").submit(function (e) {
-            e.preventDefault(e);
-            var valid = $("#form-account").valid();
-            if (valid == true) {
-                var partnerId = $("#partnerId").val();
-                var partnerPassword = $("#partnerPassword").val();
-                var groupCinemaId = $("#groupCinemaId option:selected").val();
-                var partnerName = $("#partnerName").val();
-                var phone = $("#phone").val();
-                var email = $("#email").val();
+        var valid = $("#form-account").valid();
+        if (valid == true) {
+            var partnerId = $("#partnerId").val();
+            var partnerPassword = $("#partnerPassword").val();
+            var groupCinemaId = $("#groupCinemaId option:selected").val();
+            var partnerName = $("#partnerName").val();
+            var phone = $("#phone").val();
+            var email = $("#email").val();
 
-                $http({
-                    method: "POST",
-                    url: "/Home/CreatePartnerAccount",
-                    params: {
-                        partnerId: partnerId,
-                        partnerPassword: partnerPassword,
-                        groupCinemaId: groupCinemaId,
-                        partnerName: partnerName,
-                        phone: phone,
-                        email: email,
-                    }
-                }).then(function (response) {
-                    $scope.ListPartnerAccount = response.data;
+            $http({
+                method: "POST",
+                url: "/Home/CreatePartnerAccount",
+                params: {
+                    partnerId: partnerId,
+                    partnerPassword: partnerPassword,
+                    groupCinemaId: groupCinemaId,
+                    partnerName: partnerName,
+                    phone: phone,
+                    email: email,
+                }
+            }).then(function (response) {
+                $scope.ListPartnerAccount = response.data;
 
-                    $scope.clearForm();
-                    $('#modal-account').modal('hide');
+                $scope.clearForm();
+                $('#modal-account').modal('hide');
 
-                    alert("Success!");
-                });
-            }
-        });
+                alert("Success!");
+            });
+        }
     };
 
+    $("#form-account-update").submit(function (e) {
+        $scope.updatePartner();
+    });
+
     $scope.updatePartner = function () {
-        $("#form-account-update").submit(function (e) {
-            e.preventDefault(e);
-            var valid = $("#form-form-account-update").valid();
-            if (valid == true) {
-                var partnerId = $("#partnerIdUpdate").val();
-                var partnerPassword = $("#partnerPasswordUpdate").val();
-                var partnerName = $("#partnerNameUpdate").val();
-                var phone = $("#phoneUpdate").val();
-                var email = $("#emailUpdate").val();
+        var valid = $("#form-form-account-update").valid();
+        if (valid == true) {
+            var partnerId = $("#partnerIdUpdate").val();
+            var partnerPassword = $("#partnerPasswordUpdate").val();
+            var partnerName = $("#partnerNameUpdate").val();
+            var phone = $("#phoneUpdate").val();
+            var email = $("#emailUpdate").val();
 
-                $http({
-                    method: "POST",
-                    url: "/Home/UpdatePartnerAccount",
-                    params: {
-                        partnerId: partnerId,
-                        partnerPassword: partnerPassword,
-                        partnerName: partnerName,
-                        phone: phone,
-                        email: email,
-                    }
-                }).then(function (response) {
-                    $scope.ListPartnerAccount = response.data;
+            $http({
+                method: "POST",
+                url: "/Home/UpdatePartnerAccount",
+                params: {
+                    partnerId: partnerId,
+                    partnerPassword: partnerPassword,
+                    partnerName: partnerName,
+                    phone: phone,
+                    email: email,
+                }
+            }).then(function (response) {
+                $scope.ListPartnerAccount = response.data;
 
-                    $scope.clearFormUpdate();
-                    $('#modal-account-update').modal('hide');
+                $scope.clearFormUpdate();
+                $('#modal-account-update').modal('hide');
 
-                    alert("Successful!");
-                });
-            }
-        });
+                alert("Successful!");
+            });
+        }
     };
 
     $scope.clearForm = function () {

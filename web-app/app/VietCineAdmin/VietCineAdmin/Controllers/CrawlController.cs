@@ -265,6 +265,7 @@ namespace VietCineAdmin.Controllers
                 {
                     restristedStr = restristedStr.Split('-')[1].Trim();
                     int.TryParse(restristedStr, out restricted);
+                    if (restricted == null) restricted = 0;
                     aFilm.restricted = restricted;
                 }
                 if (releaseDateStr != null)

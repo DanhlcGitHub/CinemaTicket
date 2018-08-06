@@ -23,6 +23,12 @@ function readURL(input) {
     }
 }
 
+
+
+$.validator.addMethod('customphone', function (value, element) {
+    return this.optional(element) || /^\d{9,11}$/.test(value);
+}, "Please enter 9 - 11 digit number!");
+
 var validationManager = {
     employeeValidation: function () {
         $("#empForm").validate({
@@ -44,10 +50,8 @@ var validationManager = {
                     required: true,
                     minlength: 5,
                 },
-                inputEmpPhone: {
-                    required: true,
-                    minlength: 9,
-                },
+                inputEmpPhone: 'customphone'
+                ,
                 inputEmpSelectCinema: {
                     required: true,
                 },
@@ -146,7 +150,7 @@ var validationManager = {
                 inputCapacity: {
                     required: 'Please enter capacity',
                     max: 'max capacity is 324',
-                    min : 'min capacity is 64'
+                    min: 'min capacity is 64'
                 },
                 inputRoomName: {
                     required: "Please enter room name",

@@ -77,7 +77,7 @@
                     </div>
                     <!-- Modal body -->
                     <div class="row modal-body justify-content-center align-self-center ">
-                        <div class="col-md-6" ng-repeat="aFilm in addedFilmList">
+                        <div class="col-md-5" ng-repeat="aFilm in addedFilmList" style="margin-left:30px;">
                             <!-- Box Comment -->
                             <div class="card card-widget">
                                 <div class="card-header" style="background:#f5c518">
@@ -118,7 +118,7 @@
         </div>
         <!-- cancelFilmList Modal -->
         <div class="modal fade" id="cancelFilmModal" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 60% !important; margin-left:100px;">
                 <div class="modal-content">
                     <div class="row" style="margin:auto;">
                         <h4 style="color:#dc3545; font-weight:600">These {{cancelFilmList.length}} was canceled cause not valid information or dupplicate</h4>
@@ -165,3 +165,4 @@
     
 </div>
 
+<script src="~/Content/js/CrawlModule.js"></script>

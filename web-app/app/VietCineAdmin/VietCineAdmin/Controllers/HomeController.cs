@@ -114,21 +114,21 @@ namespace VietCineAdmin.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult CreateFilm(int filmId, String filmName, DateTime dateRelease, int restricted, int filmLength,
-            String digTypeId, String author, String movieGenre, String actorList, String countries, String trailerLink, String posterPicture,
-            String additionPicture, String filmStatus, String filmContent)
+        public JsonResult CreateFilm(int filmId, String filmName, DateTime dateRelease, int restricted, int filmLength, String author,
+            String movieGenre, String actorList, String countries, String trailerLink, String posterPicture,
+            String additionPicture, int filmStatus, String filmContent)
         {
 
             FilmService service = new FilmService();
             int filmStatusInt = 0;
             switch (filmStatus)
             {
-                case "Now Showing":
+                case 1:
                     filmStatusInt = 1;
                     break;
 
-                case "Coming Soon":
-                    filmStatusInt = 0;
+                case 2:
+                    filmStatusInt = 2;
                     break;
             }
 
@@ -176,6 +176,28 @@ namespace VietCineAdmin.Controllers
                 };
 
                 service.Create(film);
+            }
+
+            var films = service.FindBy(f => f.filmStatus == 1).ToList();
+
+            return ConvertListObjectFilmToJson(films);
+        }
+
+        public JsonResult DiableFilm(int filmId)
+        {
+            FilmService service = new FilmService();
+
+            var film = service.FindByID(filmId);
+
+            if (film != null)
+            {
+                film.filmStatus = 0;
+                service.Update(film);
+
+            }
+            else
+            {
+
             }
 
             var films = service.FindBy(f => f.filmStatus == 1).ToList();

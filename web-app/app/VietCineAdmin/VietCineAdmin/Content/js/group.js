@@ -59,11 +59,9 @@ var groupController = function ($scope, $http) {
                     $scope.ListGroupCinema = response.data;
 
                     alert("Success!");
-
                 });
             }
         });
-        
     };
 
     $scope.clearForm = function () {
@@ -98,9 +96,7 @@ var validationManager = {
                 },
                 defaultPrice: {
                     required: true,
-
                 }
-
             },
             messages: {
                 groupName: {

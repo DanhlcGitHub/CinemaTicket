@@ -23,7 +23,10 @@
                     <td>{{film.dateRelease}}</td>
                     <td>{{film.movieGenre}}</td>
                     <td>{{film.countries}}</td>
-                    <td><button type="button" class="btn btn-block btn-info" ng-click="clickDetail($index)" data-toggle="modal" data-target="#modal-film">Detail</button></td>
+                    <td>
+                        <button type="button" class="btn btn-info" ng-click="clickDetail($index)" data-toggle="modal" data-target="#modal-film"  style="margin-left:20px">Detail</button>
+                        <button type="button" class="btn btn-danger" ng-click="clickDisable($index)" style="margin-left:20px">Disable</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -39,12 +42,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form>
+                <form role="form" id="form-film">
                     <div class="container">
 
                         <input type="hidden" class="form-control" id="filmId" name="filmId" value="0">
 
-                        <div class="form-row" id="form-film">
+                        <div class="form-row" >
                             <div class="form-group col-md-6">
                                 <label for="filmName">Film Name</label>
                                 <input type="text" class="form-control" id="filmName" name="filmName" value="">
@@ -66,7 +69,7 @@
 
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="restricted" id="restricted" value="0"> 0
+                                    <input class="form-check-input" type="radio" name="restricted" id="restricted" value="0" checked> 0
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -86,7 +89,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row" id="form-film">
+                        <div class="form-row" >
                             <div class="form-group col-md-6">
                                 <label for="movieGenre">Film Genre</label>
                                 <input type="text" class="form-control" id="movieGenre" name="movieGenre" value="">
@@ -94,7 +97,7 @@
 
                             <div class="form-group col-md-3">
                                 <label for="filmLength">Film Length</label>
-                                <input type="text" class="form-control" id="filmLength" name="filmLength" value="">
+                                <input type="text" class="form-control" id="filmLength" name="filmLength" value="0">
                             </div>
 
                             <div class="form-group col-md-3">
@@ -118,7 +121,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row" id="form-film">
+                        <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="countries">Countries</label>
                                 <input type="text" class="form-control" id="countries" name="countries" value="">
@@ -129,7 +132,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row" id="form-film">
+                        <div class="form-row" id="divFilePicture">
                             <div class="form-group col-md-6">
                                 <label for="posterPicture">Poster Picture</label>
                                 <input type="file" id="posterPicture" name="posterPicture" value="">

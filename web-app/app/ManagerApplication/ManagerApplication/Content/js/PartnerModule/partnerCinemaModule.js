@@ -1,4 +1,5 @@
 ﻿
+
 var partnerCinemaModule = angular.module("partnerCinemaModule", []);
 var partnerCinemaController = function ($scope, $http) {
     $scope.allCinemaData;

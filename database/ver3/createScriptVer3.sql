@@ -165,11 +165,11 @@ CREATE TABLE AdminAccount (
 	email nvarchar(255),
 );
 
-CREATE TABLE Promotion (
+/*CREATE TABLE Promotion (
     promotionId int IDENTITY(1,1) PRIMARY KEY,
 	cinemaId int,
 	urlDocument nvarchar(255),
-);
+);*/
 
 
 /* ------------------------------------------------ */

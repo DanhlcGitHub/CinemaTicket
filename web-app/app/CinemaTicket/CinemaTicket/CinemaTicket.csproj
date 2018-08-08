@@ -195,9 +195,6 @@
     <Compile Include="PartnerAccount.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Promotion.cs">
-      <DependentUpon>CinemaModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomRepository\FilmRepository.cs" />
     <Compile Include="Room.cs">
@@ -223,6 +220,9 @@
     <Compile Include="Service\TypeOfSeatService.cs" />
     <Compile Include="Service\UserAccountService.cs" />
     <Compile Include="ShowTime.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Ticket.cs">

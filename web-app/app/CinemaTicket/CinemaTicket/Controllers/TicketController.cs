@@ -130,8 +130,10 @@ namespace CinemaTicket.Controllers
             order.quantity = list.Count;
             order.bookingDate = DateTime.Today;
             order.customerId = cusId;
+            order.paymentCode = RandomUtility.RandomString(9);
+            order.qrCode = "http://cinemabookingticket.azurewebsites.net/Content/img/QRCode/qr.png";
             int orderId = new BookingTicketService().CreateOrder(order);
-            order.paymentCode = orderId +RandomUtility.RandomString(9);
+            
             
             var obj = new
                 {

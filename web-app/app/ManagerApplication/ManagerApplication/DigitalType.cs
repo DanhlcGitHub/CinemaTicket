@@ -14,6 +14,7 @@ namespace ManagerApplication
     
     public partial class DigitalType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DigitalType()
         {
             this.Rooms = new HashSet<Room>();
@@ -22,6 +23,7 @@ namespace ManagerApplication
         public int digTypeId { get; set; }
         public string name { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Rooms { get; set; }
     }
 }

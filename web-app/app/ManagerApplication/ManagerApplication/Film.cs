@@ -14,6 +14,7 @@ namespace ManagerApplication
     
     public partial class Film
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Film()
         {
             this.MovieSchedules = new HashSet<MovieSchedule>();
@@ -37,6 +38,7 @@ namespace ManagerApplication
         public Nullable<int> filmStatus { get; set; }
         public Nullable<int> ticketSold { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
     }
 }

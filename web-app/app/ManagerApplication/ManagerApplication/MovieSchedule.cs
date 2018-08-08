@@ -14,6 +14,7 @@ namespace ManagerApplication
     
     public partial class MovieSchedule
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MovieSchedule()
         {
             this.Tickets = new HashSet<Ticket>();
@@ -28,6 +29,7 @@ namespace ManagerApplication
         public virtual Film Film { get; set; }
         public virtual Room Room { get; set; }
         public virtual ShowTime ShowTime { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

@@ -163,7 +163,6 @@
     <Compile Include="CustomRepository\GroupCinemaRepository.cs" />
     <Compile Include="CustomRepository\MovieScheduleRepository.cs" />
     <Compile Include="CustomRepository\PartnerAccountRepository.cs" />
-    <Compile Include="CustomRepository\PromotionRepository.cs" />
     <Compile Include="CustomRepository\RoomRepository.cs" />
     <Compile Include="CustomRepository\SeatRepository.cs" />
     <Compile Include="CustomRepository\ShowTimeRepository.cs" />
@@ -188,9 +187,6 @@
     <Compile Include="PartnerAccount.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Promotion.cs">
-      <DependentUpon>CinemaModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
@@ -208,7 +204,6 @@
     <Compile Include="Service\GroupCinemaServcie.cs" />
     <Compile Include="Service\MovieScheduleService.cs" />
     <Compile Include="Service\PartnerAccountService.cs" />
-    <Compile Include="Service\PromotionService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\SeatService.cs" />
     <Compile Include="Service\ShowTimeService.cs" />
@@ -216,6 +211,9 @@
     <Compile Include="Service\TypeOfSeatService.cs" />
     <Compile Include="Service\UserAccountService.cs" />
     <Compile Include="ShowTime.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Ticket.cs">

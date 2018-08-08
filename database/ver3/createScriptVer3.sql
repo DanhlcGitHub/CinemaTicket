@@ -197,7 +197,9 @@ ALTER TABLE CinemaManager ADD CONSTRAINT FKCinemaManagerCinema001 FOREIGN KEY (c
 ADD qrCode nvarchar(255);
 
 ALTER TABLE Film
-DROP COLUMN isAvailable;*/
+DROP COLUMN isAvailable;
+
+DROP TABLE Promotion;*/
 
 
 

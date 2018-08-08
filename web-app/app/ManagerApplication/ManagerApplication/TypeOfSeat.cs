@@ -14,6 +14,7 @@ namespace ManagerApplication
     
     public partial class TypeOfSeat
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeOfSeat()
         {
             this.Seats = new HashSet<Seat>();
@@ -27,6 +28,7 @@ namespace ManagerApplication
         public Nullable<double> price { get; set; }
     
         public virtual GroupCinema GroupCinema { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Seat> Seats { get; set; }
     }
 }

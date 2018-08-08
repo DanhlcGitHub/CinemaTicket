@@ -14,6 +14,7 @@ namespace ManagerApplication
     
     public partial class Room
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Room()
         {
             this.MovieSchedules = new HashSet<MovieSchedule>();
@@ -30,7 +31,9 @@ namespace ManagerApplication
     
         public virtual Cinema Cinema { get; set; }
         public virtual DigitalType DigitalType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MovieSchedule> MovieSchedules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Seat> Seats { get; set; }
     }
 }

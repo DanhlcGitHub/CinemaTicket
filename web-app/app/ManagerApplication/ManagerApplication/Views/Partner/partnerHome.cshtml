@@ -240,7 +240,6 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="float-right">
-                                        <button ng-click="testBackDrop()">test</button>
                                         <button ng-click="showAddCinemaForm()" onclick="location.href='#cinemaForm';" type="button" class="btn btn-danger " style="width:100%">
                                             Add Cinema
                                         </button>
@@ -483,11 +482,14 @@
                                         <div class="row col-sm-4" style="padding-left:20px">
                                             <label class="col-sm-12 control-label font-weight-bold" style="">{{currentCinema.cinemaName}}</label>
                                             <input type="text" class="form-control col-sm-6" style="margin-right:15px" id="inputRoomName" placeholder="Enter room name" required>
+                                            <span id="dupplicateRoomNameId" style="color:red; display:none;">This room name already exist!</span>
                                         </div>
 
                                         <div class="row col-sm-6" style="padding-left:20px; vertical-align: middle;">
                                             <input type="number" min="80" max="300" name="inputCapacity" value="" id="inputCapacity" class="form-control col-sm-6" style="margin-right:15px" placeholder="Enter number of seat">
+                                            
                                             <button type="submit" id="suggestBtn" class="col-sm-3 btn btn-danger btn-block">Suggest</button>
+                                            <b style="color:red;display:none" id="capacityErrId">This field is require!</b>
                                         </div>
 
                                     </form>

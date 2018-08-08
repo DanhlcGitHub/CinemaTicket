@@ -105,6 +105,23 @@ namespace ManagerApplication.Controllers.PartnerControler
             return Json(obj);
         }
 
+
+        public JsonResult CheckDupplicateRoomName(string cinemaIdStr, string roomName)
+        {
+            string isDupplicate = "false";
+            int cinemaId = Convert.ToInt32(cinemaIdStr);
+            List<Room> roomList = new RoomService().FindBy(r => r.cinemaId == cinemaId);
+            foreach (var item in roomList)
+            {
+                if (item.name.Trim().ToLower().Equals(roomName.Trim().ToLower())) isDupplicate = "true";
+            }
+            var obj = new
+            {
+                isDupplicate = isDupplicate,
+            };
+            return Json(obj);
+        }
+
         public JsonResult GetAllCinemaInGroup(string groupIdStr)
         {
             int groupId = Convert.ToInt32(groupIdStr);

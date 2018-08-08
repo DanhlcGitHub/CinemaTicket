@@ -34,7 +34,13 @@ var roomController = function ($scope, $http) {
 
     $("#addRoomHeader").submit(function (e) {
         e.preventDefault(e);
-        $scope.initAddRoom();
+        console.log("val: " + $("#inputCapacity").val());
+        if ($("#inputCapacity").val() != "") {
+            $scope.initAddRoom();
+        } else {
+            $("#capacityErrId").css("display", "inline").fadeOut(4000);
+        }
+        
     });
     /*====================== seat area ====================*/
     $scope.matrix = []; //
@@ -429,11 +435,26 @@ var roomController = function ($scope, $http) {
             $("#validateModal").modal();
             $("#modalMessage").html("not select enought seat");
         } else {
-            if ($scope.isSaveSeatDone == true) {
-                $scope.isSaveSeatDone = false;
-                
-                $scope.saveRoomToDB();
-            }
+            // check dupplidate roomName
+            var roomName = $("#inputRoomName").val();
+
+            $http({
+                method: "POST",
+                url: "/Partner/CheckDupplicateRoomName",
+                params: { cinemaIdStr: $scope.currentCinema.cinemaId, roomName: roomName, }
+            })
+            .then(function (response) {
+                if (response.data.isDupplicate == "true") {
+                    $("#inputRoomName").focus();
+                    $("#dupplicateRoomNameId").css("display", "inline").fadeOut(4000);
+                } else {
+                    if ($scope.isSaveSeatDone == true) {
+                        $scope.isSaveSeatDone = false;
+
+                        $scope.saveRoomToDB();
+                    }
+                }
+            });
         }
     }
 

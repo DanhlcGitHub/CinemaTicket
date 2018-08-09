@@ -75,7 +75,7 @@ namespace VietCineAdmin.Controllers
         {
             FilmService service = new FilmService();
 
-            var films = service.FindBy(f => f.filmStatus == 1).ToList();
+            var films = service.FindBy(f => f.filmStatus != 0).ToList();
 
             return ConvertListObjectFilmToJson(films);
         }
@@ -86,7 +86,13 @@ namespace VietCineAdmin.Controllers
         {
             PartnerAccountService service = new PartnerAccountService();
 
-            service.Delete(partnerId);
+            PartnerAccount partner = service.FindByID(partnerId);
+
+            if (partner != null)
+            {
+                partner.isAvailable = false;
+                service.Update(partner);
+            }
 
             var listPartnerAccount = service.FindBy(pa => pa.isAvailable == true).ToList();
 
@@ -182,7 +188,7 @@ namespace VietCineAdmin.Controllers
                 service.Create(film);
             }
 
-            var films = service.FindBy(f => f.filmStatus == 1).ToList();
+            var films = service.FindBy(f => f.filmStatus != 0).ToList();
 
             return ConvertListObjectFilmToJson(films);
         }
@@ -204,7 +210,7 @@ namespace VietCineAdmin.Controllers
 
             }
 
-            var films = service.FindBy(f => f.filmStatus == 1).ToList();
+            var films = service.FindBy(f => f.filmStatus != 0).ToList();
 
             return ConvertListObjectFilmToJson(films);
         }

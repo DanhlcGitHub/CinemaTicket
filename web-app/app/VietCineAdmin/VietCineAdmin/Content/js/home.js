@@ -33,7 +33,11 @@ var homeController = function ($scope, $http) {
     };
 
 
-    $scope.clickDisable = function () {
+    $scope.clickDisable = function (index) {
+
+        $scope.FilmNowSelected = $scope.FilmNowShowing[index];
+        var filmId = $scope.FilmNowSelected.filmId;
+
         $http({
             method: "POST",
             url: "/Home/DiableFilm",
@@ -41,6 +45,7 @@ var homeController = function ($scope, $http) {
                 filmId: filmId
             }
         }).then(function (response) {
+            alert("Success!");
             $scope.FilmNowShowing = response.data;
         });
     };

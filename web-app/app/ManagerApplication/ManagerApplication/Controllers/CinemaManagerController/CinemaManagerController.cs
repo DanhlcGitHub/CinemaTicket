@@ -66,7 +66,8 @@ namespace ManagerApplication.Controllers.CinemaManagerController
             int totalSchedule = countScheduleInDay(cinemaId, selectedDate);
             if (totalSchedule != 0)
             {
-                obj = new {
+                obj = new
+                {
                     isEmpty = "false"
                 };
             }
@@ -101,6 +102,8 @@ namespace ManagerApplication.Controllers.CinemaManagerController
             {
                 List<ShowTime> baseShowTime = new ShowTimeService().GetAll();
                 List<ShowTime> allShowTime = new ShowTimeService().GetAll();
+                if (DateTime.Parse(compareDateStr) == DateTime.Today)
+                    FilterShowTime(allShowTime);
                 Room aRoom = roomList[i];
                 List<MovieSchedule> addedShowTime = new MovieScheduleService().FindBy(s => s.scheduleDate > beginOfDate
                                     && s.scheduleDate < endOfDate && s.roomId == aRoom.roomId);
@@ -249,6 +252,28 @@ namespace ManagerApplication.Controllers.CinemaManagerController
             return returnList;
         }
 
+        private List<ShowTime> FilterShowTime(List<ShowTime> showTime)
+        {
+            for (int i = showTime.Count - 1; i >= 0; i--)
+            {
+                ShowTime item = showTime[i];
+                int hour = Convert.ToInt32(item.startTime.Split(':')[0]);
+                int minute = Convert.ToInt32(item.startTime.Split(':')[1]);
+
+                int currentHour = DateTime.Now.Hour;
+                int currentMinute = DateTime.Now.Minute;
+                if ((hour * 60 + minute) > (currentHour * 60 + currentMinute))
+                {
+
+                }
+                else
+                {
+                    showTime.Remove(item);
+                }
+            }
+            return showTime;
+        }
+
         public List<object> getViewOnlyList(int cinemaId, DateTime selectedDate)
         {
             List<object> returnList = new List<object>();
@@ -261,7 +286,9 @@ namespace ManagerApplication.Controllers.CinemaManagerController
 
             for (int i = 0; i < roomList.Count; i++)
             {
+                List<ShowTime> baseShowTime = new ShowTimeService().GetAll();
                 List<ShowTime> allShowTime = new ShowTimeService().GetAll();
+                //FilterShowTime(allShowTime);
                 Room aRoom = roomList[i];
                 List<MovieSchedule> addedShowTime = new MovieScheduleService().FindBy(s => s.scheduleDate > beginOfDate
                                     && s.scheduleDate < endOfDate && s.roomId == aRoom.roomId);
@@ -271,7 +298,7 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                 // current Film added ShowTime
                 foreach (var item in addedShowTime)
                 {
-                    ShowTime time = allShowTime.Find(t => t.timeId == item.timeId);
+                    ShowTime time = baseShowTime.Find(t => t.timeId == item.timeId);
                     int endTimeNum = Convert.ToInt32(time.endTime.Split(':')[0]);
                     int endTimeMinute = Convert.ToInt32(time.endTime.Split(':')[1]);
                     if (endTimeNum == 23 && endTimeMinute == 59) endTimeNum = 24;
@@ -321,7 +348,7 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                 List<MovieSchedule> addedShowTime = new MovieScheduleService().FindBy(s => s.scheduleDate > beginOfDate
                                     && s.scheduleDate < endOfDate && s.roomId == aRoom.roomId);
 
-                if(addedShowTime!=null)
+                if (addedShowTime != null)
                     totalSchedule += addedShowTime.Count;
             }
             return totalSchedule;
@@ -507,7 +534,12 @@ namespace ManagerApplication.Controllers.CinemaManagerController
 
             List<MovieSchedule> list = new MovieScheduleService().FindBy(ms => ms.roomId == roomId
                                                              && ms.scheduleDate == scheduleDate);
-            if (list == null || list.Count == 0)
+
+            if (DateTime.Parse(formatDateStr) < DateTime.Now)
+            {
+                message = "Show time not valid for add schedule anymore!";
+            }
+            else if (list == null || list.Count == 0)
             {
                 //lay tat ca suat chieu da add trong ngay
                 DateTime beginOfDate = DateTime.Parse(inputedDate.Year + "-" + inputedDate.Month + "-" + inputedDate.Day + " 00:00");

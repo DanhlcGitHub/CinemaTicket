@@ -6,15 +6,23 @@ var loginModule = angular.module("loginModule", []);
 var loginController = function ($scope, $http) {
     $scope.roleList = [{ key: "partner", value: "partner" }, { key: "cinemaManager", value: "Cinema Manager" }];
     $("#loader").hide();
-
+    $scope.validateUsername = function (str) {
+        return /^[a-z][a-z0-9_.-]{4,19}$/i.test(str);
+    };
     $("#loginForm").submit(function (e) {
         e.preventDefault(e);
+        var username = $("#txtUsername").val();
+        var password = $("#txtPassword").val();
         var valid = $("#loginForm").valid();
         if (valid == true) {
-            $scope.checkLogin();
+            if (!$scope.validateUsername(username)) {
+                $("#txtUsernameErr").css("display", "inline").fadeOut(4000);
+            } else {
+                $scope.checkLogin();
+            }
         }
     });
-
+    
     $scope.checkLogin = function () {
         var username = $("#txtUsername").val();
         var password = $("#txtPassword").val();

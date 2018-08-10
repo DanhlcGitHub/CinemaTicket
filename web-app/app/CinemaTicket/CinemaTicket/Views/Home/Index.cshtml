@@ -41,7 +41,7 @@
                     <a class="nav-link font-weight-bold" href="#lichchieu">Lịch chiếu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold" href="#banlaive">Bán lại vé</a>
+                    <a ng-click="showResellTicket()" class="nav-link font-weight-bold" href="#banlaive">Bán lại vé</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -73,7 +73,7 @@
                     i++;
                     var active = i == 1 ? "active" : "";
                     <div class="carousel-item @active">
-                        <img height="500" class="d-block w-100" src="@Url.Content(film.posterPicture)" alt="topFilm">
+                        <img ng-click="gotoFilmDetail(@film.filmId)" height="500" class="d-block w-100" src="@Url.Content(film.posterPicture)" alt="topFilm">
                     </div>
                 }
             </div>

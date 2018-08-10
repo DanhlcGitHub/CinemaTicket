@@ -347,7 +347,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+GetCustomer()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -376,7 +376,36 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+FindCustomerById()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5,
+											"wordWrap": false
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFlIb0W+KLNwFc=",
+											"_parent": {
+												"$ref": "AAAAAAFkGEIqb/LYuY4="
+											},
+											"model": {
+												"$ref": "AAAAAAFlIb0W0KLKbts="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 373,
+											"top": 1536,
+											"width": 151,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+FindCustomerByEmail()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -394,7 +423,7 @@
 									"left": 368,
 									"top": 1501,
 									"width": 161,
-									"height": 38,
+									"height": 53,
 									"autoResize": false
 								},
 								{
@@ -813,7 +842,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+GetUser()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -842,7 +871,36 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+CreateUser()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5,
+											"wordWrap": false
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFlIchYBq6HRZ8=",
+											"_parent": {
+												"$ref": "AAAAAAFkGEqAjvPTgoM="
+											},
+											"model": {
+												"$ref": "AAAAAAFlIchX3q6EtVw="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 621,
+											"top": 1528,
+											"width": 151,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+EditUser()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -860,7 +918,7 @@
 									"left": 616,
 									"top": 1493,
 									"width": 161,
-									"height": 38,
+									"height": 53,
 									"autoResize": false
 								},
 								{
@@ -1337,7 +1395,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+CreateGroupOfCinema()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1366,7 +1424,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+EditGroupOfCinema()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1861,7 +1919,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+GetPartner()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1890,7 +1948,36 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+CreatePartner()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5,
+											"wordWrap": false
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFlIcqK583zrU0=",
+											"_parent": {
+												"$ref": "AAAAAAFkGFRDxfSrnp0="
+											},
+											"model": {
+												"$ref": "AAAAAAFlIcqKv83w/wo="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 925,
+											"top": 366,
+											"width": 199,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+EditPartner()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1908,7 +1995,7 @@
 									"left": 920,
 									"top": 331,
 									"width": 209,
-									"height": 38,
+									"height": 53,
 									"autoResize": false
 								},
 								{
@@ -2443,7 +2530,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+CreateCienema()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2472,7 +2559,65 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+GetAllCinema()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5,
+											"wordWrap": false
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFlIcteKdWvWMk=",
+											"_parent": {
+												"$ref": "AAAAAAFkGFRItvTlpsU="
+											},
+											"model": {
+												"$ref": "AAAAAAFlIctd/9WstgM="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 1085,
+											"top": 660,
+											"width": 183,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+EditCinema()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5,
+											"wordWrap": false
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFlIctie9ZFCio=",
+											"_parent": {
+												"$ref": "AAAAAAFkGFRItvTlpsU="
+											},
+											"model": {
+												"$ref": "AAAAAAFlIctiV9ZCWyQ="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 1085,
+											"top": 675,
+											"width": 183,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+FindCinemaById()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2490,7 +2635,7 @@
 									"left": 1080,
 									"top": 625,
 									"width": 193,
-									"height": 38,
+									"height": 68,
 									"autoResize": false
 								},
 								{
@@ -2967,7 +3112,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+GetCinemaManager()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2996,7 +3141,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+EditCinemaManagerInfor()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3810,7 +3955,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+CreateNewFilm()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3839,7 +3984,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+EditFilm()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4218,7 +4363,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+CreateSchedule()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4247,7 +4392,65 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+GetAllSchedule()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5,
+											"wordWrap": false
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFlIb2LUKfmjas=",
+											"_parent": {
+												"$ref": "AAAAAAFkHY7Zuqp5vd4="
+											},
+											"model": {
+												"$ref": "AAAAAAFlIb2LJ6fjZLw="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 301,
+											"top": 970,
+											"width": 215,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+FindScheduleByCinema()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5,
+											"wordWrap": false
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFlIb3BZKltalk=",
+											"_parent": {
+												"$ref": "AAAAAAFkHY7Zuqp5vd4="
+											},
+											"model": {
+												"$ref": "AAAAAAFlIb3BOKlqSJM="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 301,
+											"top": 985,
+											"width": 215,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+FindScheduleByDate()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4265,7 +4468,7 @@
 									"left": 296,
 									"top": 935,
 									"width": 225,
-									"height": 38,
+									"height": 68,
 									"autoResize": false
 								},
 								{
@@ -4713,7 +4916,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+CreateRoom()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4742,7 +4945,36 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+GetRoom()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5,
+											"wordWrap": false
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFlIcllPbxywdw=",
+											"_parent": {
+												"$ref": "AAAAAAFkIJaL70gWN90="
+											},
+											"model": {
+												"$ref": "AAAAAAFlIcllDrxv5bk="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 725,
+											"top": 991,
+											"width": 215,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+FindRoomByID()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4760,7 +4992,7 @@
 									"left": 720,
 									"top": 956,
 									"width": 225,
-									"height": 38,
+									"height": 53,
 									"autoResize": false
 								},
 								{
@@ -5645,7 +5877,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+GetSeat()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5674,7 +5906,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+CreateSeat()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -6664,7 +6896,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+GetTicket()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -6693,7 +6925,36 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+FindTicket()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5,
+											"wordWrap": false
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFlIcvls+KtjkM=",
+											"_parent": {
+												"$ref": "AAAAAAFkIKAl+VByqik="
+											},
+											"model": {
+												"$ref": "AAAAAAFlIcvlfuKqyJc="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 85,
+											"top": 1238,
+											"width": 191,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+ChangeTicketStatus()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -6711,7 +6972,7 @@
 									"left": 80,
 									"top": 1203,
 									"width": 201,
-									"height": 38,
+									"height": 53,
 									"autoResize": false
 								},
 								{
@@ -7188,7 +7449,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
+											"text": "+GetOrder()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7217,7 +7478,36 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Setter()",
+											"text": "+CreateOrder()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5,
+											"wordWrap": false
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFlIbyYjJ20KbQ=",
+											"_parent": {
+												"$ref": "AAAAAAFkIKSta1ZNHzE="
+											},
+											"model": {
+												"$ref": "AAAAAAFlIbyYTZ2xK0o="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 61,
+											"top": 1550,
+											"width": 206.41162109375,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+FindOrder()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7235,7 +7525,7 @@
 									"left": 56,
 									"top": 1515,
 									"width": 216.41162109375,
-									"height": 38,
+									"height": 53,
 									"autoResize": false
 								},
 								{
@@ -11170,7 +11460,7 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": -1472,
+											"left": -1424,
 											"top": -464,
 											"width": 0,
 											"height": 13,
@@ -11195,7 +11485,7 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 93,
+											"left": 117,
 											"top": 623,
 											"width": 175,
 											"height": 13,
@@ -11221,7 +11511,7 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": -1472,
+											"left": -1424,
 											"top": -464,
 											"width": 73.67724609375,
 											"height": 13,
@@ -11247,7 +11537,7 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": -1472,
+											"left": -1424,
 											"top": -464,
 											"width": 0,
 											"height": 13,
@@ -11267,7 +11557,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 88,
+									"left": 112,
 									"top": 616,
 									"width": 185,
 									"height": 25,
@@ -11313,7 +11603,7 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 93,
+											"left": 117,
 											"top": 646,
 											"width": 175,
 											"height": 13,
@@ -11342,7 +11632,7 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 93,
+											"left": 117,
 											"top": 661,
 											"width": 175,
 											"height": 13,
@@ -11371,7 +11661,7 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 93,
+											"left": 117,
 											"top": 676,
 											"width": 175,
 											"height": 13,
@@ -11400,7 +11690,7 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 93,
+											"left": 117,
 											"top": 691,
 											"width": 175,
 											"height": 13,
@@ -11421,7 +11711,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 88,
+									"left": 112,
 									"top": 641,
 									"width": 185,
 									"height": 68,
@@ -11455,7 +11745,7 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 93,
+											"left": 117,
 											"top": 714,
 											"width": 175,
 											"height": 13,
@@ -11484,7 +11774,7 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 93,
+											"left": 117,
 											"top": 729,
 											"width": 175,
 											"height": 13,
@@ -11505,7 +11795,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 88,
+									"left": 112,
 									"top": 709,
 									"width": 185,
 									"height": 38,
@@ -11529,7 +11819,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": -736,
+									"left": -712,
 									"top": -232,
 									"width": 10,
 									"height": 10,
@@ -11553,7 +11843,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": -736,
+									"left": -712,
 									"top": -232,
 									"width": 10,
 									"height": 10,
@@ -11569,7 +11859,7 @@
 							"showShadow": true,
 							"containerChangeable": true,
 							"containerExtending": false,
-							"left": 88,
+							"left": 112,
 							"top": 616,
 							"width": 185,
 							"height": 137,
@@ -11629,8 +11919,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 277,
-									"top": 815,
+									"left": 288,
+									"top": 814,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -11663,8 +11953,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 266,
-									"top": 825,
+									"left": 276,
+									"top": 823,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -11697,8 +11987,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 300,
-									"top": 796,
+									"left": 313,
+									"top": 797,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -11731,8 +12021,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 301,
-									"top": 854,
+									"left": 309,
+									"top": 853,
 									"width": 18,
 									"height": 13,
 									"autoResize": false,
@@ -11766,8 +12056,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 299,
-									"top": 861,
+									"left": 306,
+									"top": 859,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -11800,7 +12090,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 334,
+									"left": 342,
 									"top": 840,
 									"width": 0,
 									"height": 13,
@@ -11834,7 +12124,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 228,
+									"left": 244,
 									"top": 776,
 									"width": 32,
 									"height": 13,
@@ -11869,7 +12159,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 235,
+									"left": 251,
 									"top": 786,
 									"width": 0,
 									"height": 13,
@@ -11903,8 +12193,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 262,
-									"top": 755,
+									"left": 280,
+									"top": 756,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -11984,7 +12274,7 @@
 								"$ref": "AAAAAAFkHY7Zuapy618="
 							},
 							"lineStyle": 1,
-							"points": "339:871;239:753",
+							"points": "346:871;257:753",
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": true,
@@ -14042,36 +14332,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Getter()",
-											"horizontalAlignment": 0,
-											"verticalAlignment": 5,
-											"wordWrap": false
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAFkIWqve4SUX6o=",
-											"_parent": {
-												"$ref": "AAAAAAFkIWln2W5fACc="
-											},
-											"model": {
-												"$ref": "AAAAAAFkIWqvHYRes4M="
-											},
-											"visible": true,
-											"enabled": true,
-											"lineColor": "#000000",
-											"fillColor": "#ffffff",
-											"fontColor": "#000000",
-											"font": "Arial;13;0",
-											"showShadow": true,
-											"containerChangeable": false,
-											"containerExtending": false,
-											"left": 357,
-											"top": 345,
-											"width": 159,
-											"height": 13,
-											"autoResize": false,
-											"underline": false,
-											"text": "+Setter()",
+											"text": "+GetAdmin()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14089,7 +14350,7 @@
 									"left": 352,
 									"top": 325,
 									"width": 169,
-									"height": 38,
+									"height": 23,
 									"autoResize": false
 								},
 								{
@@ -15263,7 +15524,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGEIqbvLPBNA="
 							},
-							"name": "Getter",
+							"name": "GetCustomer",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -15277,7 +15538,21 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGEIqbvLPBNA="
 							},
-							"name": "Setter",
+							"name": "FindCustomerById",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFlIb0W0KLKbts=",
+							"_parent": {
+								"$ref": "AAAAAAFkGEIqbvLPBNA="
+							},
+							"name": "FindCustomerByEmail",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -15427,7 +15702,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGEqAjfPKUpQ="
 							},
-							"name": "Getter",
+							"name": "GetUser",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -15441,7 +15716,21 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGEqAjfPKUpQ="
 							},
-							"name": "Setter",
+							"name": "CreateUser",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFlIchX3q6EtVw=",
+							"_parent": {
+								"$ref": "AAAAAAFkGEqAjfPKUpQ="
+							},
+							"name": "EditUser",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -15580,7 +15869,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGFPFqvRzdcU="
 							},
-							"name": "Getter",
+							"name": "CreateGroupOfCinema",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -15594,7 +15883,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGFPFqvRzdcU="
 							},
-							"name": "Setter",
+							"name": "EditGroupOfCinema",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -15829,7 +16118,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGFRDtvSiho4="
 							},
-							"name": "Getter",
+							"name": "GetPartner",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -15843,7 +16132,21 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGFRDtvSiho4="
 							},
-							"name": "Setter",
+							"name": "CreatePartner",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFlIcqKv83w/wo=",
+							"_parent": {
+								"$ref": "AAAAAAFkGFRDtvSiho4="
+							},
+							"name": "EditPartner",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -16126,7 +16429,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGFRItvTcCmQ="
 							},
-							"name": "Getter",
+							"name": "CreateCienema",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -16140,7 +16443,35 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGFRItvTcCmQ="
 							},
-							"name": "Setter",
+							"name": "GetAllCinema",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFlIctd/9WstgM=",
+							"_parent": {
+								"$ref": "AAAAAAFkGFRItvTcCmQ="
+							},
+							"name": "EditCinema",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFlIctiV9ZCWyQ=",
+							"_parent": {
+								"$ref": "AAAAAAFkGFRItvTcCmQ="
+							},
+							"name": "FindCinemaById",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -16375,7 +16706,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGHZWyv4r+ms="
 							},
-							"name": "Getter",
+							"name": "GetCinemaManager",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -16389,7 +16720,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkGHZWyv4r+ms="
 							},
-							"name": "Setter",
+							"name": "EditCinemaManagerInfor",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -16775,7 +17106,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkHXueIKWaX/4="
 							},
-							"name": "Getter",
+							"name": "CreateNewFilm",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -16789,7 +17120,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkHXueIKWaX/4="
 							},
-							"name": "Setter",
+							"name": "EditFilm",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -16905,7 +17236,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkHY7Zt6pwdDM="
 							},
-							"name": "Getter",
+							"name": "CreateSchedule",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -16919,7 +17250,35 @@
 							"_parent": {
 								"$ref": "AAAAAAFkHY7Zt6pwdDM="
 							},
-							"name": "Setter",
+							"name": "GetAllSchedule",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFlIb2LJ6fjZLw=",
+							"_parent": {
+								"$ref": "AAAAAAFkHY7Zt6pwdDM="
+							},
+							"name": "FindScheduleByCinema",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFlIb3BOKlqSJM=",
+							"_parent": {
+								"$ref": "AAAAAAFkHY7Zt6pwdDM="
+							},
+							"name": "FindScheduleByDate",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -17183,7 +17542,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkIJaL7EgNLcI="
 							},
-							"name": "Getter",
+							"name": "CreateRoom",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -17197,7 +17556,21 @@
 							"_parent": {
 								"$ref": "AAAAAAFkIJaL7EgNLcI="
 							},
-							"name": "Setter",
+							"name": "GetRoom",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFlIcllDrxv5bk=",
+							"_parent": {
+								"$ref": "AAAAAAFkIJaL7EgNLcI="
+							},
+							"name": "FindRoomByID",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -17560,7 +17933,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkIJtA7UvWXDw="
 							},
-							"name": "Getter",
+							"name": "GetSeat",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -17574,7 +17947,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkIJtA7UvWXDw="
 							},
-							"name": "Setter",
+							"name": "CreateSeat",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -17944,7 +18317,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkIKAl9lBpN1s="
 							},
-							"name": "Getter",
+							"name": "GetTicket",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -17958,7 +18331,21 @@
 							"_parent": {
 								"$ref": "AAAAAAFkIKAl9lBpN1s="
 							},
-							"name": "Setter",
+							"name": "FindTicket",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFlIcvlfuKqyJc=",
+							"_parent": {
+								"$ref": "AAAAAAFkIKAl9lBpN1s="
+							},
+							"name": "ChangeTicketStatus",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18294,7 +18681,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkIKStaFZEXZQ="
 							},
-							"name": "Getter",
+							"name": "GetOrder",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18308,7 +18695,21 @@
 							"_parent": {
 								"$ref": "AAAAAAFkIKStaFZEXZQ="
 							},
-							"name": "Setter",
+							"name": "CreateOrder",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFlIbyYTZ2xK0o=",
+							"_parent": {
+								"$ref": "AAAAAAFkIKStaFZEXZQ="
+							},
+							"name": "FindOrder",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18528,21 +18929,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFkIWln125WdxM="
 							},
-							"name": "Getter",
-							"visibility": "public",
-							"isStatic": false,
-							"isLeaf": false,
-							"concurrency": "sequential",
-							"isQuery": false,
-							"isAbstract": false
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAFkIWqvHYRes4M=",
-							"_parent": {
-								"$ref": "AAAAAAFkIWln125WdxM="
-							},
-							"name": "Setter",
+							"name": "GetAdmin",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,

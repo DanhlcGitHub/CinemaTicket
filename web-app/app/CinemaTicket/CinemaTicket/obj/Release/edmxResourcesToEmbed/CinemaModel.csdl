@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="CinemaBookingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="CinemaBookingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="AdminAccount">
     <Key>
       <PropertyRef Name="adminId" />
@@ -91,6 +91,7 @@
     <Property Name="posterPicture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="additionPicture" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="filmStatus" Type="Int32" />
+    <Property Name="ticketSold" Type="Int32" />
     <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleFilm001" FromRole="Film" ToRole="MovieSchedule" />
   </EntityType>
   <EntityType Name="GroupCinema">
@@ -134,14 +135,6 @@
     <Property Name="isAvailable" Type="Boolean" />
     <NavigationProperty Name="GroupCinema" Relationship="Self.FKPartnerAccountGroupCinema001" FromRole="PartnerAccount" ToRole="GroupCinema" />
   </EntityType>
-  <EntityType Name="Promotion">
-    <Key>
-      <PropertyRef Name="promotionId" />
-    </Key>
-    <Property Name="promotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="cinemaId" Type="Int32" />
-    <Property Name="urlDocument" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="Room">
     <Key>
       <PropertyRef Name="roomId" />
@@ -182,6 +175,16 @@
     <Property Name="endTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="startTimeDouble" Type="Double" />
     <NavigationProperty Name="MovieSchedules" Relationship="Self.FKMovieScheduleShowTime001" FromRole="ShowTime" ToRole="MovieSchedule" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Ticket">
     <Key>
@@ -413,10 +416,10 @@
     <EntitySet Name="GroupCinemas" EntityType="Self.GroupCinema" />
     <EntitySet Name="MovieSchedules" EntityType="Self.MovieSchedule" />
     <EntitySet Name="PartnerAccounts" EntityType="Self.PartnerAccount" />
-    <EntitySet Name="Promotions" EntityType="Self.Promotion" />
     <EntitySet Name="Rooms" EntityType="Self.Room" />
     <EntitySet Name="Seats" EntityType="Self.Seat" />
     <EntitySet Name="ShowTimes" EntityType="Self.ShowTime" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Tickets" EntityType="Self.Ticket" />
     <EntitySet Name="TypeOfSeats" EntityType="Self.TypeOfSeat" />
     <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />

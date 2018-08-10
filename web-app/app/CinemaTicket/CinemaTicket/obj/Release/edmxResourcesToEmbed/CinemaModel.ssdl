@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="CinemaBookingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="CinemaBookingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AdminAccount">
     <Key>
       <PropertyRef Name="adminId" />
@@ -83,6 +83,7 @@
     <Property Name="posterPicture" Type="nvarchar" MaxLength="255" />
     <Property Name="additionPicture" Type="nvarchar" MaxLength="1000" />
     <Property Name="filmStatus" Type="int" />
+    <Property Name="ticketSold" Type="int" />
   </EntityType>
   <EntityType Name="GroupCinema">
     <Key>
@@ -117,14 +118,6 @@
     <Property Name="groupOfCinemaId" Type="int" />
     <Property Name="isAvailable" Type="bit" />
   </EntityType>
-  <EntityType Name="Promotion">
-    <Key>
-      <PropertyRef Name="promotionId" />
-    </Key>
-    <Property Name="promotionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="cinemaId" Type="int" />
-    <Property Name="urlDocument" Type="nvarchar" MaxLength="255" />
-  </EntityType>
   <EntityType Name="Room">
     <Key>
       <PropertyRef Name="roomId" />
@@ -157,6 +150,16 @@
     <Property Name="startTime" Type="nvarchar" MaxLength="10" />
     <Property Name="endTime" Type="nvarchar" MaxLength="10" />
     <Property Name="startTimeDouble" Type="float" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Ticket">
     <Key>
@@ -383,10 +386,10 @@
     <EntitySet Name="GroupCinema" EntityType="Self.GroupCinema" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MovieSchedule" EntityType="Self.MovieSchedule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PartnerAccount" EntityType="Self.PartnerAccount" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Seat" EntityType="Self.Seat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShowTime" EntityType="Self.ShowTime" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TypeOfSeat" EntityType="Self.TypeOfSeat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />

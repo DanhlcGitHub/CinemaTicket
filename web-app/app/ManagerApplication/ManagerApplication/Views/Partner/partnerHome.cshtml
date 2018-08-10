@@ -177,7 +177,8 @@
                                 <b class="col-sm-6 control-label">Employee username</b>
                                 <div class="col-sm-12">
                                     <input name="inputEmpUsername" type="text" class="form-control" id="inputEmpUsername" value="{{currentEmployee.username}}" placeholder="">
-                                </div>
+                                    <b id="inputEmpUsernameErr" style="color:red;display:none">username is wrong format!</b>
+                                 </div>
                             </div>
                             <div ng-if="isAddnewEmp == true" class="form-group">
                                 <b class="col-sm-2 control-label">Password</b>

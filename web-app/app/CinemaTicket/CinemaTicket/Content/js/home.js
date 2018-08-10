@@ -137,7 +137,7 @@ var filmController = function ($scope, $http) {
             $('#myModalTrailer').modal();
         }
     };
-    $scope.openInNewTab = function(url) {
+    $scope.openInNewTab = function (url) {
         var win = window.open(url, '_blank');
         win.focus();
     }
@@ -179,15 +179,30 @@ var filmController = function ($scope, $http) {
         $scope.resellEmail = document.getElementById("resellEmailTxt").value;
         document.getElementById("findResellTicketBtn").disabled = true;
         if (validateEmail($scope.resellEmail)) {
+            //check email exist or not
             $http({
                 method: "POST",
-                url: "Ticket/SendResellConfirmCode",
+                url: "Ticket/IsResellEmailExist",
                 params: { email: $scope.resellEmail }
             })
             .then(function (response) {
-                $("#confirmResellEmailBlock").slideToggle("slow");
-                document.getElementById("inputEmailResellEmailBlock").style.display = "none"
+                if (response.data.isexist == "true") {
+                    $http({
+                        method: "POST",
+                        url: "Ticket/SendResellConfirmCode",
+                        params: { email: $scope.resellEmail }
+                    })
+                    .then(function (response) {
+                        $("#confirmResellEmailBlock").slideToggle("slow");
+                        document.getElementById("inputEmailResellEmailBlock").style.display = "none"
+                    });
+                } else {
+                    document.getElementById("findResellTicketBtn").disabled = false;
+                    $('#validateModal').modal();
+                    $("#modalMessage").html("Không tìm thấy dữ liệu!");
+                }
             });
+            
         } else {
             document.getElementById("findResellTicketBtn").disabled = false;
             $('#validateModal').modal();
@@ -254,7 +269,7 @@ var filmController = function ($scope, $http) {
                     $('#validateModal').modal();
                     $("#modalMessage").html("Xảy ra lỗi kết nối, vui lòng kiểm tra kết nối!");
                 }
-                
+
             });
         } else {
             $('#validateModal').modal();
@@ -336,7 +351,12 @@ var filmController = function ($scope, $http) {
         if (username == "" || password == "") {
             $('#validateModal').modal();
             $("#modalMessage").html("Bạn chưa nhập tài khoản và mật khẩu!");
-
+        } else if (!$scope.validateUsername(username)) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Tài khoản phải từ 5 kí tự trở lên và không chứa kí tự đặc biệt!");
+        } else if (!$scope.validateUsername(password)) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Mật khẩu phải từ 5 kí tự trở lên và không chứa kí tự đặc biệt!");
         } else {
             $http({
                 method: "POST",
@@ -351,7 +371,7 @@ var filmController = function ($scope, $http) {
                     $("#myModalLogin").modal('hide');
                     $("#modalMessage").html("Đăng nhập thành công!");
                     $('#loginForm')[0].reset();
-                    
+
                     $scope.userData = response.data;
                     LocalStorageManager.saveToLocalStorage(response.data, $scope.userKey);
                 } else if (status == "notValid") {
@@ -361,6 +381,11 @@ var filmController = function ($scope, $http) {
             });
         }
     };
+
+    $scope.validateUsername = function (str) {
+        return /^[a-z][a-z0-9_.-]{4,19}$/i.test(str);
+    };
+
     $scope.register = function () {
         var username = $("#register_username").val();
         var password = $("#register_password").val();
@@ -375,9 +400,12 @@ var filmController = function ($scope, $http) {
         } else if (!validatePhone(phone)) {
             $('#validateModal').modal();
             $("#modalMessage").html("Số điện thoại phải từ 10-11 chữ số");
-        } else if (username.length < 6 || username.length > 20 || password.length < 6 || password.length > 20) {
+        } else if (!$scope.validateUsername(password)) {
             $('#validateModal').modal();
-            $("#modalMessage").html("Tên đăng nhập và mật khẩu phải từ 6 kí tự và bé hơn 20 kí tự");
+            $("#modalMessage").html("Mật khẩu phải từ 5 kí tự trở lên và không chứa kí tự đặc biệt!");
+        } else if (!$scope.validateUsername(username)) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Tài khoản phải từ 5 kí tự trở lên và không chứa kí tự đặc biệt!");
         } else {
             $http({
                 method: "POST",
@@ -416,6 +444,16 @@ var filmController = function ($scope, $http) {
             }
         });
     }
+
+    $scope.showResellTicket = function () {
+        console.log("123");
+        $("#inputEmailResellEmailBlock").show();
+        $("#resellEmailTxt").val("");
+        document.getElementById("findResellTicketBtn").disabled = false;
+        $("#confirmResellEmailBlock").hide(); 
+        document.getElementById("confirmResellTicketBtn").disabled = false;
+        $("#resellConfirmCodeTxt").val("");
+    };
 }
 
 myApp.controller("filmController", filmController);
@@ -442,5 +480,5 @@ function validateEmail(inputemail) {
     return inputemail.match(regEmail);
 }
 function validatePhone(inputphone) {
-    return inputphone.match(/\d/g).length === 10;
+    return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(inputphone);
 }

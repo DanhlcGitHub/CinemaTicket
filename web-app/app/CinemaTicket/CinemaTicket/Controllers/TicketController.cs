@@ -108,7 +108,7 @@ namespace CinemaTicket.Controllers
         {
             string orderDataStr = Request.Params["orderData"];
             JObject orderData = JObject.Parse(orderDataStr);
-            string ticketListStr = (string) orderData.GetValue("ticketListStr");
+            string ticketListStr = (string)orderData.GetValue("ticketListStr");
             string email = (string)orderData.GetValue("email");
             string phone = (string)orderData.GetValue("phone");
             string filmName = (string)orderData.GetValue("filmName");
@@ -133,15 +133,15 @@ namespace CinemaTicket.Controllers
             order.paymentCode = RandomUtility.RandomString(9);
             order.qrCode = "http://cinemabookingticket.azurewebsites.net/Content/img/QRCode/qr.png";
             int orderId = new BookingTicketService().CreateOrder(order);
-            
-            
+
+
             var obj = new
                 {
                     isSuccess = "true"
                 };
             try
             {
-                
+
                 foreach (JObject item in list)
                 {
                     int ticketId = (int)item.GetValue("ticketId");
@@ -174,12 +174,12 @@ namespace CinemaTicket.Controllers
             catch (Exception)
             {
                 new BookingTicketService().Delete(orderId);
-                obj = new 
+                obj = new
                 {
                     isSuccess = "false"
                 };
             }
-            
+
             /*var obj = ticketList
                 .Select(item => new
                 {
@@ -218,6 +218,22 @@ namespace CinemaTicket.Controllers
             Session["resellConfirmCode"] = confirmCode;
         }
 
+        public JsonResult IsResellEmailExist(string email)
+        {
+            var aObj = new
+            {
+                isexist = "true"
+            };
+            List<Customer> cusList = new CustomerService().FindBy(c => c.email == email.Trim());
+            if (cusList == null)
+            {
+                aObj = new
+                {
+                    isexist = "false"
+                };
+            }
+            return Json(aObj);
+        }
         public JsonResult GetTicketListBelongToMail(string confirmCode, string email)
         {
             string sessionConfirmCode = (string)Session["resellConfirmCode"];

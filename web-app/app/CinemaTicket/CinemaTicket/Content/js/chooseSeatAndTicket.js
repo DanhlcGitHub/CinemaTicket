@@ -529,6 +529,9 @@ var chooseTicketController = function ($scope, $http) {
         });
     };
     /*================ Login  Part*/
+    $scope.validateUsername = function (str) {
+        return /^[a-z][a-z0-9_.-]{4,19}$/i.test(str);
+    };
     $scope.showLogin = function () {
         $("#myModalLogin").modal();
     };
@@ -538,6 +541,12 @@ var chooseTicketController = function ($scope, $http) {
         if (username == "" || password == "") {
             $('#validateModal').modal();
             $("#modalMessage").html("Bạn chưa nhập tài khoản và mật khẩu!");
+        } else if (!$scope.validateUsername(username)) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Tài khoản phải từ 5 kí tự trở lên và không chứa kí tự đặc biệt!");
+        } else if (!$scope.validateUsername(password)) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Mật khẩu phải từ 5 kí tự trở lên và không chứa kí tự đặc biệt!");
         } else {
             $http({
                 method: "POST",

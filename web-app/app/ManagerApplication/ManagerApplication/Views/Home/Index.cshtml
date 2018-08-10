@@ -49,11 +49,13 @@
             <form id="loginForm" method="post">
                 <div class="form-group has-feedback">
                     <input id="txtUsername" name="txtUsername" type="text" value="" class="form-control" placeholder="username">
+                    <b id="txtUsernameErr" style="color:red; display:none">username must be 5-19 character and not include special character!</b>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <input id="txtPassword" name="txtPassword" value="" type="password" class="form-control" placeholder="Password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <b id="txtPasswordErr" style="color:red; display:none">password must be 5-19 character and not include special character!</b>
                 </div>
                 <div class="form-group">
                     <select id="inputRole" name="inputRole" class="form-control" required>

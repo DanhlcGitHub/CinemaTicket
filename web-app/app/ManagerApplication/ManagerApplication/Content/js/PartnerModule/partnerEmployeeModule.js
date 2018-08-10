@@ -139,13 +139,18 @@ var partnerEmployeeController = function ($scope, $http) {
             });
         }
     };
-
+    $scope.validateUsername = function (str) {
+        return /^[a-z][a-z0-9_.-]{4,19}$/i.test(str);
+    };
     $scope.addNewEmployee = function () {
-        if ($("#empForm").valid()) {
+        var empUsername = $("#inputEmpUsername").val();
+        if (!$scope.validateUsername(empUsername)) {
+            $("#inputEmpUsernameErr").css("display", "inline").fadeOut(4000);
+        } else if ($("#empForm").valid()) {
             var empName = $("#inputEmpName").val();
             var empEmail = $("#inputEmpEmail").val();
             var empPhone = $("#inputEmpPhone").val();
-            var empUsername = $("#inputEmpUsername").val();
+            
             var empPassword = $("#inputEmpPassword").val();
             var cinemaId = $('#inputEmpSelectCinema').val();
             var cinemaName = $('#inputEmpSelectCinema :selected').text();

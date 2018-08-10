@@ -205,6 +205,9 @@ var filmController = function ($scope, $http) {
         document.getElementById('goToChooseTicketAndSeatForm').submit();
     }
     /*================ Login & Register Part*/
+    $scope.validateUsername = function (str) {
+        return /^[a-z][a-z0-9_.-]{4,19}$/i.test(str);
+    };
     $scope.showLogin = function () {
         $("#myModalRegister").modal('hide');
         $("#myModalLogin").modal();
@@ -219,6 +222,12 @@ var filmController = function ($scope, $http) {
         if (username == "" || password == "") {
             $('#validateModal').modal();
             $("#modalMessage").html("Bạn chưa nhập tài khoản và mật khẩu!");
+        } else if (!$scope.validateUsername(username)) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Tài khoản sai phải từ 5 kí tự trở lên và không chứa kí tự đặc biệt!");
+        } else if (!$scope.validateUsername(password)) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Mật khẩu phải từ 5 kí tự trở lên và không chứa kí tự đặc biệt!");
         } else {
             $http({
                 method: "POST",
@@ -255,9 +264,12 @@ var filmController = function ($scope, $http) {
         } else if (!validatePhone(phone)) {
             $('#validateModal').modal();
             $("#modalMessage").html("Số điện thoại phải từ 10-11 chữ số");
-        } else if (username.length < 6 || username.length > 20 || password.length < 6 || password.length > 20) {
+        } else if (!$scope.validateUsername(password)) {
             $('#validateModal').modal();
-            $("#modalMessage").html("Tên đăng nhập và mật khẩu phải từ 6 kí tự và bé hơn 20 kí tự");
+            $("#modalMessage").html("Mật khẩu phải từ 5 kí tự trở lên và không chứa kí tự đặc biệt!");
+        } else if (!$scope.validateUsername(username)) {
+            $('#validateModal').modal();
+            $("#modalMessage").html("Tài khoản phải từ 5 kí tự trở lên và không chứa kí tự đặc biệt!");
         } else {
             $http({
                 method: "POST",
@@ -327,5 +339,5 @@ function validateEmail(inputemail) {
     return inputemail.match(regEmail);
 }
 function validatePhone(inputphone) {
-    return inputphone.match(/\d/g).length === 10;
+    return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(inputphone);
 }

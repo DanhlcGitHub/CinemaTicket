@@ -154,7 +154,7 @@ var chooseTicketController = function ($scope, $http) {
     $scope.isActionClick = false;
 
     $scope.alpha = ["A", "B", "C", "D", "E", "F", "J", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U"];
-    $scope.TicketStatusEnum = Object.freeze({ "available": "btn-seat", "buyed": "btn-seat-buyed", "buying": "btn-seat-buyed", "resell": "btn-seat-resell", "choosing": "btn-seat-choosing" });
+    $scope.TicketStatusEnum = Object.freeze({ "available": "btn-seat", "buyed": "btn-seat-buyed", "buying": "btn-seat-buyed", "reselling": "btn-seat-resell", "choosing": "btn-seat-choosing" });
     // init data
 
     // beforeunload---------------------

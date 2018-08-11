@@ -34,7 +34,7 @@
                     <div class="row col-sm-12">
                         <div class="col-sm-2" style="padding-left:0px; padding-right:0px">
                             <div class="nav-item active">
-                                <a id="chooseTicketStep" class="nav-link font-weight-bold" href="#" style="padding-left:0px; padding-right:0px;" ng-click="openChooseTicket()">01 CHỌN LOẠI VÉ</a>
+                                <a id="chooseTicketStep" class="nav-link font-weight-bold" href="#" style="padding-left:0px; padding-right:0px;" ng-click="openChooseTicket()">01 CHỌN SỐ LƯỢNG</a>
                             </div>
                         </div>
                         <div class="col-sm-3" style="padding-left:0px; padding-right:0px">
@@ -227,10 +227,10 @@
                             </div>
                             <div class="w3-center w3-text-light-grey inlineContainer">
                                 <div ng-repeat="seat in row.seats">
-                                    <div ng-if="seat.seatStatus != 'resell'" class="original-box">
+                                    <div ng-if="seat.seatStatus != 'reselling'" class="original-box">
                                         <button ng-click="onclickSeat(seat.seatId,seat.px,seat.py,seat.seatStatus)" class="{{seat.className}}" type="button">{{seat.locationX}}</button>
                                     </div>
-                                    <div ng-if="seat.seatStatus == 'resell'" class="original-box">
+                                    <div ng-if="seat.seatStatus == 'reselling'" class="original-box">
                                         <button class="{{seat.className}}" type="button">{{seat.locationX}}</button>
                                         <div class="popup-box popup-box-left" style="height:auto;width:250px;text-align:left;border: 1px solid black; border-radius:4px">
                                             <b>{{seat.emailOwner}}</b><br />

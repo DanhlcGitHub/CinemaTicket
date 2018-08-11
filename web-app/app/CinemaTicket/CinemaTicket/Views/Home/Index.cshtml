@@ -280,7 +280,7 @@
                         <input ng-if="!item.isOverDay" id="{{'resellDescription' + $index}}" class="w3-input w3-border" name="ticketCode" type="text" placeholder="Nhập mô tả (vd: bán lại giảm giá 50%) ">
                         <button ng-if="!item.isOverDay" ng-click="postSellingTicket($index)" class="w3-btn w3-block w3-teal">Đăng bán</button>
                     </div>
-                    <div ng-if="item.status == 'resell'" class="w3-col m5">
+                    <div ng-if="item.status == 'reselling'" class="w3-col m5">
                         <input id="{{'customerEmail' + $index}}" class="w3-input w3-border" name="email" type="text" placeholder="Nhập email người mua">
                         <button ng-click="resellTicket($index)" class="w3-btn w3-block w3-red">Xác nhận bán</button>
                     </div>

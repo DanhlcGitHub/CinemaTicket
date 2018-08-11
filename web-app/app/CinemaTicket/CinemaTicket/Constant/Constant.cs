@@ -17,7 +17,7 @@ namespace CinemaTicket.Constant
         public static String available { get { return "available"; } }
         public static String buying { get { return "buying"; } }
         public static String buyed { get { return "buyed"; } }
-        public static String resell { get { return "resell"; } }
+        public static String resell { get { return "reselling"; } }
         public static String reselled { get { return "reselled"; } }
 
         public static Dictionary<String, String> ViStatus =
@@ -26,7 +26,7 @@ namespace CinemaTicket.Constant
             { "available", "chưa mua" },
             { "buying", "đang mua" },
             { "buyed", "đã mua" },
-            { "resell", "bán lại" },
+            { "reselling", "bán lại" },
             { "reselled", "đã bán lại" },
         };
     }

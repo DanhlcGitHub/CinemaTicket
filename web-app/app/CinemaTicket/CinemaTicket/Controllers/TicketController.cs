@@ -157,6 +157,7 @@ namespace CinemaTicket.Controllers
                         string code = aTicket.ticketId + RandomUtility.RandomString(9);
                         aTicket.paymentCode = code;
                         aTicket.bookingId = orderId;
+                        aTicket.qrCode = "http://cinemabookingticket.azurewebsites.net/Content/img/QRCode/qr.png";
                     }
                     ticketList.Add(aTicket);
                 }

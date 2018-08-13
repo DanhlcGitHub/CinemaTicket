@@ -258,27 +258,35 @@ VALUES (N'3D')
 INSERT INTO DigitalType (name)
 VALUES (N'imax')
 /* ---------------------Group Of Cinema------------------- */
+CREATE TABLE GroupCinema (
+    GroupId int IDENTITY(1,1) PRIMARY KEY,
+	logoImg nvarchar(255),
+    name nvarchar(255),
+	address nvarchar(255),
+	email nvarchar(255),
+	phone nvarchar(40),
+);
+
+INSERT INTO GroupCinema (logoImg,name,address,email,phone)
+VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/cineBox.png',N'Cine Box',N'27 Ly chinh thang',N'cinebox@cine.com',N'082563654')
 
 INSERT INTO GroupCinema (logoImg,name)
-VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/cineBox.png',N'Cine Box')
+VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/cineMark.png',N'Cine Mark',N'81 landmark, tan cang',N'cinemark@cine.com',N'0825635554')
 
 INSERT INTO GroupCinema (logoImg,name)
-VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/cineMark.png',N'Cine Mark')
+VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/faFimVietnam.png',N'FaFim VietNam',N'73 Xuan Dieu, Q5',N'faFilm@cine.com',N'0825635554')
 
 INSERT INTO GroupCinema (logoImg,name)
-VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/faFimVietnam.png',N'FaFim VietNam')
+VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/pacificTheatres.jpg',N'Pacific Theatres',N'7 Bui Thanh Quan, Go vap',N'pacificTheatres@cine.com',N'0825635554')
 
 INSERT INTO GroupCinema (logoImg,name)
-VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/pacificTheatres.jpg',N'Pacific Theatres')
+VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/phimQuocGia.jpg',N'Rạp Quốc Gia',N'06 Dang van ngu, Phu Nhuan',N'phimQuocGia@cine.com',N'0825635554')
 
 INSERT INTO GroupCinema (logoImg,name)
-VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/phimQuocGia.jpg',N'Rạp Quốc Gia')
+VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/platinumCineplex.jpg',N'Platinum Cineplex',N'07 Hai Trieu, Da Cao, Quan 1',N'platinumCineplex@cine.com',N'0825635554')
 
 INSERT INTO GroupCinema (logoImg,name)
-VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/platinumCineplex.jpg',N'Platinum Cineplex')
-
-INSERT INTO GroupCinema (logoImg,name)
-VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/ramenStar.png',N'Ramen Star')
+VALUES (N'https://cinemabookingticket.azurewebsites.net/Content/img/groupLogo/ramenStar.png',N'Ramen Star',N'75 Quang trung, Quan 7',N'ramenStar@cine.com',N'0825635554')
 
 /* ---------------------Cinema------------------- */
 /*----CineBox----*/

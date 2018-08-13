@@ -33,7 +33,7 @@ CREATE TABLE DigitalType (
 
 CREATE TABLE GroupCinema (
     GroupId int IDENTITY(1,1) PRIMARY KEY,
-	logoImg nvarchar(50),
+	logoImg nvarchar(255),
     name nvarchar(255),
 	address nvarchar(255),
 	email nvarchar(255),
@@ -200,6 +200,7 @@ ALTER TABLE Film
 DROP COLUMN isAvailable;
 
 DROP TABLE Promotion;*/
+
 
 
 

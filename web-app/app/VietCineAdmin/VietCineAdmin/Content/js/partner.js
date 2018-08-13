@@ -61,24 +61,39 @@ var partnerController = function ($scope, $http) {
             var phone = $("#phone").val();
             var email = $("#email").val();
 
+            
             $http({
                 method: "POST",
-                url: "/Home/CreatePartnerAccount",
+                url: "/Home/SendMailForPartner",
                 params: {
                     partnerId: partnerId,
                     partnerPassword: partnerPassword,
-                    groupCinemaId: groupCinemaId,
-                    partnerName: partnerName,
-                    phone: phone,
                     email: email,
                 }
             }).then(function (response) {
-                $scope.ListPartnerAccount = response.data;
+                if (response.data.isSuccess == "true") {
+                    $http({
+                        method: "POST",
+                        url: "/Home/CreatePartnerAccount",
+                        params: {
+                            partnerId: partnerId,
+                            partnerPassword: partnerPassword,
+                            groupCinemaId: groupCinemaId,
+                            partnerName: partnerName,
+                            phone: phone,
+                            email: email,
+                        }
+                    }).then(function (response) {
+                        $scope.ListPartnerAccount = response.data;
 
-                $scope.clearForm();
-                $('#modal-account').modal('hide');
+                        $scope.clearForm();
+                        $('#modal-account').modal('hide');
 
-                alert("Success!");
+                        alert("Success!");
+                    });
+                } else {
+                    alert("Some error occur, please check your connection!");
+                }
             });
         }
     };

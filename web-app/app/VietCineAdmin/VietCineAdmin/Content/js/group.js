@@ -7,6 +7,11 @@ var groupController = function ($scope, $http) {
     $scope.ListGroupCinema;
     $scope.GroupCinemaNowSelected;
 
+    $("#logoImg").change(function () {
+        //$("#logoImgText").val();
+        console.log("here");
+    });
+
     $http({
         method: "GET",
         url: "/Home/GetAllGroupCinema"
@@ -22,7 +27,7 @@ var groupController = function ($scope, $http) {
         $("#address").val($scope.GroupCinemaNowSelected.address);
         $("#phone").val($scope.GroupCinemaNowSelected.phone);
         $("#email").val($scope.GroupCinemaNowSelected.email);
-        $("#logoImg").val($scope.GroupCinemaNowSelected.logoImg);
+        $("#logoImgText").val($scope.GroupCinemaNowSelected.logoImg);
         $("#divDefaultPrice").hide();
     };
 
@@ -41,7 +46,13 @@ var groupController = function ($scope, $http) {
             var email = $("#email").val();
             var logoImg = $("#logoImg").val();
             var priceDefault = $("#priceDefault").val();
+            var imgPath = "";
 
+            if (logoImg != "") {
+                var arrStr = logoImg.split('\\');
+                imgPath = arrStr[arrStr.length - 1];
+                //$scope.saveImage(path);
+            }
             $http({
                 method: "POST",
                 url: "/Home/CreateGroupCinema",
@@ -51,7 +62,7 @@ var groupController = function ($scope, $http) {
                     address: address,
                     phone: phone,
                     email: email,
-                    logoImg: logoImg,
+                    logoImg: imgPath,
                     priceDefault: priceDefault
                 }
             }).then(function (response) {
@@ -72,7 +83,43 @@ var groupController = function ($scope, $http) {
         document.getElementById("form-group").reset();
         $("#divDefaultPrice").show();
     };
+    $("#loaderPicture").hide();
+    $scope.uploadPicture = function () {
+        var formData = new FormData();
+        var files = $("#logoImg").get(0).files;
 
+        // Add the uploaded image content to the form data collection
+        if (files.length > 0) {
+            formData.append("imageUpload", files[0]);
+            var fileName = files[0].name;
+            $("#uploadImageBtn").hide();
+            $("#loaderPicture").show();
+
+            jQuery.ajax({
+                url: '/Home/SaveImage',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                success: function (data) {
+                    $("#uploadImageBtn").show();
+                    $("#loaderPicture").hide();
+                    $("#validateModal").modal();
+                    $("#modalMessage").html("Upload image " + data.message);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $("#uploadImageBtn").show();
+                    $("#loaderPicture").hide();
+                    $("#validateModal").modal();
+                    $("#modalMessage").html("Some error occur, can't upload image!");
+                }
+            });
+        } else {
+            $("#validateModal").modal();
+            $("#modalMessage").html("No file selected");
+        }
+    };
 };
 
 myApp.controller("groupController", groupController);

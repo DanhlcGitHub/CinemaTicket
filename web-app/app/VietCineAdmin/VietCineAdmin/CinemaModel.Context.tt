@@ -27,7 +27,7 @@ if (container == null)
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<#
+<# 
 
 var codeNamespace = code.VsNamespaceSuggestion();
 if (!String.IsNullOrEmpty(codeNamespace))

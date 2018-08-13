@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using VietCineAdmin.Utility;
 using VietCineAdmin.Constant;
 using VietCineAdmin.Service;
+using System.IO;
 
 namespace VietCineAdmin.Controllers
 {
@@ -251,6 +252,8 @@ namespace VietCineAdmin.Controllers
                 groupOfCinemaId = groupCinemaid,
                 partnerName = partnerName
             };
+            
+
             service.Create(partnerAccount);
 
             var listPartnerAccount = service.FindBy(pa => pa.isAvailable == true).ToList();
@@ -261,6 +264,31 @@ namespace VietCineAdmin.Controllers
             }
 
             return Json(listPartnerAccount, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SendMailForPartner(String partnerId, String partnerPassword,string email)
+        {
+            var obj = new
+            {
+                isSuccess = "true"
+            };
+            try
+            {
+                string mailContent = "Your Account information is: \n";
+                mailContent += "username: " + partnerId + "\n";
+                mailContent += "password: " + partnerPassword;
+                string mailSubject = "Well come to our group!";
+                MailUtility.SendEmail(mailSubject, mailContent, email);
+            }
+            catch (Exception)
+            {
+                obj = new
+                {
+                    isSuccess = "false"
+                };
+                throw;
+            }
+            return Json(obj);
         }
 
         public JsonResult UpdatePartnerAccount(String partnerId, String partnerPassword, String phone, String email, String available)
@@ -283,20 +311,32 @@ namespace VietCineAdmin.Controllers
         }
 
         public JsonResult CreateGroupCinema(int groupId, String groupName, String address, String phone,
-                                                                    String email, String logoImg, Double priceDefault)
+                                                                    String email, String logoImg, Double? priceDefault)
         {
+            string imagePath = "";
+            if (logoImg != "")
+            {
+                imagePath = @"https://cinemabookingticket.azurewebsites.net/" + "Content/img/cinemaLogo/" + logoImg;
+            }
+            else
+            {
+                imagePath = @"https://www.shofu.de/wp-content/themes/aaika/assets/images/default.jpg";
+            }
             GroupCinemaServcie service = new GroupCinemaServcie();
 
-            if (groupId != 0)
+            if (groupId != 0)// update
             {
+
                 var groupCinemaUpdate = service.FindByID(groupId);
 
                 groupCinemaUpdate.address = address;
                 groupCinemaUpdate.email = email;
-                groupCinemaUpdate.name = groupName;
-                groupCinemaUpdate.logoImg = logoImg;
+                groupCinemaUpdate.phone = phone;
 
-                service.Update(groupCinemaUpdate);
+                groupCinemaUpdate.name = groupName;
+                if(logoImg!="")
+                    groupCinemaUpdate.logoImg = imagePath;
+                service.Update(groupCinemaUpdate);//bi loi
             }
             else
             {
@@ -306,7 +346,7 @@ namespace VietCineAdmin.Controllers
                     address = address,
                     phone = phone,
                     email = email,
-                    logoImg = logoImg
+                    logoImg = imagePath
                 };
 
                 service.Create(groupCinema);
@@ -327,6 +367,27 @@ namespace VietCineAdmin.Controllers
             var listGroupCinema = service.GetAll();
 
             return Json(listGroupCinema, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SaveImage()
+        {
+            string message = "success!";
+            if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                System.Web.HttpPostedFile pic = System.Web.HttpContext.Current.Request.Files["imageUpload"];
+                string fileName = pic.FileName;
+                Stream fs = pic.InputStream;
+                BinaryReader br = new BinaryReader(fs);
+                byte[] bytes = br.ReadBytes((Int32)fs.Length);
+                string uriString = @"ftp://waws-prod-dm1-039.ftp.azurewebsites.windows.net/site/wwwroot/Content/img/cinemaLogo/" + fileName;
+                bool isSuccess = UploadUtility.Upload(bytes, uriString);
+                if (!isSuccess) message = "fail";
+            }
+            var obj = new
+            {
+                message = message,
+            };
+            return Json(obj);
         }
     }
 

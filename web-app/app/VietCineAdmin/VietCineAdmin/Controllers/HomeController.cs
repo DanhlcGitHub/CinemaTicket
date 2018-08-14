@@ -253,8 +253,7 @@ namespace VietCineAdmin.Controllers
                 partnerName = partnerName
             };
             
-
-            service.Create(partnerAccount);
+            service.Create(partnerAccount);// dong nay loi
 
             var listPartnerAccount = service.FindBy(pa => pa.isAvailable == true).ToList();
 
@@ -264,6 +263,23 @@ namespace VietCineAdmin.Controllers
             }
 
             return Json(listPartnerAccount, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult isPartnerUsernameExist(String partnerId)
+        {
+            var obj = new
+            {
+                isExist = "false"
+            };
+            List<PartnerAccount> partnerList = new PartnerAccountService().FindBy(p => p.partnerId.Trim().Equals(partnerId.Trim()));
+            if (partnerList != null && partnerList.Count!=0)
+            {
+                obj = new
+                {
+                    isExist = "true"
+                };
+            }
+            return Json(obj);
         }
 
         public JsonResult SendMailForPartner(String partnerId, String partnerPassword,string email)

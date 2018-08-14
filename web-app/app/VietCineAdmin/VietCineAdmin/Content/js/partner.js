@@ -61,38 +61,50 @@ var partnerController = function ($scope, $http) {
             var phone = $("#phone").val();
             var email = $("#email").val();
 
-            
             $http({
                 method: "POST",
-                url: "/Home/SendMailForPartner",
+                url: "/Home/isPartnerUsernameExist",
                 params: {
                     partnerId: partnerId,
-                    partnerPassword: partnerPassword,
-                    email: email,
                 }
             }).then(function (response) {
-                if (response.data.isSuccess == "true") {
+                if (response.data.isExist == "true") {
+                    alert("This username already exist!");
+                    $("#partnerId").focus();
+                } else {
                     $http({
                         method: "POST",
-                        url: "/Home/CreatePartnerAccount",
+                        url: "/Home/SendMailForPartner",
                         params: {
                             partnerId: partnerId,
                             partnerPassword: partnerPassword,
-                            groupCinemaId: groupCinemaId,
-                            partnerName: partnerName,
-                            phone: phone,
                             email: email,
                         }
                     }).then(function (response) {
-                        $scope.ListPartnerAccount = response.data;
+                        if (response.data.isSuccess == "true") {
+                            $http({
+                                method: "POST",
+                                url: "/Home/CreatePartnerAccount",
+                                params: {
+                                    partnerId: partnerId,
+                                    partnerPassword: partnerPassword,
+                                    groupCinemaId: groupCinemaId,
+                                    partnerName: partnerName,
+                                    phone: phone,
+                                    email: email,
+                                }
+                            }).then(function (response) {
+                                $scope.ListPartnerAccount = response.data;
 
-                        $scope.clearForm();
-                        $('#modal-account').modal('hide');
+                                $scope.clearForm();
+                                $('#modal-account').modal('hide');
 
-                        alert("Success!");
+                                alert("Success!");
+                            });
+                        } else {
+                            alert("Some error occur, please check your connection!");
+                        }
                     });
-                } else {
-                    alert("Some error occur, please check your connection!");
                 }
             });
         }
@@ -103,7 +115,7 @@ var partnerController = function ($scope, $http) {
     });
 
     $scope.updatePartner = function () {
-        var valid = $("#form-form-account-update").valid();
+        var valid = $("#form-account-update").valid();
         if (valid == true) {
             var partnerId = $("#partnerIdUpdate").val();
             var partnerPassword = $("#partnerPasswordUpdate").val();
@@ -144,8 +156,9 @@ var partnerController = function ($scope, $http) {
 myApp.controller("partnerController", partnerController);
 
 $(document).ready(function () {
+    validationManager.partnerUpdateValidation();
+
     validationManager.partnerValidation();
-    validationManager.partnerUpdateValidation()
 });
 
 
@@ -163,7 +176,7 @@ var validationManager = {
                 },
                 partnerPassword: {
                     required: true,
-                    minlength: 8
+                    minlength: 6
                 },
                 partnerName: {
                     required: true
@@ -181,7 +194,7 @@ var validationManager = {
                 },
                 partnerPassword: {
                     required: 'Please enter partnerPassword!',
-                    minlength: 'Password must be greater than 8 characters!'
+                    minlength: 'Password must be greater than 6 characters!'
                 },
                 partnerName: {
                     required: 'Please enter partner name!',
@@ -202,15 +215,13 @@ var validationManager = {
                 },
                 partnerPasswordUpdate: {
                     required: true,
-                    minlength: 8
+                    minlength: 6
                 },
                 partnerNameUpdate: {
                     required: true
                 },
-                phoneUpdate: {
-                    required: true,
-                    phone: true
-                },
+                phoneUpdate: 'customphone'
+                ,
                 emailUpdate: {
                     required: true,
                     email: true
@@ -223,14 +234,10 @@ var validationManager = {
                 },
                 partnerPasswordUpdate: {
                     required: 'Please enter partnerPassword!',
-                    minlength: 'Password must be greater than 8 characters!'
+                    minlength: 'Password must be greater than 6 characters!'
                 },
                 partnerNameUpdate: {
                     required: 'Please enter partner name!',
-                },
-                phoneUpdate: {
-                    required: 'Please enter phone number!',
-                    phone: 'Phone number is not correct!'
                 },
                 emailUpdate: {
                     required: 'Please enter email!',

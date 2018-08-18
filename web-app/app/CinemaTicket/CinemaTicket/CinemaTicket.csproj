@@ -360,7 +360,9 @@
     <Content Include="Content\img\groupLogo\pacificTheatres.jpg" />
     <Content Include="Content\img\groupLogo\phimQuocGia.jpg" />
     <Content Include="Content\img\groupLogo\platinumCineplex.jpg" />
+    <Content Include="Content\img\groupLogo\qr.png" />
     <Content Include="Content\img\groupLogo\ramenStar.png" />
+    <Content Include="Content\img\QRCode\qr.png" />
     <Content Include="Content\img\repository\android-logo.png" />
     <Content Include="Content\img\repository\apple-logo.png" />
     <Content Include="Content\img\repository\avatar.jpg" />

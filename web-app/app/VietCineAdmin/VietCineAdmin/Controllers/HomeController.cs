@@ -62,8 +62,6 @@ namespace VietCineAdmin.Controllers
             GroupCinemaServcie servcie = new GroupCinemaServcie();
             var groupCinema = servcie.GetAll();
 
-
-
             return View();
         }
 

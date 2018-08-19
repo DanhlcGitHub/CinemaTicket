@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:id="@+id/rel_register_account_tvRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_register_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đăng kí"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_register_account_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rel_register_account_tvRegister"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/tv_register_account_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_red_light" />
+
+            <EditText
+                android:id="@+id/edt_register_account_userid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_register_account_error"
+                android:layout_marginTop="10dp"
+                android:hint="Tên Đăng Nhập" />
+
+            <EditText
+                android:id="@+id/edt_register_account_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_register_account_userid"
+                android:layout_marginTop="10dp"
+                android:hint="Mật Khẩu"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/edt_register_account_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_register_account_password"
+                android:layout_marginTop="10dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/edt_register_account_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_register_account_email"
+                android:layout_marginTop="10dp"
+                android:hint="Số điện thoại"
+                android:inputType="phone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_register_account_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rel_register_account_form"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:text="Đăng kí"
+                android:textColor="@android:color/black" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
+

@@ -12,6 +12,22 @@ public class TabLayoutMainAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> fragments = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
 
+    public List<Fragment> getFragments() {
+        return fragments;
+    }
+
+    public void setFragments(List<Fragment> fragments) {
+        this.fragments = fragments;
+    }
+
+    public List<String> getTitles() {
+        return titles;
+    }
+
+    public void setTitles(List<String> titles) {
+        this.titles = titles;
+    }
+
     public TabLayoutMainAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -35,4 +51,6 @@ public class TabLayoutMainAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return this.fragments.size();
     }
+
+
 }

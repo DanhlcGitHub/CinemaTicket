@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_movie_comming_soon_item"
+    android:id="@+id/cv_film_coming_soon_item"
     android:layout_width="175dp"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="10dp"
@@ -15,7 +15,7 @@
         android:layout_height="194dp">
 
         <ImageView
-            android:id="@+id/img_movie_comming_soon"
+            android:id="@+id/img_film_coming_soon"
             android:layout_width="180dp"
             android:layout_height="194dp"
             android:layout_weight="1"
@@ -23,7 +23,7 @@
             android:src="@drawable/deadpool_2" />
 
         <TextView
-            android:id="@+id/tv_date_comming"
+            android:id="@+id/tv_date_coming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

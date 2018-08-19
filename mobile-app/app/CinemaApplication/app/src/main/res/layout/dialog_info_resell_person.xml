@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_dialog_resell_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:text="Thông tin người bán lại vé"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/liner_dialog_resell_person_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_dialog_resell_person"
+        android:layout_margin="10dp"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/tv_dialog_resell_person_emai_sub"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Email:"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_dialog_resell_person_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/liner_dialog_resell_person_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/liner_dialog_resell_person_email"
+        android:layout_margin="10dp"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/tv_dialog_resell_person_phone_sub"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Phone:"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_dialog_resell_person_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/liner_dialog_resell_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/liner_dialog_resell_person_phone"
+        android:layout_margin="10dp"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/tv_dialog_resell_person_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Description:"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_dialog_resell_description_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+<Button
+    android:id="@+id/btn_dialog_resell_person_ok"
+    android:layout_width="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_centerHorizontal="true"
+    android:text="OK"
+    android:layout_below="@+id/liner_dialog_resell_description"
+    android:layout_height="wrap_content" />
+
+</RelativeLayout>

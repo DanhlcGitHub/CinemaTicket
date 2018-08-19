@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card_finish_payment"
+        android:layout_marginBottom="10dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_ticket_qr_code"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/qr" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/img_ticket_qr_code"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:id="@+id/liner_purchased_seat_positon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/tv_ticket_seat_position_sub"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="Vị trí ghế: "
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_ticket_seat_position"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="6"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/liner_purchased_ticket_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/liner_purchased_seat_positon"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/tv_ticket_status_sub"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="Trạng thái: "
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_ticket_status"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="6"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:id="@+id/liner_purchased_ticket_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/liner_purchased_ticket_status"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/tv_ticket_price_sub"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="Giá tiền: "
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6">
+
+                        <TextView
+                            android:id="@+id/tv_ticket_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_ticket_price_sub_vnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/tv_ticket_price"
+                            android:text="VND"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/liner_purchased_two_button"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/liner_purchased_ticket_price"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <Button
+                        android:id="@+id/btn_purchased_ticket_change_ticket"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="5"
+                        android:background="#2196F3"
+                        android:text="Đổi vé"
+                        android:textColor="@android:color/white" />
+
+                    <Button
+                        android:id="@+id/btn_purchased_ticket_resell_ticket"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toEndOf="@+id/btn_purchased_ticket_change_ticket"
+                        android:layout_weight="5"
+                        android:background="#F44336"
+                        android:text="Bán lại vé"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

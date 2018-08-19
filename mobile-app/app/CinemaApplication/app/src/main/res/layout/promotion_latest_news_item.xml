@@ -30,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:paddingLeft="10dp"
-            android:text="11:20 22/05/2018" />
+            android:text="11:20 22/05/2018"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/tv_promotion_lastest_news_item_title"
@@ -38,8 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="10dp"
-            android:textSize="18dp"
-            android:text="[BHDS] Nhân 3 điểm thưởng" />
+            android:text="[BHDS] Nhân 3 điểm thưởng"
+            android:textColor="@android:color/black"
+            android:textSize="18dp" />
 
     </RelativeLayout>
 

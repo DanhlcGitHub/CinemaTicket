@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_activity_paypal_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_paypal_payment"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/tv_paypal_payment_visa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="Thanh Toán VISA"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_paypal_payment_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="HỦY"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_form_paypal_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbar_activity_paypal_payment"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:id="@+id/tv_number_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SỐ THẺ TÍN DỤNG" />
+
+        <EditText
+            android:id="@+id/edt_card_visa_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_number_card" />
+
+        <LinearLayout
+            android:id="@+id/liner_payment_card_date"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/edt_card_visa_number"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <RelativeLayout
+                android:id="@+id/relative_order_ticket_button_one"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="NGÀY HẾT HẠN(MM/DD)" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_finish_payment_ccv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="MÃ (CVV)" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_paypal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#14ce07"
+        android:layout_below="@+id/rl_form_paypal_payment"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:id="@+id/tv_paypal_payment_total_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="ĐẶT VÉ (160000.0 đ)"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

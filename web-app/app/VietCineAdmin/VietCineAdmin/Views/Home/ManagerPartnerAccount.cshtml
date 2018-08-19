@@ -36,7 +36,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Account Modal</h4>
+                    <h4 class="modal-title">Account Partner</h4>
 
                     <button type="button" ng-click="clearForm()" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -48,7 +48,7 @@
                             <div class="box-body">
 
                                 <div class="form-group">
-                                    <label for="partnerId">Partner Id</label>
+                                    <label for="partnerId">Partner username</label>
                                     <input type="text" class="form-control" id="partnerId" name="partnerId" value="">
                                 </div>
 
@@ -66,13 +66,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="phone">Phone</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" value="">
-                                </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="phone">Phone</label>
+                                            <input type="text" class="form-control" id="phone" name="phone" value="">
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" value="">
+                                        </div>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="">
                                 </div>
                             </div>
                         </div>
@@ -108,8 +112,6 @@
                                     <input type="text" class="form-control" id="partnerIdUpdate" name="partnerIdUpdate" value="" disabled>
                                 </div>
 
-                    
-
                                 <div class="form-group">
                                     <label>Group Cinema</label>
                                     <select class="form-control select2" id="groupCinemaIdUpdate" name="groupCinemaIdUpdate" disabled style=" width: 100%;">
@@ -119,22 +121,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="phoneUpdate">Phone</label>
-                                    <input type="tel" class="form-control" id="phoneUpdate" name="phoneUpdate" value="">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="phoneUpdate">Phone</label>
+                                            <input type="tel" class="form-control" id="phoneUpdate" name="phoneUpdate" value="">
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label for="emailUpdate">Email</label>
+                                            <input type="email" class="form-control" id="emailUpdate" name="emailUpdate" value="">
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="emailUpdate">Email</label>
-                                    <input type="email" class="form-control" id="emailUpdate" name="emailUpdate" value="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Is Available</label>
-                                    <select class="form-control select2" id="availableUpdate" name="availableUpdate" style=" width: 100%;">
-                                        <option value="1">Available</option>
-                                        <option value="2">Not Available</option>
-                                    </select>
-                                </div>
                             </div>
                         </div>
                         <!-- /.box -->
@@ -149,6 +148,21 @@
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade" id="validateModal" role="dialog" style="z-index:20000">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                    <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                </div>
+                <div class="modal-body justify-content-center align-self-center ">
+                    <h6 id="modalMessage"></h6>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button id="dismissBtn" type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="~/Content/js/partner.js"></script>

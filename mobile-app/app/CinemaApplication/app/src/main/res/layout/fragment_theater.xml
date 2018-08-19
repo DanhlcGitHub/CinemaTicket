@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ExpandableListView
+    <!--<ExpandableListView
         android:id="@+id/expand_list_theater"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </ExpandableListView>
-</RelativeLayout>
+    </ExpandableListView>-->
+
+    <iammert.com.expandablelib.ExpandableLayout
+        android:id="@+id/el"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:parentLayout="@layout/theater_list"
+        app:childLayout="@layout/theater_item"/>
+</ScrollView>

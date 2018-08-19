@@ -12,11 +12,6 @@
         android:title="" />
 
     <item
-        android:id="@+id/navigation_cart"
-        android:icon="@drawable/ic_star"
-        android:title="" />
-
-    <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_person"
         android:title="" />

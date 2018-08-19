@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="18sp"
+    android:layout_height="20sp">
+
+    <TextView
+        android:id="@+id/tv_seat_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="1dp"
+        android:background="@drawable/text_view_seat"
+        android:paddingBottom="4sp"
+        android:paddingTop="4sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="8sp" />
+
+</RelativeLayout>

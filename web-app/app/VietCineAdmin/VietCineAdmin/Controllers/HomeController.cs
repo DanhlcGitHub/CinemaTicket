@@ -13,7 +13,6 @@ namespace VietCineAdmin.Controllers
 {
     public class HomeController : Controller
     {
-        private static int DEFAULT_PRICE_MUTIL = 1000;
 
         public ActionResult Index()
         {
@@ -234,7 +233,7 @@ namespace VietCineAdmin.Controllers
             }
         }
 
-        public JsonResult CreatePartnerAccount(String partnerId, String partnerPassword, String partnerName, int groupCinemaid, String phone, String email, String available)
+        public JsonResult CreatePartnerAccount(String partnerId, String partnerPassword, String partnerName, int groupCinemaid, String phone, String email)
         {
             PartnerAccountService service = new PartnerAccountService();
 
@@ -305,7 +304,7 @@ namespace VietCineAdmin.Controllers
             return Json(obj);
         }
 
-        public JsonResult UpdatePartnerAccount(String partnerId, String partnerPassword, String phone, String email, String available)
+        public JsonResult UpdatePartnerAccount(String partnerId, String partnerPassword, String phone, String email)
         {
             PartnerAccountService service = new PartnerAccountService();
 
@@ -338,7 +337,7 @@ namespace VietCineAdmin.Controllers
             }
             GroupCinemaServcie service = new GroupCinemaServcie();
 
-            if (groupId != 0)// update
+            if (groupId != 0)
             {
 
                 var groupCinemaUpdate = service.FindByID(groupId);
@@ -350,7 +349,7 @@ namespace VietCineAdmin.Controllers
                 groupCinemaUpdate.name = groupName;
                 if(logoImg!="")
                     groupCinemaUpdate.logoImg = imagePath;
-                service.Update(groupCinemaUpdate);//bi loi
+                service.Update(groupCinemaUpdate);
             }
             else
             {
@@ -369,7 +368,7 @@ namespace VietCineAdmin.Controllers
                 {
                     groupId = groupCinema.GroupId,
                     typeName = "vé người lớn",
-                    price = priceDefault * DEFAULT_PRICE_MUTIL,
+                    price = priceDefault,
                     capacity = 1
                 };
 

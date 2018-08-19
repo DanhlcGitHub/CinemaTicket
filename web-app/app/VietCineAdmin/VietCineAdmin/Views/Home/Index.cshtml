@@ -3,7 +3,7 @@
         <h3 class="card-title">List Film Data</h3>
         <button class="btn btn-success float-right" data-toggle="modal" data-target="#modal-film">Create Film</button>
     </div>
-   
+
     <divdiv class="card-body">
         <table id="example1" class="table table-bordered table-striped">
             <thead>
@@ -24,7 +24,7 @@
                     <td>{{film.movieGenre}}</td>
                     <td>{{film.countries}}</td>
                     <td>
-                        <button type="button" class="btn btn-info" ng-click="clickDetail($index)" data-toggle="modal" data-target="#modal-film"  style="margin-left:20px">Detail</button>
+                        <button type="button" class="btn btn-info" ng-click="clickDetail($index)" data-toggle="modal" data-target="#modal-film" style="margin-left:20px">Detail</button>
                         <button type="button" class="btn btn-danger" ng-click="clickDisable($index)" style="margin-left:20px">Disable</button>
                     </td>
                 </tr>
@@ -47,7 +47,7 @@
 
                         <input type="hidden" class="form-control" id="filmId" name="filmId" value="0">
 
-                        <div class="form-row" >
+                        <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="filmName">Film Name</label>
                                 <input type="text" class="form-control" id="filmName" name="filmName" value="">
@@ -89,7 +89,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row" >
+                        <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="movieGenre">Film Genre</label>
                                 <input type="text" class="form-control" id="movieGenre" name="movieGenre" value="">
@@ -157,9 +157,22 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="validateModal" role="dialog" style="z-index:20000">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center align-self-center border-bottom-0">
+                    <img class="" src="~/Content/img/repository/Post-notification.png" style="width:80px; height: 50px">
+                </div>
+                <div class="modal-body justify-content-center align-self-center ">
+                    <h6 id="modalMessage"></h6>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button id="dismissBtn" type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<!-- /.row -->
-
 
 <script src="~/Content/js/home.js"></script>

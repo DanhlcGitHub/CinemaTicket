@@ -1,55 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        android:background="@color/colorBackgroundFragment"
-        android:scrollbars="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="18dp"
-            android:text="Phim Nổi Bật"
+            app:indicatorName="BallPulseIndicator"
             />
 
-
-        <include layout="@layout/movie_card_lager" />
-
-        <include layout="@layout/movie_card_lager" />
-
-        <include layout="@layout/movie_card_lager" />
-
-        <include layout="@layout/movie_card_lager" />
-
-        <include layout="@layout/card_show" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="18dp"
-            android:text="Tin Nổi Bật"
-            />
+            android:animateLayoutChanges="true"
+            android:background="@color/colorBackgroundFragment"
+            android:orientation="vertical"
+            android:scrollbars="vertical">
 
-        <include layout="@layout/new_item" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Phim Nổi Bật"
+                android:textSize="18dp" />
 
-        <include layout="@layout/new_item" />
+            <include
+                android:id="@+id/card_1"
+                layout="@layout/film_card_lager" />
 
-        <include layout="@layout/new_item" />
+            <include
+                android:id="@+id/card_2"
+                layout="@layout/film_card_lager" />
 
-        <include layout="@layout/home_latest_news_list" />
+            <include
+                android:id="@+id/card_3"
+                layout="@layout/film_card_lager" />
 
-    </LinearLayout>
 
+            <include
+                android:id="@+id/card_into_showing"
+                layout="@layout/card_show" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Tin Nổi Bật"
+                android:textSize="18dp" />
+
+            <include layout="@layout/new_item" />
+
+            <include layout="@layout/new_item" />
+
+            <include layout="@layout/new_item" />
+
+            <include layout="@layout/home_latest_news_list" />
+
+        </LinearLayout>
+    </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

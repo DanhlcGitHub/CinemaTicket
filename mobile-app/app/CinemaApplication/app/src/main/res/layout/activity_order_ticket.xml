@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_order_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_film_activity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/icon_cancel_order"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/icon_cancel" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_order_ticket_short_key"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/tv_order_ticket_space"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/tv_order_ticket_short_key"
+                        android:text=" - "
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/tv_order_ticket_cinema_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/tv_order_ticket_space"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/tv_order_ticket_full"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_order_ticket_cinema_name"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_film_info_in_order_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbar_order_ticket"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:id="@+id/tv_order_ticket_film_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_order_ticket_film_name"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_order_ticket_restricted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_view_order_border"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_order_ticket_sub_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardUseCompatPadding="true">
+
+            <ImageView
+                android:id="@+id/img_order_ticket_film"
+                android:layout_width="98dp"
+                android:layout_height="130dp"
+                android:src="@drawable/avengers" />
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_order_ticket_one"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/layout_film_info_in_order_ticket"
+        android:background="#e5e0e0" />
+
+    <TextView
+        android:id="@+id/tv_order_ticket_please_choice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_order_ticket_one"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="Vui lòng chọn loại vé và nhấn tiếp tục"
+        android:textColor="@android:color/black" />
+
+    <View
+        android:id="@+id/view_order_ticket_two"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/tv_order_ticket_please_choice"
+        android:background="#e5e0e0" />
+
+    <LinearLayout
+        android:id="@+id/liner_order_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_order_ticket_two"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/layout_choice_item_order_one"
+            layout="@layout/layout_choice_item_order" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_below="@+id/tv_order_ticket_please_choice"
+            android:background="#e5e0e0" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_above="@+id/liner_order_ticket_two_button"
+        android:background="#e5e0e0" />
+
+    <LinearLayout
+        android:id="@+id/liner_order_ticket_two_button"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <RelativeLayout
+            android:id="@+id/relative_order_ticket_button_one"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5">
+
+            <TextView
+                android:id="@+id/tv_order_ticker_price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp"
+                android:text="0.0"
+                android:textColor="@android:color/holo_green_light"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
+                android:layout_toEndOf="@+id/tv_order_ticker_price"
+                android:gravity="center|left"
+                android:text="VND"
+                android:textColor="@android:color/black" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:background="#e5e0e0" />
+
+        <RelativeLayout
+            android:id="@+id/rv_order_ticket_continues"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@android:color/darker_gray">
+
+            <TextView
+                android:id="@+id/tv_next_order_ticket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="40dp"
+                android:gravity="center"
+                android:text="TIẾP TỤC"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/icon_next_order_ticket"
+                android:layout_width="30dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/tv_next_order_ticket"
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -16,8 +16,10 @@ var homeController = function ($scope, $http) {
 
     $scope.clickDetail = function (index) {
         $scope.FilmNowSelected = $scope.FilmNowShowing[index];
-        
-        $('#datepicker').datepicker().datepicker('setDate', $scope.FilmNowSelected.dateRelease);
+
+        $('#datepicker').datepicker({ dateFormat: 'dd/mm/yy' });
+
+        $('#datepicker').datepicker('setDate', $scope.FilmNowSelected.dateRelease);
         $("input[name=restricted][value=" + $scope.FilmNowSelected.restricted + "]").attr('checked', 'checked');
         $("#filmId").val($scope.FilmNowSelected.filmId);
         $("#filmName").val($scope.FilmNowSelected.name);
@@ -83,10 +85,11 @@ var homeController = function ($scope, $http) {
                     $scope.FilmNowShowing = response.data;
 
                     $scope.clearForm();
+                    $("#validateModal").modal();
+                    $("#modalMessage").html("Successfull!");
 
                     $('#modal-film').modal('hide');
 
-                    alert("Success!");
                 });
             }
         });

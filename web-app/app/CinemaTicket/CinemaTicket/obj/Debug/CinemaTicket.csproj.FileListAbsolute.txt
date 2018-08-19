@@ -69,3 +69,39 @@ E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csproj.Co
 E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csproj.CopyComplete
 E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.dll
 E:\Luu Lac\Test Final\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.pdb
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\CinemaTicket.dll.config
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\CinemaTicket.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\CinemaTicket.pdb
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\EntityFramework.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\EntityFramework.SqlServer.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\Microsoft.Web.Infrastructure.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\Newtonsoft.Json.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.Formatting.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Helpers.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Http.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Http.WebHost.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Mvc.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Razor.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Deployment.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Razor.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\EntityFramework.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\EntityFramework.SqlServer.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\Newtonsoft.Json.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.Formatting.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Helpers.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Http.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Http.WebHost.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Mvc.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.Razor.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Deployment.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Web.WebPages.Razor.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\bin\System.Net.Http.xml
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csprojAssemblyReference.cache
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csproj.CoreCompileInputs.cache
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.csproj.CopyComplete
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.dll
+F:\CP\CinemaTicket\web-app\app\CinemaTicket\CinemaTicket\obj\Debug\CinemaTicket.pdb

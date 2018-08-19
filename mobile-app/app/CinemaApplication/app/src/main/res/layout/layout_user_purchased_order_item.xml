@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/liner_purchased_film"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/imv_purchased_item_film_image"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="4"
+            android:src="@drawable/businessman_lager" />
+
+        <RelativeLayout
+            android:id="@+id/rv_purchased_item_film"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tv_purchased_item_film_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_purchased_item_cinema_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_purchased_item_film_name"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_purchased_item_show_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_purchased_item_cinema_name"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_purchased_item_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_purchased_item_cinema_name"
+                android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@+id/tv_purchased_item_show_time"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_purchased_item_room_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_purchased_item_cinema_name"
+                android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@+id/tv_purchased_item_date"
+                android:textColor="@android:color/black" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

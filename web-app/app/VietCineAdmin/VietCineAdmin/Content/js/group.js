@@ -68,12 +68,13 @@ var groupController = function ($scope, $http) {
             }).then(function (response) {
 
                 $scope.clearForm();
+                $("#validateModal").modal();
+                $("#modalMessage").html("Successfull!");
 
                 $('#modal-group').modal('hide');
 
                 $scope.ListGroupCinema = response.data;
 
-                alert("Success!");
             });
         }
 

@@ -95,11 +95,13 @@ var partnerController = function ($scope, $http) {
                                 }
                             }).then(function (response) {
                                 $scope.ListPartnerAccount = response.data;
-
                                 $scope.clearForm();
+
+                                $("#validateModal").modal();
+                                $("#modalMessage").html("Successfull!");
+
                                 $('#modal-account').modal('hide');
 
-                                alert("Success!");
                             });
                         } else {
                             alert("Some error occur, please check your connection!");
@@ -136,10 +138,12 @@ var partnerController = function ($scope, $http) {
             }).then(function (response) {
                 $scope.ListPartnerAccount = response.data;
 
+                $("#validateModal").modal();
+                $("#modalMessage").html("Successfull!");
+
                 $scope.clearFormUpdate();
                 $('#modal-account-update').modal('hide');
 
-                alert("Successful!");
             });
         }
     };

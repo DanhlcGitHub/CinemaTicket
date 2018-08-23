@@ -127,7 +127,7 @@ var filmController = function ($scope, $http) {
         }
     };
     $scope.dateClickHandler = function (index) {
-        for (var i = 0 ; i < $scope.groupCinemaList.length; i++) {
+        for (var i = 0 ; i < 7; i++) {
             var anId = "dateofweek" + i;
             document.getElementById(anId).style.color = "black";
         }

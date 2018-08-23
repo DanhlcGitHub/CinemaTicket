@@ -1,10 +1,16 @@
 ﻿<div ng-app="homeModule" ng-controller="homeController">
     <div class="card-header">
-        <h3 class="card-title">List Film Data</h3>
-        <button class="btn btn-success float-right" data-toggle="modal" data-target="#modal-film">Create Film</button>
+        <div class="row">
+            <div class="col-md-3">
+                <h3 class="card-title">List Film Data</h3>
+            </div>
+            <div class="col-md-9">
+                <button class="btn btn-success float-right btn-group-lg" data-toggle="modal" data-target="#modal-film">Create Film</button>
+            </div>
+        </div>
     </div>
 
-    <divdiv class="card-body">
+    <div class="card-body" style="margin-left:10px; margin-right:20px">
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -30,7 +36,7 @@
                 </tr>
             </tbody>
         </table>
-    </divdiv>
+    </div>
 
     <div class="modal fade" id="modal-film" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" style="max-width: 40% !important">

@@ -171,7 +171,8 @@ namespace CinemaBookingCore.Controllers
         {
             try
             {
-                Ticket ticket = context.Ticket.Where(t => t.TicketId == ticketId).Include(t => t.BookingTicket).FirstOrDefault();
+                Ticket ticket = context.Ticket.Where(t => t.TicketId == ticketId).Include(t => t.BookingTicket).ThenInclude(bt => bt.Customer)
+                    .FirstOrDefault();
 
                 var bookingTicketOld = ticket.BookingTicket;
                 bookingTicketOld.Quantity -= 1;
@@ -227,8 +228,9 @@ namespace CinemaBookingCore.Controllers
 
                 return Ok(ticket);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.Write(ex);
                 return BadRequest();
             }
         }

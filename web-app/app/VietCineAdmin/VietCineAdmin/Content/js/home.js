@@ -1,6 +1,12 @@
 ﻿$(document).ready(function () {
     validationManager.filmValidation();
-
+    $("#posterPicture").change(function () {
+        console.log("here");
+        readURL(this, "#imagePosterPicture");
+    });
+    $("#additionPicture").change(function () {
+        readURL(this, "#imageAdditionPicture");
+    });
 });
 
 var myApp = angular.module("homeModule", []);
@@ -13,6 +19,11 @@ var homeController = function ($scope, $http) {
     }).then(function (response) {
         $scope.FilmNowShowing = response.data;
     });
+    $scope.ShowAddFilmModal = function () {
+        $('#imagePosterPicture').attr('src', 'https://placeidentity.gr/wp-content/themes/aloom/assets/images/default.jpg');
+        $('#imageAdditionPicture').attr('src', 'https://placeidentity.gr/wp-content/themes/aloom/assets/images/default.jpg');
+        $("#modal-film").modal();
+    }
 
     $scope.clickDetail = function (index) {
         $scope.FilmNowSelected = $scope.FilmNowShowing[index];
@@ -29,7 +40,7 @@ var homeController = function ($scope, $http) {
         $("#actorList").val($scope.FilmNowSelected.actorList);
         $("#countries").val($scope.FilmNowSelected.countries);
         $("#trailerLink").val($scope.FilmNowSelected.trailerLink);
-        $("#divFilePicture").hide();
+        //$("#divFilePicture").hide();
         $("#filmStatus").val($scope.FilmNowSelected.filmStatus);
         $("#filmContent").val($scope.FilmNowSelected.filmContent);
     };
@@ -68,7 +79,19 @@ var homeController = function ($scope, $http) {
                 var countries = $("#countries").val();
                 var trailerLink = $("#trailerLink").val();
                 var posterPicture = $("#posterPicture").val();
+                var posterPicturePath = "";
+                if (posterPicture != "") {
+                    var arrStr = posterPicture.split('\\');
+                    posterPicturePath = arrStr[arrStr.length - 1];
+                }
+
                 var additionPicture = $("#additionPicture").val();
+                var additionPicturePath = "";
+                if (additionPicture != "") {
+                    var arrStr = additionPicture.split('\\');
+                    additionPicturePath = arrStr[arrStr.length - 1];
+                }
+
                 var filmStatus = $("#filmStatus").val()
                 var filmContent = $("#filmContent").val();
 
@@ -78,7 +101,7 @@ var homeController = function ($scope, $http) {
                     params: {
                         filmId: filmId, filmName: filmName, dateRelease: dateRelease, restricted: restricted, filmLength: filmLength,
                         author: author, movieGenre: movieGenre, actorList: actorList,
-                        countries: countries, trailerLink: trailerLink, posterPicture: posterPicture, additionPicture: additionPicture,
+                        countries: countries, trailerLink: trailerLink, posterPicture: posterPicturePath, additionPicture: additionPicturePath,
                         filmStatus: filmStatus, filmContent: filmContent
                     }
                 }).then(function (response) {
@@ -109,8 +132,54 @@ var homeController = function ($scope, $http) {
         $("#divFilePicture").show();
         $("#filmStatus").val("1");
         $("#filmContent").val("");
+        $("#posterPicture").val("");
+        $("#additionPicture").val("");
     };
     
+
+    $scope.uploadPicture = function (id) {
+        var filmId = $("#filmId").val();
+        id = "#" + id;
+        var formData = new FormData();
+        var files = $(id).get(0).files;
+
+        // Add the uploaded image content to the form data collection
+        if (files.length > 0) {
+            formData.append("imageUpload", files[0]);
+            var fileName = files[0].name;
+            jQuery.ajax({
+                url: '/Home/SaveImage',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                success: function (data) {
+                    alert("Upload image " + data.message);
+                    console.log("filmId: " + filmId);
+                    if (filmId != 0) {
+                        $http({
+                            method: "POST",
+                            url: "/Home/UpdateImageLink",
+                            params: {
+                                filmId: filmId,
+                                fileName: fileName,
+                                type: id
+                            }
+                        }).then(function (response) {
+                            $scope.FilmNowShowing = response.data;
+                        });
+                    };
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert("Some error occur, can't upload image!");
+                }
+            });
+        } else {
+            $("#validateModal").modal();
+            $("#modalMessage").html("No file selected");
+        }
+    };
 }
 
 myApp.controller("homeController", homeController);
@@ -149,6 +218,20 @@ var validationManager = {
                 },
             }
         });
+    }
+}
+
+function readURL(input,elementId) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $(elementId).attr('src', e.target.result)
+                .width(150)
+                .height(150);
+
+        }
+        reader.readAsDataURL(input.files[0]);
     }
 }
 

@@ -122,6 +122,34 @@ namespace VietCineAdmin.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult UpdateImageLink(int filmId, string fileName,string type)
+        {
+            try
+            {
+                Film film = new FilmService().FindByID(filmId);
+                if (type.Equals("#posterPicture"))
+                {
+                    film.posterPicture = "http://cinemabookingticket.azurewebsites.net/Content/img/cinemaLogo/" + fileName;
+                }
+                else if (type.Equals("#additionPicture"))
+                {
+                    film.additionPicture = "http://cinemabookingticket.azurewebsites.net/Content/img/cinemaLogo/" + fileName;
+                }
+                new FilmService().Update(film);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            FilmService service = new FilmService();
+
+            var films = service.FindBy(f => f.filmStatus != 0).ToList();
+
+            return ConvertListObjectFilmToJson(films);
+
+        }
         public JsonResult CreateFilm(int filmId, String filmName, DateTime dateRelease, int restricted, int filmLength, String author,
             String movieGenre, String actorList, String countries, String trailerLink, String posterPicture,
             String additionPicture, int filmStatus, String filmContent)
@@ -156,14 +184,15 @@ namespace VietCineAdmin.Controllers
                 film.actorList = actorList;
                 film.countries = countries;
                 film.trailerLink = trailerLink;
-                film.posterPicture = posterPicture;
-                film.additionPicture = additionPicture;
+                //film.posterPicture = posterPicture;
+                //film.additionPicture = additionPicture;
                 film.filmStatus = filmStatusInt;
 
                 service.Update(film);
             }
             else
             {
+
                 var film = new Film
                 {
                     name = filmName,
@@ -178,11 +207,17 @@ namespace VietCineAdmin.Controllers
                     actorList = actorList,
                     countries = countries,
                     trailerLink = trailerLink,
-                    posterPicture = posterPicture,
-                    additionPicture = additionPicture,
                     filmStatus = filmStatusInt
                 };
+                if (posterPicture != null && posterPicture != "")
+                    film.posterPicture = "http://cinemabookingticket.azurewebsites.net/Content/img/cinemaLogo/" + posterPicture;
+                else
+                    film.posterPicture = "https://www.valmorgan.com.au/wp-content/uploads/2016/06/default-movie-1-3.jpg";
 
+                if (additionPicture != null && additionPicture != "")
+                    film.additionPicture = "http://cinemabookingticket.azurewebsites.net/Content/img/cinemaLogo/" + additionPicture;
+                else
+                    film.additionPicture = "http://mapleridgeliquor.com/wp-content/uploads/2016/07/sorry-image-not-available.png";
                 service.Create(film);
             }
 

@@ -5,7 +5,7 @@
                 <h3 class="card-title">List Film Data</h3>
             </div>
             <div class="col-md-9">
-                <button class="btn btn-success float-right btn-group-lg" data-toggle="modal" data-target="#modal-film">Create Film</button>
+                <button class="btn btn-success float-right btn-group-lg" ng-click="ShowAddFilmModal()">Create Film</button>
             </div>
         </div>
     </div>
@@ -140,12 +140,16 @@
 
                         <div class="form-row" id="divFilePicture">
                             <div class="form-group col-md-6">
-                                <label for="posterPicture">Poster Picture</label>
+                                <label for="">Poster Picture</label><br />
+                                <img id="imagePosterPicture" ng-src="{{FilmNowSelected.posterPicture}}"  height="150"  alt="Alternate Text" />
                                 <input type="file" id="posterPicture" name="posterPicture" value="">
+                                <button type="button" class="btn btn-info" ng-click="uploadPicture('posterPicture')">Upload Image</button>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="additionPicture">Addition Picture</label>
+                                <label for="">Extra Picture</label><br />
+                                <img id="imageAdditionPicture" ng-src="{{FilmNowSelected.additionPicture}}" height="150" alt="Alternate Text" />
                                 <input type="file" id="additionPicture" name="additionPicture" value="" multiple>
+                                <button type="button" class="btn btn-info" ng-click="uploadPicture('additionPicture')">Upload Image</button>
                             </div>
                         </div>
 

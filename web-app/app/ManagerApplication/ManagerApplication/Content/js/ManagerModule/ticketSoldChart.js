@@ -13,7 +13,7 @@ $(function () {
   var salesChart  = new Chart($salesChart, {
     type   : 'bar',
     data   : {
-      labels  : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       datasets: [
         {
           backgroundColor: '#007bff',

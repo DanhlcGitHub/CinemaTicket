@@ -165,7 +165,7 @@ namespace CinemaTicket.Controllers
                 //send email for customer
                 string mailContent = getEmailContent(ticketList, order, filmName, cinemaName, date, roomName, startTime);
                 string mailSubject = "VietCine - Mã vé xem phim tại " + cinemaName;
-                MailUtility.SendEmail(mailSubject, mailContent, email);
+                //MailUtility.SendEmail(mailSubject, mailContent, email);
                 // insert into db
                 foreach (var aTicket in ticketList)
                 {

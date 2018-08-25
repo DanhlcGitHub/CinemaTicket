@@ -34,7 +34,7 @@ var crawlController = function ($scope, $http) {
        var monthParam = $scope.currentYear + "-" + $scope.formattingMonth($scope.currentMonth);
 
        console.log(monthParam);
-       $scope.StartCrawl(monthParam);
+       $scope.crawlFilmData(monthParam);
        //$("#monthPicker select").val($scope.formattingMonth($scope.currentMonth));
    });
 
@@ -47,10 +47,10 @@ var crawlController = function ($scope, $http) {
         var monthParam = $scope.currentYear + "-" + $scope.selectedMonth;
         console.log(monthParam);
 
-        $scope.StartCrawl(monthParam);
+        $scope.crawlFilmData(monthParam);
     });
 
-    $scope.StartCrawl = function (monthParam) {
+    /*$scope.StartCrawl = function (monthParam) {
         $scope.CrawlFilmData = [];
         $("#showFilmArea").hide();
         $("#crawlLoader").show();
@@ -80,6 +80,25 @@ var crawlController = function ($scope, $http) {
                });
                $('#monthPicker').prop('disabled', false);
            }
+       });
+    };*/
+
+    $scope.crawlFilmData = function (monthParam) {
+        $("#showFilmArea").hide();
+        $("#crawlLoader").show();
+        $('#monthPicker').prop('disabled', 'disabled');
+        $http({
+            method: "POST",
+            url: "/Crawl/CrawlFilmData",
+            params: { monthParam: monthParam, }
+        })
+       .then(function (response) {
+           $("#crawlLoader").hide();
+           console.log(response.data);
+           $scope.CrawlFilmData = response.data;
+           //$scope.CrawlFilmData = $scope.filterCrawlList(response.data);
+           $('#monthPicker').prop('disabled', false);
+           $("#showFilmArea").show();
        });
     };
 

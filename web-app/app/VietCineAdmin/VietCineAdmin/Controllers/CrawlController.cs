@@ -41,173 +41,113 @@ namespace VietCineAdmin.Controllers
 
         private async Task<List<object>> StartCrawlerAsync(string monthParam)
         {
-            List<Film> filmList = new FilmService().FindBy(f => f.filmStatus != (int)FilmStatus.notAvailable);// 
+            List<Film> allFilmList = new FilmService().GetAll();
             int year = DateTime.Today.Year;
             var url = "https://www.imdb.com/movies-coming-soon/" + monthParam;
             var httpClient = new HttpClient();
             var html = await httpClient.GetStringAsync(url);
-
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(html);
-
             var divs = htmlDocument.DocumentNode.Descendants("div")
-                .Where(node => node.GetAttributeValue("itemtype", "")
-                        .Equals("http://schema.org/Movie")).ToList();
-
-            List<object> filmUrl = new List<object>();
+               .Where(node => node.GetAttributeValue("itemtype", "")
+                       .Equals("http://schema.org/Movie")).ToList();
+            List<object> filmList = new List<object>();
             foreach (var div in divs)
             {
-                var name = "";
-                var detailUrl = "";
+                object aFilm = null;
                 try
                 {
-                    var nameNode = div.SelectSingleNode("(.//a[@itemprop='url'])");
-                    if (nameNode != null)
+                    var description = "";
+                    var restristed = "";
+                    var filmLength = "";
+                    var author = "";
+                    var actors = "";
+                    var picture = "";
+                    var trailerLink = "";
+                    var name = "";
+                    var genre = "";
+                    var imdb = "0";
+                    var releaseDate = monthParam;
+                    var restristedNode = div.SelectSingleNode("(.//img[@class='absmiddle certimage'])");
+                    if (restristedNode != null)
+                        restristed = restristedNode.ChildAttributes("title").FirstOrDefault().Value;
+
+                    var genreElement = div.SelectSingleNode("(.//p[@class='cert-runtime-genre'])");
+                    var genreNodes = genreElement.SelectNodes(".//span");
+
+                    if (genreNodes != null)
                     {
-                        name = nameNode.InnerText;
-                        detailUrl = "https://www.imdb.com/" + nameNode.ChildAttributes("href").FirstOrDefault().Value;
-                        var obj = new
+                        foreach (var node in genreNodes)
                         {
-                            name = name,
-                            url = detailUrl,
-                        };
-                        if (filmList.Find(f => f.name.Trim() == name.Trim()) == null)
-                        {
-                            if (name.Contains(year + ""))
-                            {
-                                filmUrl.Add(obj);
-                            }
+                            genre += node.InnerText;
                         }
-
-                    }
-                }
-                catch (Exception e)
-                {
-
-                }
-            }
-            return filmUrl;
-        }
-
-        public async Task<JsonResult> CrawlFilmObjectAsync(string url, string monthParam)
-        {
-            object aFilm;
-
-            var httpClient = new HttpClient();
-            bool isDateValid = false;
-            var description = "";
-            var restristed = "";
-            var filmLength = "";
-            var author = "";
-            var actors = "";
-            var picture = "";
-            var trailerLink = "";
-            var name = "";
-            var genre = "";
-            var imdb = "0";
-            var releaseDateStr = "";
-            DateTime releaseDate;
-            try
-            {
-                var detailHtml = await httpClient.GetStringAsync(url);
-                var detailHtmlDocument = new HtmlDocument();
-                detailHtmlDocument.LoadHtml(detailHtml);
-
-                var div = detailHtmlDocument.DocumentNode.Descendants("div")
-                    .Where(node => node.GetAttributeValue("id", "")
-                            .Equals("title-overview-widget")).FirstOrDefault();
-
-                var releaseDateNode = div.SelectSingleNode("(.//a[@title='See more release dates'])");
-                if (releaseDateNode != null)
-                {
-                    int day = 0;
-                    releaseDateStr = releaseDateNode.InnerText.Trim();
-                    string dayStr = releaseDateStr.Split(' ')[0].Trim();
-                    bool isDayOk = int.TryParse(dayStr, out day);
-                    if (isDayOk)
-                    {
-                        //inforValid = true;
-                        releaseDateStr = monthParam + "-" + day;
-                        isDateValid = DateTime.TryParse(releaseDateStr, out releaseDate);
                     }
 
-                    if (isDateValid)
+                    var descriptionNode = div.SelectSingleNode("(.//div[@class='outline'])");
+                    if (descriptionNode != null)
+                        description = descriptionNode.InnerText.Trim();
+                    var imdbNode = div.SelectSingleNode("(.//div[@class='rating_txt'])");
+                    if (imdbNode != null)
+                        imdb = imdbNode.InnerText.Replace("\n", "").Replace("Metascore", "").Trim();
+                    var filmLengthNode = div.SelectSingleNode(".//time");
+                    if (filmLengthNode != null)
+                        filmLength = filmLengthNode.InnerText;
+                    var authorNode = div.SelectSingleNode("(.//div[@class='txt-block'])[1]");
+                    if (authorNode != null)
+                        author = authorNode.InnerText;
+                    author = author.Replace("\n", "").Replace("Director:", "")
+                        .Replace("Directors:", "").Replace(" ", "").Replace("|", ", ");
+                    var actorNodes = div.SelectNodes("(.//div[@class='txt-block'])[2]");
+                    if (actorNodes != null)
                     {
-                        var restristedNode = div.SelectSingleNode("(.//meta[@itemprop='contentRating'])");
-                        if (restristedNode != null)
-                            restristed = restristedNode.InnerText.Trim();
-                        var genreNodes = div.SelectNodes("(.//span[@itemprop='genre'])");
-
-                        if (genreNodes != null)
-                        {
-                            foreach (var node in genreNodes)
-                            {
-                                genre += node.InnerText + ", ";
-                            }
-                        }
-
-                        var nameNode = div.SelectSingleNode("(.//h1[@itemprop='name'])");
-                        if (nameNode != null)
-                        {
-                            name = nameNode.InnerText.Trim();
-                            name = name.Replace("&nbsp;", " ");
-                        }
-
-
-                        var descriptionNode = div.SelectSingleNode("(.//div[@class='summary_text'])");
-                        if (descriptionNode != null)
-                            description = descriptionNode.InnerText;
-
-                        var imdbNode = div.SelectSingleNode("(.//span[@itemprop='ratingValue'])");
-                        if (imdbNode != null)
-                            imdb = imdbNode.InnerText.Trim();
-
-                        var filmLengthNode = div.SelectSingleNode("(.//time[@itemprop='duration'])");
-                        if (filmLengthNode != null)
-                            filmLength = filmLengthNode.InnerText;
-
-                        var authorNode = div.SelectSingleNode("(.//span[@itemprop='director'])");
-                        if (authorNode != null)
-                            author = authorNode.InnerText;
-
-                        var actorNodes = div.SelectNodes("(.//span[@itemprop='actors'])");
                         foreach (var node in actorNodes)
                         {
                             actors += node.InnerText.Trim() + ", ";
                         }
-
-                        var trailerLinkNode = div.SelectSingleNode("(.//a[@itemprop='trailer'])");
-                        if (trailerLinkNode != null)
-                            trailerLink = trailerLinkNode.ChildAttributes("href").FirstOrDefault().Value;
-
-                        var pictureNode = div.SelectSingleNode("(.//img[@itemprop='image'])");
-                        if (pictureNode != null)
-                            picture = pictureNode.ChildAttributes("src").FirstOrDefault().Value;
-
-
-                        aFilm = new
-                        {
-                            picture = picture,
-                            name = name,
-                            imdb = imdb,
-                            genre = genre,
-                            filmLength = filmLength,
-                            description = description,
-                            restristed = restristed,
-                            author = author,
-                            actors = actors,
-                            trailerLink = "https://www.imdb.com/" + trailerLink,
-                            releaseDate = releaseDateStr,
-                        };
-                        return Json(aFilm);
                     }
+                    actors = actors.Replace("\n", "").Replace("Stars:", "").Replace("Star:", "");
+
+                    var trailerLinkNode = div.SelectSingleNode("(.//a[@itemprop='trailer'])");
+                    if (trailerLinkNode != null)
+                        trailerLink = trailerLinkNode.ChildAttributes("href").FirstOrDefault().Value;
+                    var pictureNode = div.Descendants("img");
+                    if (pictureNode != null)
+                        picture = pictureNode.FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
+                    var nameNode = div.SelectSingleNode("(.//img[@class='poster shadowed'])");
+                    if (nameNode != null)
+                        name = nameNode.ChildAttributes("title").FirstOrDefault().Value;
+                    aFilm = new
+                    {
+                        picture = picture,
+                        name = name,
+                        imdb = imdb,
+                        genre = genre,
+                        filmLength = filmLength,
+                        description = description,
+                        restristed = restristed,
+                        author = author,
+                        actors = actors,
+                        trailerLink = "https://www.imdb.com/" + trailerLink,
+                        releaseDate = releaseDate,
+                    };
+                    if (name.Contains(year + "") && !isFilmExist(name, allFilmList))
+                        filmList.Add(aFilm);
+
                 }
-                return null;
+                catch (Exception e)
+                {
+                }
             }
-            catch (Exception)
+            return filmList;
+        }
+
+        private bool isFilmExist(string name,List<Film> filmList)
+        {
+            foreach (var item in filmList)
             {
-                return null;
+                if (name.Trim().Equals(item.name.Trim())) return true;
             }
+            return false;
         }
 
         public JsonResult SaveFilmToDB()
@@ -255,7 +195,6 @@ namespace VietCineAdmin.Controllers
 
                 if (imdbStr != null)// 111 min
                 {
-                    imdbStr = imdbStr.Split(' ')[0].Trim();
                     bool flag = double.TryParse(imdbStr, out imdb);
                     if (flag) 
                         aFilm.imdb = imdb;

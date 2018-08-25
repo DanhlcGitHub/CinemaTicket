@@ -5,7 +5,7 @@
 <div ng-app="crawlModule" ng-controller="crawlController">
     <div class="card-header">
         <h3 class="card-title">Crawl Film Data</h3>
-        <button class="btn btn-success float-right" ng-click="viewAddedList()">View Added List</button>
+        <button class="btn btn-success float-right" ng-click="viewAddedList()">View Added List ({{addedFilmList.length}})</button>
     </div>
     <div id="customFilterForm" class="card-body">
         <div class="form-group has-warning">
@@ -57,7 +57,7 @@
                             <hr />
                             <div class="col-md-12">
                                 <button ng-click="addFilmToList(aFilm)" type="button" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> add film</button>
-                                <span class="float-right text-muted">{{aFilm.releaseDate}}</span>
+                                <span class="float-right text-muted">publish in {{aFilm.releaseDate}}</span>
                             </div>
                         </div>
                         <!-- /.card-footer -->
@@ -67,7 +67,7 @@
             </div>
         </div>
         <!-- added Film Modal -->
-        <div class="modal fade" id="addedFilmModal" role="dialog">
+        <div class="modal fade" id="addedFilmModal" role="dialog" style="z-index:10000">
             <div class="modal-dialog modal-dialog-centered" style="max-width: 80% !important">
 
                 <div class="modal-content">
@@ -100,7 +100,7 @@
                                     <hr />
                                     <div class="col-md-12">
                                         <button ng-click="removeFilmToList(aFilm)" type="button" class="btn btn-default btn-sm"><i class="fa fa-minus"></i> remove film</button>
-                                        <span class="float-right text-muted">publish in July 6</span>
+                                        <span class="float-right text-muted">publish in {{aFilm.releaseDate}}</span>
                                     </div>
                                 </div>
                                 <!-- /.card-footer -->

@@ -197,14 +197,18 @@ namespace VietCineAdmin.Controllers
                 {
                     bool flag = double.TryParse(imdbStr, out imdb);
                     if (flag) 
-                        aFilm.imdb = imdb;
+                        aFilm.imdb = imdb/10;
                 }
 
                 if (restristedStr != null && restristedStr.Contains("PG-"))// 111 min
                 {
-                    restristedStr = restristedStr.Split('-')[1].Trim();
-                    int.TryParse(restristedStr, out restricted);
-                    if (restricted == null) restricted = 0;
+
+                    if (restristedStr == null || restristedStr == "") restricted = 0;
+                    else
+                    {
+                        restristedStr = restristedStr.Split('-')[1].Trim();
+                        int.TryParse(restristedStr, out restricted);
+                    }
                     aFilm.restricted = restricted;
                 }
                 if (releaseDateStr != null)

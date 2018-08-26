@@ -69,6 +69,7 @@ var scheduleController = function ($scope, $http) {
     });
 
     $('#customScheduleDateSelector').on('change', function (e) {
+        $("#instructionElement").hide();
         var selectDate = this.value;
         $scope.currentSelectedDate = selectDate;
         $("#loader").show();
@@ -152,7 +153,7 @@ var scheduleController = function ($scope, $http) {
             var timeList = scheduleList[i].currentShowTime;
             for (var j = 0; j < timeList.length; j++) {
                 var aTime = timeList[j];
-                var backgroundColor = $scope.getBackGroundColor(aTime.status);
+                var backgroundColor = $scope.getBackGroundColor(aTime.status,aTime.filmLength);
                 var aTask = {
                     startTime: aTime.startTimeNum - $scope.baseStartTime,
                     duration: 2,
@@ -160,6 +161,7 @@ var scheduleController = function ($scope, $http) {
                     id: aTime.timeId,
                     filmId: aTime.filmId,
                     filmName: aTime.filmName || "",
+                    filmLength: aTime.filmLength,
                     title: aTime.startTime + " - " + aTime.endTime + "  " + aTime.status,
                     display: aTime.display || "block",
                     backgroundColor: backgroundColor
@@ -170,14 +172,18 @@ var scheduleController = function ($scope, $http) {
         return tasks;
     }
 
-    $scope.getBackGroundColor = function (status) {
+    $scope.getBackGroundColor = function (status,filmLength) {
         var backgroundColor = "#576D7C";//blue
         if (status == StatusConstant.added) {
             backgroundColor = "#dc3545";//red
         } else if (status == StatusConstant.choosing) {
-            backgroundColor = "green";
+            backgroundColor = "green";//green
+            if(filmLength > 120)
+                backgroundColor = "#ffbf00; color: black";//yellow - warmning
         } else if (status == StatusConstant.suggested) {
             backgroundColor = "#443354"; //purple
+            /*if (filmLength > 120)
+                backgroundColor = "#ffbf00";//yellow - warmning*/
         }
         return backgroundColor;
     }
@@ -188,9 +194,11 @@ var scheduleController = function ($scope, $http) {
             $("#validateModal").modal();
             $("#modalMessage").html("These day is no longer available for add chedule");
         } else {
-            t.backgroundColor = "green";
+            //t.backgroundColor = "green";//#f4b342
             var selectedColumn = $scope.currentScheduleData[t.column].currentShowTime;
             var aTime = $scope.findTimeById(t.id, selectedColumn);
+            
+
             if (aTime.status != StatusConstant.added) {
                 //if available -> choosing; else if choosing -> available
                 if (aTime.status == StatusConstant.suggested) {
@@ -203,11 +211,13 @@ var scheduleController = function ($scope, $http) {
                         aTime.status = "choosing";
                         aTime.filmId = $scope.currentSelectedFilmId;
                         aTime.filmName = $scope.currentSelectedFilmName;
+
+                        var aFilm = $scope.findFilmById($scope.currentSelectedFilmId);
+                        aTime.filmLength = aFilm.length;
                     } else {
                         $("#validateModal").modal();
                         $("#modalMessage").html("Please select a film!");
                     }
-
                 } else if (aTime.status == StatusConstant.choosing) {
                     aTime.status = "available";
                     aTime.filmId = "";
@@ -286,6 +296,20 @@ var scheduleController = function ($scope, $http) {
             }
         }
         return null;
+    };
+
+    $scope.findFilmById = function (id) {
+        for (var i = 0 ; i < $scope.filmData.length; i++) {
+            var aFilm = $scope.filmData[i];
+            if (aFilm.id == id) {
+                return aFilm;
+            }
+        }
+        return null;
+    };
+
+    $scope.showInstruction = function () {
+        $("#instructionElement").toggle("slow");
     };
 
     $scope.isSaveDone = true;

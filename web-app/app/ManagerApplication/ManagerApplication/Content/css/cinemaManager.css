@@ -254,3 +254,8 @@ div::-webkit-scrollbar-thumb {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.cell {
+    height: 119px; width: 139px;display: inline-block; background-color: green; 
+    color:white; font-size: 16px; margin-right: 15px;
+}

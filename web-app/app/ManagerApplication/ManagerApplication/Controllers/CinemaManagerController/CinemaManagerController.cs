@@ -194,12 +194,14 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                     string status = "available";
                     int filmId = -1;
                     string name = "";
+                    int filmLength = 0;
                     Film aFilm = findFilmInDictionary(time, suggestDictionary);
                     if (aFilm != null)
                     {
                         status = "suggested";
                         filmId = aFilm.filmId;
                         name = aFilm.name;
+                        filmLength = (int)aFilm.filmLength;
                     }
 
                     var aTime = new
@@ -212,6 +214,7 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                         status = status,
                         filmId = filmId,
                         filmName = name,
+                        filmLength = filmLength,
                     };
                     currentShowTime.Add(aTime);
                 }
@@ -235,6 +238,7 @@ namespace ManagerApplication.Controllers.CinemaManagerController
                         status = "added",
                         filmId = aFilm.filmId,
                         filmName = aFilm.name,
+                        filmLength = aFilm.filmLength,
                     };
                     currentShowTime.Add(aTime);
                 }

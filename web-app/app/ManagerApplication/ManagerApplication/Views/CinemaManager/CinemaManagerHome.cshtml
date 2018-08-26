@@ -75,7 +75,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-book"></i>
                                 <p>
-                                   Advance Schedule
+                                    Advance Schedule
                                 </p>
                             </a>
                         </li>
@@ -142,10 +142,33 @@
                                             </select>
                                         </div>
                                         <div class="col-lg-6">
-                                            <button ng-click="unSuggest()" class="btn btn-info" type="button" style="width: 200px">Unsuggest</button>
+                                            <button ng-click="unSuggest()" class="btn btn-info" type="button" style="width: 150px">Unsuggest</button>
+                                            <button ng-click="showInstruction()" class="btn btn-info" type="button" style="width: 150px">Show instruction</button>
                                         </div>
                                     </div>
 
+                                </div>
+                            </div>
+                            <div id="instructionElement" class="col-lg-12" style="margin-bottom:10px">
+                                <div class="cell" style="background-color: #576d7c; " title="available">
+                                    <i class="nav-icon fa fa-calendar"></i>
+                                    Available cell
+                                </div>
+                                <div class="cell" style="background-color: green; " title="choosing">
+                                    <i class="nav-icon fa fa-calendar"></i>
+                                    Choosing cell
+                                </div>
+                                <div class="cell" style="background-color: #443354; " title="Suggested">
+                                    <i class="nav-icon fa fa-calendar"></i>
+                                    Suggested cell
+                                </div>
+                                <div class="cell" style="background-color: #dc3545; " title="Added">
+                                    <i class="nav-icon fa fa-calendar"></i>
+                                    Added cell
+                                </div>
+                                <div class="cell" style="background-color: #ffbf00;color:black " title="Warning">
+                                    <i class="nav-icon fa fa-calendar"></i>
+                                    Warning cell
                                 </div>
                             </div>
                             <div id="skeduler-container" style="overflow-x:auto"></div>
